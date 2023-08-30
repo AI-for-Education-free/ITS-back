@@ -1,0 +1,17 @@
+# 标准配置
+
+server:
+  port: 8080
+
+# 日志级别开启为debug
+#debug: true
+
+# 推荐
+logging:
+  group:
+    debugLevel: com.dream.exerciseSystem
+  level:
+    root: info
+    debugLevel: debug
+#     设置某个包的级别
+#    com.dream.exerciseSystem.controller: debug

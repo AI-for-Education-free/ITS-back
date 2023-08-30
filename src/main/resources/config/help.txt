@@ -1,0 +1,6 @@
+springBoot四级配置：
+    1级：（和jar包同目录）./config/application.yml
+    2级：（和jar包同目录）./application.yml
+    3级：（classpath，即resources）./config/application.yml
+    4级：（classpath，即resources）./application.yml
+1级级别最高，4级最低

@@ -1,0 +1,15 @@
+# 自定义配置
+time: 2022
+author:
+  name: dream
+# 习题相关数据
+exercise:
+  subjectType: JAVA
+  exerciseType: SINGLE_CHOICE_EXERCISE,JAVA_PROGRAM_EXERCISE
+
+# 用于/config/ServerConfig读取的配置
+myServer:
+  ip: 192.168.0.1
+  port: 1234
+  time: 5
+  size: 10
