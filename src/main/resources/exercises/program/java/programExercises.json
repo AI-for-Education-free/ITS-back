@@ -1,0 +1,1108 @@
+{
+  "source": "w3resource",
+  "link": "https://www.w3resource.com/java-exercises/index.php",
+  "subjectType": "JAVA",
+  "exercises": [
+    {
+      "orderInTag": 1,
+      "id": "1607982877",
+      "concepts": [
+        "basic"
+      ],
+      "exerciseContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Write a Java program to print 'Hello' on screen and then print your name on a separate line.",
+          "chinese": "编写一个Java程序，在屏幕上打印“Hello”，然后在单独的行上打印您的名字。"
+        },
+        {
+          "contentType": "CODE",
+          "code": "example\nExpected Output :\nHello\nYour name"
+        }
+      ],
+      "initCode": "public class Solution {\n    public static void printHello() {\n\n    }\n}",
+      "targetMethodName": "printHello",
+      "answerContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Sample Solution:\n\nJava Code:",
+          "chinese": "示例：\n\nJava代码：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "CODE",
+          "code": "public class Exercise1 {\n \n public static void main(String[] args) {\n  System.out.println(\"Hello\\nAlexandra Abramov!\");\n }\n \n}"
+        },
+        {
+          "contentType": "TEXT",
+          "english": "Sample solution using input from the user:\n\nJava Code:",
+          "chinese": "使用用户输入的示例：\n\nJava代码：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "CODE",
+          "code": "import java.util.Scanner;\n\npublic class Main {\n  public static void main(String[] args) \n  {\n    Scanner input = new Scanner (System.in);\n    System.out.print(\"Input your first name: \");\n    String fname = input.next();\n    System.out.print(\"Input your last name: \");\n    String lname = input.next();\n    System.out.println();\n    System.out.println(\"Hello \\n\"+fname+\" \"+lname);\n  }\n}"
+        }
+      ],
+      "explanationContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Flowchart:\n",
+          "chinese": "流程图：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": "java-basic-exercise-1.png"
+        },
+        {
+          "contentType": "TEXT",
+          "english": "Flowchart:\n",
+          "chinese": "流程图：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": "java-basic-exercise-flowchart-1-a.png"
+        }
+      ],
+      "tags": [
+        "basic"
+      ]
+    },
+    {
+      "orderInTag": 1,
+      "id": "626812306",
+      "initCode": "public class Solution {\n    public static double smallest(double x, double y, double z)\n    {\n        \n    }\n}",
+      "targetMethodName": "smallest",
+      "concepts": [
+        "method"
+      ],
+      "tags": [
+        "method"
+      ],
+      "exerciseContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Write a Java method to find the smallest number among three numbers.",
+          "chinese": ""
+        },
+        {
+          "contentType": "CODE",
+          "code": "example\nTest Data:\nInput the first number: 25\nInput the Second number: 37\nInput the third number: 29 \nExpected Output:\n\nThe smallest value is 25.0"
+        }
+      ],
+      "answerContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Sample Solution:\n\nJava Code:",
+          "chinese": "示例：\n\nJava代码：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "CODE",
+          "code": "import java.util.Scanner;\npublic class Exercise1 {\n\n public static void main(String[] args)\n    {\n        Scanner in = new Scanner(System.in);\n        System.out.print(\"Input the first number: \");\n        double x = in.nextDouble();\n        System.out.print(\"Input the Second number: \");\n        double y = in.nextDouble();\n        System.out.print(\"Input the third number: \");\n        double z = in.nextDouble();\n        System.out.print(\"The smallest value is \" + smallest(x, y, z)+\"\\n\" );\n    }\n\n   public static double smallest(double x, double y, double z)\n    {\n        return Math.min(Math.min(x, y), z);\n    }\n}"
+        }
+      ],
+      "explanationContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Flowchart:\n",
+          "chinese": "流程图：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": "java-method-exercise-1.png"
+        }
+      ]
+    },
+    {
+      "orderInTag": 2,
+      "id": "1984017648",
+      "concepts": [
+        "method"
+      ],
+      "exerciseContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Write a Java method to compute the average of three numbers.",
+          "chinese": ""
+        },
+        {
+          "contentType": "CODE",
+          "code": "example\nTest Data:\nInput the first number: 25 \nInput the second number: 45\nInput the third number: 65\nExpected Output:\n\nThe average value is 45.0"
+        }
+      ],
+      "initCode": "public class Solution {\n    public static double average(double x, double y, double z)\n    {\n        \n    }\n}",
+      "targetMethodName": "average",
+      "answerContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Sample Solution:\n\nJava Code:",
+          "chinese": "示例：\n\nJava代码：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "CODE",
+          "code": "import java.util.Scanner;\npublic class Exercise2 {\n\n public static void main(String[] args)\n    {\n        Scanner in = new Scanner(System.in);\n        System.out.print(\"Input the first number: \");\n        double x = in.nextDouble();\n        System.out.print(\"Input the second number: \");\n        double y = in.nextDouble();\n        System.out.print(\"Input the third number: \");\n        double z = in.nextDouble();\n        System.out.print(\"The average value is \" + average(x, y, z)+\"\\n\" );\n    }\n\n  public static double average(double x, double y, double z)\n    {\n        return (x + y + z) / 3;\n    }\n}"
+        }
+      ],
+      "explanationContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Flowchart:",
+          "chinese": "流程图：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": "java-method-exercise-2.png"
+        }
+      ],
+      "tags": [
+        "method"
+      ]
+    },
+    {
+      "orderInTag": 3,
+      "id": "783120422",
+      "concepts": [
+        "method"
+      ],
+      "exerciseContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Write a Java method to display the middle character of a string.",
+          "chinese": ""
+        },
+        {
+          "contentType": "TEXT",
+          "english": "Note: a) If the length of the string is odd there will be two middle characters.\nb) If the length of the string is even there will be one middle character.",
+          "chinese": ""
+        },
+        {
+          "contentType": "CODE",
+          "code": "example\nTest Data:\nInput a string: 350 \nExpected Output:\n\n                                                                          \nThe middle character in the string: 5"
+        }
+      ],
+      "initCode": "public class Solution {\n    public static double middle(String str)\n    {\n        \n    }\n}",
+      "targetMethodName": "middle",
+      "answerContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Sample Solution:\n\nJava Code:",
+          "chinese": "示例：\n\nJava代码：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "CODE",
+          "code": "import java.util.Scanner;\npublic class Exercise3 {\n  public static void main(String[] args)\n    {\n        Scanner in = new Scanner(System.in);\n        System.out.print(\"Input a string: \");\n        String str = in.nextLine();\n        System.out.print(\"The middle character in the string: \" + middle(str)+\"\\n\");\n    }\n public static String middle(String str)\n    {\n        int position;\n        int length;\n        if (str.length() % 2 == 0)\n        {\n            position = str.length() / 2 - 1;\n            length = 2;\n        }\n        else\n        {\n            position = str.length() / 2;\n            length = 1;\n        }\n        return str.substring(position, position + length);\n    }\n}"
+        }
+      ],
+      "explanationContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Flowchart:",
+          "chinese": "流程图：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": "java-method-exercise-3.png"
+        }
+      ],
+      "tags": [
+        "method"
+      ]
+    },
+    {
+      "orderInTag": 4,
+      "id": "11545219199",
+      "concepts": [
+        "method"
+      ],
+      "exerciseContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Write a Java method to count all vowels in a string.",
+          "chinese": "",
+          "style": ""
+        },
+        {
+          "contentType": "CODE",
+          "code": "example\nTest Data:\nInput the string: w3resource \nExpected Output:\n\nNumber of  Vowels in the string: 4"
+        }
+      ],
+      "initCode": "public class Solution {\n    public static double countVowels(String str) {\n        \n    }\n}",
+      "targetMethodName": "countVowels",
+      "answerContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Sample Solution:\n\nJava Code:",
+          "chinese": "示例：\n\nJava代码：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "CODE",
+          "code": "import java.util.Scanner;\npublic class Exercise4 {\n  public static void main(String[] args)\n    {\n        Scanner in = new Scanner(System.in);\n        System.out.print(\"Input the string: \");\n        String str = in.nextLine();\n\n        System.out.print(\"Number of  Vowels in the string: \" + count_Vowels(str)+\"\\n\");\n    }\n public static int count_Vowels(String str)\n    {\n        int count = 0;\n        for (int i = 0; i < str.length(); i++)\n        {\n            if (str.charAt(i) == 'a' || str.charAt(i) == 'e' || str.charAt(i) == 'i'\n                    || str.charAt(i) == 'o' || str.charAt(i) == 'u')\n            {\n                count++;\n            }\n        }\n        return count;\n    }\n}"
+        }
+      ],
+      "explanationContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Flowchart:\n",
+          "chinese": "流程图：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": "java-method-exercise-4.png"
+        }
+      ],
+      "tags": [
+        "method"
+      ]
+    },
+    {
+      "orderInTag": 5,
+      "id": "757383549",
+      "concepts": [
+        "method"
+      ],
+      "exerciseContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Write a Java method to count all the words in a string.",
+          "chinese": "",
+          "style": ""
+        },
+        {
+          "contentType": "CODE",
+          "code": "example\nTest Data:\nInput the string: The quick brown fox jumps over the lazy dog.\nExpected Output:\n\nNumber of words in the string: 9"
+        }
+      ],
+      "initCode": "public class Solution {\n    public static int countWords(String str) {\n        \n    }\n}",
+      "targetMethodName": "countWords",
+      "answerContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Sample Solution:\n\nJava Code:",
+          "chinese": "示例：\n\nJava代码：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "CODE",
+          "code": "import java.util.Scanner;\npublic class Exercise5 {\n\n  public static void main(String[] args)\n    {\n        Scanner in = new Scanner(System.in);\n        System.out.print(\"Input the string: \");\n        String str = in.nextLine();\n\n        System.out.print(\"Number of words in the string: \" + count_Words(str)+\"\\n\");\n    }\n\n public static int count_Words(String str)\n    {\n       int count = 0;\n        if (!(\" \".equals(str.substring(0, 1))) || !(\" \".equals(str.substring(str.length() - 1))))\n        {\n            for (int i = 0; i < str.length(); i++)\n            {\n                if (str.charAt(i) == ' ')\n                {\n                    count++;\n                }\n            }\n            count = count + 1; \n        }\n        return count; // returns 0 if string starts or ends with space \" \".\n    }\n }"
+        }
+      ],
+      "explanationContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Flowchart:",
+          "chinese": "流程图：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": "java-method-exercise-5.png"
+        }
+      ],
+      "tags": [
+        "method"
+      ]
+    },
+    {
+      "orderInTag": 6,
+      "id": "1908084726",
+      "concepts": [
+        "method"
+      ],
+      "exerciseContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Write a Java method to compute the sum of digits in an integer.",
+          "chinese": "",
+          "style": ""
+        },
+        {
+          "contentType": "CODE",
+          "code": "example\nTest Data:\nInput an integer: 25\nExpected Output:\n\nThe sum is 7"
+        }
+      ],
+      "initCode": "public class Solution {\n    public static int sumDigits(long n) {\n        \n    }\n}",
+      "targetMethodName": "sumDigits",
+      "answerContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Sample Solution:\n\nJava Code:",
+          "chinese": "示例：\n\nJava代码：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "CODE",
+          "code": "import java.util.Scanner;\npublic class Exercise6 {\n\n  public static void main(String[] args)\n    {\n      Scanner in = new Scanner(System.in);\n      System.out.print(\"Input an integer: \");\n      int digits = in.nextInt();\n\t  System.out.println(\"The sum is \" + sumDigits(digits));\n    }\n\n public static int sumDigits(long n) {\n\t\tint result = 0;\n\t\t\n\t\twhile(n > 0) {\n\t\t\tresult += n % 10;\n\t\t\tn /= 10;\n\t\t}\n\t\t\n\t\treturn result;\n\t}\n\t\n }"
+        }
+      ],
+      "explanationContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Flowchart:",
+          "chinese": "流程图：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": "java-method-exercise-6.png"
+        }
+      ],
+      "tags": [
+        "method"
+      ]
+    },
+    {
+      "orderInTag": 7,
+      "id": "1910861483",
+      "initCode": "public class Solution {\n    public static int getPentagonalNumber(int i) {\n        \n    }\n}",
+      "targetMethodName": "getPentagonalNumber",
+      "concepts": [
+        "method"
+      ],
+      "tags": [
+        "method"
+      ],
+      "exerciseContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Write a Java method to display the first 50 pentagonal numbers.\nNote: A pentagonal number is a figurate number that extends the concept of triangular and square numbers to the pentagon, but, unlike the first two, the patterns involved in the construction of pentagonal numbers are not rotationally symmetrical.",
+          "chinese": "",
+          "style": ""
+        },
+        {
+          "contentType": "TEXT",
+          "english": "Pictorial Presentation:",
+          "chinese": "",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": "java-method-image-exercise-7.png"
+        },
+        {
+          "contentType": "CODE",
+          "code": "example\nExpected Output:\n\n1     5     12    22    35    51    70    92    117   145\n176   210   247   287   330   376   425   477   532   590\n651   715   782   852   925   1001  1080  1162  1247  1335\n1426  1520  1617  1717  1820  1926  2035  2147  2262  2380\n2501  2625  2752  2882  3015  3151  3290  3432  3577  3725"
+        }
+      ],
+      "answerContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Sample Solution:\n\nJava Code:",
+          "chinese": "示例：\n\nJava代码：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "CODE",
+          "code": "import java.util.Scanner;\npublic class Exercise7 {\npublic static void main(String[] args) {\n   \t\tint count = 1;\n\t\tfor(int i = 1; i <= 50; i++){\n\t\t\tSystem.out.printf(\"%-6d\",getPentagonalNumber(i));\n\t\t\tif(count % 10 == 0) System.out.println();\n\t\t\tcount++;\n\t\t}\n    }\n  public static int getPentagonalNumber(int i) {\n\t\treturn (i * (3 * i - 1))/2;\n\t}\n}"
+        }
+      ],
+      "explanationContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Flowchart:",
+          "chinese": "流程图：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": "java-method-exercise-7.png"
+        }
+      ]
+    },
+    {
+      "orderInTag": 8,
+      "id": "1445477298",
+      "initCode": "public class Solution {\n    public static double futureInvestmentValue(double investmentAmount, double monthlyInterestRate, int years) {\n    \n    }\n}",
+      "targetMethodName": "futureInvestmentValue",
+      "concepts": [
+        "method"
+      ],
+      "tags": [
+        "method"
+      ],
+      "exerciseContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Write a Java method to compute the future investment value at a given interest rate for a specified number of years.",
+          "chinese": "",
+          "style": ""
+        },
+        {
+          "contentType": "CODE",
+          "code": "example\nSample data (Monthly compounded) and Output:\nInput the investment amount: 1000\nInput the rate of interest: 10\nInput number of years: 5\n\nExpected Output:\n\nYears    FutureValue                                     \n1            1104.71                                     \n2            1220.39                                     \n3            1348.18                                     \n4            1489.35                                     \n5            1645.31"
+        }
+      ],
+      "answerContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Sample Solution:\n\nJava Code:",
+          "chinese": "示例：\n\nJava代码：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "CODE",
+          "code": "import java.util.Scanner;\npublic class Exercise8 {\n \n public static void main(String[] args) {\n    Scanner in = new Scanner(System.in); \n    System.out.print(\"Input the investment amount: \");\n \tdouble investment = in.nextDouble();\n \tSystem.out.print(\"Input the rate of interest: \");\n\tdouble rate = in.nextDouble();\n\tSystem.out.print(\"Input number of years: \");\n\tint year = in.nextInt();\n\t\n\trate *= 0.01;\n\t\n\tSystem.out.println(\"Years    FutureValue\");\n\tfor(int i = 1; i <= year; i++) {\n    \tint formatter = 19;\n\t    if (i >= 10) formatter = 18;\n\t\tSystem.out.printf(i + \"%\"+formatter+\".2f\\n\", futureInvestmentValue(investment, rate/12, i));\n       }\n\t }\n \n public static double futureInvestmentValue(double investmentAmount, double monthlyInterestRate, int years) {\n\t\treturn investmentAmount * Math.pow(1 + monthlyInterestRate, years * 12);\n\t}\n}"
+        },
+        {
+          "contentType": "TEXT",
+          "english": "Sample Output:",
+          "chinese": "示例输出",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "CODE",
+          "code": "Input the investment amount: 1000                                                                             \nInput the rate of interest: 10                                                                                \nInput number of years: 5                                                                                      \nYears    FutureValue                                                                                          \n1            1104.71                                                                                          \n2            1220.39                                                                                          \n3            1348.18                                                                                          \n4            1489.35                                                                                          \n5            1645.31"
+        }
+      ],
+      "explanationContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Flowchart:",
+          "chinese": "流程图：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": "java-method-exercise-8.png"
+        }
+      ]
+    },
+    {
+      "orderInTag": 9,
+      "id": "1570692484",
+      "initCode": "public class Solution {\n    public static void printChars(char char1, char char2, int n) {\n        \n    }\n}",
+      "targetMethodName": "printChars",
+      "concepts": [
+        "method"
+      ],
+      "tags": [
+        "method"
+      ],
+      "exerciseContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Write a Java method to print characters between two characters (i.e. A to P).\nNote: Prints 20 characters per line",
+          "chinese": "",
+          "style": ""
+        },
+        {
+          "contentType": "CODE",
+          "code": "example\nExpected Output:\n\n( ) * + , - . / 0 1 2 3 4 5 6 7 8 9 : ;                  \n< = > ? @ A B C D E F G H I J K L M N O                  \nP Q R S T U V W X Y Z [ \\ ] ^ _ ` a b c                  \nd e f g h i j k l m n o p q r s t u v w                  \nx y z"
+        }
+      ],
+      "answerContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Sample Solution:\n\nJava Code:",
+          "chinese": "示例：\n\nJava代码：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "CODE",
+          "code": "public class Exercise9 {\n   public static void main(String[] args) {\n        print_Chars('(', 'z', 20);\n    }\n public static void print_Chars(char char1, char char2, int n) {\n        for (int ctr = 1; char1 <= char2; ctr++, char1++) {\n            System.out.print(char1 + \" \");\n            if (ctr % n == 0) System.out.println(\"\");\n        }\n\t\tSystem.out.print(\"\\n\");\n    }\n}"
+        },
+        {
+          "contentType": "TEXT",
+          "english": "Sample Output:",
+          "chinese": "示例输出",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "CODE",
+          "code": "( ) * + , - . / 0 1 2 3 4 5 6 7 8 9 : ;                                                                       \n< = > ? @ A B C D E F G H I J K L M N O                                                                       \nP Q R S T U V W X Y Z [ \\ ] ^ _ ` a b c                                                                       \nd e f g h i j k l m n o p q r s t u v w                                                                       \nx y z"
+        }
+      ],
+      "explanationContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Flowchart:",
+          "chinese": "流程图：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": "java-method-exercise-9.png"
+        }
+      ]
+    },
+    {
+      "orderInTag": 10,
+      "id": "1953957128",
+      "initCode": "public class Solution {\n    public static boolean isLeapYear(int y)\n    {\n        \n    }\n}",
+      "targetMethodName": "isLeapYear",
+      "concepts": [
+        "method"
+      ],
+      "tags": [
+        "method"
+      ],
+      "exerciseContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Write a Java method to check whether a year (integer) entered by the user is a leap year or not.",
+          "chinese": "",
+          "style": ""
+        },
+        {
+          "contentType": "TEXT",
+          "english": "Pictorial Presentation:",
+          "chinese": "",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": "java-method-image-exercise-10.png"
+        },
+        {
+          "contentType": "CODE",
+          "code": "example\nExpected Output:\n\nInput a year: 2017                                                                        \nfalse"
+        }
+      ],
+      "answerContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Sample Solution:\n\nJava Code:",
+          "chinese": "示例：\n\nJava代码：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "CODE",
+          "code": "import java.util.Scanner;\n\npublic class Exercise10 {\n \n public static void main(String[] args)\n    {\n        Scanner in = new Scanner(System.in);\n        System.out.print(\"Input a year: \");\n        int year = in.nextInt();\n\n        System.out.println(is_LeapYear(year));\n    }\n \n public static boolean is_LeapYear(int y)\n    {\n        boolean a = (y % 4) == 0;\n        boolean b = (y % 100) != 0;\n        boolean c = ((y % 100 == 0) && (y % 400 == 0));\n\n        return a && (b || c);\n    }\n}\n"
+        }
+      ],
+      "explanationContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Flowchart:",
+          "chinese": "流程图：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": "java-method-exercise-10.png"
+        }
+      ]
+    },
+    {
+      "orderInTag": 11,
+      "id": "286744419",
+      "initCode": "public class Solution {\n    public static boolean isValidPassword(String password) {\n\n    }\n}",
+      "targetMethodName": "isValidPassword",
+      "concepts": [
+        "method"
+      ],
+      "tags": [
+        "method"
+      ],
+      "exerciseContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Write a Java method to check whether a string is a valid password.\nPassword rules:\nA password must have at least ten characters.\nA password consists of only letters and digits.\nA password must contain at least two digits.",
+          "chinese": "",
+          "style": ""
+        },
+        {
+          "contentType": "CODE",
+          "code": "example\nExpected Output:\n\n1. A password must have at least eight characters.                                             \n2. A password consists of only letters and digits.                                         \n3. A password must contain at least two digits                                        \nInput a password (You are agreeing to the above Terms and Conditions.): abcd1234           \nPassword is valid: abcd1234 "
+        }
+      ],
+      "answerContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Sample Solution:\n\nJava Code:",
+          "chinese": "示例：\n\nJava代码：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "CODE",
+          "code": "import java.util.Scanner;\n\npublic class Exercise11 {\n    \npublic static final int PASSWORD_LENGTH = 8;\n\npublic static void main(String[] args) {\n\n        Scanner input = new Scanner(System.in);\n        System.out.print(\n                \"1. A password must have at least eight characters.\\n\" +\n                \"2. A password consists of only letters and digits.\\n\" +\n                \"3. A password must contain at least two digits \\n\" +\n                \"Input a password (You are agreeing to the above Terms and Conditions.): \");\n        String s = input.nextLine();\n\n        if (is_Valid_Password(s)) {\n            System.out.println(\"Password is valid: \" + s);\n        } else {\n            System.out.println(\"Not a valid password: \" + s);\n        }\n\n    }\n\n    public static boolean is_Valid_Password(String password) {\n\n        if (password.length() < PASSWORD_LENGTH) return false;\n\n        int charCount = 0;\n        int numCount = 0;\n        for (int i = 0; i < password.length(); i++) {\n\n            char ch = password.charAt(i);\n\n            if (is_Numeric(ch)) numCount++;\n            else if (is_Letter(ch)) charCount++;\n            else return false;\n        }\n\n\n        return (charCount >= 2 && numCount >= 2);\n    }\n\n    public static boolean is_Letter(char ch) {\n        ch = Character.toUpperCase(ch);\n        return (ch >= 'A' && ch <= 'Z');\n    }\n\n\n    public static boolean is_Numeric(char ch) {\n\n        return (ch >= '0' && ch <= '9');\n    }\n\n}"
+        }
+      ],
+      "explanationContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Flowchart:",
+          "chinese": "流程图：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": "java-method-exercise-11.png"
+        }
+      ]
+    },
+    {
+      "orderInTag": 12,
+      "id": "1664592468",
+      "initCode": "public class Solution {\n    public static void printMatrix(int n) {\n        \n    }\n}",
+      "targetMethodName": "printMatrix",
+      "concepts": [
+        "method"
+      ],
+      "tags": [
+        "method"
+      ],
+      "exerciseContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Write a Java method (takes n as input) to display an n-by-n matrix.",
+          "chinese": "",
+          "style": ""
+        },
+        {
+          "contentType": "CODE",
+          "code": "example\nExpected Output:\n\nInput a number: 10                                                                         \n1 0 0 1 1 0 0 0 1 1                                                                       \n0 0 1 0 1 0 1 0 0 0                                                                        \n0 1 0 1 0 0 0 0 0 1                                                                       \n1 1 1 0 0 0 0 1 1 1                                                                        \n1 1 0 1 1 1 0 1 0 0                                                                      \n1 0 0 0 1 1 0 0 0 0                                                                       \n0 0 1 0 0 0 0 1 1 1                                                                      \n1 1 0 1 0 1 0 0 1 0                                                                       \n0 0 1 0 0 0 0 1 1 0                                                        \n1 1 1 0 0 1 1 1 1 0"
+        }
+      ],
+      "answerContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Sample Solution:\n\nJava Code:",
+          "chinese": "示例：\n\nJava代码：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "CODE",
+          "code": "import java.util.Scanner;\n\npublic class Exercise12 {\n \npublic static void main(String[] args)\n    {\n        \n        Scanner in = new Scanner(System.in);\n        System.out.print(\"Input a number: \");\n        int n = in.nextInt();\n        printMatrix(n);\n    }\n \n public static void printMatrix(int n) {\n\n        for(int i = 0; i < n; i++) {\n            for(int j = 0; j < n; j++) {\n                System.out.print((int)(Math.random() * 2) + \" \");\n            }\n            System.out.println();\n        }\n    }\n}"
+        }
+      ],
+      "explanationContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Flowchart:",
+          "chinese": "流程图：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": "java-method-exercise-12.png"
+        }
+      ]
+    },
+    {
+      "orderInTag": 13,
+      "id": "11301541859",
+      "initCode": "public class Solution {\n    public static double areaTriangle(double side1, double side2, double side3) {\n        \n    }\n}",
+      "targetMethodName": "areaTriangle",
+      "concepts": [
+        "method"
+      ],
+      "tags": [
+        "method"
+      ],
+      "exerciseContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Write Java methods to calculate triangle area.",
+          "chinese": "",
+          "style": ""
+        },
+        {
+          "contentType": "TEXT",
+          "english": "Pictorial Presentation:",
+          "chinese": "",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": "java-method-image-exercise-13.png"
+        },
+        {
+          "contentType": "CODE",
+          "code": "example\nExpected Output:\n\nInput Side-1: 10                                                                               \nInput Side-2: 15                                                                               \nInput Side-3: 20                                                                              \nThe area of the triangle is 72.6184377413890"
+        }
+      ],
+      "answerContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Sample Solution:\n\nJava Code:",
+          "chinese": "示例：\n\nJava代码：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "CODE",
+          "code": "import java.util.Scanner;\npublic class Exercise13 {\n  public static void main(String[] args)\n    {\n        Scanner in = new Scanner(System.in);\n         System.out.print(\"Input Side-1: \");\n         double side1 = in.nextDouble();\n         System.out.print(\"Input Side-2: \");\n         double side2 = in.nextDouble();\n         System.out.print(\"Input Side-3: \");\n         double side3 = in.nextDouble();\n         System.out.println( is_Valid(side1, side2,side3) ?\n                \"The area of the triangle is \" + area_triangle(side1, side2, side3) : \"Invalid triangle\" );\n    }\n\n  public static boolean is_Valid(double side1, double side2, double side3) {\n        if( side1 + side2 > side3 &&\n                side2 + side3 > side1 &&\n                side1 + side3 > side2) return true;\n        else return false;\n    }\n   public static double area_triangle(double side1, double side2, double side3) {\n        double area = 0;\n        double s = (side1 + side2 + side3)/2;\n        area = Math.sqrt(s*(s - side1)*(s - side2)*(s - side3));\n        return area;\n    }\n}"
+        }
+      ],
+      "explanationContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Flowchart:",
+          "chinese": "流程图：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": "java-method-exercise-13.png"
+        }
+      ]
+    },
+    {
+      "orderInTag": 14,
+      "id": "11472778036",
+      "initCode": "public class Solution {\n    public static double pentagonArea(int n, double s) {\n        \n    }\n}",
+      "targetMethodName": "pentagonArea",
+      "concepts": [
+        "method"
+      ],
+      "tags": [
+        "method"
+      ],
+      "exerciseContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Write a Java method to create a pentagon's area.",
+          "chinese": "",
+          "style": ""
+        },
+        {
+          "contentType": "TEXT",
+          "english": "Pictorial Presentation:",
+          "chinese": "",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": "java-method-image-exercise-14.png"
+        },
+        {
+          "contentType": "CODE",
+          "code": "example\nExpected Output:\n\nInput the number of sides: 5                             \nInput the side: 6                                        \nThe area of the pentagon is 61.93718642120281"
+        }
+      ],
+      "answerContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Sample Solution:\n\nJava Code:",
+          "chinese": "示例：\n\nJava代码：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "CODE",
+          "code": "import java.util.Scanner;\npublic class Exercise14 {\n \n  public static void main(String[] args) {\n\n        Scanner input = new Scanner(System.in);\n        System.out.print(\"Input the number of sides: \");\n        int n = input.nextInt();\n        System.out.print(\"Input the side: \");\n        double side = input.nextDouble();\n\n        System.out.println(\"The area of the pentagon is \" + pentagon_area(n, side));\n    }\n\n    public static double pentagon_area(int n, double s) {\n        return  (n * s * s) / (4 * Math.tan(Math.PI/n));\n    }\n}"
+        }
+      ],
+      "explanationContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Flowchart:",
+          "chinese": "流程图：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": "java-method-exercise-14.png"
+        }
+      ]
+    },
+    {
+      "orderInTag": 16,
+      "id": "1859681378",
+      "initCode": "public class Solution {\n    public static ArrayList<String> twinPrime(long n) {\n        \n    }\n}",
+      "targetMethodName": "twinPrime",
+      "concepts": [
+        "method"
+      ],
+      "tags": [
+        "method"
+      ],
+      "exerciseContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Write a Java method to find all twin prime numbers less than 100.",
+          "chinese": "",
+          "style": ""
+        },
+        {
+          "contentType": "TEXT",
+          "english": "Pictorial Presentation:",
+          "chinese": "",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": "java-method-image-exercise-16.png"
+        },
+        {
+          "contentType": "CODE",
+          "code": "example\nExpected Output:\n\n(3, 5)                                                   \n(5, 7)                                                   \n(11, 13)                                                 \n(17, 19)                                                 \n(29, 31)                                                 \n(41, 43)                                                 \n(59, 61)                                                 \n(71, 73) "
+        }
+      ],
+      "answerContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Sample Solution:\n\nJava Code:",
+          "chinese": "示例：\n\nJava代码：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "CODE",
+          "code": "import java.util.Scanner;\npublic class Exercise16 {\n \n public static void main(String[] args) {\n\n        for (int i = 2; i < 100; i++) {\n\n            if (is_Prime(i) && is_Prime(i + 2)) {\n                System.out.printf(\"(%d, %d)\\n\", i, i + 2);\n            }\n        }\n    }\n\n    public static boolean is_Prime(long n) {\n\n        if (n < 2) return false;\n\n        for (int i = 2; i <= n / 2; i++) {\n\n            if (n % i == 0) return false;\n        }\n        return true;\n    }\n\n}"
+        }
+      ],
+      "explanationContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Flowchart:",
+          "chinese": "流程图：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": "java-method-exercise-16.png"
+        }
+      ]
+    },
+    {
+      "orderInTag": 17,
+      "id": "439410769",
+      "initCode": "public class Solution {\n    public static int countValue(int num, int k) {\n        \n    }\n}",
+      "targetMethodName": "countValue",
+      "concepts": [
+        "method"
+      ],
+      "tags": [
+        "method"
+      ],
+      "exerciseContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Write a Java method to count the number of digits in an integer with the value k (0~9). The integer may be assumed to be non-negative.",
+          "chinese": "",
+          "style": ""
+        },
+        {
+          "contentType": "TEXT",
+          "english": "Pictorial Presentation:",
+          "chinese": "",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": "java-method-image-exercise-17.png"
+        },
+        {
+          "contentType": "CODE",
+          "code": "example\nExpected Output:\n\nInput a number:  12541\n1"
+        }
+      ],
+      "answerContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Sample Solution:\n\nJava Code:",
+          "chinese": "示例：\n\nJava代码：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "CODE",
+          "code": "import java.util.Scanner;\npublic class Main {\n public static void main(String[] args)\n   {\n       Scanner in = new Scanner(System.in);\n       System.out.print(\"Input a number: \");\n       int n = in.nextInt();\n       if (n>0)\n       {\n       System.out.println(test(n));\n       }\n   }\n public static int test(int num)\n   {\n    int ctr = 0;\n    int n = num;\n    do{\n      if (n % 10 == 2){\n          ctr ++;\n      }\n      n /= 10;\n     }while(n > 0);\n      return ctr;\n   }\n}"
+        }
+      ],
+      "explanationContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Flowchart:",
+          "chinese": "流程图：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": "java-method-exercise-flowchart-17.png"
+        }
+      ]
+    },
+    {
+      "orderInTag": 18,
+      "id": "39945466",
+      "initCode": "public class Solution {\n    public static boolean isConsecutive(int x, int y, int z) {\n        \n    }\n}",
+      "targetMethodName": "isConsecutive",
+      "concepts": [
+        "method"
+      ],
+      "tags": [
+        "method"
+      ],
+      "exerciseContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Write a Java method that accepts three integers and checks whether they are consecutive or not. Returns true or false.\nFrom Wikipedia-\nConsecutive numbers are numbers that follow each other in order. They have a difference of 1 between every two numbers. In a set of consecutive numbers, the mean and the median are equal.\nIf n is a number, then the next numbers will be n+1 and n+2.",
+          "chinese": "",
+          "style": ""
+        },
+        {
+          "contentType": "TEXT",
+          "english": "Pictorial Presentation:",
+          "chinese": "",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": "java-method-image-exercise-18-1.png"
+        },
+        {
+          "contentType": "TEXT",
+          "english": "Pictorial Presentation:",
+          "chinese": "",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": "java-method-image-exercise-18-2.png"
+        },
+        {
+          "contentType": "CODE",
+          "code": "example\nExpected Output:\n\nInput the first number:  15\nInput the second number:  16\nInput the third number:  17\nCheck whether the three said numbers are consecutive or not!true"
+        }
+      ],
+      "answerContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Sample Solution:\n\nJava Code:",
+          "chinese": "示例：\n\nJava代码：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "CODE",
+          "code": "import java.util.Scanner;\npublic class Main { \n public static void main(String[] args)\n    {\n        Scanner in = new Scanner(System.in);\n        System.out.print(\"Input the first number: \");\n        int x = in.nextInt();\n        System.out.print(\"Input the second number: \");\n        int y = in.nextInt();\n        System.out.print(\"Input the third number: \");\n        int z = in.nextInt();\n        System.out.print(\"Check whether the three said numbers are consecutive or not!\");\n        System.out.println(test(x,y,z));\n        }\n\n public static boolean test(int x, int y, int z){\n    int max_num = Math.max(x, Math.max(y, z));\n    int min_num = Math.min(x, Math.min(y, z));\n    int middle_num = x+y+z - max_num - min_num;\n    return (max_num - middle_num) == 1 && (middle_num - min_num == 1);\n  }\n} "
+        }
+      ],
+      "explanationContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Flowchart:",
+          "chinese": "流程图：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": "java-method-exercise-flowchart-18.png"
+        }
+      ]
+    },
+    {
+      "orderInTag": 19,
+      "id": "11530202290",
+      "initCode": "public class Solution {\n    public static boolean testMethod19(int x, int y, int z) {\n       \n    }\n}",
+      "targetMethodName": "methodTest19",
+      "concepts": [
+        "method"
+      ],
+      "tags": [
+        "method"
+      ],
+      "exerciseContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Write a Java method that accepts three integers and returns true if one is the middle point between the other two integers, otherwise false.",
+          "chinese": "",
+          "style": ""
+        },
+        {
+          "contentType": "TEXT",
+          "english": "Pictorial Presentation:",
+          "chinese": "",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": "java-method-image-exercise-19.png"
+        },
+        {
+          "contentType": "CODE",
+          "code": "example\nExpected Output:\n\nInput the first number:  2\nInput the second number:  4\nInput the third number:  6\nCheck whether the three said numbers has a midpoint!\ntrue"
+        }
+      ],
+      "answerContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Sample Solution:\n\nJava Code:",
+          "chinese": "示例：\n\nJava代码：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "CODE",
+          "code": "import java.util.Scanner;\npublic class Main { \n public static void main(String[] args)\n    {\n        Scanner in = new Scanner(System.in);\n        System.out.print(\"Input the first number: \");\n        int x = in.nextInt();\n        System.out.print(\"Input the second number: \");\n        int y = in.nextInt();\n        System.out.print(\"Input the third number: \");\n        int z = in.nextInt();\n        System.out.print(\"Check whether the three said numbers has a midpoint!\\n\");\n        System.out.print(test(x,y,z));\n        }\n\n public static boolean test(int x, int y, int z){\n    int max = Math.max(x, Math.max(y,z));\n    int min = Math.min(x, Math.min(y,z));\n    double mid_point1 = (max + min) / 2.0;\n    int mid_point2 = x + y + z - max - min;\n    return (mid_point1 == mid_point2);\n  }\n}"
+        }
+      ],
+      "explanationContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Flowchart:",
+          "chinese": "流程图：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": "java-method-exercise-flowchart-19.png"
+        }
+      ]
+    },
+    {
+      "orderInTag": 20,
+      "id": "182931703",
+      "initCode": "public class Solution {\n    public static int methodTest20(int n){\n\n    }\n}",
+      "targetMethodName": "methodTest20",
+      "concepts": [
+        "method"
+      ],
+      "tags": [
+        "method"
+      ],
+      "exerciseContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Write a Java method for extracting the first digit from a positive or negative integer.",
+          "chinese": "",
+          "style": ""
+        },
+        {
+          "contentType": "TEXT",
+          "english": "Pictorial Presentation:",
+          "chinese": "",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": "java-method-image-exercise-20.png"
+        },
+        {
+          "contentType": "CODE",
+          "code": "example\nExpected Output:\n\nInput an integer(positive/negative): 81\n\nFactors of 3 of the said integer:\n81 = 3 * 3 * 3 * 3 * 1"
+        }
+      ],
+      "answerContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Sample Solution:\n\nJava Code:",
+          "chinese": "示例：\n\nJava代码：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "CODE",
+          "code": "import java.util.Scanner;\npublic class Main { \n public static void main(String[] args)\n    {\n        Scanner in = new Scanner(System.in);\n        System.out.print(\"Input an integer(positive/negative):\");\n        int n = in.nextInt();\n        System.out.print(\"Extract the first digit from the said integer:\\n\");\n        System.out.print(test(n));\n        }\n\npublic static int test(int n){\n       int fact_num = 10;\n       while(n / fact_num != 0){\n        fact_num *= 10;\n    }\n    return Math.abs(n / (fact_num/10));\n  }\n}"
+        }
+      ],
+      "explanationContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Flowchart:",
+          "chinese": "流程图：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": "java-method-exercise-flowchart-20.png"
+        }
+      ]
+    }
+  ]
+}

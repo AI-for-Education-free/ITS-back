@@ -1,0 +1,55 @@
+{
+  "source": "w3resource",
+  "link": "https://www.w3resource.com/java-exercises/index.php",
+  "subjectType": "JAVA",
+  "exercises": [
+    {
+      "orderInTag": -1,
+      "id": "",
+      "initCode": "public class Solution {\n    \n}",
+      "targetMethodName": "",
+      "concepts": [
+        ""
+      ],
+      "tags": [
+        ""
+      ],
+      "exerciseContents": [
+        {
+          "contentType": "TEXT",
+          "english": "",
+          "chinese": "",
+          "style": ""
+        },
+        {
+          "contentType": "CODE",
+          "code": ""
+        }
+      ],
+      "answerContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Sample Solution:\n\nJava Code:",
+          "chinese": "示例：\n\nJava代码：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "CODE",
+          "code": ""
+        }
+      ],
+      "explanationContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Flowchart:",
+          "chinese": "流程图：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": ""
+        }
+      ]
+    }
+  ]
+}

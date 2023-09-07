@@ -1,0 +1,62 @@
+{
+  "source": "sanfoundry",
+  "link": "https://www.sanfoundry.com/java-questions-answers-freshers-experienced/#java-chapters",
+  "subjectType": "JAVA",
+  "exercises": [
+    {
+      "orderInTag": 1,
+      "id": "",
+      "concepts": [
+        ""
+      ],
+      "exerciseContents": [
+        {
+          "contentType": "TEXT",
+          "english": "",
+          "chinese": ""
+        }
+      ],
+      "options": [
+        [
+          {
+            "contentType": "TEXT",
+            "english": "",
+            "chinese": ""
+          }
+        ],
+        [
+          {
+            "contentType": "TEXT",
+            "english": "",
+            "chinese": ""
+          }
+        ],
+        [
+          {
+            "contentType": "TEXT",
+            "english": "",
+            "chinese": ""
+          }
+        ],
+        [
+          {
+            "contentType": "TEXT",
+            "english": "",
+            "chinese": ""
+          }
+        ]
+      ],
+      "correctAnswer": 1,
+      "explanationContents": [
+        {
+          "contentType": "TEXT",
+          "english": "",
+          "chinese": ""
+        }
+      ],
+      "tags": [
+        ""
+      ]
+    }
+  ]
+}

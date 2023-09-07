@@ -1,0 +1,9 @@
+{
+  "source": "w3resource",
+  "link": "https://www.w3resource.com/java-exercises/index.php",
+  "subjectType": "JAVA",
+  "test": "public static String middle(String str) {\n        int position;\n        int length;\n        if (str.length() % 2 == 0)\n        {\n            position = str.length() / 2 - 1;\n            length = 2;\n        }\n        else\n        {\n            position = str.length() / 2;\n            length = 1;\n        }\n        return str.substring(position, position + length);\n    }",
+  "exercises": [
+
+  ]
+}
