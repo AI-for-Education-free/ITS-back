@@ -49,7 +49,7 @@ public class JavaProgramExerciseService implements IJavaProgramExerciseService {
             return new DataWrapper(false).msgBuilder("检查Java编程习题失败").codeBuilder(100);
         } else {
             String targetMethodName = result.targetMethodName;
-            HashMap<String, Object> checkResult = JavaProgramExercise.check(submissionCode, targetMethodName);
+            HashMap<String, Object> checkResult = JavaProgramExercise.check(submissionCode, targetMethodName, "XZJ");
             data.put("result", checkResult);
             return new DataWrapper(true).msgBuilder("检查Java编程习题成功").dataBuilder(data);
         }

@@ -97,11 +97,12 @@ public class SingleChoiceExercise {
         File file = new File(fPath);
         String jsonString = Files.readString(Path.of(file.getAbsolutePath()));
         JSONObject jsonObject = JSONObject.fromObject(jsonString);
+        String subjectType = (String) jsonObject.get("subjectType");
         JSONArray exerciseArray = jsonObject.getJSONArray("exercises");
         List<SingleChoiceExercise> singleChoiceExercises = new ArrayList<>();
         for (int i = 0; i < exerciseArray.size(); i++) {
             JSONObject exerciseObject = exerciseArray.getJSONObject(i);
-            singleChoiceExercises.add(generateExerciseFromJsonObject(exerciseObject, "JAVA"));
+            singleChoiceExercises.add(generateExerciseFromJsonObject(exerciseObject, subjectType));
         }
     }
 }

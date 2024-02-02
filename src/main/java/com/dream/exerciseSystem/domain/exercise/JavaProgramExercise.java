@@ -8,13 +8,13 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.mdkt.compiler.InMemoryJavaCompiler;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -37,7 +37,7 @@ public class JavaProgramExercise {
     public String targetMethodName;
 
     public static void main(String[] args) {
-        String s = "Write a Java method to print characters between two characters (i.e. A to P). ";
+        String s = "Write a Java method to check whether every digit of a given integer is even. Return true if every digit is odd otherwise false.";
         System.out.println(s.hashCode());
     }
 
@@ -79,10 +79,16 @@ public class JavaProgramExercise {
         return new JavaProgramExercise(id, subjectType, exercise, concepts, tags, orderInTag, initCode, targetMethodName);
     }
 
-    public static Method getCheckMethod(String targetMethodName) {
+    public static Method getCheckMethod(String targetMethodName, String developer) {
         String checkMethodName = "check" + targetMethodName.substring(0,1).toUpperCase() + targetMethodName.substring(1);
-        Class<JavaProgramExerciseChecker> javaProgramExerciseCheckerClass = JavaProgramExerciseChecker.class;
-        Method[] checkMethods = javaProgramExerciseCheckerClass.getDeclaredMethods();
+        Method[] checkMethods = null;
+        if (Objects.equals(developer, "XCL")) {
+            Class<JavaProgramExerciseCheckerXCL> javaProgramExerciseCheckerClass = JavaProgramExerciseCheckerXCL.class;
+            checkMethods = javaProgramExerciseCheckerClass.getDeclaredMethods();
+        } else {
+            Class<JavaProgramExerciseChecker> javaProgramExerciseCheckerClass = JavaProgramExerciseChecker.class;
+            checkMethods = javaProgramExerciseCheckerClass.getDeclaredMethods();
+        }
         List<Method> filteredCheckMethods = Stream.of(checkMethods).filter(method -> method.getName().equals(checkMethodName)).collect(Collectors.toList());
         return filteredCheckMethods.get(0);
     }
@@ -102,7 +108,7 @@ public class JavaProgramExercise {
         return result;
     }
 
-    public static HashMap<String, Object> check(String submissionCode, String targetMethodName)
+    public static HashMap<String, Object> check(String submissionCode, String targetMethodName, String developer)
             throws Exception {
         HashMap<String, Object> checkResult = new HashMap<>();
         HashMap<String, Object> findSolutionClassResult = getSolutionClass(submissionCode);
@@ -115,11 +121,15 @@ public class JavaProgramExercise {
             return checkResult;
         }
 
-        Method checkMethod = getCheckMethod(targetMethodName);
+        Method checkMethod = getCheckMethod(targetMethodName, developer);
         checkMethod.setAccessible(true);
 
         try {
-            checkResult = (HashMap<String, Object>) checkMethod.invoke(new JavaProgramExerciseChecker(), solutionClass);
+            if (Objects.equals(developer, "XCL")) {
+                checkResult = (HashMap<String, Object>) checkMethod.invoke(new JavaProgramExerciseCheckerXCL(), solutionClass);
+            } else {
+                checkResult = (HashMap<String, Object>) checkMethod.invoke(new JavaProgramExerciseChecker(), solutionClass);
+            }
         } catch (Exception e) {
             assert e instanceof InvocationTargetException;
             InvocationTargetException targetEx = (InvocationTargetException) e;

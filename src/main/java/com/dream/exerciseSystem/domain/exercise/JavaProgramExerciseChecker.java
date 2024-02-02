@@ -254,32 +254,6 @@ public class JavaProgramExerciseChecker {
         return result;
     }
 
-//    public HashMap<String, Object> getUserOutput(Method targetMethod) {
-//        HashMap<String, Object> result = new HashMap<>();
-//
-//        final ByteArrayOutputStream userOutputStream = new ByteArrayOutputStream();
-//        PrintStream consoleStream = System.out;
-//        System.setOut(new PrintStream(userOutputStream));
-//                try {
-//            targetMethod.invoke(null, testInput1);
-//            String userOutput = userOutputStream.toString();
-//            if (userOutput.length() > 0) {
-//                userOutput = userOutput.substring(0, userOutput.length() - 1);
-//            }
-//            result.put("userOutput", userOutput);
-//            System.setOut(consoleStream);
-//        } catch (Exception e) {
-//            assert e instanceof InvocationTargetException;
-//            InvocationTargetException targetEx = (InvocationTargetException) e;
-//            result.put("correct", false);
-//            result.put("hint", "runtimeException");
-//            result.put("runtimeException", targetEx);
-//            System.setOut(consoleStream);
-//            return result;
-//        }
-//    }
-
-
     public HashMap<String, Object> checkPrintHello(Class<?> solutionClass) {
         String targetMethodName = "printHello";
         HashMap<String, Object> result = new HashMap<>();
@@ -1495,7 +1469,7 @@ public class JavaProgramExerciseChecker {
                 + submissionCodeSuffix;
         String targetMethodName = exercise.targetMethodName;
 
-        HashMap<String, Object> checkResult = JavaProgramExercise.check(submissionCode, targetMethodName);
+        HashMap<String, Object> checkResult = JavaProgramExercise.check(submissionCode, targetMethodName, "XZJ");
         System.out.println(checkResult);
     }
 
