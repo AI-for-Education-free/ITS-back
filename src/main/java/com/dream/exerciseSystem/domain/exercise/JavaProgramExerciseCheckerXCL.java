@@ -42,25 +42,52 @@ public class JavaProgramExerciseCheckerXCL {
         return true;
     }
 
+    public HashMap<String, Object> checkInputAndOutput(Class<?> solutionClass, String targetMethodName, Class<?>[] trueParameterTypes, Class<?> trueReturnType) {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("correct", false);
+        ArrayList<HashMap<String, String>> hints = new ArrayList<>();
+
+        Method targetMethod = null;
+        // 检查方法是否存在以及输入参数
+        try {
+            targetMethod = solutionClass.getDeclaredMethod(targetMethodName, trueParameterTypes);
+        } catch (NoSuchMethodException noSuchMethodException) {
+            HashMap<String, String> hint = new HashMap<>();
+            hint.put("chinese", "方法 " + targetMethodName + " 不存在；或者方法 " + targetMethodName +
+                    " 的输入参数类型/数目不对，输入参数必须为：" + Arrays.toString(trueParameterTypes));
+            hints.add(hint);
+            result.put("hints", hints);
+            return result;
+        }
+
+        // 检查返回值
+        Class<?> returnType = targetMethod.getReturnType();
+        if (returnType != trueReturnType) {
+            HashMap<String, String> hint = new HashMap<>();
+            hint.put("chinese", "方法 " + targetMethodName + " 的返回值类型不对，返回值类型必须为：" + trueReturnType);
+            hints.add(hint);
+            result.put("hints", hints);
+            return result;
+        }
+
+        result.put("correct", true);
+        return result;
+    }
+
     public HashMap<String, Object> checkMethodTest22(Class<?> solutionClass) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
         // 改成对应方法名
         String targetMethodName = "methodTest22";
         HashMap<String, Object> result = new HashMap<>();
         ArrayList<HashMap<String, String>> hints = new ArrayList<>();
 
-        // 输入参数个数和类型
-        Method targetMethod = solutionClass.getDeclaredMethod(targetMethodName, int.class);
-        // 返回值类型
+        Method targetMethod = null;
+        Class<?>[] trueParameterTypes = {int.class};
         Class<?> trueReturnType = boolean.class;
-        Class<?> returnType = targetMethod.getReturnType();
-        if (returnType != trueReturnType) {
-            HashMap<String, String> hint = new HashMap<>();
-            hint.put("chinese", "方法 " + targetMethodName + " 的返回值类型不对，返回值类型必须为：" + trueReturnType);
-            hints.add(hint);
-            result.put("correct", false);
-            result.put("hints", hints);
-            return result;
+        HashMap<String, Object> checkInputAndOutputResult = checkInputAndOutput(solutionClass, targetMethodName, trueParameterTypes, trueReturnType);
+        if (!(boolean)checkInputAndOutputResult.get("correct")) {
+            return checkInputAndOutputResult;
         }
+        targetMethod = solutionClass.getDeclaredMethod(targetMethodName, trueParameterTypes);
 
         // 测试的输入值
         int testInput1 = random.nextInt(10000) + 10000;
@@ -108,17 +135,14 @@ public class JavaProgramExerciseCheckerXCL {
         HashMap<String, Object> result = new HashMap<>();
         ArrayList<HashMap<String, String>> hints = new ArrayList<>();
 
-        Method targetMethod = solutionClass.getDeclaredMethod(targetMethodName, String.class);
+        Method targetMethod = null;
+        Class<?>[] trueParameterTypes = {String.class};
         Class<?> trueReturnType = boolean.class;
-        Class<?> returnType = targetMethod.getReturnType();
-        if (returnType != trueReturnType) {
-            HashMap<String, String> hint = new HashMap<>();
-            hint.put("chinese", "方法 " + targetMethodName + " 的返回值类型不对，返回值类型必须为：" + trueReturnType);
-            hints.add(hint);
-            result.put("correct", false);
-            result.put("hints", hints);
-            return result;
+        HashMap<String, Object> checkInputAndOutputResult = checkInputAndOutput(solutionClass, targetMethodName, trueParameterTypes, trueReturnType);
+        if (!(boolean)checkInputAndOutputResult.get("correct")) {
+            return checkInputAndOutputResult;
         }
+        targetMethod = solutionClass.getDeclaredMethod(targetMethodName, trueParameterTypes);
 
         String testInput1 = "AIEEE";
         String testInput2 = "IAO";
@@ -167,7 +191,7 @@ public class JavaProgramExerciseCheckerXCL {
                 "        String phrase = input.toLowerCase();\n" +
                 "        for (int i = 0; i < phrase.length(); i++) {\n" +
                 "            if (str_vowels.indexOf(phrase.charAt(i)) == -1)\n" +
-                "                return true;\n" +
+                "                return false;\n" +
                 "        }\n" +
                 "        return true;\n" +
                 "    }\n"
@@ -189,7 +213,7 @@ public class JavaProgramExerciseCheckerXCL {
             JSONObject exerciseObject = exerciseArray.getJSONObject(i);
             javaProgramExercises.add(JavaProgramExercise.generateExerciseFromJsonObject(exerciseObject, "JAVA"));
         }
-        JavaProgramExercise exercise = javaProgramExercises.get(2);
+        JavaProgramExercise exercise = javaProgramExercises.get(1);
         javaProgramExerciseCheck(exercise);
     }
 }

@@ -12,8 +12,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
 
 public class JavaProgramExerciseCheckerTemplate {
     public static final int PASSWORD_LENGTH = 10;
@@ -90,79 +89,51 @@ public class JavaProgramExerciseCheckerTemplate {
         return strings;
     }
 
-    public HashMap<String, Object> findTargetMethod(Method[] solutionMethods, String targetMethodName, Class<?>[] trueParameterTypes,
-                                   Class<?> trueReturnType) {
+    public HashMap<String, Object> checkInputAndOutput(Class<?> solutionClass, String targetMethodName, Class<?>[] trueParameterTypes, Class<?> trueReturnType) {
         HashMap<String, Object> result = new HashMap<>();
+        result.put("correct", false);
         ArrayList<HashMap<String, String>> hints = new ArrayList<>();
-        List<Method> filteredSolutionMethods = Stream.of(solutionMethods).filter(method -> method.getName().equals(targetMethodName)).collect(Collectors.toList());
-        if (filteredSolutionMethods.size() == 0) {
-            HashMap<String, String> hint = new HashMap<>();
-            hint.put("chinese", "没有找到名为 " + targetMethodName + " 的方法");
-            hints.add(hint);
-            result.put("correct", false);
-            result.put("hints", hints);
-            return result;
-        }
+
         Method targetMethod = null;
-        for (Method m: filteredSolutionMethods) {
-            Class<?>[] targetParameterTypes = m.getParameterTypes();
-            Class<?> returnType = m.getReturnType();
-            if (returnType == trueReturnType && Arrays.equals(targetParameterTypes, trueParameterTypes)) {
-                targetMethod = m;
-                break;
-            }
-        }
-        if (targetMethod == null) {
+        // 检查方法是否存在以及输入参数
+        try {
+            targetMethod = solutionClass.getDeclaredMethod(targetMethodName, trueParameterTypes);
+        } catch (NoSuchMethodException noSuchMethodException) {
             HashMap<String, String> hint = new HashMap<>();
-            hint.put("chinese", "方法 " + targetMethodName + " 的返回值或者参数类型不对，\n返回值类型必须为：" + trueReturnType
-                    + "\n参数必须为：" + Arrays.toString(trueParameterTypes));
+            hint.put("chinese", "方法 " + targetMethodName + " 不存在；或者方法 " + targetMethodName +
+                    " 的输入参数类型/数目不对，输入参数必须为：" + Arrays.toString(trueParameterTypes));
             hints.add(hint);
-            result.put("correct", false);
             result.put("hints", hints);
             return result;
         }
 
-        result.put("targetMethod", targetMethod);
+        // 检查返回值
+        Class<?> returnType = targetMethod.getReturnType();
+        if (returnType != trueReturnType) {
+            HashMap<String, String> hint = new HashMap<>();
+            hint.put("chinese", "方法 " + targetMethodName + " 的返回值类型不对，返回值类型必须为：" + trueReturnType);
+            hints.add(hint);
+            result.put("hints", hints);
+            return result;
+        }
+
+        result.put("correct", true);
         return result;
     }
 
-    public HashMap<String, Object> checkPrintHello(Class<?> solutionClass) {
+    public HashMap<String, Object> checkPrintHello(Class<?> solutionClass) throws NoSuchMethodException {
         String targetMethodName = "printHello";
         HashMap<String, Object> result = new HashMap<>();
         ArrayList<HashMap<String, String>> hints = new ArrayList<>();
 
-        Method[] solutionMethods = solutionClass.getDeclaredMethods();
-        List<Method> filteredSolutionMethods = Stream.of(solutionMethods).filter(method -> method.getName().equals(targetMethodName)).collect(Collectors.toList());
-
-        if (filteredSolutionMethods.size() == 0) {
-            HashMap<String, String> hint = new HashMap<>();
-            hint.put("chinese", "没有找到名为 " + targetMethodName + " 的方法");
-            hints.add(hint);
-            result.put("correct", false);
-            result.put("hints", hints);
-            return result;
-        }
-
         Method targetMethod = null;
-        for (Method m: filteredSolutionMethods) {
-            Class<?>[] targetParameterTypes = m.getParameterTypes();
-            Class<?> returnType = m.getReturnType();
-            int modifiers = m.getModifiers();
-            if (modifiers == 9 && returnType.equals(Void.TYPE) && targetParameterTypes.length == 0) {
-                // modifiers == 9: public static
-                // returnType.equals(trueReturnType): void
-                targetMethod = m;
-                break;
-            }
+        Class<?>[] trueParameterTypes = {};
+        Class<?> trueReturnType = void.class;
+        HashMap<String, Object> checkInputAndOutputResult = checkInputAndOutput(solutionClass, targetMethodName, trueParameterTypes, trueReturnType);
+        if (!(boolean)checkInputAndOutputResult.get("correct")) {
+            return checkInputAndOutputResult;
         }
-        if (targetMethod == null) {
-            HashMap<String, String> hint = new HashMap<>();
-            hint.put("chinese", "方法 " + targetMethodName + " 的返回值或者参数类型不对，\n返回值类型必须为 void\n参数必须为空");
-            hints.add(hint);
-            result.put("correct", false);
-            result.put("hints", hints);
-            return result;
-        }
+        targetMethod = solutionClass.getDeclaredMethod(targetMethodName, trueParameterTypes);
 
         targetMethod.setAccessible(true);
         final ByteArrayOutputStream userOutputStream = new ByteArrayOutputStream();
@@ -209,19 +180,19 @@ public class JavaProgramExerciseCheckerTemplate {
         return result;
     }
 
-    public HashMap<String, Object> checkSmallest(Class<?> solutionClass) throws InvocationTargetException, IllegalAccessException {
+    public HashMap<String, Object> checkSmallest(Class<?> solutionClass) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
         String targetMethodName = "smallest";
         HashMap<String, Object> result = new HashMap<>();
         ArrayList<HashMap<String, String>> hints = new ArrayList<>();
 
-        Method[] solutionMethods = solutionClass.getDeclaredMethods();
-        Class<?>[] trueParameterTypes = new Class[]{double.class, double.class, double.class};
-        Class<Double> trueReturnType = double.class;
-        HashMap<String, Object> findTargetMethodResult = findTargetMethod(solutionMethods, targetMethodName, trueParameterTypes, trueReturnType);
-        if (!findTargetMethodResult.containsKey("targetMethod")) {
-            return findTargetMethodResult;
+        Method targetMethod = null;
+        Class<?>[] trueParameterTypes = {double.class, double.class, double.class};
+        Class<?> trueReturnType = double.class;
+        HashMap<String, Object> checkInputAndOutputResult = checkInputAndOutput(solutionClass, targetMethodName, trueParameterTypes, trueReturnType);
+        if (!(boolean)checkInputAndOutputResult.get("correct")) {
+            return checkInputAndOutputResult;
         }
-        Method targetMethod = (Method) findTargetMethodResult.get("targetMethod");
+        targetMethod = solutionClass.getDeclaredMethod(targetMethodName, trueParameterTypes);
 
         targetMethod.setAccessible(true);
         double userMethodOutput1 = (double) targetMethod.invoke(null, 25, 37, 39);
@@ -256,19 +227,22 @@ public class JavaProgramExerciseCheckerTemplate {
     }
 
 
-    public HashMap<String, Object> checkMiddle(Class<?> solutionClass) throws InvocationTargetException, IllegalAccessException {
+    public HashMap<String, Object> checkMiddle(Class<?> solutionClass) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
         String targetMethodName = "middle";
         HashMap<String, Object> result = new HashMap<>();
         ArrayList<HashMap<String, String>> hints = new ArrayList<>();
 
-        Method[] solutionMethods = solutionClass.getDeclaredMethods();
-        Class<?>[] trueParameterTypes = new Class[]{String.class};
+        Method targetMethod = solutionClass.getDeclaredMethod(targetMethodName, String.class);
         Class<?> trueReturnType = String.class;
-        HashMap<String, Object> findTargetMethodResult = findTargetMethod(solutionMethods, targetMethodName, trueParameterTypes, trueReturnType);
-        if (!findTargetMethodResult.containsKey("targetMethod")) {
-            return findTargetMethodResult;
+        Class<?> returnType = targetMethod.getReturnType();
+        if (returnType != trueReturnType) {
+            HashMap<String, String> hint = new HashMap<>();
+            hint.put("chinese", "方法 " + targetMethodName + " 的返回值类型不对，返回值类型必须为：" + trueReturnType);
+            hints.add(hint);
+            result.put("correct", false);
+            result.put("hints", hints);
+            return result;
         }
-        Method targetMethod = (Method) findTargetMethodResult.get("targetMethod");
 
         targetMethod.setAccessible(true);
         String userMethodOutput1 = (String) targetMethod.invoke(null, "350");
@@ -304,42 +278,19 @@ public class JavaProgramExerciseCheckerTemplate {
     }
 
 
-    public HashMap<String, Object> checkPrintChars(Class<?> solutionClass) {
+    public HashMap<String, Object> checkPrintChars(Class<?> solutionClass) throws NoSuchMethodException {
         String targetMethodName = "printChars";
         HashMap<String, Object> result = new HashMap<>();
         ArrayList<HashMap<String, String>> hints = new ArrayList<>();
 
-        Method[] solutionMethods = solutionClass.getDeclaredMethods();
-        List<Method> filteredSolutionMethods = Stream.of(solutionMethods).filter(method -> method.getName().equals(targetMethodName)).collect(Collectors.toList());
-
-        if (filteredSolutionMethods.size() == 0) {
-            HashMap<String, String> hint = new HashMap<>();
-            hint.put("chinese", "没有找到名为 " + targetMethodName + " 的方法");
-            hints.add(hint);
-            result.put("correct", false);
-            result.put("hints", hints);
-            return result;
-        }
-
         Method targetMethod = null;
-        Class<?>[] trueParameterTypes = new Class[]{char.class, char.class, int.class};
-        for (Method m: filteredSolutionMethods) {
-            Class<?>[] targetParameterTypes = m.getParameterTypes();
-            Class<?> returnType = m.getReturnType();
-            int modifiers = m.getModifiers();
-            if (modifiers == 9 && returnType.equals(Void.TYPE) && Arrays.equals(targetParameterTypes, trueParameterTypes)) {
-                targetMethod = m;
-                break;
-            }
+        Class<?>[] trueParameterTypes = {char.class, char.class, int.class};
+        Class<?> trueReturnType = void.class;
+        HashMap<String, Object> checkInputAndOutputResult = checkInputAndOutput(solutionClass, targetMethodName, trueParameterTypes, trueReturnType);
+        if (!(boolean)checkInputAndOutputResult.get("correct")) {
+            return checkInputAndOutputResult;
         }
-        if (targetMethod == null) {
-            HashMap<String, String> hint = new HashMap<>();
-            hint.put("chinese", "方法 " + targetMethodName + " 的返回值或者参数类型不对，\n返回值类型必须为 void\n参数必须为 " + Arrays.toString(trueParameterTypes));
-            hints.add(hint);
-            result.put("correct", false);
-            result.put("hints", hints);
-            return result;
-        }
+        targetMethod = solutionClass.getDeclaredMethod(targetMethodName, trueParameterTypes);
 
         targetMethod.setAccessible(true);
         // 获取用户输出1
@@ -400,17 +351,14 @@ public class JavaProgramExerciseCheckerTemplate {
         HashMap<String, Object> result = new HashMap<>();
         ArrayList<HashMap<String, String>> hints = new ArrayList<>();
 
-        Method targetMethod = solutionClass.getDeclaredMethod(targetMethodName, int.class);
+        Method targetMethod = null;
+        Class<?>[] trueParameterTypes = {int.class};
         Class<?> trueReturnType = boolean.class;
-        Class<?> returnType = targetMethod.getReturnType();
-        if (returnType != trueReturnType) {
-            HashMap<String, String> hint = new HashMap<>();
-            hint.put("chinese", "方法 " + targetMethodName + " 的返回值类型不对，返回值类型必须为：" + trueReturnType);
-            hints.add(hint);
-            result.put("correct", false);
-            result.put("hints", hints);
-            return result;
+        HashMap<String, Object> checkInputAndOutputResult = checkInputAndOutput(solutionClass, targetMethodName, trueParameterTypes, trueReturnType);
+        if (!(boolean)checkInputAndOutputResult.get("correct")) {
+            return checkInputAndOutputResult;
         }
+        targetMethod = solutionClass.getDeclaredMethod(targetMethodName, trueParameterTypes);
 
         int testInput1 = random.nextInt(1000) + 1000;
         int testInput2 = random.nextInt(1000) + 1000;
@@ -478,17 +426,14 @@ public class JavaProgramExerciseCheckerTemplate {
         HashMap<String, Object> result = new HashMap<>();
         ArrayList<HashMap<String, String>> hints = new ArrayList<>();
 
-        Method targetMethod = solutionClass.getDeclaredMethod(targetMethodName, int.class);
+        Method targetMethod = null;
+        Class<?>[] trueParameterTypes = {int.class};
         Class<?> trueReturnType = void.class;
-        Class<?> returnType = targetMethod.getReturnType();
-        if (returnType != trueReturnType) {
-            HashMap<String, String> hint = new HashMap<>();
-            hint.put("chinese", "方法 " + targetMethodName + " 的返回值类型不对，返回值类型必须为：" + trueReturnType);
-            hints.add(hint);
-            result.put("correct", false);
-            result.put("hints", hints);
-            return result;
+        HashMap<String, Object> checkInputAndOutputResult = checkInputAndOutput(solutionClass, targetMethodName, trueParameterTypes, trueReturnType);
+        if (!(boolean)checkInputAndOutputResult.get("correct")) {
+            return checkInputAndOutputResult;
         }
+        targetMethod = solutionClass.getDeclaredMethod(targetMethodName, trueParameterTypes);
 
         int testInput1 = random.nextInt(20) + 1;
         int testInput2 = random.nextInt(20) + 1;
@@ -573,17 +518,14 @@ public class JavaProgramExerciseCheckerTemplate {
         HashMap<String, Object> result = new HashMap<>();
         ArrayList<HashMap<String, String>> hints = new ArrayList<>();
 
-        Method targetMethod = solutionClass.getDeclaredMethod(targetMethodName, long.class);
+        Method targetMethod = null;
+        Class<?>[] trueParameterTypes = {long.class};
         Class<?> trueReturnType = ArrayList.class;
-        Class<?> returnType = targetMethod.getReturnType();
-        if (returnType != trueReturnType) {
-            HashMap<String, String> hint = new HashMap<>();
-            hint.put("chinese", "方法 " + targetMethodName + " 的返回值类型不对，返回值类型必须为：" + trueReturnType);
-            hints.add(hint);
-            result.put("correct", false);
-            result.put("hints", hints);
-            return result;
+        HashMap<String, Object> checkInputAndOutputResult = checkInputAndOutput(solutionClass, targetMethodName, trueParameterTypes, trueReturnType);
+        if (!(boolean)checkInputAndOutputResult.get("correct")) {
+            return checkInputAndOutputResult;
         }
+        targetMethod = solutionClass.getDeclaredMethod(targetMethodName, trueParameterTypes);
 
         long testInput1 = 100;
         long testInput2 = 200;
@@ -627,11 +569,20 @@ public class JavaProgramExerciseCheckerTemplate {
         String submissionCodeSuffix = "}";
         String submissionCode = submissionCodePrefix +
                 "\n" +
-                "    public static void printChars(char char1, char char2, int n) {\n" +
-                "        for (int ctr = 1; char1 <= char2; ctr++, char1++) {\n" +
-                "            System.out.print(char1 + \" \");\n" +
-                "            if (ctr % n == 0) System.out.println(\"\");\n" +
+                "    public static String middle(String str) {\n" +
+                "        int position;\n" +
+                "        int length;\n" +
+                "        if (str.length() % 2 == 0)\n" +
+                "        {\n" +
+                "            position = str.length() / 2 - 1;\n" +
+                "            length = 2;\n" +
                 "        }\n" +
+                "        else\n" +
+                "        {\n" +
+                "            position = str.length() / 2;\n" +
+                "            length = 1;\n" +
+                "        }\n" +
+                "        return str.substring(position, position + length);\n" +
                 "    }\n"
                 + submissionCodeSuffix;
         String targetMethodName = exercise.targetMethodName;
