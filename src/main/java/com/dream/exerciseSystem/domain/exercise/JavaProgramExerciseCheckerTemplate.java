@@ -282,6 +282,7 @@ public class JavaProgramExerciseCheckerTemplate {
         boolean check1 = Objects.equals(userMethodOutput1, trueOutput1);
         boolean check2 = Objects.equals(userMethodOutput2, trueOutput2);
         boolean check3 = Objects.equals(userMethodOutput3, trueOutput3);
+
         if (!check1) {
             HashMap<String, String> hint = new HashMap<>();
             hint.put("chinese", targetMethodName + "(\"350\")的返回值应该是" + trueOutput1 + "，而不应该是" + userMethodOutput1);

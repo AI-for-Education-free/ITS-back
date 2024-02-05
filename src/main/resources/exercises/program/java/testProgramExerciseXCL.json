@@ -7,7 +7,7 @@
     {
       "orderInTag": 22,
       "id": "359850201",
-      "initCode": "public class Solution {\n    \n}",
+      "initCode": "public class Solution {\n    public static boolean methodTest22(int n){\n\n    }\n}",
       "targetMethodName": "methodTest22",
       "concepts": [
         "method"
@@ -59,6 +59,74 @@
         {
           "contentType": "IMAGE",
           "imageName": "java-method-exercise-flowchart-22.png"
+        }
+      ]
+    },
+    {
+      "orderInTag": 23,
+      "id": "980736155",
+      "initCode": "public class Solution {\n    public static boolean isAllVowel(String input){\n\n    }\n}",
+      "targetMethodName": "isAllVowel",
+      "concepts": [
+        "method"
+      ],
+      "tags": [
+        "method"
+      ],
+      "exerciseContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Write a Java method that checks whether all the characters in a given string are vowels (a, e,i,o,u) or not. Return true if each character in the string is a vowel, otherwise return false.",
+          "chinese": "编写一个 Java 方法来检查给定字符串中的所有字符是否都是元音（a、e、i、o、u）。 如果字符串中的每个字符都是元音，则返回 true，否则返回 false。",
+          "style": ""
+        },
+        {
+          "contentType": "TEXT",
+          "english": "From Wikipedia-\nA vowel is a syllabic speech sound pronounced without any stricture in the vocal tract. Vowels are one of the two principal classes of speech sounds, the other being the consonant. Vowels vary in quality, in loudness and also in quantity (length). They are usually voiced and are closely involved in prosodic variation such as tone, intonation and stress.\n\nWrite a Java method that checks whether all the characters in a given string are vowels (a, e,i,o,u) or not. Return true if each character in the string is a vowel, otherwise return false.\n\nSample Data:\nAIEEE ->true\nIAO -> true\nJava -> false\nPython -> false\n\n",
+          "chinese": "来自维基百科-\n元音是在声道中没有任何狭窄的情况下发音的音节语音。 元音是语音的两大类之一，另一类是辅音。 元音的质量、响度和数量（长度）各不相同。 它们通常是浊音的，并且与音调、语调和重音等韵律变化密切相关。\n\n编写一个 Java 方法来检查给定字符串中的所有字符是否都是元音（a、e、i、o、u）。 如果字符串中的每个字符都是元音，则返回 true，否则返回 false。\n\n样本数据：\nAIEEE ->true\nIAO -> 正确\nJava -> 假\nPython -> 假",
+          "style": ""
+        },
+        {
+          "contentType": "TEXT",
+          "english": "Pictorial Presentation:",
+          "chinese": "",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": "java-method-image-exercise-23-1.png"
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": "java-method-image-exercise-23-2.png"
+        },
+        {
+          "contentType": "CODE",
+          "code": "example\nExpected Output:\n\nInput a string:  AIEEE\nCheck all the characters of the said string are vowels or not!\ntrue"
+        }
+      ],
+      "answerContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Sample Solution:\n\nJava Code:",
+          "chinese": "示例：\n\nJava代码：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "CODE",
+          "code": "import java.util.Scanner;\npublic class Main {\n  public static void main(String[] args) {\n    Scanner sc = new Scanner(System.in);\n    System.out.print(\"Input a string: \");\n    String str = sc.nextLine();\n    System.out.print(\"Check all the characters of the said string are vowels or not!\\n\");\n    System.out.print(test(str));\n  }\n\n  public static boolean test(String input) {\n    String str_vowels = \"aeiou\";\n    String phrase = input.toLowerCase();\n    for (int i = 0; i < phrase.length(); i++) {\n      if (str_vowels.indexOf(phrase.charAt(i)) == -1)\n        return false;\n    }\n    return true;\n  }\n}"
+        }
+      ],
+      "explanationContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Flowchart:",
+          "chinese": "流程图：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": "java-method-exercise-flowchart-23.png"
         }
       ]
     }

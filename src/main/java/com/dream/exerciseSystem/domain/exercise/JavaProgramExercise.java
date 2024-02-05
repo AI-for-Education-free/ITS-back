@@ -37,7 +37,7 @@ public class JavaProgramExercise {
     public String targetMethodName;
 
     public static void main(String[] args) {
-        String s = "Write a Java method to check whether every digit of a given integer is even. Return true if every digit is odd otherwise false.";
+        String s = "Write a Java method that checks whether all the characters in a given string are vowels (a, e,i,o,u) or not. Return true if each character in the string is a vowel, otherwise return false.";
         System.out.println(s.hashCode());
     }
 

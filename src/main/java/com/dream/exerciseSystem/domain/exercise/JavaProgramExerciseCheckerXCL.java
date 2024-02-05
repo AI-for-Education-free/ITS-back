@@ -32,6 +32,16 @@ public class JavaProgramExerciseCheckerXCL {
         return true;
     }
 
+    public static boolean isAllVowel(String input) {
+        String str_vowels = "aeiou";
+        String phrase = input.toLowerCase();
+        for (int i = 0; i < phrase.length(); i++) {
+            if (str_vowels.indexOf(phrase.charAt(i)) == -1)
+                return false;
+        }
+        return true;
+    }
+
     public HashMap<String, Object> checkMethodTest22(Class<?> solutionClass) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
         // 改成对应方法名
         String targetMethodName = "methodTest22";
@@ -93,21 +103,71 @@ public class JavaProgramExerciseCheckerXCL {
         return result;
     }
 
+    public HashMap<String, Object> checkIsAllVowel(Class<?> solutionClass) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
+        String targetMethodName = "isAllVowel";
+        HashMap<String, Object> result = new HashMap<>();
+        ArrayList<HashMap<String, String>> hints = new ArrayList<>();
+
+        Method targetMethod = solutionClass.getDeclaredMethod(targetMethodName, String.class);
+        Class<?> trueReturnType = boolean.class;
+        Class<?> returnType = targetMethod.getReturnType();
+        if (returnType != trueReturnType) {
+            HashMap<String, String> hint = new HashMap<>();
+            hint.put("chinese", "方法 " + targetMethodName + " 的返回值类型不对，返回值类型必须为：" + trueReturnType);
+            hints.add(hint);
+            result.put("correct", false);
+            result.put("hints", hints);
+            return result;
+        }
+
+        String testInput1 = "AIEEE";
+        String testInput2 = "IAO";
+        String testInput3 = "Python";
+
+        targetMethod.setAccessible(true);
+        boolean userMethodOutput1 = (boolean) targetMethod.invoke(null, testInput1);
+        boolean userMethodOutput2 = (boolean) targetMethod.invoke(null, testInput2);
+        boolean userMethodOutput3 = (boolean) targetMethod.invoke(null, testInput3);
+
+        boolean trueOutput1 = isAllVowel(testInput1);
+        boolean trueOutput2 = isAllVowel(testInput2);
+        boolean trueOutput3 = isAllVowel(testInput3);
+
+        boolean check1 = Objects.equals(userMethodOutput1, trueOutput1);
+        boolean check2 = Objects.equals(userMethodOutput2, trueOutput2);
+        boolean check3 = Objects.equals(userMethodOutput3, trueOutput3);
+
+        if (!check1) {
+            HashMap<String, String> hint = new HashMap<>();
+            hint.put("chinese", targetMethodName + "(" + testInput1 + ")的返回值应该是" + trueOutput1 + "，而不应该是" + userMethodOutput1);
+            hints.add(hint);
+        }
+        if (!check2) {
+            HashMap<String, String> hint = new HashMap<>();
+            hint.put("chinese", targetMethodName + "(" + testInput2 + ")的返回值应该是" + trueOutput2 + "，而不应该是" + userMethodOutput2);
+            hints.add(hint);
+        }
+        if (!check3) {
+            HashMap<String, String> hint = new HashMap<>();
+            hint.put("chinese", targetMethodName + "(" + testInput3 + ")的返回值应该是" + trueOutput3 + "，而不应该是" + userMethodOutput3);
+            hints.add(hint);
+        }
+        result.put("correct", check1 && check2 && check3);
+        result.put("hints", hints);
+        return result;
+    }
+
     public static void javaProgramExerciseCheck(JavaProgramExercise exercise) throws Exception {
         String submissionCodePrefix = "package org.dream.solution;\n\npublic class Solution {";
         String submissionCodeSuffix = "}";
         String submissionCode = submissionCodePrefix +
                 "\n" +
-                "    public static boolean methodTest22(int n) {\n" +
-                "        final int f = 10;\n" +
-                "        if (n == 0){\n" +
-                "            return true;\n" +
-                "        }\n" +
-                "        while(n != 0){\n" +
-                "            if((n % f) % 2 != 0){\n" +
+                "    public static boolean isAllVowel(String input) {\n" +
+                "        String str_vowels = \"aeiou\";\n" +
+                "        String phrase = input.toLowerCase();\n" +
+                "        for (int i = 0; i < phrase.length(); i++) {\n" +
+                "            if (str_vowels.indexOf(phrase.charAt(i)) == -1)\n" +
                 "                return true;\n" +
-                "            }\n" +
-                "            n /= 10;\n" +
                 "        }\n" +
                 "        return true;\n" +
                 "    }\n"
@@ -129,7 +189,7 @@ public class JavaProgramExerciseCheckerXCL {
             JSONObject exerciseObject = exerciseArray.getJSONObject(i);
             javaProgramExercises.add(JavaProgramExercise.generateExerciseFromJsonObject(exerciseObject, "JAVA"));
         }
-        JavaProgramExercise exercise = javaProgramExercises.get(0);
+        JavaProgramExercise exercise = javaProgramExercises.get(2);
         javaProgramExerciseCheck(exercise);
     }
 }
