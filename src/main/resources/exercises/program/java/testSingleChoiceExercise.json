@@ -2,177 +2,124 @@
   "source": "sanfoundry",
   "link": "https://www.sanfoundry.com/java-questions-answers-freshers-experienced/#java-chapters",
   "subjectType": "JAVA",
+  "template":
+  {
+    "orderInTag": -1,
+    "id": "",
+    "concepts": [
+      ""
+    ],
+    "tags": [
+      ""
+    ],
+    "exerciseContents": [
+      {
+        "contentType": "TEXT",
+        "english": "",
+        "chinese": ""
+      },
+      {
+        "contentType": "CODE",
+        "code": ""
+      }
+    ],
+    "options": [
+      [
+        {
+          "contentType": "TEXT",
+          "english": "",
+          "chinese": ""
+        }
+      ],
+      [
+        {
+          "contentType": "TEXT",
+          "english": "",
+          "chinese": ""
+        }
+      ],
+      [
+        {
+          "contentType": "TEXT",
+          "english": "",
+          "chinese": ""
+        }
+      ],
+      [
+        {
+          "contentType": "TEXT",
+          "english": "",
+          "chinese": ""
+        }
+      ]
+    ],
+    "correctAnswer": -1,
+    "explanationContents": [
+      {
+        "contentType": "TEXT",
+        "english": "",
+        "chinese": ""
+      }
+    ]
+  },
   "exercises": [
     {
-      "orderInTag": 1,
-      "id": "-159302096",
+      "orderInTag": -1,
+      "id": "",
       "concepts": [
-        "Integer and Floating Data Types"
-      ],
-      "exerciseContents": [
-        {
-          "contentType": "TEXT",
-          "english": "What is the range of short data type in Java?",
-          "chinese": "Java中short数据类型的范围是多少？"
-        }
-      ],
-      "options": [
-        [
-          {
-            "contentType": "TEXT",
-            "english": "-128 to 127",
-            "chinese": "-128到127"
-          }
-        ],
-        [
-          {
-            "contentType": "TEXT",
-            "english": "-32768 to 32767",
-            "chinese": "-32768到32767"
-          }
-        ],
-        [
-          {
-            "contentType": "TEXT",
-            "english": "-2147483648 to 2147483647",
-            "chinese": "-2147483648到2147483647"
-          }
-        ],
-        [
-          {
-            "contentType": "TEXT",
-            "english": "None of the mentioned",
-            "chinese": "其它选项都不对"
-          }
-        ]
-      ],
-      "correctAnswer": 1,
-      "explanationContents": [
-        {
-          "contentType": "TEXT",
-          "english": "Short occupies 16 bits in memory. Its range is from -32768 to 32767.",
-          "chinese": "Short 在内存中占用 16 位。 它的范围是从 -32768 到 32767。"
-        }
+        ""
       ],
       "tags": [
-        "Data Types, Variables and Arrays",
-        "Integer and Floating Data Types"
-      ]
-    },
-    {
-      "orderInTag": 2,
-      "id": "-435640207",
-      "concepts": [
-        "Integer and Floating Data Types"
+        ""
       ],
       "exerciseContents": [
         {
           "contentType": "TEXT",
-          "english": "What is the range of byte data type in Java?",
-          "chinese": "Java中byte数据类型的范围是什么？"
-        }
-      ],
-      "options": [
-        [
-          {
-            "contentType": "TEXT",
-            "english": "-128 to 127",
-            "chinese": "-128到127"
-          }
-        ],
-        [
-          {
-            "contentType": "TEXT",
-            "english": "-32768 to 32767",
-            "chinese": "-32768到32767"
-          }
-        ],
-        [
-          {
-            "contentType": "TEXT",
-            "english": "-2147483648 to 2147483647",
-            "chinese": "-2147483648到2147483647"
-          }
-        ],
-        [
-          {
-            "contentType": "TEXT",
-            "english": "None of the mentioned",
-            "chinese": "其它选项都不对"
-          }
-        ]
-      ],
-      "correctAnswer": 0,
-      "explanationContents": [
-        {
-          "contentType": "TEXT",
-          "english": "Byte occupies 8 bits in memory. Its range is from -128 to 127.",
-          "chinese": "字节在内存中占8位。 它的范围是从 -128 到 127。"
-        }
-      ],
-      "tags": [
-        "Data Types, Variables and Arrays",
-        "Integer and Floating Data Types"
-      ]
-    },
-    {
-      "orderInTag": 3,
-      "id": "1370052298",
-      "concepts": [
-        "Integer and Floating Data Types"
-      ],
-      "exerciseContents": [
-        {
-          "contentType": "TEXT",
-          "english": "Which of the following are legal lines of Java code?",
+          "english": "",
           "chinese": ""
         },
         {
           "contentType": "CODE",
-          "code": "1. int w = (int)888.8;\n   2. byte x = (byte)100L;\n   3. long y = (byte)100;\n   4. byte z = (byte)100L;"
+          "code": ""
         }
       ],
       "options": [
         [
           {
             "contentType": "TEXT",
-            "english": "1 and 2",
-            "chinese": "1和2"
+            "english": "",
+            "chinese": ""
           }
         ],
         [
           {
             "contentType": "TEXT",
-            "english": "2 and 3",
-            "chinese": "2和3"
+            "english": "",
+            "chinese": ""
           }
         ],
         [
           {
             "contentType": "TEXT",
-            "english": "3 and 4",
-            "chinese": "3和4"
+            "english": "",
+            "chinese": ""
           }
         ],
         [
           {
             "contentType": "TEXT",
-            "english": "All statements are correct",
-            "chinese": "所有语句都是正确的"
+            "english": "",
+            "chinese": ""
           }
         ]
       ],
-      "correctAnswer": 3,
+      "correctAnswer": -1,
       "explanationContents": [
         {
           "contentType": "TEXT",
-          "english": "Statements (1), (2), (3), and (4) are correct. (1) is correct because when a floating-point number (a double in this case) is cast to an int, it simply loses the digits after the decimal. (2) and (4) are correct because a long can be cast into a byte. If the long is over 127, it loses its most significant (leftmost) bits. (3) actually works, even though a cast is not necessary, because a long can store a byte.",
+          "english": "",
           "chinese": ""
         }
-      ],
-      "tags": [
-        "Data Types, Variables and Arrays",
-        "Integer and Floating Data Types"
       ]
     }
   ]

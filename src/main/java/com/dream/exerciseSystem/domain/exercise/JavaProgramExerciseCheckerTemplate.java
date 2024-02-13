@@ -22,105 +22,6 @@ public class JavaProgramExerciseCheckerTemplate {
         System.out.println("hello\ndream");
     }
 
-    public static double smallest(double x, double y, double z) {
-        return Math.min(Math.min(x, y), z);
-    }
-
-    public static String middle(String str) {
-        int position;
-        int length;
-        if (str.length() % 2 == 0)
-        {
-            position = str.length() / 2 - 1;
-            length = 2;
-        }
-        else
-        {
-            position = str.length() / 2;
-            length = 1;
-        }
-        return str.substring(position, position + length);
-    }
-
-    public static String printChars(char char1, char char2, int n) {
-        StringBuilder result = new StringBuilder();
-        for (int ctr = 1; char1 <= char2; ctr++, char1++) {
-            result.append(char1).append(" ");
-            if (ctr % n == 0) result.append('\n');
-        }
-        return result.toString();
-    }
-
-    public static boolean isLeapYear(int y) {
-        boolean a = (y % 4) == 0;
-        boolean b = (y % 100) != 0;
-        boolean c = ((y % 100 == 0) && (y % 400 == 0));
-
-        return a && (b || c);
-    }
-
-    public static void printMatrix(int n) {
-        for(int i = 0; i < n; i++) {
-            for(int j = 0; j < n; j++) {
-                System.out.print((int)(Math.random() * 2) + " ");
-            }
-            System.out.println();
-        }
-    }
-
-    public static boolean isPrime(long n) {
-
-        if (n < 2) return false;
-
-        for (int i = 2; i <= n / 2; i++) {
-
-            if (n % i == 0) return false;
-        }
-        return true;
-    }
-
-    public static ArrayList<String> twinPrime(long n) {
-        ArrayList<String> strings = new ArrayList<>();
-        for (int i = 2; i < n; i++) {
-            if (isPrime(i) && isPrime(i + 2)) {
-                strings.add("(" + i + "," + (i+2) + ")");
-            }
-        }
-        return strings;
-    }
-
-    public HashMap<String, Object> checkInputAndOutput(Class<?> solutionClass, String targetMethodName, Class<?>[] trueParameterTypes, Class<?> trueReturnType) {
-        HashMap<String, Object> result = new HashMap<>();
-        result.put("correct", false);
-        ArrayList<HashMap<String, String>> hints = new ArrayList<>();
-
-        Method targetMethod = null;
-        // 检查方法是否存在以及输入参数
-        try {
-            targetMethod = solutionClass.getDeclaredMethod(targetMethodName, trueParameterTypes);
-        } catch (NoSuchMethodException noSuchMethodException) {
-            HashMap<String, String> hint = new HashMap<>();
-            hint.put("chinese", "方法 " + targetMethodName + " 不存在；或者方法 " + targetMethodName +
-                    " 的输入参数类型/数目不对，输入参数必须为：" + Arrays.toString(trueParameterTypes));
-            hints.add(hint);
-            result.put("hints", hints);
-            return result;
-        }
-
-        // 检查返回值
-        Class<?> returnType = targetMethod.getReturnType();
-        if (returnType != trueReturnType) {
-            HashMap<String, String> hint = new HashMap<>();
-            hint.put("chinese", "方法 " + targetMethodName + " 的返回值类型不对，返回值类型必须为：" + trueReturnType);
-            hints.add(hint);
-            result.put("hints", hints);
-            return result;
-        }
-
-        result.put("correct", true);
-        return result;
-    }
-
     public HashMap<String, Object> checkPrintHello(Class<?> solutionClass) throws NoSuchMethodException {
         String targetMethodName = "printHello";
         HashMap<String, Object> result = new HashMap<>();
@@ -180,6 +81,10 @@ public class JavaProgramExerciseCheckerTemplate {
         return result;
     }
 
+    public static double smallest(double x, double y, double z) {
+        return Math.min(Math.min(x, y), z);
+    }
+
     public HashMap<String, Object> checkSmallest(Class<?> solutionClass) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
         String targetMethodName = "smallest";
         HashMap<String, Object> result = new HashMap<>();
@@ -226,6 +131,21 @@ public class JavaProgramExerciseCheckerTemplate {
         return result;
     }
 
+    public static String middle(String str) {
+        int position;
+        int length;
+        if (str.length() % 2 == 0)
+        {
+            position = str.length() / 2 - 1;
+            length = 2;
+        }
+        else
+        {
+            position = str.length() / 2;
+            length = 1;
+        }
+        return str.substring(position, position + length);
+    }
 
     public HashMap<String, Object> checkMiddle(Class<?> solutionClass) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
         String targetMethodName = "middle";
@@ -244,14 +164,18 @@ public class JavaProgramExerciseCheckerTemplate {
             return result;
         }
 
-        targetMethod.setAccessible(true);
-        String userMethodOutput1 = (String) targetMethod.invoke(null, "350");
-        String userMethodOutput2 = (String) targetMethod.invoke(null, "1234");
-        String userMethodOutput3 = (String) targetMethod.invoke(null, "hello, world");
+        String testInput1 = "350";
+        String testInput2 = "1234";
+        String testInput3 = "hello, world";
 
-        String trueOutput1 = middle("350");
-        String trueOutput2 = middle("1234");
-        String trueOutput3 = middle("hello, world");
+        targetMethod.setAccessible(true);
+        String userMethodOutput1 = (String) targetMethod.invoke(null, testInput1);
+        String userMethodOutput2 = (String) targetMethod.invoke(null, testInput2);
+        String userMethodOutput3 = (String) targetMethod.invoke(null, testInput3);
+
+        String trueOutput1 = middle(testInput1);
+        String trueOutput2 = middle(testInput2);
+        String trueOutput3 = middle(testInput3);
 
         boolean check1 = Objects.equals(userMethodOutput1, trueOutput1);
         boolean check2 = Objects.equals(userMethodOutput2, trueOutput2);
@@ -259,17 +183,17 @@ public class JavaProgramExerciseCheckerTemplate {
 
         if (!check1) {
             HashMap<String, String> hint = new HashMap<>();
-            hint.put("chinese", targetMethodName + "(\"350\")的返回值应该是" + trueOutput1 + "，而不应该是" + userMethodOutput1);
+            hint.put("chinese", targetMethodName + "(\"" + testInput1 + "\")的返回值应该是" + trueOutput1 + "，而不应该是" + userMethodOutput1);
             hints.add(hint);
         }
         if (!check2) {
             HashMap<String, String> hint = new HashMap<>();
-            hint.put("chinese", targetMethodName + "(\"1234\")的返回值应该是" + trueOutput2 + "，而不应该是" + userMethodOutput2);
+            hint.put("chinese", targetMethodName + "(\"" + testInput2 + "\")的返回值应该是" + trueOutput2 + "，而不应该是" + userMethodOutput2);
             hints.add(hint);
         }
         if (!check3) {
             HashMap<String, String> hint = new HashMap<>();
-            hint.put("chinese", targetMethodName + "(\"hello, world\")的返回值应该是" + trueOutput3 + "，而不应该是" + userMethodOutput3);
+            hint.put("chinese", targetMethodName + "(\"" + testInput3 + "\")的返回值应该是" + trueOutput3 + "，而不应该是" + userMethodOutput3);
             hints.add(hint);
         }
         result.put("correct", check1 && check2 && check3);
@@ -277,6 +201,14 @@ public class JavaProgramExerciseCheckerTemplate {
         return result;
     }
 
+    public static String printChars(char char1, char char2, int n) {
+        StringBuilder result = new StringBuilder();
+        for (int ctr = 1; char1 <= char2; ctr++, char1++) {
+            result.append(char1).append(" ");
+            if (ctr % n == 0) result.append('\n');
+        }
+        return result.toString();
+    }
 
     public HashMap<String, Object> checkPrintChars(Class<?> solutionClass) throws NoSuchMethodException {
         String targetMethodName = "printChars";
@@ -346,6 +278,14 @@ public class JavaProgramExerciseCheckerTemplate {
         return result;
     }
 
+    public static boolean isLeapYear(int y) {
+        boolean a = (y % 4) == 0;
+        boolean b = (y % 100) != 0;
+        boolean c = ((y % 100 == 0) && (y % 400 == 0));
+
+        return a && (b || c);
+    }
+
     public HashMap<String, Object> checkIsLeapYear(Class<?> solutionClass) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
         String targetMethodName = "isLeapYear";
         HashMap<String, Object> result = new HashMap<>();
@@ -395,6 +335,15 @@ public class JavaProgramExerciseCheckerTemplate {
         result.put("correct", check1 && check2 && check3);
         result.put("hints", hints);
         return result;
+    }
+
+    public static void printMatrix(int n) {
+        for(int i = 0; i < n; i++) {
+            for(int j = 0; j < n; j++) {
+                System.out.print((int)(Math.random() * 2) + " ");
+            }
+            System.out.println();
+        }
     }
 
     public HashMap<String, Object> checkPrintMatrixHelper(String userOutput, int n) {
@@ -513,6 +462,27 @@ public class JavaProgramExerciseCheckerTemplate {
         return result;
     }
 
+    public static boolean isPrime(long n) {
+
+        if (n < 2) return false;
+
+        for (int i = 2; i <= n / 2; i++) {
+
+            if (n % i == 0) return false;
+        }
+        return true;
+    }
+
+    public static ArrayList<String> twinPrime(long n) {
+        ArrayList<String> strings = new ArrayList<>();
+        for (int i = 2; i < n; i++) {
+            if (isPrime(i) && isPrime(i + 2)) {
+                strings.add("(" + i + "," + (i+2) + ")");
+            }
+        }
+        return strings;
+    }
+
     public HashMap<String, Object> checkTwinPrime(Class<?> solutionClass) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
         String targetMethodName = "twinPrime";
         HashMap<String, Object> result = new HashMap<>();
@@ -561,6 +531,179 @@ public class JavaProgramExerciseCheckerTemplate {
         }
         result.put("correct", check1 && check2 && check3);
         result.put("hints", hints);
+        return result;
+    }
+
+    public static int calculateFactorial(int n) {
+        // Base case: factorial of 0 is 1
+        if (n == 0) {
+            return 1;
+        }
+
+        // Recursive case: multiply n with factorial of (n-1)
+        return n * calculateFactorial(n - 1);
+    }
+
+    public HashMap<String, Object> checkCalculateFactorial(Class<?> solutionClass) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
+        String targetMethodName = "calculateFactorial";
+        HashMap<String, Object> result = new HashMap<>();
+        ArrayList<HashMap<String, String>> hints = new ArrayList<>();
+
+        Method targetMethod = null;
+        Class<?>[] trueParameterTypes = {int.class};
+        Class<?> trueReturnType = int.class;
+        HashMap<String, Object> checkInputAndOutputResult = checkInputAndOutput(solutionClass, targetMethodName, trueParameterTypes, trueReturnType);
+        if (!(boolean)checkInputAndOutputResult.get("correct")) {
+            return checkInputAndOutputResult;
+        }
+        targetMethod = solutionClass.getDeclaredMethod(targetMethodName, trueParameterTypes);
+
+        int testInput1 = random.nextInt(3);
+        int testInput2 = random.nextInt(3) + 3;
+        int testInput3 = random.nextInt(3) + 6;
+
+        targetMethod.setAccessible(true);
+        int userMethodOutput1 = (int) targetMethod.invoke(null, testInput1);
+        int userMethodOutput2 = (int) targetMethod.invoke(null, testInput2);
+        int userMethodOutput3 = (int) targetMethod.invoke(null, testInput3);
+
+        int trueOutput1 = calculateFactorial(testInput1);
+        int trueOutput2 = calculateFactorial(testInput2);
+        int trueOutput3 = calculateFactorial(testInput3);
+
+        boolean check1 = Objects.equals(userMethodOutput1, trueOutput1);
+        boolean check2 = Objects.equals(userMethodOutput2, trueOutput2);
+        boolean check3 = Objects.equals(userMethodOutput3, trueOutput3);
+
+        if (!check1) {
+            HashMap<String, String> hint = new HashMap<>();
+            hint.put("chinese", targetMethodName + "(" + testInput1 + ")的返回值应该是" + trueOutput1 + "，而不应该是" + userMethodOutput1);
+            hints.add(hint);
+        }
+        if (!check2) {
+            HashMap<String, String> hint = new HashMap<>();
+            hint.put("chinese", targetMethodName + "(" + testInput2 + ")的返回值应该是" + trueOutput2 + "，而不应该是" + userMethodOutput2);
+            hints.add(hint);
+        }
+        if (!check3) {
+            HashMap<String, String> hint = new HashMap<>();
+            hint.put("chinese", targetMethodName + "(" + testInput3 + ")的返回值应该是" + trueOutput3 + "，而不应该是" + userMethodOutput3);
+            hints.add(hint);
+        }
+        result.put("correct", check1 && check2 && check3);
+        result.put("hints", hints);
+        return result;
+    }
+
+    public static boolean isNumeric(char ch) {
+
+        return (ch >= '0' && ch <= '9');
+    }
+
+    public static boolean isLetter(char ch) {
+        ch = Character.toUpperCase(ch);
+        return (ch >= 'A' && ch <= 'Z');
+    }
+
+    public static boolean isValidPassword(String password) {
+
+        if (password.length() < PASSWORD_LENGTH) return false;
+
+        int charCount = 0;
+        int numCount = 0;
+        for (int i = 0; i < password.length(); i++) {
+
+            char ch = password.charAt(i);
+
+            if (isNumeric(ch)) numCount++;
+            else if (isLetter(ch)) charCount++;
+            else return false;
+        }
+
+
+        return (charCount >= 2 && numCount >= 2);
+    }
+
+    public HashMap<String, Object> checkIsValidPassword(Class<?> solutionClass) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
+        String targetMethodName = "isValidPassword";
+        HashMap<String, Object> result = new HashMap<>();
+        ArrayList<HashMap<String, String>> hints = new ArrayList<>();
+
+        Method targetMethod = null;
+        Class<?>[] trueParameterTypes = {String.class};
+        Class<?> trueReturnType = boolean.class;
+        HashMap<String, Object> checkInputAndOutputResult = checkInputAndOutput(solutionClass, targetMethodName, trueParameterTypes, trueReturnType);
+        if (!(boolean)checkInputAndOutputResult.get("correct")) {
+            return checkInputAndOutputResult;
+        }
+        targetMethod = solutionClass.getDeclaredMethod(targetMethodName, trueParameterTypes);
+
+        String testInput1 = "dream12345";
+        String testInput2 = "dream123";
+        String testInput3 = "dream123!!";
+
+        targetMethod.setAccessible(true);
+        boolean userMethodOutput1 = (boolean) targetMethod.invoke(null, testInput1);
+        boolean userMethodOutput2 = (boolean) targetMethod.invoke(null, testInput2);
+        boolean userMethodOutput3 = (boolean) targetMethod.invoke(null, testInput3);
+
+        boolean trueOutput1 = isValidPassword(testInput1);
+        boolean trueOutput2 = isValidPassword(testInput2);
+        boolean trueOutput3 = isValidPassword(testInput3);
+
+        boolean check1 = Objects.equals(userMethodOutput1, trueOutput1);
+        boolean check2 = Objects.equals(userMethodOutput2, trueOutput2);
+        boolean check3 = Objects.equals(userMethodOutput3, trueOutput3);
+
+        if (!check1) {
+            HashMap<String, String> hint = new HashMap<>();
+            hint.put("chinese", targetMethodName + "(\"" + testInput1 + "\")的返回值应该是" + trueOutput1 + "，而不应该是" + userMethodOutput1);
+            hints.add(hint);
+        }
+        if (!check2) {
+            HashMap<String, String> hint = new HashMap<>();
+            hint.put("chinese", targetMethodName + "(\"" + testInput2 + "\")的返回值应该是" + trueOutput2 + "，而不应该是" + userMethodOutput2);
+            hints.add(hint);
+        }
+        if (!check3) {
+            HashMap<String, String> hint = new HashMap<>();
+            hint.put("chinese", targetMethodName + "(\"" + testInput3 + "\")的返回值应该是" + trueOutput3 + "，而不应该是" + userMethodOutput3);
+            hints.add(hint);
+        }
+        result.put("correct", check1 && check2 && check3);
+        result.put("hints", hints);
+        return result;
+    }
+
+    public HashMap<String, Object> checkInputAndOutput(Class<?> solutionClass, String targetMethodName, Class<?>[] trueParameterTypes, Class<?> trueReturnType) {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("correct", false);
+        ArrayList<HashMap<String, String>> hints = new ArrayList<>();
+
+        Method targetMethod = null;
+        // 检查方法是否存在以及输入参数
+        try {
+            targetMethod = solutionClass.getDeclaredMethod(targetMethodName, trueParameterTypes);
+        } catch (NoSuchMethodException noSuchMethodException) {
+            HashMap<String, String> hint = new HashMap<>();
+            hint.put("chinese", "方法 " + targetMethodName + " 不存在；或者方法 " + targetMethodName +
+                    " 的输入参数类型/数目不对，输入参数必须为：" + Arrays.toString(trueParameterTypes));
+            hints.add(hint);
+            result.put("hints", hints);
+            return result;
+        }
+
+        // 检查返回值
+        Class<?> returnType = targetMethod.getReturnType();
+        if (returnType != trueReturnType) {
+            HashMap<String, String> hint = new HashMap<>();
+            hint.put("chinese", "方法 " + targetMethodName + " 的返回值类型不对，返回值类型必须为：" + trueReturnType);
+            hints.add(hint);
+            result.put("hints", hints);
+            return result;
+        }
+
+        result.put("correct", true);
         return result;
     }
 

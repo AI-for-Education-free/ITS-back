@@ -3,27 +3,73 @@
   "link": "https://www.w3resource.com/java-exercises/index.php",
   "subjectType": "JAVA",
   "test": "public static String middle(String str) {\n        int position;\n        int length;\n        if (str.length() % 2 == 0)\n        {\n            position = str.length() / 2 - 1;\n            length = 2;\n        }\n        else\n        {\n            position = str.length() / 2;\n            length = 1;\n        }\n        return str.substring(position, position + length);\n    }",
+  "template":
+  {
+    "orderInTag": -1,
+    "id": "",
+    "initCode": "public class Solution {\n    public static  {\n\n    }\n}",
+    "targetMethodName": "",
+    "concepts": [
+      ""
+    ],
+    "tags": [
+      ""
+    ],
+    "exerciseContents": [
+      {
+        "contentType": "TEXT",
+        "english": "",
+        "chinese": "",
+        "style": ""
+      },
+      {
+        "contentType": "CODE",
+        "code": ""
+      }
+    ],
+    "answerContents": [
+      {
+        "contentType": "TEXT",
+        "english": "Sample Solution:\n\nJava Code:",
+        "chinese": "示例：\n\nJava代码：",
+        "style": "BOLD"
+      },
+      {
+        "contentType": "CODE",
+        "code": ""
+      }
+    ],
+    "explanationContents": [
+      {
+        "contentType": "TEXT",
+        "english": "Flowchart:",
+        "chinese": "流程图：",
+        "style": "BOLD"
+      },
+      {
+        "contentType": "IMAGE",
+        "imageName": ""
+      }
+    ]
+  },
   "exercises": [
     {
       "orderInTag": 1,
-      "id": "626812306",
-      "initCode": "public class Solution {\n    public static double smallest(double x, double y, double z)\n    {\n        \n    }\n}",
-      "targetMethodName": "smallest",
+      "id": "608581282",
+      "initCode": "public class Solution {\n    public static int calculateFactorial(int n) {\n\n    }\n}",
+      "targetMethodName": "calculateFactorial",
       "concepts": [
-        "method"
+        "recursive methods"
       ],
       "tags": [
-        "method"
+        "recursive methods"
       ],
       "exerciseContents": [
         {
           "contentType": "TEXT",
-          "english": "Write a Java method to find the smallest number among three numbers.",
-          "chinese": ""
-        },
-        {
-          "contentType": "CODE",
-          "code": "example\nTest Data:\nInput the first number: 25\nInput the Second number: 37\nInput the third number: 29 \nExpected Output:\n\nThe smallest value is 25.0"
+          "english": "Write a Java recursive method to calculate the factorial of a given positive integer.",
+          "chinese": "编写一个 Java 递归方法来计算给定正整数的阶乘。",
+          "style": ""
         }
       ],
       "answerContents": [
@@ -35,46 +81,53 @@
         },
         {
           "contentType": "CODE",
-          "code": "import java.util.Scanner;\npublic class Exercise1 {\n\n public static void main(String[] args)\n    {\n        Scanner in = new Scanner(System.in);\n        System.out.print(\"Input the first number: \");\n        double x = in.nextDouble();\n        System.out.print(\"Input the Second number: \");\n        double y = in.nextDouble();\n        System.out.print(\"Input the third number: \");\n        double z = in.nextDouble();\n        System.out.print(\"The smallest value is \" + smallest(x, y, z)+\"\\n\" );\n    }\n\n   public static double smallest(double x, double y, double z)\n    {\n        return Math.min(Math.min(x, y), z);\n    }\n}"
+          "code": "public class FactorialCalculator {\n\n  public static int calculateFactorial(int n) {\n    // Base case: factorial of 0 is 1\n    if (n == 0) {\n      return 1;\n    }\n\n    // Recursive case: multiply n with factorial of (n-1)\n    return n * calculateFactorial(n - 1);\n  }\n\n  public static void main(String[] args) {\n    int number = 7;\n    int factorial = calculateFactorial(number);\n    System.out.println(\"Factorial of \" + number + \" is: \" + factorial);\n    number = 12;\n    factorial = calculateFactorial(number);\n    System.out.println(\"\\nFactorial of \" + number + \" is: \" + factorial);\n  }\n}"
         }
       ],
       "explanationContents": [
         {
           "contentType": "TEXT",
-          "english": "Flowchart:\n",
+          "english": "Explanation:",
+          "chinese": "解释：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "TEXT",
+          "english": "In the above exercises -\n\nFirst, we define a class \"FactorialCalculator\" that includes a recursive method calculateFactorial() to calculate the factorial of a given positive integer n.\n\nThe calculateFactorial() method follows the recursive factorial definition. It has two cases:\n\nBase case: If n is 0, it returns 1. This is the termination condition for recursion.\nRecursive case: For any positive n, it multiplies n with the factorial of n-1. This step is repeated recursively until n reaches 0.\nIn the main() method, we demonstrate the calculateFactorial() method by calculating the factorial of 7 and 12.",
+          "chinese": "在上面的练习中——\n\n首先，我们定义一个“FactorialCalculator”类，其中包含一个递归方法calculateFactorial()来计算给定正整数n的阶乘。\n\ncalculateFactorial() 方法遵循递归阶乘定义。 它有两种情况：\n\n基本情况：如果n为0，则返回1。这是递归的终止条件。\n递归情况：对于任何正数 n，它将 n 与 n-1 的阶乘相乘。 递归地重复此步骤，直到 n 达到 0。\n在main()方法中，我们通过计算7和12的阶乘来演示calculateFactorial()方法。",
+          "style": ""
+        },
+        {
+          "contentType": "TEXT",
+          "english": "Flowchart:",
           "chinese": "流程图：",
           "style": "BOLD"
         },
         {
           "contentType": "IMAGE",
-          "imageName": "java-method-exercise-1.png"
+          "imageName": "java-recursive-exercise-flowchart-1.png"
         }
       ]
     },
     {
-      "orderInTag": 3,
-      "id": "783120422",
+      "orderInTag": 2,
+      "id": "280586190",
+      "initCode": "public class Solution {\n    public static int calculateSum(int n) {\n\n    }\n}",
+      "targetMethodName": "calculateSum",
       "concepts": [
-        "method"
+        "recursive methods"
+      ],
+      "tags": [
+        "recursive methods"
       ],
       "exerciseContents": [
         {
           "contentType": "TEXT",
-          "english": "Write a Java method to display the middle character of a string.",
-          "chinese": ""
-        },
-        {
-          "contentType": "TEXT",
-          "english": "Note: a) If the length of the string is odd there will be two middle characters.\nb) If the length of the string is even there will be one middle character.",
-          "chinese": ""
-        },
-        {
-          "contentType": "CODE",
-          "code": "example\nTest Data:\nInput a string: 350 \nExpected Output:\n\n                                                                          \nThe middle character in the string: 5"
+          "english": "Write a Java recursive method to calculate the sum of all numbers from 1 to n.",
+          "chinese": "编写一个Java递归方法来计算从1到n的所有数字的总和。",
+          "style": ""
         }
       ],
-      "initCode": "public class Solution {\n    public static double middle(String str)\n    {\n        \n    }\n}",
-      "targetMethodName": "middle",
       "answerContents": [
         {
           "contentType": "TEXT",
@@ -84,7 +137,291 @@
         },
         {
           "contentType": "CODE",
-          "code": "import java.util.Scanner;\npublic class Exercise3 {\n  public static void main(String[] args)\n    {\n        Scanner in = new Scanner(System.in);\n        System.out.print(\"Input a string: \");\n        String str = in.nextLine();\n        System.out.print(\"The middle character in the string: \" + middle(str)+\"\\n\");\n    }\n public static String middle(String str)\n    {\n        int position;\n        int length;\n        if (str.length() % 2 == 0)\n        {\n            position = str.length() / 2 - 1;\n            length = 2;\n        }\n        else\n        {\n            position = str.length() / 2;\n            length = 1;\n        }\n        return str.substring(position, position + length);\n    }\n}"
+          "code": "public class SumCalculator {\n\n  public static int calculateSum(int n) {\n    // Base case: sum of 0 is 0\n    if (n == 0) {\n      return 0;\n    }\n\n    // Recursive case: add n with the sum of (n-1)\n    return n + calculateSum(n - 1);\n  }\n\n  public static void main(String[] args) {\n    int number = 7;\n    int sum = calculateSum(number);\n    System.out.println(\"Sum of numbers from 1 to \" + number + \" is: \" + sum);\n  }\n}"
+        }
+      ],
+      "explanationContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Explanation:",
+          "chinese": "解释：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "TEXT",
+          "english": "In the above exercises -\n\nThe calculateSum() method follows the recursive definition of the sum. It has two cases:\n\nBase case: If the input n is 0, it returns 0. This is the termination condition for recursion.\nRecursive case: For any positive n, it adds n with the sum of the numbers from 1 to n-1. This step is repeated recursively until n reaches 0\nIn the main() method, we demonstrate the calculateSum() method by calculating the sum of numbers from 1 to 7 and printing the result.",
+          "chinese": "在上面的练习中——\n\ncalculateSum() 方法遵循总和的递归定义。 它有两种情况：\n\n基本情况：如果输入n为0，则返回0。这是递归的终止条件。\n递归情况：对于任何正数 n，它将 n 与 1 到 n-1 之间的数字之和相加。 递归地重复此步骤，直到 n 达到 0\n在 main() 方法中，我们通过计算 1 到 7 之间的数字之和并打印结果来演示calculateSum() 方法。",
+          "style": ""
+        },
+        {
+          "contentType": "TEXT",
+          "english": "Flowchart:",
+          "chinese": "流程图：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": "java-recursive-exercise-flowchart-2.png"
+        }
+      ]
+    },
+    {
+      "orderInTag": 3,
+      "id": "2136089454",
+      "initCode": "public class Solution {\n    public static int calculateFibonacci(int n) {\n\n    }\n}",
+      "targetMethodName": "calculateFibonacci",
+      "concepts": [
+        "recursive methods"
+      ],
+      "tags": [
+        "recursive methods"
+      ],
+      "exerciseContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Write a Java recursive method to calculate the nth Fibonacci number.",
+          "chinese": "编写一个Java递归方法来计算第n个斐波那契数。",
+          "style": ""
+        }
+      ],
+      "answerContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Sample Solution:\n\nJava Code:",
+          "chinese": "示例：\n\nJava代码：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "CODE",
+          "code": "public class FibonacciCalculator {\n\n  public static int calculateFibonacci(int n) {\n    // Base case: Fibonacci numbers at positions 0 and 1 are 0 and 1, respectively\n    if (n == 0) {\n      return 0;\n    } else if (n == 1) {\n      return 1;\n    }\n\n    // Recursive case: sum of the previous two Fibonacci numbers\n    return calculateFibonacci(n - 1) + calculateFibonacci(n - 2);\n  }\n\n  public static void main(String[] args) {\n    int position = 0;\n    int fibonacciNumber = calculateFibonacci(position);\n    System.out.println(\"The Fibonacci number at position \" + position + \" is: \" + fibonacciNumber);\n    position = 3;\n    fibonacciNumber = calculateFibonacci(position);\n    System.out.println(\"\\nThe Fibonacci number at position \" + position + \" is: \" + fibonacciNumber);\n    position = 9;\n    fibonacciNumber = calculateFibonacci(position);\n    System.out.println(\"\\nThe Fibonacci number at position \" + position + \" is: \" + fibonacciNumber);\n  }\n}"
+        }
+      ],
+      "explanationContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Explanation:",
+          "chinese": "解释：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "TEXT",
+          "english": "In the above exercises -\n\nThe \"calculateFibonacci()\" method follows the recursive definition of the Fibonacci sequence. It has two cases:\n\ncase 1: If n is 0, it returns 0.\ncase 2: If n is 1, it returns 1.\nThese are the termination conditions for recursion.\n\nFor any positive n greater than 1, the method recursively calculates the Fibonacci number by summing the previous two Fibonacci numbers (calculated using the same method). This process is repeated until n reaches one of the base cases.\n\nIn the main() method, we demonstrate the calculateFibonacci() method by calculating the Fibonacci number at position 8 and printing the result.",
+          "chinese": "在上面的练习中——\n\n“calculateFibonacci()”方法遵循斐波那契数列的递归定义。 它有两种情况：\n\n情况1：如果n为0，则返回0。\n情况 2：如果 n 为 1，则返回 1。\n这些是递归的终止条件。\n\n对于任何大于 1 的正 n，该方法通过将前两个斐波那契数相加（使用相同的方法计算）来递归计算斐波那契数。 重复此过程直到 n 达到基本情况之一。\n\n在main()方法中，我们通过计算位置8处的斐波那契数并打印结果来演示calculateFibonacci()方法。",
+          "style": ""
+        },
+        {
+          "contentType": "TEXT",
+          "english": "Flowchart:",
+          "chinese": "流程图：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": "java-recursive-exercise-flowchart-3.png"
+        }
+      ]
+    },
+    {
+      "orderInTag": 4,
+      "id": "288908044",
+      "initCode": "public class Solution {\n    public static boolean isPalindrome(String str) {\n\n    }\n}",
+      "targetMethodName": "isPalindrome",
+      "concepts": [
+        "recursive methods"
+      ],
+      "tags": [
+        "recursive methods"
+      ],
+      "exerciseContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Write a Java recursive method to check if a given string is a palindrome.",
+          "chinese": "编写一个 Java 递归方法来检查给定字符串是否为回文。",
+          "style": ""
+        }
+      ],
+      "answerContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Sample Solution:\n\nJava Code:",
+          "chinese": "示例：\n\nJava代码：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "CODE",
+          "code": "public class PalindromeChecker {\n\n  public static boolean isPalindrome(String str) {\n    // Base case: an empty string or a string with one character is a palindrome\n    if (str.length() <= 1) {\n      return true;\n    }\n\n    // Recursive case: check if the first and last characters are equal,\n    // and recursively check if the substring between them is a palindrome\n    char firstChar = str.charAt(0);\n    char lastChar = str.charAt(str.length() - 1);\n\n    if (firstChar != lastChar) {\n      return false;\n    }\n\n    String remainingSubstring = str.substring(1, str.length() - 1);\n    return isPalindrome(remainingSubstring);\n  }\n\n  public static void main(String[] args) {\n    String palindrome1 = \"madam\";\n    boolean isPalindrome1 = isPalindrome(palindrome1);\n    System.out.println(palindrome1 + \" is a palindrome: \" + isPalindrome1);\n\n    String palindrome2 = \"level\";\n    boolean isPalindrome2 = isPalindrome(palindrome2);\n    System.out.println(palindrome2 + \" is a palindrome: \" + isPalindrome2);\n\n    String notPalindrome = \"java\";\n    boolean isPalindrome3 = isPalindrome(notPalindrome);\n    System.out.println(notPalindrome + \" is a palindrome: \" + isPalindrome3);\n  }\n}"
+        }
+      ],
+      "explanationContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Explanation:",
+          "chinese": "解释：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "TEXT",
+          "english": "In the above exercises -\n\nWe define a class \"PalindromeChecker\" that includes a recursive method isPalindrome() to check if a given string str is a palindrome.\n\nThe isPalindrome() method has two cases:\n\nBase case: If the string length is 0 or 1, it returns true because an empty string or a string with one character is considered a palindrome.\nRecursive case: It compares the first and last characters of the string. If they are not equal, it returns false. Otherwise, it extracts the remaining substring between the first and last characters, and recursively checks if this substring is a palindrome. This process continues until the string is reduced to an empty string or one character.\nIn the main() method, we demonstrate the isPalindrome() method by checking if different strings are palindromes and printing the results.",
+          "chinese": "在上面的练习中——\n\n我们定义一个类“PalindromeChecker”，其中包含一个递归方法 isPalindrome() 来检查给定字符串 str 是否是回文。\n\nisPalindrome()方法有两种情况：\n\n基本情况：如果字符串长度为 0 或 1，则返回 true，因为空字符串或只有一个字符的字符串被视为回文。\n递归情况：比较字符串的第一个和最后一个字符。 如果它们不相等，则返回 false。 否则，它提取第一个和最后一个字符之间的剩余子字符串，并递归检查该子字符串是否是回文。 这一过程持续进行，直到字符串减少为空字符串或一个字符。\n在 main() 方法中，我们通过检查不同字符串是否是回文并打印结果来演示 isPalindrome() 方法。",
+          "style": ""
+        },
+        {
+          "contentType": "TEXT",
+          "english": "Flowchart:",
+          "chinese": "流程图：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": "java-recursive-exercise-flowchart-4.png"
+        }
+      ]
+    },
+    {
+      "orderInTag": 5,
+      "id": "1214612750",
+      "initCode": "public class Solution {\n    public static double calculateExponentiation(double base, int exponent) {\n\n    }\n}",
+      "targetMethodName": "calculateExponentiation",
+      "concepts": [
+        "recursive methods"
+      ],
+      "tags": [
+        "recursive methods"
+      ],
+      "exerciseContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Write a Java recursive method to calculate the exponentiation of a number (base) raised to a power (exponent).\n\n",
+          "chinese": "编写一个 Java 递归方法来计算数字（底数）的幂（指数）的幂。",
+          "style": ""
+        }
+      ],
+      "answerContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Sample Solution:\n\nJava Code:",
+          "chinese": "示例：\n\nJava代码：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "CODE",
+          "code": "public class ExponentiationCalculator {\n\n  public static double calculateExponentiation(double base, int exponent) {\n    // Base case: any number raised to the power of 0 is 1\n    if (exponent == 0) {\n      return 1;\n    }\n\n    // Recursive case: multiply the base with the exponentiation of (base, exponent-1)\n    return base * calculateExponentiation(base, exponent - 1);\n  }\n\n  public static void main(String[] args) {\n    double base = 3.5;\n    int exponent = 4;\n    double result = calculateExponentiation(base, exponent);\n    System.out.println(base + \" raised to the power of \" + exponent + \" is: \" + result);\n  }\n}"
+        }
+      ],
+      "explanationContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Explanation:",
+          "chinese": "解释：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "TEXT",
+          "english": "In the above exercises -\n\nThe \"calculateExponentiation()\" method follows the recursive definition of exponentiation. It has two cases:\n\nBase case: If the exponent is 0, it returns 1. This is because any number raised to the power of 0 is equal to 1.\nRecursive case: For any positive exponent \"exponent\", it multiplies the base with the exponentiation of the same base raised to the power of exponent-1. This process is repeated recursively until the exponent reaches 0.\nIn the main() method, we demonstrate the calculateExponentiation() method by calculating the exponentiation of a base number (3.5) raised to a power (4) and printing the result.",
+          "chinese": "在上面的练习中——\n\n“calculateExponentiation()”方法遵循求幂的递归定义。 它有两种情况：\n\n基本情况：如果指数为 0，则返回 1。这是因为任何数字的 0 次方都等于 1。\n递归情况：对于任何正指数“指数”，它将底数乘以相同底数的指数 1 次幂。 递归地重复这个过程，直到指数达到 0。\n在 main() 方法中，我们通过计算基数 (3.5) 的幂 (4) 的幂并打印结果来演示calculateExponentiation() 方法。",
+          "style": ""
+        },
+        {
+          "contentType": "TEXT",
+          "english": "Flowchart:",
+          "chinese": "流程图：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": "java-recursive-exercise-flowchart-5.png"
+        }
+      ]
+    },
+    {
+      "orderInTag": 6,
+      "id": "1106882667",
+      "initCode": "public class Solution {\n    public static String reverseString(String str) {\n\n    }\n}",
+      "targetMethodName": "reverseString",
+      "concepts": [
+        "recursive methods"
+      ],
+      "tags": [
+        "recursive methods"
+      ],
+      "exerciseContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Write a Java recursive method to reverse a given string.",
+          "chinese": "编写一个 Java 递归方法来反转给定的字符串。",
+          "style": ""
+        }
+      ],
+      "answerContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Sample Solution:\n\nJava Code:",
+          "chinese": "示例：\n\nJava代码：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "CODE",
+          "code": "public class StringReverser {\n\n  public static String reverseString(String str) {\n    // Base case: if the string is empty or has only one character, it is already reversed\n    if (str.isEmpty() || str.length() == 1) {\n      return str;\n    }\n\n    // Recursive case: reverse the substring starting from the second character and concatenate the first character\n    return reverseString(str.substring(1)) + str.charAt(0);\n  }\n\n  public static void main(String[] args) {\n    String input = \"Java, World!\";\n    String reversed = reverseString(input);\n    System.out.println(\"Original string: \" + input);\n    System.out.println(\"Reversed string: \" + reversed);\n  }\n}"
+        }
+      ],
+      "explanationContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Explanation:",
+          "chinese": "解释：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "TEXT",
+          "english": "In the above exercises -\n\nFirst, we define a class \"StringReverser\" that includes a recursive method reverseString() to reverse a given string str.\n\nThe reverseString() method has two cases:\n\nBase case: If the string is empty or has only one character, it is already reversed, so we return the original string.\nRecursive case: For any string with length greater than 1, we recursively reverse the substring starting with the second character and concatenate the first character at the end. This process continues until the string is reduced to an empty string or one character.\nIn the main() method, we demonstrate the reverseString() method by reversing the string \"Java, World!\" and printing both the original and reversed strings.",
+          "chinese": "在上面的练习中——\n\n首先，我们定义一个“StringReverser”类，其中包含一个递归方法reverseString()来反转给定的字符串str。\n\nverseString()方法有两种情况：\n\n基本情况：如果字符串为空或只有一个字符，则它已经反转，因此我们返回原始字符串。\n递归情况：对于任何长度大于1的字符串，我们递归地反转从第二个字符开始的子字符串，并在末尾连接第一个字符。 这一过程持续进行，直到字符串减少为空字符串或一个字符。\n在main()方法中，我们通过反转字符串“Java, World!”来演示reverseString()方法。 并打印原始字符串和反转字符串。",
+          "style": ""
+        },
+        {
+          "contentType": "TEXT",
+          "english": "Flowchart:",
+          "chinese": "流程图：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": "java-recursive-exercise-flowchart-6.png"
+        }
+      ]
+    },
+    {
+      "orderInTag": -1,
+      "id": "",
+      "initCode": "public class Solution {\n    public static  {\n\n    }\n}",
+      "targetMethodName": "",
+      "concepts": [
+        ""
+      ],
+      "tags": [
+        ""
+      ],
+      "exerciseContents": [
+        {
+          "contentType": "TEXT",
+          "english": "",
+          "chinese": "",
+          "style": ""
+        },
+        {
+          "contentType": "CODE",
+          "code": ""
+        }
+      ],
+      "answerContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Sample Solution:\n\nJava Code:",
+          "chinese": "示例：\n\nJava代码：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "CODE",
+          "code": ""
         }
       ],
       "explanationContents": [
@@ -96,11 +433,104 @@
         },
         {
           "contentType": "IMAGE",
-          "imageName": "java-method-exercise-3.png"
+          "imageName": ""
         }
+      ]
+    },
+    {
+      "orderInTag": -1,
+      "id": "",
+      "initCode": "public class Solution {\n    public static  {\n\n    }\n}",
+      "targetMethodName": "",
+      "concepts": [
+        ""
       ],
       "tags": [
-        "method"
+        ""
+      ],
+      "exerciseContents": [
+        {
+          "contentType": "TEXT",
+          "english": "",
+          "chinese": "",
+          "style": ""
+        },
+        {
+          "contentType": "CODE",
+          "code": ""
+        }
+      ],
+      "answerContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Sample Solution:\n\nJava Code:",
+          "chinese": "示例：\n\nJava代码：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "CODE",
+          "code": ""
+        }
+      ],
+      "explanationContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Flowchart:",
+          "chinese": "流程图：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": ""
+        }
+      ]
+    },
+    {
+      "orderInTag": -1,
+      "id": "",
+      "initCode": "public class Solution {\n    public static  {\n\n    }\n}",
+      "targetMethodName": "",
+      "concepts": [
+        ""
+      ],
+      "tags": [
+        ""
+      ],
+      "exerciseContents": [
+        {
+          "contentType": "TEXT",
+          "english": "",
+          "chinese": "",
+          "style": ""
+        },
+        {
+          "contentType": "CODE",
+          "code": ""
+        }
+      ],
+      "answerContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Sample Solution:\n\nJava Code:",
+          "chinese": "示例：\n\nJava代码：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "CODE",
+          "code": ""
+        }
+      ],
+      "explanationContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Flowchart:",
+          "chinese": "流程图：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": ""
+        }
       ]
     }
   ]

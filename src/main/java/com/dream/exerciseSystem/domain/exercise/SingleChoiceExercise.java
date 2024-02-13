@@ -36,16 +36,6 @@ public class SingleChoiceExercise {
     // 在同一个tag下的习题顺序
     public int orderInTag;
 
-    public SingleChoiceExercise() {
-        this.id = "";
-        this.subjectType = "";
-        this.exercise = new Exercise();
-        this.correctAnswer = -1;
-        this.options = null;
-        this.concepts = null;
-        this.tags = null;
-    }
-
     public SingleChoiceExercise(String id, String subjectType, Exercise exercise, int correctAnswer,
                                 List<List<Content>> options, List<String> concepts, List<String> tags, int orderInTag) {
         this.id = id;
