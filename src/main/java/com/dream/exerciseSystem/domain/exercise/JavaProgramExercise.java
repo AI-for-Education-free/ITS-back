@@ -37,7 +37,7 @@ public class JavaProgramExercise {
     public String targetMethodName;
 
     public static void main(String[] args) {
-        String s = "Write a Java recursive method to reverse a given string.";
+        String s = "Write a Java recursive method to find the sum of all odd numbers in an array.";
         System.out.println(s.hashCode());
     }
 

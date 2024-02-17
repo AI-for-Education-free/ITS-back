@@ -17,6 +17,7 @@ import java.util.*;
 public class JavaProgramExerciseChecker {
     public static final int PASSWORD_LENGTH = 10;
     private final Random random = new Random();
+    private final Util exerciseUtil = new Util();
 
     public static void printHello() {
         System.out.println("hello\ndream");
@@ -1725,19 +1726,187 @@ public class JavaProgramExerciseChecker {
         return result;
     }
 
+    public static int calculateGCD(int num1, int num2) {
+        // Base case: if the second number is 0, the GCD is the first number
+        if (num2 == 0) {
+            return num1;
+        }
+
+        // Recursive case: calculate the GCD by recursively calling the method with num2 as the new num1 and the remainder as num2
+        int remainder = num1 % num2;
+        return calculateGCD(num2, remainder);
+    }
+
+    public HashMap<String, Object> checkCalculateGCD(Class<?> solutionClass) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
+        String targetMethodName = "calculateGCD";
+        HashMap<String, Object> result = new HashMap<>();
+        ArrayList<HashMap<String, String>> hints = new ArrayList<>();
+
+        Method targetMethod = null;
+        Class<?>[] trueParameterTypes = {int.class, int.class};
+        Class<?> trueReturnType = int.class;
+        HashMap<String, Object> checkInputAndOutputResult = checkInputAndOutput(solutionClass, targetMethodName, trueParameterTypes, trueReturnType);
+        if (!(boolean)checkInputAndOutputResult.get("correct")) {
+            return checkInputAndOutputResult;
+        }
+        targetMethod = solutionClass.getDeclaredMethod(targetMethodName, trueParameterTypes);
+
+        int testInput11 = random.nextInt(1000);
+        int testInput12 = random.nextInt(1000);
+        int testInput21 = random.nextInt(1000);
+        int testInput22 = random.nextInt(1000);
+        int testInput31 = random.nextInt(1000);
+        int testInput32 = random.nextInt(1000);
+
+        targetMethod.setAccessible(true);
+        int userMethodOutput1 = (int) targetMethod.invoke(null, testInput11, testInput12);
+        int userMethodOutput2 = (int) targetMethod.invoke(null, testInput21, testInput22);
+        int userMethodOutput3 = (int) targetMethod.invoke(null, testInput31, testInput32);
+
+        int trueOutput1 = calculateGCD(testInput11, testInput12);
+        int trueOutput2 = calculateGCD(testInput21, testInput22);
+        int trueOutput3 = calculateGCD(testInput31, testInput32);
+
+        boolean check1 = userMethodOutput1 == trueOutput1;
+        boolean check2 = userMethodOutput2 == trueOutput2;
+        boolean check3 = userMethodOutput3 == trueOutput3;
+        if (!check1) {
+            HashMap<String, String> hint = new HashMap<>();
+            hint.put("chinese", targetMethodName + "("+ testInput11 + ", " + testInput12 + ")的返回值应该是" + trueOutput1 + "，而不应该是" + userMethodOutput1);
+            hints.add(hint);
+        }
+        if (!check2) {
+            HashMap<String, String> hint = new HashMap<>();
+            hint.put("chinese", targetMethodName + "("+ testInput21 + ", " + testInput22 + ")的返回值应该是" + trueOutput2 + "，而不应该是" + userMethodOutput2);
+            hints.add(hint);
+        }
+        if (!check3) {
+            HashMap<String, String> hint = new HashMap<>();
+            hint.put("chinese", targetMethodName + "("+ testInput31 + ", " + testInput32 + ")的返回值应该是" + trueOutput3 + "，而不应该是" + userMethodOutput3);
+            hints.add(hint);
+        }
+        result.put("correct", check1 && check2 && check3);
+        result.put("hints", hints);
+        return result;
+    }
+
+    public static < T > int countOccurrences(T[] arr, T target) {
+        return countOccurrences(arr, target, 0);
+    }
+
+    private static < T > int countOccurrences(T[] arr, T target, int index) {
+        // Base case: if the index reaches the end of the array, return 0
+        if (index == arr.length) {
+            return 0;
+        }
+
+        // Recursive case: check if the element at the current index is equal to the target,
+        // and recursively call the method with the next index and add 1 if it is equal
+        int count = countOccurrences(arr, target, index + 1);
+        if (arr[index].equals(target)) {
+            count++;
+        }
+
+        return count;
+    }
+
+    public static int calculateOddNumberSum(int[] arr) {
+        return calculateOddNumberSum(arr, 0);
+    }
+
+    private static int calculateOddNumberSum(int[] arr, int index) {
+        // Base case: if the index reaches the end of the array, return 0
+        if (index == arr.length) {
+            return 0;
+        }
+
+        // Recursive case: check if the element at the current index is odd,
+        // and recursively call the method with the next index and add the current element if it is odd
+        int sum = calculateOddNumberSum(arr, index + 1);
+        if (arr[index] % 2 != 0) {
+            sum += arr[index];
+        }
+
+        return sum;
+    }
+
+    public HashMap<String, Object> checkCalculateOddNumberSum(Class<?> solutionClass) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
+        String targetMethodName = "calculateOddNumberSum";
+        HashMap<String, Object> result = new HashMap<>();
+        ArrayList<HashMap<String, String>> hints = new ArrayList<>();
+
+        Method targetMethod = null;
+        Class<?>[] trueParameterTypes = {int[].class};
+        Class<?> trueReturnType = int.class;
+        HashMap<String, Object> checkInputAndOutputResult = checkInputAndOutput(solutionClass, targetMethodName, trueParameterTypes, trueReturnType);
+        if (!(boolean)checkInputAndOutputResult.get("correct")) {
+            return checkInputAndOutputResult;
+        }
+        targetMethod = solutionClass.getDeclaredMethod(targetMethodName, trueParameterTypes);
+
+        int arrayNum1 = random.nextInt(10) + 20;
+        int arrayNum2 = random.nextInt(10) + 20;
+        int arrayNum3 = random.nextInt(10) + 20;
+        int[] testInput1 = exerciseUtil.generateIntArray(1, 100, arrayNum1);
+        int[] testInput2 = exerciseUtil.generateIntArray(1, 100, arrayNum2);
+        int[] testInput3 = exerciseUtil.generateIntArray(1, 100, arrayNum3);
+
+        targetMethod.setAccessible(true);
+        int userMethodOutput1 = (int) targetMethod.invoke(null, testInput1);
+        int userMethodOutput2 = (int) targetMethod.invoke(null, testInput2);
+        int userMethodOutput3 = (int) targetMethod.invoke(null, testInput3);
+
+        int trueOutput1 = calculateOddNumberSum(testInput1);
+        int trueOutput2 = calculateOddNumberSum(testInput2);
+        int trueOutput3 = calculateOddNumberSum(testInput3);
+
+        boolean check1 = Objects.equals(userMethodOutput1, trueOutput1);
+        boolean check2 = Objects.equals(userMethodOutput2, trueOutput2);
+        boolean check3 = Objects.equals(userMethodOutput3, trueOutput3);
+
+        if (!check1) {
+            HashMap<String, String> hint = new HashMap<>();
+            hint.put("chinese", targetMethodName + "(" + Arrays.toString(testInput1) + ")的返回值应该是" + trueOutput1 + "，而不应该是" + userMethodOutput1);
+            hints.add(hint);
+        }
+        if (!check2) {
+            HashMap<String, String> hint = new HashMap<>();
+            hint.put("chinese", targetMethodName + "(" + Arrays.toString(testInput2) + ")的返回值应该是" + trueOutput2 + "，而不应该是" + userMethodOutput2);
+            hints.add(hint);
+        }
+        if (!check3) {
+            HashMap<String, String> hint = new HashMap<>();
+            hint.put("chinese", targetMethodName + "(" + Arrays.toString(testInput3) + ")的返回值应该是" + trueOutput3 + "，而不应该是" + userMethodOutput3);
+            hints.add(hint);
+        }
+        result.put("correct", check1 && check2 && check3);
+        result.put("hints", hints);
+        return result;
+    }
+
     public static void javaProgramExerciseCheck(JavaProgramExercise exercise) throws Exception {
         String submissionCodePrefix = "package org.dream.solution;\n\npublic class Solution {";
         String submissionCodeSuffix = "}";
         String submissionCode = submissionCodePrefix +
                 "\n" +
-                "    public static String reverseString(String str) {\n" +
-                "        // Base case: if the string is empty or has only one character, it is already reversed\n" +
-                "        if (str.isEmpty() || str.length() == 1) {\n" +
-                "            return str+'a';\n" +
+                "    public static int calculateOddNumberSum(int[] arr) {\n" +
+                "        return calculateOddNumberSum(arr, 0);\n" +
+                "    }\n" +
+                "\n" +
+                "    private static int calculateOddNumberSum(int[] arr, int index) {\n" +
+                "        // Base case: if the index reaches the end of the array, return 0\n" +
+                "        if (index == arr.length) {\n" +
+                "            return 1;\n" +
                 "        }\n" +
                 "\n" +
-                "        // Recursive case: reverse the substring starting from the second character and concatenate the first character\n" +
-                "        return reverseString(str.substring(1)) + str.charAt(0);\n" +
+                "        // Recursive case: check if the element at the current index is odd,\n" +
+                "        // and recursively call the method with the next index and add the current element if it is odd\n" +
+                "        int sum = calculateOddNumberSum(arr, index + 1);\n" +
+                "        if (arr[index] % 2 != 0) {\n" +
+                "            sum += arr[index];\n" +
+                "        }\n" +
+                "\n" +
+                "        return sum;\n" +
                 "    }\n"
                 + submissionCodeSuffix;
         String targetMethodName = exercise.targetMethodName;
@@ -1757,7 +1926,7 @@ public class JavaProgramExerciseChecker {
             JSONObject exerciseObject = exerciseArray.getJSONObject(i);
             javaProgramExercises.add(JavaProgramExercise.generateExerciseFromJsonObject(exerciseObject, "JAVA"));
         }
-        JavaProgramExercise exercise = javaProgramExercises.get(5);
+        JavaProgramExercise exercise = javaProgramExercises.get(7);
         javaProgramExerciseCheck(exercise);
     }
 }

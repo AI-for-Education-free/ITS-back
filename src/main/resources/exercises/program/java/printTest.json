@@ -1,3 +1,60 @@
 {
-  "method": [21]
+  "method": [21],
+  "recursive methods": [8],
+  "recursive methods-8": {
+    "orderInTag": 8,
+    "id": "198613369",
+    "initCode": "public class Solution {\n    public static < T > int countOccurrences(T[] arr, T target) {\n\n    }\n}",
+    "targetMethodName": "countOccurrences",
+    "concepts": [
+      "recursive methods"
+    ],
+    "tags": [
+      "recursive methods"
+    ],
+    "exerciseContents": [
+      {
+        "contentType": "TEXT",
+        "english": "Write a Java recursive method to count the number of occurrences of a specific element in an array.",
+        "chinese": "编写一个 Java 递归方法来计算数组中特定元素出现的次数。",
+        "style": ""
+      }
+    ],
+    "answerContents": [
+      {
+        "contentType": "TEXT",
+        "english": "Sample Solution:\n\nJava Code:",
+        "chinese": "示例：\n\nJava代码：",
+        "style": "BOLD"
+      },
+      {
+        "contentType": "CODE",
+        "code": "public class ArrayElementCounter {\n\n  public static < T > int countOccurrences(T[] arr, T target) {\n    return countOccurrences(arr, target, 0);\n  }\n\n  private static < T > int countOccurrences(T[] arr, T target, int index) {\n    // Base case: if the index reaches the end of the array, return 0\n    if (index == arr.length) {\n      return 0;\n    }\n\n    // Recursive case: check if the element at the current index is equal to the target,\n    // and recursively call the method with the next index and add 1 if it is equal\n    int count = countOccurrences(arr, target, index + 1);\n    if (arr[index].equals(target)) {\n      count++;\n    }\n\n    return count;\n  }\n\n  public static void main(String[] args) {\n    Integer[] numbers = {\n      10,\n      20,\n      30,\n      40,\n      20,\n      50,\n      20,\n      60\n    };\n    int target = 20;\n    int occurrences = countOccurrences(numbers, target);\n    System.out.println(\"The number of occurrences of \" + target + \" in the array is: \" + occurrences);\n  }\n}"
+      }
+    ],
+    "explanationContents": [
+      {
+        "contentType": "TEXT",
+        "english": "Explanation:",
+        "chinese": "解释：",
+        "style": "BOLD"
+      },
+      {
+        "contentType": "TEXT",
+        "english": "In the above exercises -\n\nFirst, we define a class \"ArrayElementCounter\" that includes a recursive method countOccurrences() to count the number of occurrences of a specific element target in an array arr.\n\nThe countOccurrences() method has two cases:\n\nBase case: If the index reaches the end of the array (index == arr.length), we return 0 as there are no more elements to check.\nRecursive case: For any index that is within the bounds of the array, we check if the element at that index is equal to the target. We then recursively call the method with the next index and add 1 to the count if the element is equal to the target. This process continues until we reach the end of the array.\nIn the main() method, we demonstrate the usage of the countOccurrences() method by counting the number of occurrences of the number 20 in the array {10, 20, 30, 40, 20, 50, 20, 60}and printing the result.",
+        "chinese": "在上面的练习中——\n\n首先，我们定义一个类“ArrayElementCounter”，其中包含一个递归方法 countOccurrences() 来计算数组 arr 中特定元素目标出现的次数。\n\ncountOccurrences()方法有两种情况：\n\n基本情况：如果索引到达数组末尾（index == arr.length），我们返回 0，因为没有更多元素需要检查。\n递归情况：对于数组边界内的任何索引，我们检查该索引处的元素是否等于目标。 然后，我们使用下一个索引递归调用该方法，如果该元素等于目标，则将计数加 1。 这个过程一直持续到我们到达数组的末尾。\n在 main() 方法中，我们通过计算数组 {10, 20, 30, 40, 20, 50, 20, 60} 中数字 20 出现的次数并打印 结果。",
+        "style": ""
+      },
+      {
+        "contentType": "TEXT",
+        "english": "Flowchart:",
+        "chinese": "流程图：",
+        "style": "BOLD"
+      },
+      {
+        "contentType": "IMAGE",
+        "imageName": "java-recursive-exercise-flowchart-8.png"
+      }
+    ]
+  }
 }

@@ -390,26 +390,22 @@
       ]
     },
     {
-      "orderInTag": -1,
-      "id": "",
-      "initCode": "public class Solution {\n    public static  {\n\n    }\n}",
-      "targetMethodName": "",
+      "orderInTag": 7,
+      "id": "1228848010",
+      "initCode": "public class Solution {\n    public static int calculateGCD(int num1, int num2) {\n\n    }\n}",
+      "targetMethodName": "calculateGCD",
       "concepts": [
-        ""
+        "recursive methods"
       ],
       "tags": [
-        ""
+        "recursive methods"
       ],
       "exerciseContents": [
         {
           "contentType": "TEXT",
-          "english": "",
-          "chinese": "",
+          "english": "Write a Java recursive method to find the greatest common divisor (GCD) of two numbers.",
+          "chinese": "编写一个 Java 递归方法来查找两个数字的最大公约数 (GCD)。",
           "style": ""
-        },
-        {
-          "contentType": "CODE",
-          "code": ""
         }
       ],
       "answerContents": [
@@ -421,10 +417,22 @@
         },
         {
           "contentType": "CODE",
-          "code": ""
+          "code": "public class GCDCalculator {\n\n  public static int calculateGCD(int num1, int num2) {\n    // Base case: if the second number is 0, the GCD is the first number\n    if (num2 == 0) {\n      return num1;\n    }\n\n    // Recursive case: calculate the GCD by recursively calling the method with num2 as the new num1 and the remainder as num2\n    int remainder = num1 % num2;\n    return calculateGCD(num2, remainder);\n  }\n\n  public static void main(String[] args) {\n    int number1 = 16;\n    int number2 = 18;\n    int gcd = calculateGCD(number1, number2);\n    System.out.println(\"The GCD of \" + number1 + \" and \" + number2 + \" is: \" + gcd);\n  }\n}"
         }
       ],
       "explanationContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Explanation:",
+          "chinese": "解释：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "TEXT",
+          "english": "In the above exercises -\n\nFirst, we define a class GCDCalculator that includes a recursive method calculateGCD() to find the greatest common divisor (GCD) of two numbers.\n\nThe calculateGCD() method follows the recursive GCD definition. It has two cases:\n\nBase case: If the second number (num2) is 0, the GCD is the first number (num1). This is because any number divided by 0 is the number itself.\nRecursive case: For any two numbers (num1 and num2), we calculate the remainder when num1 is divided by num2. We then recursively call the method with num2 as the new num1 and the remainder as num2. This process continues until num2 reaches 0.\nIn the main() method, we demonstrate the calculateGCD() method by finding the GCD of two numbers (16 and 18) and printing the result.",
+          "chinese": "在上面的练习中——\n\n首先，我们定义一个类 GCDCalculator，其中包含一个递归方法calculateGCD()来查找两个数字的最大公约数（GCD）。\n\ncalculateGCD() 方法遵循递归 GCD 定义。 它有两种情况：\n\n基本情况：如果第二个数字 (num2) 为 0，则 GCD 为第一个数字 (num1)。 这是因为任何数字除以 0 就是数字本身。\n递归情况：对于任意两个数字（num1 和 num2），我们计算 num1 除以 num2 时的余数。 然后，我们递归调用该方法，将 num2 作为新的 num1，将余数作为 num2。 这个过程一直持续到 num2 达到 0。\n在 main() 方法中，我们通过查找两个数字（16 和 18）的 GCD 并打印结果来演示calculateGCD() 方法。",
+          "style": ""
+        },
         {
           "contentType": "TEXT",
           "english": "Flowchart:",
@@ -433,31 +441,27 @@
         },
         {
           "contentType": "IMAGE",
-          "imageName": ""
+          "imageName": "java-recursive-exercise-flowchart-7.png"
         }
       ]
     },
     {
-      "orderInTag": -1,
-      "id": "",
-      "initCode": "public class Solution {\n    public static  {\n\n    }\n}",
-      "targetMethodName": "",
+      "orderInTag": 9,
+      "id": "89064573",
+      "initCode": "public class Solution {\n    public static int calculateOddNumberSum(int[] arr) {\n\n    }\n}",
+      "targetMethodName": "calculateOddNumberSum",
       "concepts": [
-        ""
+        "recursive methods"
       ],
       "tags": [
-        ""
+        "recursive methods"
       ],
       "exerciseContents": [
         {
           "contentType": "TEXT",
-          "english": "",
-          "chinese": "",
+          "english": "Write a Java recursive method to find the sum of all odd numbers in an array.",
+          "chinese": "编写一个 Java 递归方法来查找数组中所有奇数的总和。",
           "style": ""
-        },
-        {
-          "contentType": "CODE",
-          "code": ""
         }
       ],
       "answerContents": [
@@ -469,59 +473,23 @@
         },
         {
           "contentType": "CODE",
-          "code": ""
+          "code": "public class OddNumberSumCalculator {\n\n  public static int calculateOddNumberSum(int[] arr) {\n    return calculateOddNumberSum(arr, 0);\n  }\n\n  private static int calculateOddNumberSum(int[] arr, int index) {\n    // Base case: if the index reaches the end of the array, return 0\n    if (index == arr.length) {\n      return 0;\n    }\n\n    // Recursive case: check if the element at the current index is odd,\n    // and recursively call the method with the next index and add the current element if it is odd\n    int sum = calculateOddNumberSum(arr, index + 1);\n    if (arr[index] % 2 != 0) {\n      sum += arr[index];\n    }\n\n    return sum;\n  }\n\n  public static void main(String[] args) {\n    int[] numbers = {\n      1,\n      2,\n      3,\n      4,\n      5,\n      6,\n      7,\n      8,\n      9\n    };\n    int sum = calculateOddNumberSum(numbers);\n    System.out.println(\"The sum of all odd numbers in the array is: \" + sum);\n  }\n}"
         }
       ],
       "explanationContents": [
         {
           "contentType": "TEXT",
-          "english": "Flowchart:",
-          "chinese": "流程图：",
+          "english": "Explanation:",
+          "chinese": "解释：",
           "style": "BOLD"
         },
         {
-          "contentType": "IMAGE",
-          "imageName": ""
-        }
-      ]
-    },
-    {
-      "orderInTag": -1,
-      "id": "",
-      "initCode": "public class Solution {\n    public static  {\n\n    }\n}",
-      "targetMethodName": "",
-      "concepts": [
-        ""
-      ],
-      "tags": [
-        ""
-      ],
-      "exerciseContents": [
-        {
           "contentType": "TEXT",
-          "english": "",
-          "chinese": "",
+          "english": "In the above exercises -\n\nFirst, we define a class OddNumberSumCalculator that includes a recursive method calculateOddNumberSum() to find the sum of all odd numbers in an array.\n\nThe calculateOddNumberSum() method has two cases:\n\nBase case: If the index reaches the end of the array (index == arr.length), we return 0 as there are no more elements to check.\nRecursive case: For any index that is within the bounds of the array, we check if the element at that index is odd. We then recursively call the method with the next index and add the current element to the sum if it is odd. This process continues until we reach the end of the array.\nIn the main() method, we demonstrate the calculateOddNumberSum() method by finding the sum of all odd numbers in the array [1, 2, 3, 4, 5, 6, 7, 8, 9] and printing the result.",
+          "chinese": "在上面的练习中——\n\n首先，我们定义一个类 OddNumberSumCalculator，其中包含一个递归方法calculateOddNumberSum()，用于查找数组中所有奇数的总和。\n\ncalculateOddNumberSum()方法有两种情况：\n\n基本情况：如果索引到达数组末尾（index == arr.length），我们返回 0，因为没有更多元素需要检查。\n递归情况：对于数组边界内的任何索引，我们检查该索引处的元素是否为奇数。 然后，我们使用下一个索引递归调用该方法，如果当前元素是奇数，则将当前元素添加到总和中。 这个过程一直持续到我们到达数组的末尾。\n在 main() 方法中，我们通过查找数组 [1, 2, 3, 4, 5, 6, 7, 8, 9] 中所有奇数的总和并打印结果来演示calculateOddNumberSum() 方法。",
           "style": ""
         },
         {
-          "contentType": "CODE",
-          "code": ""
-        }
-      ],
-      "answerContents": [
-        {
-          "contentType": "TEXT",
-          "english": "Sample Solution:\n\nJava Code:",
-          "chinese": "示例：\n\nJava代码：",
-          "style": "BOLD"
-        },
-        {
-          "contentType": "CODE",
-          "code": ""
-        }
-      ],
-      "explanationContents": [
-        {
           "contentType": "TEXT",
           "english": "Flowchart:",
           "chinese": "流程图：",
@@ -529,7 +497,7 @@
         },
         {
           "contentType": "IMAGE",
-          "imageName": ""
+          "imageName": "java-recursive-exercise-flowchart-9.png"
         }
       ]
     }

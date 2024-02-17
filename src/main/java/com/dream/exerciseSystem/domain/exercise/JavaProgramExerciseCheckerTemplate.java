@@ -17,6 +17,7 @@ import java.util.*;
 public class JavaProgramExerciseCheckerTemplate {
     public static final int PASSWORD_LENGTH = 10;
     private final Random random = new Random();
+    private final Util exerciseUtil = new Util();
 
     public static void printHello() {
         System.out.println("hello\ndream");
@@ -668,6 +669,80 @@ public class JavaProgramExerciseCheckerTemplate {
         if (!check3) {
             HashMap<String, String> hint = new HashMap<>();
             hint.put("chinese", targetMethodName + "(\"" + testInput3 + "\")的返回值应该是" + trueOutput3 + "，而不应该是" + userMethodOutput3);
+            hints.add(hint);
+        }
+        result.put("correct", check1 && check2 && check3);
+        result.put("hints", hints);
+        return result;
+    }
+
+    public static int calculateOddNumberSum(int[] arr) {
+        return calculateOddNumberSum(arr, 0);
+    }
+
+    private static int calculateOddNumberSum(int[] arr, int index) {
+        // Base case: if the index reaches the end of the array, return 0
+        if (index == arr.length) {
+            return 0;
+        }
+
+        // Recursive case: check if the element at the current index is odd,
+        // and recursively call the method with the next index and add the current element if it is odd
+        int sum = calculateOddNumberSum(arr, index + 1);
+        if (arr[index] % 2 != 0) {
+            sum += arr[index];
+        }
+
+        return sum;
+    }
+
+    public HashMap<String, Object> checkCalculateOddNumberSum(Class<?> solutionClass) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
+        String targetMethodName = "calculateOddNumberSum";
+        HashMap<String, Object> result = new HashMap<>();
+        ArrayList<HashMap<String, String>> hints = new ArrayList<>();
+
+        Method targetMethod = null;
+        Class<?>[] trueParameterTypes = {int[].class};
+        Class<?> trueReturnType = int.class;
+        HashMap<String, Object> checkInputAndOutputResult = checkInputAndOutput(solutionClass, targetMethodName, trueParameterTypes, trueReturnType);
+        if (!(boolean)checkInputAndOutputResult.get("correct")) {
+            return checkInputAndOutputResult;
+        }
+        targetMethod = solutionClass.getDeclaredMethod(targetMethodName, trueParameterTypes);
+
+        int arrayNum1 = random.nextInt(10) + 20;
+        int arrayNum2 = random.nextInt(10) + 20;
+        int arrayNum3 = random.nextInt(10) + 20;
+        int[] testInput1 = exerciseUtil.generateIntArray(1, 100, arrayNum1);
+        int[] testInput2 = exerciseUtil.generateIntArray(1, 100, arrayNum2);
+        int[] testInput3 = exerciseUtil.generateIntArray(1, 100, arrayNum3);
+
+        targetMethod.setAccessible(true);
+        int userMethodOutput1 = (int) targetMethod.invoke(null, testInput1);
+        int userMethodOutput2 = (int) targetMethod.invoke(null, testInput2);
+        int userMethodOutput3 = (int) targetMethod.invoke(null, testInput3);
+
+        int trueOutput1 = calculateOddNumberSum(testInput1);
+        int trueOutput2 = calculateOddNumberSum(testInput2);
+        int trueOutput3 = calculateOddNumberSum(testInput3);
+
+        boolean check1 = Objects.equals(userMethodOutput1, trueOutput1);
+        boolean check2 = Objects.equals(userMethodOutput2, trueOutput2);
+        boolean check3 = Objects.equals(userMethodOutput3, trueOutput3);
+
+        if (!check1) {
+            HashMap<String, String> hint = new HashMap<>();
+            hint.put("chinese", targetMethodName + "(" + Arrays.toString(testInput1) + ")的返回值应该是" + trueOutput1 + "，而不应该是" + userMethodOutput1);
+            hints.add(hint);
+        }
+        if (!check2) {
+            HashMap<String, String> hint = new HashMap<>();
+            hint.put("chinese", targetMethodName + "(" + Arrays.toString(testInput2) + ")的返回值应该是" + trueOutput2 + "，而不应该是" + userMethodOutput2);
+            hints.add(hint);
+        }
+        if (!check3) {
+            HashMap<String, String> hint = new HashMap<>();
+            hint.put("chinese", targetMethodName + "(" + Arrays.toString(testInput3) + ")的返回值应该是" + trueOutput3 + "，而不应该是" + userMethodOutput3);
             hints.add(hint);
         }
         result.put("correct", check1 && check2 && check3);
