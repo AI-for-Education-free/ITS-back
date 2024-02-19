@@ -1,0 +1,369 @@
+{
+  "source": "w3resource",
+  "link": "https://www.w3resource.com/java-exercises/index.php",
+  "subjectType": "JAVA",
+  "test": "public static String middle(String str) {\n        int position;\n        int length;\n        if (str.length() % 2 == 0)\n        {\n            position = str.length() / 2 - 1;\n            length = 2;\n        }\n        else\n        {\n            position = str.length() / 2;\n            length = 1;\n        }\n        return str.substring(position, position + length);\n    }",
+  "template":
+  {
+    "orderInTag": -1,
+    "id": "",
+    "initCode": "public class Solution {\n    public static  {\n\n    }\n}",
+    "targetMethodName": "",
+    "concepts": [
+      ""
+    ],
+    "tags": [
+      ""
+    ],
+    "exerciseContents": [
+      {
+        "contentType": "TEXT",
+        "english": "",
+        "chinese": "",
+        "style": ""
+      },
+      {
+        "contentType": "CODE",
+        "code": ""
+      }
+    ],
+    "answerContents": [
+      {
+        "contentType": "TEXT",
+        "english": "Sample Solution:\n\nJava Code:",
+        "chinese": "示例：\n\nJava代码：",
+        "style": "BOLD"
+      },
+      {
+        "contentType": "CODE",
+        "code": ""
+      }
+    ],
+    "explanationContents": [
+      {
+        "contentType": "TEXT",
+        "english": "Explanation:",
+        "chinese": "解释：",
+        "style": "BOLD"
+      },
+      {
+        "contentType": "TEXT",
+        "english": "",
+        "chinese": "",
+        "style": ""
+      },
+      {
+        "contentType": "TEXT",
+        "english": "Flowchart:",
+        "chinese": "流程图：",
+        "style": "BOLD"
+      },
+      {
+        "contentType": "IMAGE",
+        "imageName": ""
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "orderInTag": 1,
+      "id": "2015407318",
+      "initCode": "public class Solution {\n    public static  {\n\n    }\n}",
+      "targetMethodName": "",
+      "concepts": [
+        "data types"
+      ],
+      "tags": [
+        "data types"
+      ],
+      "exerciseContents": [
+        {
+          "contentType": "TEXT",
+          "english": "",
+          "chinese": "",
+          "style": ""
+        },
+        {
+          "contentType": "CODE",
+          "code": ""
+        }
+      ],
+      "answerContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Sample Solution:\n\nJava Code:",
+          "chinese": "示例：\n\nJava代码：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "CODE",
+          "code": ""
+        }
+      ],
+      "explanationContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Explanation:",
+          "chinese": "解释：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "TEXT",
+          "english": "",
+          "chinese": "",
+          "style": ""
+        },
+        {
+          "contentType": "TEXT",
+          "english": "Flowchart:",
+          "chinese": "流程图：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": ""
+        }
+      ]
+    },
+    {
+      "orderInTag": -1,
+      "id": "",
+      "initCode": "public class Solution {\n    public static  {\n\n    }\n}",
+      "targetMethodName": "",
+      "concepts": [
+        ""
+      ],
+      "tags": [
+        ""
+      ],
+      "exerciseContents": [
+        {
+          "contentType": "TEXT",
+          "english": "",
+          "chinese": "",
+          "style": ""
+        },
+        {
+          "contentType": "CODE",
+          "code": ""
+        }
+      ],
+      "answerContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Sample Solution:\n\nJava Code:",
+          "chinese": "示例：\n\nJava代码：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "CODE",
+          "code": ""
+        }
+      ],
+      "explanationContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Explanation:",
+          "chinese": "解释：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "TEXT",
+          "english": "",
+          "chinese": "",
+          "style": ""
+        },
+        {
+          "contentType": "TEXT",
+          "english": "Flowchart:",
+          "chinese": "流程图：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": ""
+        }
+      ]
+    },
+    {
+      "orderInTag": -1,
+      "id": "",
+      "initCode": "public class Solution {\n    public static  {\n\n    }\n}",
+      "targetMethodName": "",
+      "concepts": [
+        ""
+      ],
+      "tags": [
+        ""
+      ],
+      "exerciseContents": [
+        {
+          "contentType": "TEXT",
+          "english": "",
+          "chinese": "",
+          "style": ""
+        },
+        {
+          "contentType": "CODE",
+          "code": ""
+        }
+      ],
+      "answerContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Sample Solution:\n\nJava Code:",
+          "chinese": "示例：\n\nJava代码：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "CODE",
+          "code": ""
+        }
+      ],
+      "explanationContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Explanation:",
+          "chinese": "解释：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "TEXT",
+          "english": "",
+          "chinese": "",
+          "style": ""
+        },
+        {
+          "contentType": "TEXT",
+          "english": "Flowchart:",
+          "chinese": "流程图：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": ""
+        }
+      ]
+    },
+    {
+      "orderInTag": -1,
+      "id": "",
+      "initCode": "public class Solution {\n    public static  {\n\n    }\n}",
+      "targetMethodName": "",
+      "concepts": [
+        ""
+      ],
+      "tags": [
+        ""
+      ],
+      "exerciseContents": [
+        {
+          "contentType": "TEXT",
+          "english": "",
+          "chinese": "",
+          "style": ""
+        },
+        {
+          "contentType": "CODE",
+          "code": ""
+        }
+      ],
+      "answerContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Sample Solution:\n\nJava Code:",
+          "chinese": "示例：\n\nJava代码：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "CODE",
+          "code": ""
+        }
+      ],
+      "explanationContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Explanation:",
+          "chinese": "解释：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "TEXT",
+          "english": "",
+          "chinese": "",
+          "style": ""
+        },
+        {
+          "contentType": "TEXT",
+          "english": "Flowchart:",
+          "chinese": "流程图：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": ""
+        }
+      ]
+    },
+    {
+      "orderInTag": -1,
+      "id": "",
+      "initCode": "public class Solution {\n    public static  {\n\n    }\n}",
+      "targetMethodName": "",
+      "concepts": [
+        ""
+      ],
+      "tags": [
+        ""
+      ],
+      "exerciseContents": [
+        {
+          "contentType": "TEXT",
+          "english": "",
+          "chinese": "",
+          "style": ""
+        },
+        {
+          "contentType": "CODE",
+          "code": ""
+        }
+      ],
+      "answerContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Sample Solution:\n\nJava Code:",
+          "chinese": "示例：\n\nJava代码：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "CODE",
+          "code": ""
+        }
+      ],
+      "explanationContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Explanation:",
+          "chinese": "解释：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "TEXT",
+          "english": "",
+          "chinese": "",
+          "style": ""
+        },
+        {
+          "contentType": "TEXT",
+          "english": "Flowchart:",
+          "chinese": "流程图：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": ""
+        }
+      ]
+    }
+  ]
+}

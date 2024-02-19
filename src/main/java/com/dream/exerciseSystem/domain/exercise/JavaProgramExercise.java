@@ -37,7 +37,7 @@ public class JavaProgramExercise {
     public String targetMethodName;
 
     public static void main(String[] args) {
-        String s = "Write a Java recursive method to find the sum of all odd numbers in an array.";
+        String s = "Write a Java program to convert temperature from Fahrenheit to Celsius degrees.";
         System.out.println(s.hashCode());
     }
 
@@ -85,6 +85,9 @@ public class JavaProgramExercise {
         if (Objects.equals(developer, "XCL")) {
             Class<JavaProgramExerciseCheckerXCL> javaProgramExerciseCheckerClass = JavaProgramExerciseCheckerXCL.class;
             checkMethods = javaProgramExerciseCheckerClass.getDeclaredMethods();
+        } else if (Objects.equals(developer, "XZJ2")) {
+            Class<JavaProgramExerciseCheckerXZJ2> javaProgramExerciseCheckerClass = JavaProgramExerciseCheckerXZJ2.class;
+            checkMethods = javaProgramExerciseCheckerClass.getDeclaredMethods();
         } else {
             Class<JavaProgramExerciseChecker> javaProgramExerciseCheckerClass = JavaProgramExerciseChecker.class;
             checkMethods = javaProgramExerciseCheckerClass.getDeclaredMethods();
@@ -127,6 +130,8 @@ public class JavaProgramExercise {
         try {
             if (Objects.equals(developer, "XCL")) {
                 checkResult = (HashMap<String, Object>) checkMethod.invoke(new JavaProgramExerciseCheckerXCL(), solutionClass);
+            } else if (Objects.equals(developer, "XZJ2")) {
+                checkResult = (HashMap<String, Object>) checkMethod.invoke(new JavaProgramExerciseCheckerXZJ2(), solutionClass);
             } else {
                 checkResult = (HashMap<String, Object>) checkMethod.invoke(new JavaProgramExerciseChecker(), solutionClass);
             }
