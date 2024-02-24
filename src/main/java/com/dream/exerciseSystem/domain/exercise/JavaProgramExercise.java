@@ -37,7 +37,7 @@ public class JavaProgramExercise {
     public String targetMethodName;
 
     public static void main(String[] args) {
-        String s = "Write a Java program to convert temperature from Fahrenheit to Celsius degrees.";
+        String s = "Write a Java program that reads an integer between 0 and 1000 and adds all the digits in the integer.";
         System.out.println(s.hashCode());
     }
 
