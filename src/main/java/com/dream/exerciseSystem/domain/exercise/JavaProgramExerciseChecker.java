@@ -19,205 +19,6 @@ public class JavaProgramExerciseChecker {
     private final Random random = new Random();
     private final Util exerciseUtil = new Util();
 
-    public static void printHello() {
-        System.out.println("hello\ndream");
-    }
-
-    public static double smallest(double x, double y, double z) {
-        return Math.min(Math.min(x, y), z);
-    }
-
-    public static double average(double x, double y, double z) {
-        return (x + y + z) / 3;
-    }
-
-    public static String middle(String str) {
-        int position;
-        int length;
-        if (str.length() % 2 == 0)
-        {
-            position = str.length() / 2 - 1;
-            length = 2;
-        }
-        else
-        {
-            position = str.length() / 2;
-            length = 1;
-        }
-        return str.substring(position, position + length);
-    }
-
-    public static int countVowels(String str) {
-        int count = 0;
-        for (int i = 0; i < str.length(); i++)
-        {
-            if (str.charAt(i) == 'a' || str.charAt(i) == 'e' || str.charAt(i) == 'i'
-                    || str.charAt(i) == 'o' || str.charAt(i) == 'u')
-            {
-                count++;
-            }
-        }
-        return count;
-    }
-
-    public static int countWords(String str) {
-        int count = 0;
-        if (!(" ".equals(str.substring(0, 1))) || !(" ".equals(str.substring(str.length() - 1))))
-        {
-            for (int i = 0; i < str.length(); i++)
-            {
-                if (str.charAt(i) == ' ')
-                {
-                    count++;
-                }
-            }
-            count = count + 1;
-        }
-        // returns 0 if string starts or ends with space " ".
-        return count;
-    }
-
-    public static int sumDigits(long n) {
-        int result = 0;
-
-        while(n > 0) {
-            result += n % 10;
-            n /= 10;
-        }
-
-        return result;
-    }
-
-    public static int getPentagonalNumber(int i) {
-        return (i * (3 * i - 1))/2;
-    }
-
-    public static double futureInvestmentValue(double investmentAmount, double monthlyInterestRate, int years) {
-        return investmentAmount * Math.pow(1 + monthlyInterestRate, years * 12);
-    }
-
-    public static String printChars(char char1, char char2, int n) {
-        StringBuilder result = new StringBuilder();
-        for (int ctr = 1; char1 <= char2; ctr++, char1++) {
-            result.append(char1).append(" ");
-            if (ctr % n == 0) result.append('\n');
-        }
-        return result.toString();
-    }
-
-    public static boolean isLeapYear(int y) {
-        boolean a = (y % 4) == 0;
-        boolean b = (y % 100) != 0;
-        boolean c = ((y % 100 == 0) && (y % 400 == 0));
-
-        return a && (b || c);
-    }
-
-    public static boolean isValidPassword(String password) {
-
-        if (password.length() < PASSWORD_LENGTH) return false;
-
-        int charCount = 0;
-        int numCount = 0;
-        for (int i = 0; i < password.length(); i++) {
-
-            char ch = password.charAt(i);
-
-            if (isNumeric(ch)) numCount++;
-            else if (isLetter(ch)) charCount++;
-            else return false;
-        }
-
-
-        return (charCount >= 2 && numCount >= 2);
-    }
-
-    public static boolean isLetter(char ch) {
-        ch = Character.toUpperCase(ch);
-        return (ch >= 'A' && ch <= 'Z');
-    }
-
-    public static boolean isNumeric(char ch) {
-
-        return (ch >= '0' && ch <= '9');
-    }
-
-    public static void printMatrix(int n) {
-        for(int i = 0; i < n; i++) {
-            for(int j = 0; j < n; j++) {
-                System.out.print((int)(Math.random() * 2) + " ");
-            }
-            System.out.println();
-        }
-    }
-
-    public static double areaTriangle(double side1, double side2, double side3) {
-        double area = 0;
-        double s = (side1 + side2 + side3)/2;
-        area = Math.sqrt(s*(s - side1)*(s - side2)*(s - side3));
-        return area;
-    }
-
-    public static double pentagonArea(int n, double s) {
-        return  (n * s * s) / (4 * Math.tan(Math.PI/n));
-    }
-
-    public static boolean isPrime(long n) {
-
-        if (n < 2) return false;
-
-        for (int i = 2; i <= n / 2; i++) {
-
-            if (n % i == 0) return false;
-        }
-        return true;
-    }
-
-    public static ArrayList<String> twinPrime(long n) {
-        ArrayList<String> strings = new ArrayList<>();
-        for (int i = 2; i < n; i++) {
-            if (isPrime(i) && isPrime(i + 2)) {
-                strings.add("(" + i + "," + (i+2) + ")");
-            }
-        }
-        return strings;
-    }
-
-    public static int countValue(int num, int k) {
-        int ctr = 0;
-        int n = num;
-        do{
-            if (n % 10 == k){
-                ctr ++;
-            }
-            n /= 10;
-        }while(n > 0);
-        return ctr;
-    }
-
-    public static boolean isConsecutive(int x, int y, int z) {
-        int max_num = Math.max(x, Math.max(y, z));
-        int min_num = Math.min(x, Math.min(y, z));
-        int middle_num = x+y+z - max_num - min_num;
-        return (max_num - middle_num) == 1 && (middle_num - min_num == 1);
-    }
-
-    public static boolean methodTest19(int x, int y, int z) {
-        int max = Math.max(x, Math.max(y,z));
-        int min = Math.min(x, Math.min(y,z));
-        double mid_point1 = (max + min) / 2.0;
-        int mid_point2 = x + y + z - max - min;
-        return (mid_point1 == mid_point2);
-    }
-
-    public static int methodTest20 (int n) {
-        int fact_num = 10;
-        while(n / fact_num != 0){
-            fact_num *= 10;
-        }
-        return Math.abs(n / (fact_num/10));
-    }
-
     public HashMap<String, Object> checkInputAndOutput(Class<?> solutionClass, String targetMethodName, Class<?>[] trueParameterTypes, Class<?> trueReturnType) {
         HashMap<String, Object> result = new HashMap<>();
         result.put("correct", false);
@@ -248,6 +49,10 @@ public class JavaProgramExerciseChecker {
 
         result.put("correct", true);
         return result;
+    }
+
+    public static void printHello() {
+        System.out.println("hello\ndream");
     }
 
     public HashMap<String, Object> checkPrintHello(Class<?> solutionClass) throws NoSuchMethodException {
@@ -309,6 +114,10 @@ public class JavaProgramExerciseChecker {
         return result;
     }
 
+    public static double smallest(double x, double y, double z) {
+        return Math.min(Math.min(x, y), z);
+    }
+
     public HashMap<String, Object> checkSmallest(Class<?> solutionClass) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
         String targetMethodName = "smallest";
         HashMap<String, Object> result = new HashMap<>();
@@ -323,36 +132,53 @@ public class JavaProgramExerciseChecker {
         }
         targetMethod = solutionClass.getDeclaredMethod(targetMethodName, trueParameterTypes);
 
-        targetMethod.setAccessible(true);
-        double userMethodOutput1 = (double) targetMethod.invoke(null, 25, 37, 39);
-        double userMethodOutput2 = (double) targetMethod.invoke(null, 2, -5, 10);
-        double userMethodOutput3 = (double) targetMethod.invoke(null, 144, 295, 100);
+        double testInput11 = exerciseUtil.generateDouble(-10, 10);
+        double testInput12 = exerciseUtil.generateDouble(-10, 10);
+        double testInput13 = exerciseUtil.generateDouble(-10, 10);
+        double testInput21 = exerciseUtil.generateDouble(-10, 10);
+        double testInput22 = exerciseUtil.generateDouble(-10, 10);
+        double testInput23 = exerciseUtil.generateDouble(-10, 10);
+        double testInput31 = exerciseUtil.generateDouble(-10, 10);
+        double testInput32 = exerciseUtil.generateDouble(-10, 10);
+        double testInput33 = exerciseUtil.generateDouble(-10, 10);
 
-        double trueOutput1 = smallest(25, 37, 39);
-        double trueOutput2 = smallest(2, -5, 10);
-        double trueOutput3 = smallest(144, 295, 100);
+        targetMethod.setAccessible(true);
+        double userMethodOutput1 = (double) targetMethod.invoke(null, testInput11, testInput12, testInput13);
+        double userMethodOutput2 = (double) targetMethod.invoke(null, testInput21, testInput22, testInput23);
+        double userMethodOutput3 = (double) targetMethod.invoke(null, testInput31, testInput32, testInput33);
+
+        double trueOutput1 = smallest(testInput11, testInput12, testInput13);
+        double trueOutput2 = smallest(testInput21, testInput22, testInput23);
+        double trueOutput3 = smallest(testInput31, testInput32, testInput33);
 
         boolean check1 = userMethodOutput1 == trueOutput1;
         boolean check2 = userMethodOutput2 == trueOutput2;
         boolean check3 = userMethodOutput3 == trueOutput3;
         if (!check1) {
             HashMap<String, String> hint = new HashMap<>();
-            hint.put("chinese", targetMethodName + "(25, 37, 39)的返回值应该是" + trueOutput1 + "，而不应该是" + userMethodOutput1);
+            hint.put("chinese", targetMethodName + "("+ testInput11 + ", " + testInput12 + ", " + testInput13 + ")的返回值应该是"
+                    + trueOutput1 + "，而不应该是" + userMethodOutput1);
             hints.add(hint);
         }
         if (!check2) {
             HashMap<String, String> hint = new HashMap<>();
-            hint.put("chinese", targetMethodName + "(2, -5, 10)的返回值应该是" + trueOutput2 + "，而不应该是" + userMethodOutput2);
+            hint.put("chinese", targetMethodName + "("+ testInput21 + ", " + testInput22 + ", " + testInput23 + ")的返回值应该是"
+                    + trueOutput2 + "，而不应该是" + userMethodOutput2);
             hints.add(hint);
         }
         if (!check3) {
             HashMap<String, String> hint = new HashMap<>();
-            hint.put("chinese", targetMethodName + "(144, 295, 100)的返回值应该是" + trueOutput3 + "，而不应该是" + userMethodOutput3);
+            hint.put("chinese", targetMethodName + "("+ testInput31 + ", " + testInput32 + ", " + testInput33 + ")的返回值应该是"
+                    + trueOutput3 + "，而不应该是" + userMethodOutput3);
             hints.add(hint);
         }
         result.put("correct", check1 && check2 && check3);
         result.put("hints", hints);
         return result;
+    }
+
+    public static double average(double x, double y, double z) {
+        return (x + y + z) / 3;
     }
 
     public HashMap<String, Object> checkAverage(Class<?> solutionClass) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
@@ -401,6 +227,22 @@ public class JavaProgramExerciseChecker {
         return result;
     }
 
+    public static String middle(String str) {
+        int position;
+        int length;
+        if (str.length() % 2 == 0)
+        {
+            position = str.length() / 2 - 1;
+            length = 2;
+        }
+        else
+        {
+            position = str.length() / 2;
+            length = 1;
+        }
+        return str.substring(position, position + length);
+    }
+
     public HashMap<String, Object> checkMiddle(Class<?> solutionClass) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
         String targetMethodName = "middle";
         HashMap<String, Object> result = new HashMap<>();
@@ -445,6 +287,19 @@ public class JavaProgramExerciseChecker {
         result.put("correct", check1 && check2 && check3);
         result.put("hints", hints);
         return result;
+    }
+
+    public static int countVowels(String str) {
+        int count = 0;
+        for (int i = 0; i < str.length(); i++)
+        {
+            if (str.charAt(i) == 'a' || str.charAt(i) == 'e' || str.charAt(i) == 'i'
+                    || str.charAt(i) == 'o' || str.charAt(i) == 'u')
+            {
+                count++;
+            }
+        }
+        return count;
     }
 
     public HashMap<String, Object> checkCountVowels(Class<?> solutionClass) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
@@ -493,6 +348,23 @@ public class JavaProgramExerciseChecker {
         return result;
     }
 
+    public static int countWords(String str) {
+        int count = 0;
+        if (!(" ".equals(str.substring(0, 1))) || !(" ".equals(str.substring(str.length() - 1))))
+        {
+            for (int i = 0; i < str.length(); i++)
+            {
+                if (str.charAt(i) == ' ')
+                {
+                    count++;
+                }
+            }
+            count = count + 1;
+        }
+        // returns 0 if string starts or ends with space " ".
+        return count;
+    }
+
     public HashMap<String, Object> checkCountWords(Class<?> solutionClass) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
         String targetMethodName = "countWords";
         HashMap<String, Object> result = new HashMap<>();
@@ -536,6 +408,17 @@ public class JavaProgramExerciseChecker {
         }
         result.put("correct", check1 && check2 && check3);
         result.put("hints", hints);
+        return result;
+    }
+
+    public static int sumDigits(long n) {
+        int result = 0;
+
+        while(n > 0) {
+            result += n % 10;
+            n /= 10;
+        }
+
         return result;
     }
 
@@ -588,6 +471,10 @@ public class JavaProgramExerciseChecker {
         result.put("correct", check1 && check2 && check3);
         result.put("hints", hints);
         return result;
+    }
+
+    public static int getPentagonalNumber(int i) {
+        return (i * (3 * i - 1))/2;
     }
 
     public HashMap<String, Object> checkGetPentagonalNumber(Class<?> solutionClass) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
@@ -667,6 +554,10 @@ public class JavaProgramExerciseChecker {
         return result;
     }
 
+    public static double futureInvestmentValue(double investmentAmount, double monthlyInterestRate, int years) {
+        return investmentAmount * Math.pow(1 + monthlyInterestRate, years * 12);
+    }
+
     public HashMap<String, Object> checkFutureInvestmentValue (Class<?> solutionClass) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
         String targetMethodName = "futureInvestmentValue";
         HashMap<String, Object> result = new HashMap<>();
@@ -711,6 +602,15 @@ public class JavaProgramExerciseChecker {
         result.put("correct", check1 && check2 && check3);
         result.put("hints", hints);
         return result;
+    }
+
+    public static String printChars(char char1, char char2, int n) {
+        StringBuilder result = new StringBuilder();
+        for (int ctr = 1; char1 <= char2; ctr++, char1++) {
+            result.append(char1).append(" ");
+            if (ctr % n == 0) result.append('\n');
+        }
+        return result.toString();
     }
 
     public HashMap<String, Object> checkPrintChars(Class<?> solutionClass) throws NoSuchMethodException {
@@ -781,6 +681,14 @@ public class JavaProgramExerciseChecker {
         return result;
     }
 
+    public static boolean isLeapYear(int y) {
+        boolean a = (y % 4) == 0;
+        boolean b = (y % 100) != 0;
+        boolean c = ((y % 100 == 0) && (y % 400 == 0));
+
+        return a && (b || c);
+    }
+
     public HashMap<String, Object> checkIsLeapYear(Class<?> solutionClass) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
         String targetMethodName = "isLeapYear";
         HashMap<String, Object> result = new HashMap<>();
@@ -832,6 +740,35 @@ public class JavaProgramExerciseChecker {
         return result;
     }
 
+    public static boolean isValidPassword(String password) {
+
+        if (password.length() < PASSWORD_LENGTH) return false;
+
+        int charCount = 0;
+        int numCount = 0;
+        for (int i = 0; i < password.length(); i++) {
+
+            char ch = password.charAt(i);
+
+            if (isNumeric(ch)) numCount++;
+            else if (isLetter(ch)) charCount++;
+            else return false;
+        }
+
+
+        return (charCount >= 2 && numCount >= 2);
+    }
+
+    public static boolean isLetter(char ch) {
+        ch = Character.toUpperCase(ch);
+        return (ch >= 'A' && ch <= 'Z');
+    }
+
+    public static boolean isNumeric(char ch) {
+
+        return (ch >= '0' && ch <= '9');
+    }
+
     public HashMap<String, Object> checkIsValidPassword(Class<?> solutionClass) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
         String targetMethodName = "isValidPassword";
         HashMap<String, Object> result = new HashMap<>();
@@ -881,6 +818,15 @@ public class JavaProgramExerciseChecker {
         result.put("correct", check1 && check2 && check3);
         result.put("hints", hints);
         return result;
+    }
+
+    public static void printMatrix(int n) {
+        for(int i = 0; i < n; i++) {
+            for(int j = 0; j < n; j++) {
+                System.out.print((int)(Math.random() * 2) + " ");
+            }
+            System.out.println();
+        }
     }
 
     public HashMap<String, Object> checkPrintMatrixHelper(String userOutput, int n) {
@@ -999,6 +945,13 @@ public class JavaProgramExerciseChecker {
         return result;
     }
 
+    public static double areaTriangle(double side1, double side2, double side3) {
+        double area = 0;
+        double s = (side1 + side2 + side3)/2;
+        area = Math.sqrt(s*(s - side1)*(s - side2)*(s - side3));
+        return area;
+    }
+
     public HashMap<String, Object> checkAreaTriangle(Class<?> solutionClass) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
         String targetMethodName = "areaTriangle";
         HashMap<String, Object> result = new HashMap<>();
@@ -1045,6 +998,10 @@ public class JavaProgramExerciseChecker {
         return result;
     }
 
+    public static double pentagonArea(int n, double s) {
+        return  (n * s * s) / (4 * Math.tan(Math.PI/n));
+    }
+
     public HashMap<String, Object> checkPentagonArea(Class<?> solutionClass) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
         String targetMethodName = "pentagonArea";
         HashMap<String, Object> result = new HashMap<>();
@@ -1089,6 +1046,27 @@ public class JavaProgramExerciseChecker {
         result.put("correct", check1 && check2 && check3);
         result.put("hints", hints);
         return result;
+    }
+
+    public static boolean isPrime(long n) {
+
+        if (n < 2) return false;
+
+        for (int i = 2; i <= n / 2; i++) {
+
+            if (n % i == 0) return false;
+        }
+        return true;
+    }
+
+    public static ArrayList<String> twinPrime(long n) {
+        ArrayList<String> strings = new ArrayList<>();
+        for (int i = 2; i < n; i++) {
+            if (isPrime(i) && isPrime(i + 2)) {
+                strings.add("(" + i + "," + (i+2) + ")");
+            }
+        }
+        return strings;
     }
 
     public HashMap<String, Object> checkTwinPrime(Class<?> solutionClass) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
@@ -1142,6 +1120,18 @@ public class JavaProgramExerciseChecker {
         return result;
     }
 
+    public static int countValue(int num, int k) {
+        int ctr = 0;
+        int n = num;
+        do{
+            if (n % 10 == k){
+                ctr ++;
+            }
+            n /= 10;
+        }while(n > 0);
+        return ctr;
+    }
+
     public HashMap<String, Object> checkCountValue(Class<?> solutionClass) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
         String targetMethodName = "countValue";
         HashMap<String, Object> result = new HashMap<>();
@@ -1186,6 +1176,13 @@ public class JavaProgramExerciseChecker {
         result.put("correct", check1 && check2 && check3);
         result.put("hints", hints);
         return result;
+    }
+
+    public static boolean isConsecutive(int x, int y, int z) {
+        int max_num = Math.max(x, Math.max(y, z));
+        int min_num = Math.min(x, Math.min(y, z));
+        int middle_num = x+y+z - max_num - min_num;
+        return (max_num - middle_num) == 1 && (middle_num - min_num == 1);
     }
 
     public HashMap<String, Object> checkIsConsecutive(Class<?> solutionClass) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
@@ -1242,6 +1239,14 @@ public class JavaProgramExerciseChecker {
         return result;
     }
 
+    public static boolean methodTest19(int x, int y, int z) {
+        int max = Math.max(x, Math.max(y,z));
+        int min = Math.min(x, Math.min(y,z));
+        double mid_point1 = (max + min) / 2.0;
+        int mid_point2 = x + y + z - max - min;
+        return (mid_point1 == mid_point2);
+    }
+
     public HashMap<String, Object> checkMethodTest19(Class<?> solutionClass) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
         String targetMethodName = "methodTest19";
         HashMap<String, Object> result = new HashMap<>();
@@ -1294,6 +1299,14 @@ public class JavaProgramExerciseChecker {
         result.put("correct", check1 && check2 && check3 && check4);
         result.put("hints", hints);
         return result;
+    }
+
+    public static int methodTest20 (int n) {
+        int fact_num = 10;
+        while(n / fact_num != 0){
+            fact_num *= 10;
+        }
+        return Math.abs(n / (fact_num/10));
     }
 
     public HashMap<String, Object> checkMethodTest20(Class<?> solutionClass) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {

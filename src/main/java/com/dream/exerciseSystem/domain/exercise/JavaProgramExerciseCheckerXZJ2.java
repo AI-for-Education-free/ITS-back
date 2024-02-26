@@ -13,6 +13,7 @@ import java.util.*;
 
 public class JavaProgramExerciseCheckerXZJ2 {
     private final Random random = new Random();
+    private final Util exerciseUtil = new Util();
 
     public static double fahrenheit2celsius(double fahrenheit) {
         return (( 5 *(fahrenheit - 32.0)) / 9.0);
@@ -242,6 +243,66 @@ public class JavaProgramExerciseCheckerXZJ2 {
         return result;
     }
 
+    public static double calculateBMI(double weight_pound, double height_inch) {
+        return weight_pound * 0.45359237 / (height_inch * 0.0254 * height_inch * 0.0254);
+    }
+
+    public HashMap<String, Object> checkCalculateBMI(Class<?> solutionClass) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
+        String targetMethodName = "calculateBMI";
+        HashMap<String, Object> result = new HashMap<>();
+        ArrayList<HashMap<String, String>> hints = new ArrayList<>();
+
+        Method targetMethod = null;
+        Class<?>[] trueParameterTypes = {double.class, double.class};
+        Class<?> trueReturnType = double.class;
+        HashMap<String, Object> checkInputAndOutputResult = checkInputAndOutput(solutionClass, targetMethodName, trueParameterTypes, trueReturnType);
+        if (!(boolean)checkInputAndOutputResult.get("correct")) {
+            return checkInputAndOutputResult;
+        }
+        targetMethod = solutionClass.getDeclaredMethod(targetMethodName, trueParameterTypes);
+
+        double testInput11 = exerciseUtil.generateDouble(400, 500);
+        double testInput12 = exerciseUtil.generateDouble(65, 85);
+        double testInput21 = exerciseUtil.generateDouble(400, 500);
+        double testInput22 = exerciseUtil.generateDouble(65, 85);
+        double testInput31 = exerciseUtil.generateDouble(400, 500);
+        double testInput32 = exerciseUtil.generateDouble(65, 85);
+
+        targetMethod.setAccessible(true);
+        double userMethodOutput1 = (double) targetMethod.invoke(null, testInput11, testInput12);
+        double userMethodOutput2 = (double) targetMethod.invoke(null, testInput21, testInput22);
+        double userMethodOutput3 = (double) targetMethod.invoke(null, testInput31, testInput32);
+
+        double trueOutput1 = calculateBMI(testInput11, testInput12);
+        double trueOutput2 = calculateBMI(testInput21, testInput22);
+        double trueOutput3 = calculateBMI(testInput31, testInput32);
+
+        boolean check1 = userMethodOutput1 == trueOutput1;
+        boolean check2 = userMethodOutput2 == trueOutput2;
+        boolean check3 = userMethodOutput3 == trueOutput3;
+        if (!check1) {
+            HashMap<String, String> hint = new HashMap<>();
+            hint.put("chinese", targetMethodName + "("+ testInput11 + ", " + testInput12 + ")的返回值应该是"
+                    + trueOutput1 + "，而不应该是" + userMethodOutput1);
+            hints.add(hint);
+        }
+        if (!check2) {
+            HashMap<String, String> hint = new HashMap<>();
+            hint.put("chinese", targetMethodName + "("+ testInput21 + ", " + testInput22 + ")的返回值应该是"
+                    + trueOutput2 + "，而不应该是" + userMethodOutput2);
+            hints.add(hint);
+        }
+        if (!check3) {
+            HashMap<String, String> hint = new HashMap<>();
+            hint.put("chinese", targetMethodName + "("+ testInput31 + ", " + testInput32 + ")的返回值应该是"
+                    + trueOutput3 + "，而不应该是" + userMethodOutput3);
+            hints.add(hint);
+        }
+        result.put("correct", check1 && check2 && check3);
+        result.put("hints", hints);
+        return result;
+    }
+
     public HashMap<String, Object> checkInputAndOutput(Class<?> solutionClass, String targetMethodName, Class<?>[] trueParameterTypes, Class<?> trueReturnType) {
         HashMap<String, Object> result = new HashMap<>();
         result.put("correct", false);
@@ -279,11 +340,8 @@ public class JavaProgramExerciseCheckerXZJ2 {
         String submissionCodeSuffix = "}";
         String submissionCode = submissionCodePrefix +
                 "\n" +
-                "    public static int[] minute2yearAndDay(double min) {\n" +
-                "        double minutesInYear = 60 * 24 * 365;\n" +
-                "        int years = (int) (min / minutesInYear) + 1;\n" +
-                "        int days = (int) (min / 60 / 24) % 365;\n" +
-                "        return new int[]{years, days};\n" +
+                "    public static double calculateBMI(double weight_pound, double height_inch) {\n" +
+                "        return weight_pound * 0.45359 / (height_inch * 0.0254 * height_inch * 0.0254);\n" +
                 "    }\n"
                 + submissionCodeSuffix;
         String targetMethodName = exercise.targetMethodName;
@@ -303,7 +361,7 @@ public class JavaProgramExerciseCheckerXZJ2 {
             JSONObject exerciseObject = exerciseArray.getJSONObject(i);
             javaProgramExercises.add(JavaProgramExercise.generateExerciseFromJsonObject(exerciseObject, "JAVA"));
         }
-        JavaProgramExercise exercise = javaProgramExercises.get(3);
+        JavaProgramExercise exercise = javaProgramExercises.get(4);
         javaProgramExerciseCheck(exercise);
     }
 }

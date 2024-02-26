@@ -37,7 +37,7 @@ public class JavaProgramExercise {
     public String targetMethodName;
 
     public static void main(String[] args) {
-        String s = "Write a Java program that reads an integer between 0 and 1000 and adds all the digits in the integer.";
+        String s = "Write a Java program to compute the body mass index (BMI).";
         System.out.println(s.hashCode());
     }
 

@@ -26,4 +26,8 @@ public class Util {
 
         return result;
     }
+
+    public double generateDouble(double lowerBound, double upperBound) {
+        return random.nextDouble() * (upperBound - lowerBound) + lowerBound;
+    }
 }
