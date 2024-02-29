@@ -37,7 +37,7 @@ public class JavaProgramExercise {
     public String targetMethodName;
 
     public static void main(String[] args) {
-        String s = "Write a Java program to compute the body mass index (BMI).";
+        String s = "Write a Java program to take the user for a distance (in meters) and the time taken (as three numbers: hours, minutes, seconds), and display the speed, in meters per second, kilometers per hour and miles per hour (hint: 1 mile = 1609 meters).";
         System.out.println(s.hashCode());
     }
 

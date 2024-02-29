@@ -30,4 +30,8 @@ public class Util {
     public double generateDouble(double lowerBound, double upperBound) {
         return random.nextDouble() * (upperBound - lowerBound) + lowerBound;
     }
+
+    public float generateFloat(float lowerBound, float upperBound) {
+        return random.nextFloat() * (upperBound - lowerBound) + lowerBound;
+    }
 }

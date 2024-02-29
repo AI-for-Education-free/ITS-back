@@ -1105,6 +1105,132 @@
       ]
     },
     {
+      "orderInTag": 22,
+      "id": "359850201",
+      "initCode": "public class Solution {\n    public static boolean methodTest22(int n){\n\n    }\n}",
+      "targetMethodName": "methodTest22",
+      "concepts": [
+        "method"
+      ],
+      "tags": [
+        "method"
+      ],
+      "exerciseContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Write a Java method to check whether every digit of a given integer is even. Return true if every digit is odd otherwise false.\n\nNote: 1, 3, 5, 7, 9 are odd digits and 0, 2, 4, 6, and 8 are even digits\n\nSample data:\n(8642)->true\n(123)->false\n(200)->true",
+          "chinese": "编写一个 Java 方法来检查给定整数的每个数字是否为偶数。 如果每个数字都是奇数，则返回 true，否则返回 false。\n\n注：1、3、5、7、9 为奇数，0、2、4、6、8 为偶数\n\n样本数据：\n(8642)->true\n(123)->false\n(200)->true",
+          "style": ""
+        },
+        {
+          "contentType": "TEXT",
+          "english": "Pictorial Presentation:",
+          "chinese": "",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": "java-method-image-exercise-22-1.png"
+        },
+        {
+          "contentType": "CODE",
+          "code": "example\nExpected Output:\n\nInput an integer: 8642\nCheck whether every digit of the said integer is even or not!\ntrue"
+        }
+      ],
+      "answerContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Sample Solution:\n\nJava Code:",
+          "chinese": "示例：\n\nJava代码：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "CODE",
+          "code": "import java.util.Scanner;\npublic class Main { \n public static void main(String[] args)\n    {\n        Scanner in = new Scanner(System.in);\n        System.out.print(\"Input an integer:\");\n        int n = in.nextInt();\n        System.out.print(\"Check whether every digit of the said integer is even or not!\\n\");\n        System.out.print(test(n));\n        }\n\n  public static boolean test(int n){\n    final int f = 10;\n    if (n == 0){\n        return false;\n    }\n    while(n != 0){\n        if((n % f) % 2 != 0){\n            return false;\n        }\n        n /= 10;\n    }\n     return true;\n   }\n}"
+        }
+      ],
+      "explanationContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Flowchart:",
+          "chinese": "流程图：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": "java-method-exercise-flowchart-22.png"
+        }
+      ]
+    },
+    {
+      "orderInTag": 23,
+      "id": "980736155",
+      "initCode": "public class Solution {\n    public static boolean isAllVowel(String input){\n\n    }\n}",
+      "targetMethodName": "isAllVowel",
+      "concepts": [
+        "method"
+      ],
+      "tags": [
+        "method"
+      ],
+      "exerciseContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Write a Java method that checks whether all the characters in a given string are vowels (a, e,i,o,u) or not. Return true if each character in the string is a vowel, otherwise return false.",
+          "chinese": "编写一个 Java 方法来检查给定字符串中的所有字符是否都是元音（a、e、i、o、u）。 如果字符串中的每个字符都是元音，则返回 true，否则返回 false。",
+          "style": ""
+        },
+        {
+          "contentType": "TEXT",
+          "english": "From Wikipedia-\nA vowel is a syllabic speech sound pronounced without any stricture in the vocal tract. Vowels are one of the two principal classes of speech sounds, the other being the consonant. Vowels vary in quality, in loudness and also in quantity (length). They are usually voiced and are closely involved in prosodic variation such as tone, intonation and stress.\n\nWrite a Java method that checks whether all the characters in a given string are vowels (a, e,i,o,u) or not. Return true if each character in the string is a vowel, otherwise return false.\n\nSample Data:\nAIEEE ->true\nIAO -> true\nJava -> false\nPython -> false\n\n",
+          "chinese": "来自维基百科-\n元音是在声道中没有任何狭窄的情况下发音的音节语音。 元音是语音的两大类之一，另一类是辅音。 元音的质量、响度和数量（长度）各不相同。 它们通常是浊音的，并且与音调、语调和重音等韵律变化密切相关。\n\n编写一个 Java 方法来检查给定字符串中的所有字符是否都是元音（a、e、i、o、u）。 如果字符串中的每个字符都是元音，则返回 true，否则返回 false。\n\n样本数据：\nAIEEE ->true\nIAO -> 正确\nJava -> 假\nPython -> 假",
+          "style": ""
+        },
+        {
+          "contentType": "TEXT",
+          "english": "Pictorial Presentation:",
+          "chinese": "",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": "java-method-image-exercise-23-1.png"
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": "java-method-image-exercise-23-2.png"
+        },
+        {
+          "contentType": "CODE",
+          "code": "example\nExpected Output:\n\nInput a string:  AIEEE\nCheck all the characters of the said string are vowels or not!\ntrue"
+        }
+      ],
+      "answerContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Sample Solution:\n\nJava Code:",
+          "chinese": "示例：\n\nJava代码：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "CODE",
+          "code": "import java.util.Scanner;\npublic class Main {\n  public static void main(String[] args) {\n    Scanner sc = new Scanner(System.in);\n    System.out.print(\"Input a string: \");\n    String str = sc.nextLine();\n    System.out.print(\"Check all the characters of the said string are vowels or not!\\n\");\n    System.out.print(test(str));\n  }\n\n  public static boolean test(String input) {\n    String str_vowels = \"aeiou\";\n    String phrase = input.toLowerCase();\n    for (int i = 0; i < phrase.length(); i++) {\n      if (str_vowels.indexOf(phrase.charAt(i)) == -1)\n        return false;\n    }\n    return true;\n  }\n}"
+        }
+      ],
+      "explanationContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Flowchart:",
+          "chinese": "流程图：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": "java-method-exercise-flowchart-23.png"
+        }
+      ]
+    },
+    {
       "orderInTag": 1,
       "id": "608581282",
       "initCode": "public class Solution {\n    public static int calculateFactorial(int n) {\n\n    }\n}",
@@ -1549,6 +1675,365 @@
         {
           "contentType": "IMAGE",
           "imageName": "java-recursive-exercise-flowchart-9.png"
+        }
+      ]
+    },
+    {
+      "orderInTag": 1,
+      "id": "2015407318",
+      "initCode": "public class Solution {\n    public static double fahrenheit2Celsius(double fahrenheit) {\n\n    }\n}",
+      "targetMethodName": "fahrenheit2celsius",
+      "concepts": [
+        "data types"
+      ],
+      "tags": [
+        "data types"
+      ],
+      "exerciseContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Write a Java program to convert temperature from Fahrenheit to Celsius degrees.",
+          "chinese": "编写一个Java程序，将温度从华氏度转换为摄氏度。",
+          "style": ""
+        },
+        {
+          "contentType": "TEXT",
+          "english": "The Fahrenheit scale is a temperature scale based on one proposed in 1724 by physicist Daniel Gabriel Fahrenheit. It uses the degree Fahrenheit (symbol: °F) as the unit.\n\nThe Celsius scale, previously known as the centigrade scale, is a temperature scale used by the International System of Units (SI). As an SI derived unit, it is used by all countries in the world, except the U.S.\n\nTest Data\nInput a degree in Fahrenheit: 212",
+          "chinese": "编写一个Java程序，将温度从华氏度转换为摄氏度。\n\n\n\n华氏温标是基于物理学家丹尼尔·加布里埃尔·华氏在1724年提出的温标。它使用华氏度（符号：°F）作为单位。\n\n\n\n摄氏度，以前称为摄氏度，是国际单位制（SI）使用的温标。作为国际单位制衍生的单位，除美国外，世界上所有国家都使用它。\n\n\n\n测试数据\n\n输入华氏度：212",
+          "style": ""
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": "java-datatype-image-exercise-1.png"
+        },
+        {
+          "contentType": "CODE",
+          "code": "example\nTest Data\nInput a degree in Fahrenheit: 212\nExpected Output:\n212.0 degree Fahrenheit is equal to 100.0 in Celsius"
+        }
+      ],
+      "answerContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Sample Solution:\n\nJava Code:",
+          "chinese": "示例：\n\nJava代码：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "CODE",
+          "code": "import java.util.Scanner;\npublic class Exercise1 {\n\n    public static void main(String[] Strings) {\n\n        Scanner input = new Scanner(System.in);\n\n        System.out.print(\"Input a degree in Fahrenheit: \");\n        double fahrenheit = input.nextDouble();\n\n        double  celsius =(( 5 *(fahrenheit - 32.0)) / 9.0);\n        System.out.println(fahrenheit + \" degree Fahrenheit is equal to \" + celsius + \" in Celsius\");\n    }\n}"
+        }
+      ],
+      "explanationContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Flowchart:",
+          "chinese": "流程图：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": "java-datatype-exercise-flowchart-1.png"
+        }
+      ]
+    },
+    {
+      "orderInTag": 2,
+      "id": "453573376",
+      "initCode": "public class Solution {\n    public static double inch2meter(double inch) {\n\n    }\n}",
+      "targetMethodName": "inch2meter",
+      "concepts": [
+        "data types"
+      ],
+      "tags": [
+        "data types"
+      ],
+      "exerciseContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Write a Java program that reads a number in inches and converts it to meters.",
+          "chinese": "编写一个Java程序，读取以英寸为单位的数字并将其转换为米。",
+          "style": ""
+        },
+        {
+          "contentType": "TEXT",
+          "english": "The inch is a unit of length in the (British) imperial and United States customary systems of measurement now formally equal to \u200B1/36 yard but usually understood as \u200B1/12 of a foot.\n\nThe meter is the base unit of length in some metric systems, including the International System of Units (SI). The SI unit symbol is m.\n\nNote: One inch is 0.0254 meter.\n\nTest Data\nInput a value for inch: 1000",
+          "chinese": "英寸是（英国）帝国和美国习惯测量系统中的长度单位，现在正式等于\u200B1/36码，但通常理解为\u200B1/12英尺。\n\n\n\n米是一些公制中的基本长度单位，包括国际单位制（SI）。国际单位制符号为m。\n\n\n\n注：1英寸等于0.0254米。\n\n\n\n测试数据\n\n输入英寸值：1000",
+          "style": ""
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": "java-datatype-image-exercise-2.png"
+        },
+        {
+          "contentType": "CODE",
+          "code": "example\nNote: One inch is 0.0254 meter.\nTest Data\nInput a value for inch: 1000\nExpected Output :\n1000.0 inch is 25.4 meters"
+        }
+      ],
+      "answerContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Sample Solution:\n\nJava Code:",
+          "chinese": "示例：\n\nJava代码：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "CODE",
+          "code": "import java.util.Scanner;\npublic class Exercise2 {\n\n    public static void main(String[] Strings) {\n\n        Scanner input = new Scanner(System.in);\n\n        System.out.print(\"Input a value for inch: \");\n        double inch = input.nextDouble();\n        double meters = inch * 0.0254;\n        System.out.println(inch + \" inch is \" + meters + \" meters\");\n\n    }\n}"
+        }
+      ],
+      "explanationContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Flowchart:",
+          "chinese": "流程图：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": "java-datatype-exercise-flowchart-2.png"
+        }
+      ]
+    },
+    {
+      "orderInTag": 3,
+      "id": "823932918",
+      "initCode": "public class Solution {\n    public static int dataTypesTest3(int num) {\n\n    }\n}",
+      "targetMethodName": "dataTypesTest3",
+      "concepts": [
+        "data types"
+      ],
+      "tags": [
+        "data types"
+      ],
+      "exerciseContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Write a Java program that reads an integer between 0 and 1000 and adds all the digits in the integer.",
+          "chinese": "编写一个Java程序，读取0到1000之间的整数，并将整数中的所有数字相加。",
+          "style": ""
+        },
+        {
+          "contentType": "TEXT",
+          "english": "An integer is a number that can be written without a fractional component. For example, 23, 6, 0, and −1245 are integers, while 3.25, \u200B7 1⁄2, and √3 are not.\n\nTest Data\nInput an integer between 0 and 1000: 565",
+          "chinese": "整数是一个可以在没有分数成分的情况下写入的数字。例如，23、6、0和−1245是整数，而3.25，\u200B7 1⁄2和√3不是。\n\n\n\n测试数据\n\n输入0到1000之间的整数：565",
+          "style": ""
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": "java-datatype-exercise-flowchart-2.png"
+        },
+        {
+          "contentType": "CODE",
+          "code": "java-datatype-image-exercise-3.png"
+        }
+      ],
+      "answerContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Sample Solution:\n\nJava Code:",
+          "chinese": "示例：\n\nJava代码：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "CODE",
+          "code": "import java.util.Scanner;\npublic class Main {\n\n    public static void main(String[] Strings) {\n\n        Scanner input = new Scanner(System.in);\n\n        System.out.print(\"Input an integer between 0 and 1000: \");\n        int num = input.nextInt();\n\n        int firstDigit = num % 10;\n        int remainingNumber = num / 10;\n        int SecondDigit = remainingNumber % 10;\n        remainingNumber = remainingNumber / 10;\n        int thirdDigit = remainingNumber % 10;\n        remainingNumber = remainingNumber / 10;\n        int fourthDigit = remainingNumber % 10;\n        int sum = thirdDigit + SecondDigit + firstDigit + fourthDigit;\n        System.out.println(\"The sum of all digits in \" + num + \" is \" + sum);\n\n    }\n}"
+        }
+      ],
+      "explanationContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Flowchart:",
+          "chinese": "流程图：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": "java-datatype-exercise-flowchart-3.png"
+        }
+      ]
+    },
+    {
+      "orderInTag": 4,
+      "id": "730870659",
+      "initCode": "public class Solution {\n    public static  {\n\n    }\n}",
+      "targetMethodName": "minute2yearAndDay",
+      "concepts": [
+        "data types"
+      ],
+      "tags": [
+        "data types"
+      ],
+      "exerciseContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Write a Java program to convert minutes into years and days.",
+          "chinese": "编写一个Java程序，将分钟转换为年和天。",
+          "style": ""
+        },
+        {
+          "contentType": "TEXT",
+          "english": "Test Data\nInput the number of minutes: 3456789",
+          "chinese": "测试数据\n\n输入分钟数：3456789",
+          "style": ""
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": "java-datatype-image-exercise-4.png"
+        },
+        {
+          "contentType": "CODE",
+          "code": "example\nTest Data\nInput the number of minutes: 3456789\nExpected Output :\n3456789 minutes is approximately 6 years and 210 days"
+        }
+      ],
+      "answerContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Sample Solution:\n\nJava Code:",
+          "chinese": "示例：\n\nJava代码：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "CODE",
+          "code": "import java.util.Scanner;\npublic class Exercise4 {\n\n    public static void main(String[] Strings) {\n\n\n        double minutesInYear = 60 * 24 * 365;\n\n        Scanner input = new Scanner(System.in);\n\n        System.out.print(\"Input the number of minutes: \");\n\n        double min = input.nextDouble();\n\n        long years = (long) (min / minutesInYear);\n        int days = (int) (min / 60 / 24) % 365;\n\n        System.out.println((int) min + \" minutes is approximately \" + years + \" years and \" + days + \" days\");\n    }\n}"
+        }
+      ],
+      "explanationContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Flowchart:",
+          "chinese": "流程图：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": "java-datatype-exercise-flowchart-4.png"
+        }
+      ]
+    },
+    {
+      "orderInTag": 5,
+      "id": "466317658",
+      "initCode": "public class Solution {\n    public static double calculateBMI(double weight_pound, double height_inch) {\n\n    }\n}",
+      "targetMethodName": "calculateBMI",
+      "concepts": [
+        "data types"
+      ],
+      "tags": [
+        "data types"
+      ],
+      "exerciseContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Write a Java program to compute the body mass index (BMI).",
+          "chinese": "编写一个Java程序来计算体重指数（BMI）。",
+          "style": ""
+        },
+        {
+          "contentType": "TEXT",
+          "english": "BMI: The BMI is defined as the body mass divided by the square of the body height, and is universally expressed in units of kg/m2, resulting from mass in kilograms and height in metres.\n\nTest Data\nInput weight in pounds: 452\nInput height in inches: 72",
+          "chinese": "BMI：BMI定义为体重除以身高的平方，通用单位为kg/m2，由质量（千克）和身高（米）得出。\n\n\n\n测试数据\n\n输入重量（磅）：452\n\n输入高度（英寸）：72",
+          "style": ""
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": "java-datatype-image-exercise-6.png"
+        },
+        {
+          "contentType": "CODE",
+          "code": "example\nTest Data\nInput weight in pounds: 452\nInput height in inches: 72\nExpected Output:\nBody Mass Index is 61.30159143458721"
+        },
+        {
+          "contentType": "TEXT",
+          "english": "Addendum: Enter weight in pounds and height in inches.",
+          "chinese": "补充：输入的体重以磅为单位，身高以英寸为单位。",
+          "style": ""
+        }
+      ],
+      "answerContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Sample Solution:\n\nJava Code:",
+          "chinese": "示例：\n\nJava代码：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "CODE",
+          "code": "import java.util.Scanner;\npublic class Exercise6 {\n\n    public static void main(String[] Strings) {\n\n        Scanner input = new Scanner(System.in);\n\n        System.out.print(\"Input weight in pounds: \");\n        double weight = input.nextDouble();\n\n        System.out.print(\"Input height in inches: \");\n        double inches = input.nextDouble();\n\n        double BMI = weight * 0.45359237 / (inches * 0.0254 * inches * 0.0254);\n        System.out.print(\"Body Mass Index is \" + BMI+\"\\n\");\n    }\n}"
+        }
+      ],
+      "explanationContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Flowchart:",
+          "chinese": "流程图：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": "java-datatype-exercise-flowchart-6.pngc"
+        }
+      ]
+    },
+    {
+      "orderInTag": 6,
+      "id": "1330187685",
+      "initCode": "public class Solution {\n    public static float calculateSpeed(float meter, float hour, float minute, float second) {\n\n    }\n}",
+      "targetMethodName": "calculateSpeed",
+      "concepts": [
+        "data types"
+      ],
+      "tags": [
+        "data types"
+      ],
+      "exerciseContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Write a Java program to take the user for a distance (in meters) and the time taken (as three numbers: hours, minutes, seconds), and display the speed, in meters per second, kilometers per hour and miles per hour (hint: 1 mile = 1609 meters).",
+          "chinese": "编写一个Java程序，向用户测量距离（以米为单位）和所用时间（以小时、分钟、秒为三个数字），并显示速度（以米/秒、公里/小时和英里/小时为单位）（提示：1英里=1609米）。",
+          "style": ""
+        },
+        {
+          "contentType": "TEXT",
+          "english": "Test Data\nInput distance in meters: 2500\nInput hour: 5\nInput minutes: 56\nInput seconds: 23",
+          "chinese": "测试数据\n\n输入距离（米）：2500\n\n输入小时数：5\n\n输入分钟数：56\n\n输入秒数：23",
+          "style": ""
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": "java-datatype-image-exercise-7.png"
+        },
+        {
+          "contentType": "CODE",
+          "code": "example\nTest Data\nInput distance in meters: 2500\nInput hour: 5\nInput minutes: 56\nInput seconds: 23\nExpected Output :\nYour speed in meters/second is 0.11691531\nYour speed in km/h is 0.42089513\nYour speed in miles/h is 0.26158804"
+        },{
+          "contentType": "TEXT",
+          "english": "Addendum: The return speed is measured in m/s.",
+          "chinese": "补充：返回的速度以m/s为单位。",
+          "style": ""
+        }
+      ],
+      "answerContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Sample Solution:\n\nJava Code:",
+          "chinese": "示例：\n\nJava代码：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "CODE",
+          "code": "import java.util.Scanner;\npublic class Exercise7 {\n\n    public static void main(String[] args) {\n\t\tScanner scanner = new Scanner(System.in); \n\n\t\tfloat timeSeconds;\n\t\tfloat mps,kph, mph;\n\n\t\tSystem.out.print(\"Input distance in meters: \");\n\t\tfloat distance = scanner.nextFloat();\n\n\t\tSystem.out.print(\"Input hour: \");\n\t\tfloat hr = scanner.nextFloat();\n\n\t\tSystem.out.print(\"Input minutes: \");\n\t\tfloat min = scanner.nextFloat();\n\n\t\tSystem.out.print(\"Input seconds: \");\n\t\tfloat sec = scanner.nextFloat();\n\n\t\ttimeSeconds = (hr*3600) + (min*60) + sec;\n\t\tmps = distance / timeSeconds;\n\t\tkph = ( distance/1000.0f ) / ( timeSeconds/3600.0f );\n\t\tmph = kph / 1.609f;\n\n\t\tSystem.out.println(\"Your speed in meters/second is \"+mps);\n\t\tSystem.out.println(\"Your speed in km/h is \"+kph);\n\t\tSystem.out.println(\"Your speed in miles/h is \"+mph);\n\t\t\n\n\t\tscanner.close();\n\t}\n}"
+        }
+      ],
+      "explanationContents": [
+        {
+          "contentType": "TEXT",
+          "english": "Flowchart:",
+          "chinese": "流程图：",
+          "style": "BOLD"
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": "java-datatype-exercise-flowchart-7.png"
         }
       ]
     }

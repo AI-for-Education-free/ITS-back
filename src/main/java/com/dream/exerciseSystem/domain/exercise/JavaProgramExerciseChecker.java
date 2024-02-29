@@ -51,6 +51,8 @@ public class JavaProgramExerciseChecker {
         return result;
     }
 
+    // ------------------------------------------------- Basic Exercises------------------------------------------------
+
     public static void printHello() {
         System.out.println("hello\ndream");
     }
@@ -113,6 +115,8 @@ public class JavaProgramExerciseChecker {
         result.put("hints", hints);
         return result;
     }
+
+    // ----------------------------------------------- Methods Exercises------------------------------------------------
 
     public static double smallest(double x, double y, double z) {
         return Math.min(Math.min(x, y), z);
@@ -1364,6 +1368,139 @@ public class JavaProgramExerciseChecker {
         return result;
     }
 
+    public static boolean methodTest22(int n) {
+        final int f = 10;
+        if (n == 0){
+            return false;
+        }
+        while(n != 0){
+            if((n % f) % 2 != 0){
+                return false;
+            }
+            n /= 10;
+        }
+        return true;
+    }
+
+    public HashMap<String, Object> checkMethodTest22(Class<?> solutionClass) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
+        // 改成对应方法名
+        String targetMethodName = "methodTest22";
+        HashMap<String, Object> result = new HashMap<>();
+        ArrayList<HashMap<String, String>> hints = new ArrayList<>();
+
+        Method targetMethod = null;
+        Class<?>[] trueParameterTypes = {int.class};
+        Class<?> trueReturnType = boolean.class;
+        HashMap<String, Object> checkInputAndOutputResult = checkInputAndOutput(solutionClass, targetMethodName, trueParameterTypes, trueReturnType);
+        if (!(boolean)checkInputAndOutputResult.get("correct")) {
+            return checkInputAndOutputResult;
+        }
+        targetMethod = solutionClass.getDeclaredMethod(targetMethodName, trueParameterTypes);
+
+        // 测试的输入值
+        int testInput1 = random.nextInt(10000) + 10000;
+        int testInput2 = random.nextInt(100000) + 100000;
+        int testInput3 = random.nextInt(1000000) + 1000000;
+
+        targetMethod.setAccessible(true);
+        // 用户代码的输出值
+        boolean userMethodOutput1 = (boolean) targetMethod.invoke(null, testInput1);
+        boolean userMethodOutput2 = (boolean) targetMethod.invoke(null, testInput2);
+        boolean userMethodOutput3 = (boolean) targetMethod.invoke(null, testInput3);
+
+        // 正确的输出值
+        boolean trueOutput1 = methodTest22(testInput1);
+        boolean trueOutput2 = methodTest22(testInput2);
+        boolean trueOutput3 = methodTest22(testInput3);
+
+        // 检查用户输出和正确输出是否一致
+        boolean check1 = Objects.equals(userMethodOutput1, trueOutput1);
+        boolean check2 = Objects.equals(userMethodOutput2, trueOutput2);
+        boolean check3 = Objects.equals(userMethodOutput3, trueOutput3);
+
+        if (!check1) {
+            HashMap<String, String> hint = new HashMap<>();
+            hint.put("chinese", targetMethodName + "(" + testInput1 + ")的返回值应该是" + trueOutput1 + "，而不应该是" + userMethodOutput1);
+            hints.add(hint);
+        }
+        if (!check2) {
+            HashMap<String, String> hint = new HashMap<>();
+            hint.put("chinese", targetMethodName + "(" + testInput2 + ")的返回值应该是" + trueOutput2 + "，而不应该是" + userMethodOutput2);
+            hints.add(hint);
+        }
+        if (!check3) {
+            HashMap<String, String> hint = new HashMap<>();
+            hint.put("chinese", targetMethodName + "(" + testInput3 + ")的返回值应该是" + trueOutput3 + "，而不应该是" + userMethodOutput3);
+            hints.add(hint);
+        }
+        result.put("correct", check1 && check2 && check3);
+        result.put("hints", hints);
+        return result;
+    }
+
+    public static boolean isAllVowel(String input) {
+        String str_vowels = "aeiou";
+        String phrase = input.toLowerCase();
+        for (int i = 0; i < phrase.length(); i++) {
+            if (str_vowels.indexOf(phrase.charAt(i)) == -1)
+                return false;
+        }
+        return true;
+    }
+
+    public HashMap<String, Object> checkIsAllVowel(Class<?> solutionClass) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
+        String targetMethodName = "isAllVowel";
+        HashMap<String, Object> result = new HashMap<>();
+        ArrayList<HashMap<String, String>> hints = new ArrayList<>();
+
+        Method targetMethod = null;
+        Class<?>[] trueParameterTypes = {String.class};
+        Class<?> trueReturnType = boolean.class;
+        HashMap<String, Object> checkInputAndOutputResult = checkInputAndOutput(solutionClass, targetMethodName, trueParameterTypes, trueReturnType);
+        if (!(boolean)checkInputAndOutputResult.get("correct")) {
+            return checkInputAndOutputResult;
+        }
+        targetMethod = solutionClass.getDeclaredMethod(targetMethodName, trueParameterTypes);
+
+        String testInput1 = "AIEEE";
+        String testInput2 = "IAO";
+        String testInput3 = "Python";
+
+        targetMethod.setAccessible(true);
+        boolean userMethodOutput1 = (boolean) targetMethod.invoke(null, testInput1);
+        boolean userMethodOutput2 = (boolean) targetMethod.invoke(null, testInput2);
+        boolean userMethodOutput3 = (boolean) targetMethod.invoke(null, testInput3);
+
+        boolean trueOutput1 = isAllVowel(testInput1);
+        boolean trueOutput2 = isAllVowel(testInput2);
+        boolean trueOutput3 = isAllVowel(testInput3);
+
+        boolean check1 = Objects.equals(userMethodOutput1, trueOutput1);
+        boolean check2 = Objects.equals(userMethodOutput2, trueOutput2);
+        boolean check3 = Objects.equals(userMethodOutput3, trueOutput3);
+
+        if (!check1) {
+            HashMap<String, String> hint = new HashMap<>();
+            hint.put("chinese", targetMethodName + "(" + testInput1 + ")的返回值应该是" + trueOutput1 + "，而不应该是" + userMethodOutput1);
+            hints.add(hint);
+        }
+        if (!check2) {
+            HashMap<String, String> hint = new HashMap<>();
+            hint.put("chinese", targetMethodName + "(" + testInput2 + ")的返回值应该是" + trueOutput2 + "，而不应该是" + userMethodOutput2);
+            hints.add(hint);
+        }
+        if (!check3) {
+            HashMap<String, String> hint = new HashMap<>();
+            hint.put("chinese", targetMethodName + "(" + testInput3 + ")的返回值应该是" + trueOutput3 + "，而不应该是" + userMethodOutput3);
+            hints.add(hint);
+        }
+        result.put("correct", check1 && check2 && check3);
+        result.put("hints", hints);
+        return result;
+    }
+
+    // -----------------------------------------Recursive Methods Exercises---------------------------------------------
+
     public static int calculateFactorial(int n) {
         // Base case: factorial of 0 is 1
         if (n == 0) {
@@ -1890,6 +2027,363 @@ public class JavaProgramExerciseChecker {
         if (!check3) {
             HashMap<String, String> hint = new HashMap<>();
             hint.put("chinese", targetMethodName + "(" + Arrays.toString(testInput3) + ")的返回值应该是" + trueOutput3 + "，而不应该是" + userMethodOutput3);
+            hints.add(hint);
+        }
+        result.put("correct", check1 && check2 && check3);
+        result.put("hints", hints);
+        return result;
+    }
+
+    // ------------------------------------------------Data Types Exercises---------------------------------------------
+
+    public static double fahrenheit2celsius(double fahrenheit) {
+        return (( 5 *(fahrenheit - 32.0)) / 9.0);
+    }
+
+    public HashMap<String, Object> checkFahrenheit2celsius(Class<?> solutionClass) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
+        String targetMethodName = "fahrenheit2celsius";
+        HashMap<String, Object> result = new HashMap<>();
+        ArrayList<HashMap<String, String>> hints = new ArrayList<>();
+
+        Method targetMethod = null;
+        Class<?>[] trueParameterTypes = {double.class};
+        Class<?> trueReturnType = double.class;
+        HashMap<String, Object> checkInputAndOutputResult = checkInputAndOutput(solutionClass, targetMethodName, trueParameterTypes, trueReturnType);
+        if (!(boolean)checkInputAndOutputResult.get("correct")) {
+            return checkInputAndOutputResult;
+        }
+        targetMethod = solutionClass.getDeclaredMethod(targetMethodName, trueParameterTypes);
+
+        double testInput1 = random.nextDouble() + random.nextInt(10) + 10;
+        double testInput2 = random.nextDouble() + random.nextInt(100) + 100;
+        double testInput3 = random.nextDouble() + random.nextInt(1000) + 1000;
+
+        targetMethod.setAccessible(true);
+        double userMethodOutput1 = (double) targetMethod.invoke(null, testInput1);
+        double userMethodOutput2 = (double) targetMethod.invoke(null, testInput2);
+        double userMethodOutput3 = (double) targetMethod.invoke(null, testInput3);
+
+        double trueOutput1 = fahrenheit2celsius(testInput1);
+        double trueOutput2 = fahrenheit2celsius(testInput2);
+        double trueOutput3 = fahrenheit2celsius(testInput3);
+
+        boolean check1 = userMethodOutput1 == trueOutput1;
+        boolean check2 = userMethodOutput2 == trueOutput2;
+        boolean check3 = userMethodOutput3 == trueOutput3;
+        if (!check1) {
+            HashMap<String, String> hint = new HashMap<>();
+            hint.put("chinese", targetMethodName + "(" + testInput1 + ")的返回值应该是" + trueOutput1 + "，而不应该是" + userMethodOutput1);
+            hints.add(hint);
+        }
+        if (!check2) {
+            HashMap<String, String> hint = new HashMap<>();
+            hint.put("chinese", targetMethodName + "(" + testInput2 + ")的返回值应该是" + trueOutput2 + "，而不应该是" + userMethodOutput2);
+            hints.add(hint);
+        }
+        if (!check3) {
+            HashMap<String, String> hint = new HashMap<>();
+            hint.put("chinese", targetMethodName + "(" + testInput3 + ")的返回值应该是" + trueOutput3 + "，而不应该是" + userMethodOutput3);
+            hints.add(hint);
+        }
+        result.put("correct", check1 && check2 && check3);
+        result.put("hints", hints);
+        return result;
+    }
+
+    public static double inch2meter(double inch) {
+        return inch * 0.0254;
+    }
+
+    public HashMap<String, Object> checkInch2meter(Class<?> solutionClass) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
+        String targetMethodName = "inch2meter";
+        HashMap<String, Object> result = new HashMap<>();
+        ArrayList<HashMap<String, String>> hints = new ArrayList<>();
+
+        Method targetMethod = null;
+        Class<?>[] trueParameterTypes = {double.class};
+        Class<?> trueReturnType = double.class;
+        HashMap<String, Object> checkInputAndOutputResult = checkInputAndOutput(solutionClass, targetMethodName, trueParameterTypes, trueReturnType);
+        if (!(boolean)checkInputAndOutputResult.get("correct")) {
+            return checkInputAndOutputResult;
+        }
+        targetMethod = solutionClass.getDeclaredMethod(targetMethodName, trueParameterTypes);
+
+        double testInput1 = random.nextDouble() + random.nextInt(10) + 10;
+        double testInput2 = random.nextDouble() + random.nextInt(100) + 100;
+        double testInput3 = random.nextDouble() + random.nextInt(1000) + 1000;
+
+        targetMethod.setAccessible(true);
+        double userMethodOutput1 = (double) targetMethod.invoke(null, testInput1);
+        double userMethodOutput2 = (double) targetMethod.invoke(null, testInput2);
+        double userMethodOutput3 = (double) targetMethod.invoke(null, testInput3);
+
+        double trueOutput1 = inch2meter(testInput1);
+        double trueOutput2 = inch2meter(testInput2);
+        double trueOutput3 = inch2meter(testInput3);
+
+        boolean check1 = userMethodOutput1 == trueOutput1;
+        boolean check2 = userMethodOutput2 == trueOutput2;
+        boolean check3 = userMethodOutput3 == trueOutput3;
+        if (!check1) {
+            HashMap<String, String> hint = new HashMap<>();
+            hint.put("chinese", targetMethodName + "(" + testInput1 + ")的返回值应该是" + trueOutput1 + "，而不应该是" + userMethodOutput1);
+            hints.add(hint);
+        }
+        if (!check2) {
+            HashMap<String, String> hint = new HashMap<>();
+            hint.put("chinese", targetMethodName + "(" + testInput2 + ")的返回值应该是" + trueOutput2 + "，而不应该是" + userMethodOutput2);
+            hints.add(hint);
+        }
+        if (!check3) {
+            HashMap<String, String> hint = new HashMap<>();
+            hint.put("chinese", targetMethodName + "(" + testInput3 + ")的返回值应该是" + trueOutput3 + "，而不应该是" + userMethodOutput3);
+            hints.add(hint);
+        }
+        result.put("correct", check1 && check2 && check3);
+        result.put("hints", hints);
+        return result;
+    }
+
+    public static int dataTypesTest3(int num) {
+        int firstDigit = num % 10;
+        int remainingNumber = num / 10;
+        int SecondDigit = remainingNumber % 10;
+        remainingNumber = remainingNumber / 10;
+        int thirdDigit = remainingNumber % 10;
+        remainingNumber = remainingNumber / 10;
+        int fourthDigit = remainingNumber % 10;
+
+        return thirdDigit + SecondDigit + firstDigit + fourthDigit;
+    }
+
+    public HashMap<String, Object> checkDataTypesTest3(Class<?> solutionClass) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
+        String targetMethodName = "dataTypesTest3";
+        HashMap<String, Object> result = new HashMap<>();
+        ArrayList<HashMap<String, String>> hints = new ArrayList<>();
+
+        Method targetMethod = null;
+        Class<?>[] trueParameterTypes = {int.class};
+        Class<?> trueReturnType = int.class;
+        HashMap<String, Object> checkInputAndOutputResult = checkInputAndOutput(solutionClass, targetMethodName, trueParameterTypes, trueReturnType);
+        if (!(boolean)checkInputAndOutputResult.get("correct")) {
+            return checkInputAndOutputResult;
+        }
+        targetMethod = solutionClass.getDeclaredMethod(targetMethodName, trueParameterTypes);
+
+        int testInput1 = random.nextInt(1000);
+        int testInput2 = random.nextInt(1000);
+        int testInput3 = random.nextInt(1000);
+
+        targetMethod.setAccessible(true);
+        int userMethodOutput1 = (int) targetMethod.invoke(null, testInput1);
+        int userMethodOutput2 = (int) targetMethod.invoke(null, testInput2);
+        int userMethodOutput3 = (int) targetMethod.invoke(null, testInput3);
+
+        int trueOutput1 = dataTypesTest3(testInput1);
+        int trueOutput2 = dataTypesTest3(testInput2);
+        int trueOutput3 = dataTypesTest3(testInput3);
+
+        boolean check1 = Objects.equals(userMethodOutput1, trueOutput1);
+        boolean check2 = Objects.equals(userMethodOutput2, trueOutput2);
+        boolean check3 = Objects.equals(userMethodOutput3, trueOutput3);
+
+        if (!check1) {
+            HashMap<String, String> hint = new HashMap<>();
+            hint.put("chinese", targetMethodName + "(" + testInput1 + ")的返回值应该是" + trueOutput1 + "，而不应该是" + userMethodOutput1);
+            hints.add(hint);
+        }
+        if (!check2) {
+            HashMap<String, String> hint = new HashMap<>();
+            hint.put("chinese", targetMethodName + "(" + testInput2 + ")的返回值应该是" + trueOutput2 + "，而不应该是" + userMethodOutput2);
+            hints.add(hint);
+        }
+        if (!check3) {
+            HashMap<String, String> hint = new HashMap<>();
+            hint.put("chinese", targetMethodName + "(" + testInput3 + ")的返回值应该是" + trueOutput3 + "，而不应该是" + userMethodOutput3);
+            hints.add(hint);
+        }
+        result.put("correct", check1 && check2 && check3);
+        result.put("hints", hints);
+        return result;
+    }
+
+    public static int[] minute2yearAndDay(double min) {
+        double minutesInYear = 60 * 24 * 365;
+        int years = (int) (min / minutesInYear);
+        int days = (int) (min / 60 / 24) % 365;
+        return new int[]{years, days};
+    }
+
+    public HashMap<String, Object> checkMinute2yearAndDay(Class<?> solutionClass) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
+        String targetMethodName = "minute2yearAndDay";
+        HashMap<String, Object> result = new HashMap<>();
+        ArrayList<HashMap<String, String>> hints = new ArrayList<>();
+
+        Method targetMethod = null;
+        Class<?>[] trueParameterTypes = {double.class};
+        Class<?> trueReturnType = int[].class;
+        HashMap<String, Object> checkInputAndOutputResult = checkInputAndOutput(solutionClass, targetMethodName, trueParameterTypes, trueReturnType);
+        if (!(boolean)checkInputAndOutputResult.get("correct")) {
+            return checkInputAndOutputResult;
+        }
+        targetMethod = solutionClass.getDeclaredMethod(targetMethodName, trueParameterTypes);
+
+        double testInput1 = random.nextDouble() + random.nextInt(10000) + 10000;
+        double testInput2 = random.nextDouble() + random.nextInt(100000) + 100000;
+        double testInput3 = random.nextDouble() + random.nextInt(1000000) + 1000000;
+
+        targetMethod.setAccessible(true);
+        int[] userMethodOutput1 = (int[]) targetMethod.invoke(null, testInput1);
+        int[] userMethodOutput2 = (int[]) targetMethod.invoke(null, testInput2);
+        int[] userMethodOutput3 = (int[]) targetMethod.invoke(null, testInput3);
+
+        int[] trueOutput1 = minute2yearAndDay(testInput1);
+        int[] trueOutput2 = minute2yearAndDay(testInput2);
+        int[] trueOutput3 = minute2yearAndDay(testInput3);
+
+        boolean check1 = Arrays.equals(userMethodOutput1, trueOutput1);
+        boolean check2 = Arrays.equals(userMethodOutput2, trueOutput2);
+        boolean check3 = Arrays.equals(userMethodOutput3, trueOutput3);
+        if (!check1) {
+            HashMap<String, String> hint = new HashMap<>();
+            hint.put("chinese", targetMethodName + "(" + testInput1 + ")的返回值应该是" + Arrays.toString(trueOutput1) + "，而不应该是" + Arrays.toString(userMethodOutput1));
+            hints.add(hint);
+        }
+        if (!check2) {
+            HashMap<String, String> hint = new HashMap<>();
+            hint.put("chinese", targetMethodName + "(" + testInput2 + ")的返回值应该是" + Arrays.toString(trueOutput2) + "，而不应该是" + Arrays.toString(userMethodOutput2));
+            hints.add(hint);
+        }
+        if (!check3) {
+            HashMap<String, String> hint = new HashMap<>();
+            hint.put("chinese", targetMethodName + "(" + testInput3 + ")的返回值应该是" + Arrays.toString(trueOutput3) + "，而不应该是" + Arrays.toString(userMethodOutput3));
+            hints.add(hint);
+        }
+        result.put("correct", check1 && check2 && check3);
+        result.put("hints", hints);
+        return result;
+    }
+
+    public static double calculateBMI(double weight_pound, double height_inch) {
+        return weight_pound * 0.45359237 / (height_inch * 0.0254 * height_inch * 0.0254);
+    }
+
+    public HashMap<String, Object> checkCalculateBMI(Class<?> solutionClass) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
+        String targetMethodName = "calculateBMI";
+        HashMap<String, Object> result = new HashMap<>();
+        ArrayList<HashMap<String, String>> hints = new ArrayList<>();
+
+        Method targetMethod = null;
+        Class<?>[] trueParameterTypes = {double.class, double.class};
+        Class<?> trueReturnType = double.class;
+        HashMap<String, Object> checkInputAndOutputResult = checkInputAndOutput(solutionClass, targetMethodName, trueParameterTypes, trueReturnType);
+        if (!(boolean)checkInputAndOutputResult.get("correct")) {
+            return checkInputAndOutputResult;
+        }
+        targetMethod = solutionClass.getDeclaredMethod(targetMethodName, trueParameterTypes);
+
+        double testInput11 = exerciseUtil.generateDouble(400, 500);
+        double testInput12 = exerciseUtil.generateDouble(65, 85);
+        double testInput21 = exerciseUtil.generateDouble(400, 500);
+        double testInput22 = exerciseUtil.generateDouble(65, 85);
+        double testInput31 = exerciseUtil.generateDouble(400, 500);
+        double testInput32 = exerciseUtil.generateDouble(65, 85);
+
+        targetMethod.setAccessible(true);
+        double userMethodOutput1 = (double) targetMethod.invoke(null, testInput11, testInput12);
+        double userMethodOutput2 = (double) targetMethod.invoke(null, testInput21, testInput22);
+        double userMethodOutput3 = (double) targetMethod.invoke(null, testInput31, testInput32);
+
+        double trueOutput1 = calculateBMI(testInput11, testInput12);
+        double trueOutput2 = calculateBMI(testInput21, testInput22);
+        double trueOutput3 = calculateBMI(testInput31, testInput32);
+
+        boolean check1 = userMethodOutput1 == trueOutput1;
+        boolean check2 = userMethodOutput2 == trueOutput2;
+        boolean check3 = userMethodOutput3 == trueOutput3;
+        if (!check1) {
+            HashMap<String, String> hint = new HashMap<>();
+            hint.put("chinese", targetMethodName + "("+ testInput11 + ", " + testInput12 + ")的返回值应该是"
+                    + trueOutput1 + "，而不应该是" + userMethodOutput1);
+            hints.add(hint);
+        }
+        if (!check2) {
+            HashMap<String, String> hint = new HashMap<>();
+            hint.put("chinese", targetMethodName + "("+ testInput21 + ", " + testInput22 + ")的返回值应该是"
+                    + trueOutput2 + "，而不应该是" + userMethodOutput2);
+            hints.add(hint);
+        }
+        if (!check3) {
+            HashMap<String, String> hint = new HashMap<>();
+            hint.put("chinese", targetMethodName + "("+ testInput31 + ", " + testInput32 + ")的返回值应该是"
+                    + trueOutput3 + "，而不应该是" + userMethodOutput3);
+            hints.add(hint);
+        }
+        result.put("correct", check1 && check2 && check3);
+        result.put("hints", hints);
+        return result;
+    }
+
+    public static float calculateSpeed(float meter, float hour, float minute, float second) {
+        float timeSeconds = (hour * 3600) + (minute * 60) + second;
+        return meter / timeSeconds;
+    }
+
+    public HashMap<String, Object> checkCalculateSpeed(Class<?> solutionClass) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
+        String targetMethodName = "calculateSpeed";
+        HashMap<String, Object> result = new HashMap<>();
+        ArrayList<HashMap<String, String>> hints = new ArrayList<>();
+
+        Method targetMethod = null;
+        Class<?>[] trueParameterTypes = {float.class, float.class, float.class, float.class};
+        Class<?> trueReturnType = float.class;
+        HashMap<String, Object> checkInputAndOutputResult = checkInputAndOutput(solutionClass, targetMethodName, trueParameterTypes, trueReturnType);
+        if (!(boolean)checkInputAndOutputResult.get("correct")) {
+            return checkInputAndOutputResult;
+        }
+        targetMethod = solutionClass.getDeclaredMethod(targetMethodName, trueParameterTypes);
+
+        float testInput11 = exerciseUtil.generateFloat(5000, 50000);
+        float testInput12 = exerciseUtil.generateFloat(0, 5);
+        float testInput13 = exerciseUtil.generateFloat(0, 300);
+        float testInput14 = exerciseUtil.generateFloat(0, 600);
+        float testInput21 = exerciseUtil.generateFloat(5000, 50000);
+        float testInput22 = exerciseUtil.generateFloat(0, 5);
+        float testInput23 = exerciseUtil.generateFloat(0, 300);
+        float testInput24 = exerciseUtil.generateFloat(0, 600);
+        float testInput31 = exerciseUtil.generateFloat(5000, 50000);
+        float testInput32 = exerciseUtil.generateFloat(0, 5);
+        float testInput33 = exerciseUtil.generateFloat(0, 300);
+        float testInput34 = exerciseUtil.generateFloat(0, 600);
+
+        targetMethod.setAccessible(true);
+        float userMethodOutput1 = (float) targetMethod.invoke(null, testInput11, testInput12, testInput13, testInput14);
+        float userMethodOutput2 = (float) targetMethod.invoke(null, testInput21, testInput22, testInput23, testInput24);
+        float userMethodOutput3 = (float) targetMethod.invoke(null, testInput31, testInput32, testInput33, testInput34);
+
+        float trueOutput1 = calculateSpeed(testInput11, testInput12, testInput13, testInput14);
+        float trueOutput2 = calculateSpeed(testInput21, testInput22, testInput23, testInput24);
+        float trueOutput3 = calculateSpeed(testInput31, testInput32, testInput33, testInput34);
+
+        boolean check1 = userMethodOutput1 == trueOutput1;
+        boolean check2 = userMethodOutput2 == trueOutput2;
+        boolean check3 = userMethodOutput3 == trueOutput3;
+        if (!check1) {
+            HashMap<String, String> hint = new HashMap<>();
+            hint.put("chinese", targetMethodName + "("+ testInput11 + ", " + testInput12 + ", " + testInput13 + ", " + testInput14 + ")的返回值应该是"
+                    + trueOutput1 + "，而不应该是" + userMethodOutput1);
+            hints.add(hint);
+        }
+        if (!check2) {
+            HashMap<String, String> hint = new HashMap<>();
+            hint.put("chinese", targetMethodName + "("+ testInput21 + ", " + testInput22 + ", " + testInput23 + ", " + testInput24 + ")的返回值应该是"
+                    + trueOutput2 + "，而不应该是" + userMethodOutput2);
+            hints.add(hint);
+        }
+        if (!check3) {
+            HashMap<String, String> hint = new HashMap<>();
+            hint.put("chinese", targetMethodName + "("+ testInput31 + ", " + testInput32 + ", " + testInput33 + ", " + testInput34 + ")的返回值应该是"
+                    + trueOutput3 + "，而不应该是" + userMethodOutput3);
             hints.add(hint);
         }
         result.put("correct", check1 && check2 && check3);
