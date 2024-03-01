@@ -51,6 +51,11 @@ public class JavaProgramExerciseChecker {
         return result;
     }
 
+    public void quickFindMethod() {
+        Class<?>[] trueParameterTypes = {double.class, double.class, double.class};
+        Class<?> trueReturnType = double.class;
+    }
+
     // ------------------------------------------------- Basic Exercises------------------------------------------------
 
     public static void printHello() {
