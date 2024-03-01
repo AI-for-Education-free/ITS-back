@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -51,9 +52,83 @@ public class JavaProgramExerciseChecker {
         return result;
     }
 
+    private static boolean parameterTypesMatch(Class<?>[] actualParameterTypes, Class<?>[] expectedParameterTypes) {
+        if (actualParameterTypes.length != expectedParameterTypes.length) {
+            return false;
+        }
+        for (int i = 0; i < actualParameterTypes.length; i++) {
+            if (!actualParameterTypes[i].equals(expectedParameterTypes[i])) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public void quickFindMethod() {
         Class<?>[] trueParameterTypes = {double.class, double.class, double.class};
         Class<?> trueReturnType = double.class;
+        Method[] methods = this.getClass().getDeclaredMethods();
+        for (Method method : methods) {
+            if (method.getReturnType().equals(trueReturnType)
+                    && Modifier.isPublic(method.getModifiers())
+                    && parameterTypesMatch(method.getParameterTypes(), trueParameterTypes)) {
+                System.out.println(method.getName());
+            }
+        }
+    }
+
+    public static void javaProgramExerciseCheck(JavaProgramExercise exercise) throws Exception {
+        String submissionCodePrefix = "package org.dream.solution;\n\npublic class Solution {";
+        String submissionCodeSuffix = "}";
+        String submissionCode = submissionCodePrefix +
+                "\n" +
+                "    public static int calculateOddNumberSum(int[] arr) {\n" +
+                "        return calculateOddNumberSum(arr, 0);\n" +
+                "    }\n" +
+                "\n" +
+                "    private static int calculateOddNumberSum(int[] arr, int index) {\n" +
+                "        // Base case: if the index reaches the end of the array, return 0\n" +
+                "        if (index == arr.length) {\n" +
+                "            return 1;\n" +
+                "        }\n" +
+                "\n" +
+                "        // Recursive case: check if the element at the current index is odd,\n" +
+                "        // and recursively call the method with the next index and add the current element if it is odd\n" +
+                "        int sum = calculateOddNumberSum(arr, index + 1);\n" +
+                "        if (arr[index] % 2 != 0) {\n" +
+                "            sum += arr[index];\n" +
+                "        }\n" +
+                "\n" +
+                "        return sum;\n" +
+                "    }\n"
+                + submissionCodeSuffix;
+        String targetMethodName = exercise.targetMethodName;
+
+        HashMap<String, Object> checkResult = JavaProgramExercise.check(submissionCode, targetMethodName, "XZJ");
+        System.out.println(checkResult);
+    }
+
+    public static void main(String[] args) throws Exception {
+        int w = 1;
+
+        if (w == 0) {
+            String fPath = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "exercises", "program", "java", "testProgramExercise.json").toString();
+            File file = new File(fPath);
+            String jsonString = Files.readString(Path.of(file.getAbsolutePath()));
+            JSONObject jsonObject = JSONObject.fromObject(jsonString);
+            JSONArray exerciseArray = jsonObject.getJSONArray("exercises");
+            List<JavaProgramExercise> javaProgramExercises = new ArrayList<>();
+            for (int i = 0; i < exerciseArray.size(); i++) {
+                JSONObject exerciseObject = exerciseArray.getJSONObject(i);
+                javaProgramExercises.add(JavaProgramExercise.generateExerciseFromJsonObject(exerciseObject, "JAVA"));
+            }
+            JavaProgramExercise exercise = javaProgramExercises.get(7);
+            javaProgramExerciseCheck(exercise);
+        } else if (w == 1) {
+            // find method
+            JavaProgramExerciseChecker instance = new JavaProgramExerciseChecker();
+            instance.quickFindMethod();
+        }
     }
 
     // ------------------------------------------------- Basic Exercises------------------------------------------------
@@ -2394,51 +2469,5 @@ public class JavaProgramExerciseChecker {
         result.put("correct", check1 && check2 && check3);
         result.put("hints", hints);
         return result;
-    }
-
-    public static void javaProgramExerciseCheck(JavaProgramExercise exercise) throws Exception {
-        String submissionCodePrefix = "package org.dream.solution;\n\npublic class Solution {";
-        String submissionCodeSuffix = "}";
-        String submissionCode = submissionCodePrefix +
-                "\n" +
-                "    public static int calculateOddNumberSum(int[] arr) {\n" +
-                "        return calculateOddNumberSum(arr, 0);\n" +
-                "    }\n" +
-                "\n" +
-                "    private static int calculateOddNumberSum(int[] arr, int index) {\n" +
-                "        // Base case: if the index reaches the end of the array, return 0\n" +
-                "        if (index == arr.length) {\n" +
-                "            return 1;\n" +
-                "        }\n" +
-                "\n" +
-                "        // Recursive case: check if the element at the current index is odd,\n" +
-                "        // and recursively call the method with the next index and add the current element if it is odd\n" +
-                "        int sum = calculateOddNumberSum(arr, index + 1);\n" +
-                "        if (arr[index] % 2 != 0) {\n" +
-                "            sum += arr[index];\n" +
-                "        }\n" +
-                "\n" +
-                "        return sum;\n" +
-                "    }\n"
-                + submissionCodeSuffix;
-        String targetMethodName = exercise.targetMethodName;
-
-        HashMap<String, Object> checkResult = JavaProgramExercise.check(submissionCode, targetMethodName, "XZJ");
-        System.out.println(checkResult);
-    }
-
-    public static void main(String[] args) throws Exception {
-        String fPath = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "exercises", "program", "java", "testProgramExercise.json").toString();
-        File file = new File(fPath);
-        String jsonString = Files.readString(Path.of(file.getAbsolutePath()));
-        JSONObject jsonObject = JSONObject.fromObject(jsonString);
-        JSONArray exerciseArray = jsonObject.getJSONArray("exercises");
-        List<JavaProgramExercise> javaProgramExercises = new ArrayList<>();
-        for (int i = 0; i < exerciseArray.size(); i++) {
-            JSONObject exerciseObject = exerciseArray.getJSONObject(i);
-            javaProgramExercises.add(JavaProgramExercise.generateExerciseFromJsonObject(exerciseObject, "JAVA"));
-        }
-        JavaProgramExercise exercise = javaProgramExercises.get(7);
-        javaProgramExerciseCheck(exercise);
     }
 }
