@@ -82,24 +82,15 @@ public class JavaProgramExerciseChecker {
         String submissionCodeSuffix = "}";
         String submissionCode = submissionCodePrefix +
                 "\n" +
-                "    public static int calculateOddNumberSum(int[] arr) {\n" +
-                "        return calculateOddNumberSum(arr, 0);\n" +
-                "    }\n" +
+                "    public static int sumDigits(long n) {\n" +
+                "        int result = 0;\n" +
                 "\n" +
-                "    private static int calculateOddNumberSum(int[] arr, int index) {\n" +
-                "        // Base case: if the index reaches the end of the array, return 0\n" +
-                "        if (index == arr.length) {\n" +
-                "            return 1;\n" +
+                "        while(n > 0) {\n" +
+                "            result += n % 10;\n" +
+                "            n /= 10;\n" +
                 "        }\n" +
                 "\n" +
-                "        // Recursive case: check if the element at the current index is odd,\n" +
-                "        // and recursively call the method with the next index and add the current element if it is odd\n" +
-                "        int sum = calculateOddNumberSum(arr, index + 1);\n" +
-                "        if (arr[index] % 2 != 0) {\n" +
-                "            sum += arr[index];\n" +
-                "        }\n" +
-                "\n" +
-                "        return sum;\n" +
+                "        return result;\n" +
                 "    }\n"
                 + submissionCodeSuffix;
         String targetMethodName = exercise.targetMethodName;
@@ -109,10 +100,10 @@ public class JavaProgramExerciseChecker {
     }
 
     public static void main(String[] args) throws Exception {
-        int w = 1;
+        int w = 0;
 
         if (w == 0) {
-            String fPath = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "exercises", "program", "java", "testProgramExercise.json").toString();
+            String fPath = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "exercises", "program", "java", "programExercises.json").toString();
             File file = new File(fPath);
             String jsonString = Files.readString(Path.of(file.getAbsolutePath()));
             JSONObject jsonObject = JSONObject.fromObject(jsonString);
@@ -122,7 +113,7 @@ public class JavaProgramExerciseChecker {
                 JSONObject exerciseObject = exerciseArray.getJSONObject(i);
                 javaProgramExercises.add(JavaProgramExercise.generateExerciseFromJsonObject(exerciseObject, "JAVA"));
             }
-            JavaProgramExercise exercise = javaProgramExercises.get(7);
+            JavaProgramExercise exercise = javaProgramExercises.get(6);
             javaProgramExerciseCheck(exercise);
         } else if (w == 1) {
             // find method
@@ -161,8 +152,8 @@ public class JavaProgramExerciseChecker {
             assert e instanceof InvocationTargetException;
             // 这里如果用户写的方法发生invoke错误，这里(InvocationTargetException) e会发生投影错误
             InvocationTargetException targetEx = (InvocationTargetException) e;
-//            Throwable trowEx = targetEx .getTargetException();
-//            throw new Exception ("异常："+trowEx .getMessage());
+            // Throwable trowEx = targetEx .getTargetException();
+            // throw new Exception ("异常："+trowEx .getMessage());
             result.put("correct", false);
             result.put("hint", "runtimeException");
             result.put("runtimeException", targetEx);
@@ -506,56 +497,111 @@ public class JavaProgramExerciseChecker {
         return result;
     }
 
-    public HashMap<String, Object> checkSumDigits(Class<?> solutionClass) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
-        String targetMethodName = "sumDigits";
+    public HashMap<String, Object> checkLongIntOut(Class<?> solutionClass, String targetMethodName, int numTest, long minInput, long maxInput) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         HashMap<String, Object> result = new HashMap<>();
         ArrayList<HashMap<String, String>> hints = new ArrayList<>();
 
-        Method targetMethod = null;
+        // 先找出正确答案
         Class<?>[] trueParameterTypes = {long.class};
-        Class<?> trueReturnType = int.class;
+        Class<?> trueReturnType = long.class;
+        Method[] methods = this.getClass().getDeclaredMethods();
+        Method groundTruthMethod = null;
+        for (Method method : methods) {
+            if (method.getReturnType().equals(trueReturnType) &&
+                    Modifier.isPublic(method.getModifiers()) &&
+                    parameterTypesMatch(method.getParameterTypes(), trueParameterTypes) &&
+                    method.getName().equals(targetMethodName)
+            ) {
+                groundTruthMethod = method;
+                break;
+            }
+        }
+        assert groundTruthMethod != null;
+        groundTruthMethod.setAccessible(true);
+
+        Method targetMethod = null;
         HashMap<String, Object> checkInputAndOutputResult = checkInputAndOutput(solutionClass, targetMethodName, trueParameterTypes, trueReturnType);
         if (!(boolean)checkInputAndOutputResult.get("correct")) {
             return checkInputAndOutputResult;
         }
         targetMethod = solutionClass.getDeclaredMethod(targetMethodName, trueParameterTypes);
 
-        long testInput1 = random.nextLong() % 1000;
-        long testInput2 = random.nextLong() % 1000;
-        long testInput3 = random.nextLong() % 1000;
-
         targetMethod.setAccessible(true);
-        int userMethodOutput1 = (int) targetMethod.invoke(null, testInput1);
-        int userMethodOutput2 = (int) targetMethod.invoke(null, testInput2);
-        int userMethodOutput3 = (int) targetMethod.invoke(null, testInput3);
+        boolean checkAll = true;
+        for (int i = 0; i < numTest; i++) {
+            long testInput = exerciseUtil.generateLong(minInput, minInput);
+            int userMethodOutput = (int) targetMethod.invoke(null, testInput);
+            int trueOutput = (int) groundTruthMethod.invoke(null, testInput);
+            boolean check = Objects.equals(userMethodOutput, trueOutput);
 
-        int trueOutput1 = sumDigits(testInput1);
-        int trueOutput2 = sumDigits(testInput2);
-        int trueOutput3 = sumDigits(testInput3);
+            if (!check) {
+                HashMap<String, String> hint = new HashMap<>();
+                hint.put("chinese", targetMethodName + "(" + testInput + ")的返回值应该是" + trueOutput + "，而不应该是" + userMethodOutput);
+                hints.add(hint);
+            }
 
-        boolean check1 = Objects.equals(userMethodOutput1, trueOutput1);
-        boolean check2 = Objects.equals(userMethodOutput2, trueOutput2);
-        boolean check3 = Objects.equals(userMethodOutput3, trueOutput3);
+            checkAll = checkAll & check;
+        }
 
-        if (!check1) {
-            HashMap<String, String> hint = new HashMap<>();
-            hint.put("chinese", targetMethodName + "(" + testInput1 + ")的返回值应该是" + trueOutput1 + "，而不应该是" + userMethodOutput1);
-            hints.add(hint);
-        }
-        if (!check2) {
-            HashMap<String, String> hint = new HashMap<>();
-            hint.put("chinese", targetMethodName + "(" + testInput2 + ")的返回值应该是" + trueOutput2 + "，而不应该是" + userMethodOutput2);
-            hints.add(hint);
-        }
-        if (!check3) {
-            HashMap<String, String> hint = new HashMap<>();
-            hint.put("chinese", targetMethodName + "(" + testInput3 + ")的返回值应该是" + trueOutput3 + "，而不应该是" + userMethodOutput3);
-            hints.add(hint);
-        }
-        result.put("correct", check1 && check2 && check3);
+        result.put("correct", checkAll);
         result.put("hints", hints);
         return result;
     }
+
+    public HashMap<String, Object> checkSumDigits(Class<?> solutionClass) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
+        return checkLongIntOut(solutionClass, "sumDigits", 3, -100, 100);
+    }
+
+//    public HashMap<String, Object> checkSumDigits(Class<?> solutionClass) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
+//        String targetMethodName = "sumDigits";
+//        HashMap<String, Object> result = new HashMap<>();
+//        ArrayList<HashMap<String, String>> hints = new ArrayList<>();
+//
+//        Method targetMethod = null;
+//        Class<?>[] trueParameterTypes = {long.class};
+//        Class<?> trueReturnType = int.class;
+//        HashMap<String, Object> checkInputAndOutputResult = checkInputAndOutput(solutionClass, targetMethodName, trueParameterTypes, trueReturnType);
+//        if (!(boolean)checkInputAndOutputResult.get("correct")) {
+//            return checkInputAndOutputResult;
+//        }
+//        targetMethod = solutionClass.getDeclaredMethod(targetMethodName, trueParameterTypes);
+//
+//        long testInput1 = random.nextLong() % 1000;
+//        long testInput2 = random.nextLong() % 1000;
+//        long testInput3 = random.nextLong() % 1000;
+//
+//        targetMethod.setAccessible(true);
+//        int userMethodOutput1 = (int) targetMethod.invoke(null, testInput1);
+//        int userMethodOutput2 = (int) targetMethod.invoke(null, testInput2);
+//        int userMethodOutput3 = (int) targetMethod.invoke(null, testInput3);
+//
+//        int trueOutput1 = sumDigits(testInput1);
+//        int trueOutput2 = sumDigits(testInput2);
+//        int trueOutput3 = sumDigits(testInput3);
+//
+//        boolean check1 = Objects.equals(userMethodOutput1, trueOutput1);
+//        boolean check2 = Objects.equals(userMethodOutput2, trueOutput2);
+//        boolean check3 = Objects.equals(userMethodOutput3, trueOutput3);
+//
+//        if (!check1) {
+//            HashMap<String, String> hint = new HashMap<>();
+//            hint.put("chinese", targetMethodName + "(" + testInput1 + ")的返回值应该是" + trueOutput1 + "，而不应该是" + userMethodOutput1);
+//            hints.add(hint);
+//        }
+//        if (!check2) {
+//            HashMap<String, String> hint = new HashMap<>();
+//            hint.put("chinese", targetMethodName + "(" + testInput2 + ")的返回值应该是" + trueOutput2 + "，而不应该是" + userMethodOutput2);
+//            hints.add(hint);
+//        }
+//        if (!check3) {
+//            HashMap<String, String> hint = new HashMap<>();
+//            hint.put("chinese", targetMethodName + "(" + testInput3 + ")的返回值应该是" + trueOutput3 + "，而不应该是" + userMethodOutput3);
+//            hints.add(hint);
+//        }
+//        result.put("correct", check1 && check2 && check3);
+//        result.put("hints", hints);
+//        return result;
+//    }
 
     public static int getPentagonalNumber(int i) {
         return (i * (3 * i - 1))/2;

@@ -34,4 +34,8 @@ public class Util {
     public float generateFloat(float lowerBound, float upperBound) {
         return random.nextFloat() * (upperBound - lowerBound) + lowerBound;
     }
+
+    public long generateLong(long lowerBound, long upperBound) {
+        return random.nextLong() * (upperBound - lowerBound) + lowerBound;
+    }
 }
