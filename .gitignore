@@ -34,3 +34,6 @@ build/
 
 # data
 record.md
+
+# local db
+src/main/resources/*Database.yml

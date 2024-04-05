@@ -4,9 +4,11 @@ spring:
       static-locations: classpath:/static/
       add-mappings: true
   profiles:
-    active: "dev"
-#    使用maven里的配置
-#    active: @profile.active@
+    active: "local"
+    #    使用maven里的配置
+    #    active: @profile.active@
     group:
-      "dev": devStandard,devDB,devCustomize
+      "dev": dev,devDatabase,customize
+      "local": local,localDatabase,customize
       "test": testStandard
+      "prod": prod,prodDatabase,customize
