@@ -71,7 +71,7 @@
 
 - 为了保护数据库，`.gitignore`添加了`application-localDatabse.yml`、`application-devDatabse.yml`和`application-prodDatabse.yml`，所以这三个文件需要手动创建，目前都是在本地开发，所以只有`application-localDatabse.yml`是必须的，另外两个可以为空
 
-- `application-localDatabse.yml`的内容如下
+- `application-localDatabse.yml`的内容如下：修改其中数据库的IP和端口（如果是用的Docker，就改成对应容器的IP地址），以及Mysql的密码
 
   ```yml
   # 数据库配置
@@ -81,23 +81,16 @@
         time-to-live: 3600s
     data:
       mongodb:
-      	# 修改ip地址和端口
-        # 如果用的是docker，则更改为mongodb docker容器的ip地址
         uri: mongodb://127.0.0.1:27017/exerciseSystem
     redis:
-    	# 修改ip地址和端口
-    	# 如果用的是docker，则更改为redis docker容器的ip地址
       host: localhost
       port: 6379
       database: 0
     datasource:
       druid:
         driver-class-name: com.mysql.cj.jdbc.Driver
-        # 修改ip地址和端口
-        # 如果用的是docker，则更改为mysql docker容器的ip地址
         url: jdbc:mysql://127.0.0.1:3306/exercise_system_test?characterEncoding=UTF8&serverTimeZone=UTC&useSSL=false&allowPublicKeyRetrieval=true
         username: root
-        # 修改密码
         password: your-password
         druid:
           initial-size: 5
