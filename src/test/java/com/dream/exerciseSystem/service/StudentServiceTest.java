@@ -11,18 +11,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
+import javax.annotation.Resource;
 import java.util.HashMap;
 
 
 @SpringBootTest
-@ActiveProfiles("dev")
+//@ActiveProfiles("dev")
 public class StudentServiceTest {
-    @Autowired
+    @Resource
     private StudentService studentService;
 
     @Test
     void testLogin() {
-        DataWrapper trueStudentQueryResult = studentService.login("18800118477@163.com", "123");
+        DataWrapper trueStudentQueryResult = studentService.login("test2@gmail.com", "123456");
         System.out.println(trueStudentQueryResult);
 //        Assertions.assertThrows(PasswordErrorException.class,
 //                () -> studentService.login(passwordErrorStudent.getId(), passwordErrorStudent.getPassword()));
@@ -33,7 +34,7 @@ public class StudentServiceTest {
     @Test
     void testRegister() {
 //        Student existedStudent = new Student("xzj", "12345678", "18800118477@163.com");
-        Student newStudent = new Student("xzjdream", "12341234", "18800118477@126.com");
+        Student newStudent = new Student("xzy2", "test2@gmail.com", "123456");
 //        DataWrapper registerResult1 = studentService.register(existedStudent);
         DataWrapper registerResult2 = studentService.register(newStudent);
 //        System.out.println(registerResult1);

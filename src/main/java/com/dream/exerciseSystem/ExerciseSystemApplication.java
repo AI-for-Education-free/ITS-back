@@ -5,9 +5,12 @@ import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.web.DefaultSecurityFilterChain;
+import org.mybatis.spring.annotation.MapperScan;
 
 @SpringBootApplication
+@MapperScan("com.dream.exerciseSystem.mapper")
 public class ExerciseSystemApplication {
 
     public static void main(String[] args) {

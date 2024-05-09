@@ -1,44 +1,64 @@
 package com.dream.exerciseSystem.domain;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.IdType;
+import java.io.Serializable;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
+/**
+ * student model for mybatis
+ * @TableName student
+ * @author xzy
+ * @createDate 2024.5.9
+ */
+@TableName(value ="student")
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
-public class Student {
+@RequiredArgsConstructor
+public class Student implements Serializable {
+    /**
+     * student id
+     */
+    @TableId(type = IdType.AUTO)
     private Integer id;
+
+    /**
+     * student name
+     */
     private String name;
-    private String password;
+
+    /**
+     * student email
+     */
     private String email;
 
-    public Student(String name, String password) {
-        this.name = name;
-        this.password = password;
-    }
+    /**
+     * student password
+     */
+    private String password;
 
-    public Student(String name, String password, String email) {
+    @TableField(exist = false)
+    private static final long serialVersionUID = 1L;
+
+    public Student(String name, String email, String password) {
         this.name = name;
-        this.password = password;
         this.email = email;
+        this.password = password;
     }
 
-    public Integer getId() {
-        return id;
+    public Student(int id, String name, String email, String password) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
     }
 
-    public String getName() {
-        return name;
-    }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
 
     @Override
     public String toString() {

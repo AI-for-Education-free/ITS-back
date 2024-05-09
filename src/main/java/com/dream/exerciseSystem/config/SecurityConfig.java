@@ -29,29 +29,29 @@ public class SecurityConfig {
     }
 
     // 配置过滤器链
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                // 关闭csrf
-                .csrf().disable()
-                // 不通过session获取security context
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .authorizeRequests()
-                // 对于登入接口，允许匿名访问
-                .antMatchers("/students/login").anonymous()
-                .antMatchers("/students/register").anonymous()
-                // 除上面以外的所有请求都需要鉴权认证
-                .anyRequest().authenticated();
-
-        // 允许跨域
-        http.cors();
-
-        // 在UsernamePasswordAuthenticationFilter前加上我们自定义的jwtAuthenticationTokenFilter
-        http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
-
-        return http.build();
-    }
+//    @Bean
+//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//        http
+//                // 关闭csrf
+//                .csrf().disable()
+//                // 不通过session获取security context
+//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+//                .and()
+//                .authorizeRequests()
+//                // 对于登入接口，允许匿名访问
+//                .antMatchers("/students/login").anonymous()
+//                .antMatchers("/students/register").anonymous()
+//                // 除上面以外的所有请求都需要鉴权认证
+//                .anyRequest().authenticated();
+//
+//        // 允许跨域
+//        http.cors();
+//
+//        // 在UsernamePasswordAuthenticationFilter前加上我们自定义的jwtAuthenticationTokenFilter
+//        http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
+//
+//        return http.build();
+//    }
 
     // 配置放行规则
     @Bean
