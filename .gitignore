@@ -39,4 +39,4 @@ record.md
 src/main/resources/*Database.yml
 
 # too large data
-src/main/resources/userBehavior/xes3g5m_user_behavior.json
+src/main/resources/userBehavior/xes3g5m.json

@@ -1,10 +1,13 @@
 package com.dream.exerciseSystem;
 
+import com.dream.exerciseSystem.domain.Student;
 import com.dream.exerciseSystem.domain.User4MongodbTest;
 import com.dream.exerciseSystem.domain.exercise.JavaProgramExercise;
 import com.dream.exerciseSystem.domain.exercise.SingleChoiceExercise;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import org.json.JSONException;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -93,9 +96,15 @@ public class MongodbTest {
     }
 
     @Test
-    void xes3g5mUserBehavior2database() throws IOException {
-        String fPath = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "exercises", "math", "xes3g5m", "mathExercises.json").toString();
+    void xes3g5mUserBehavior2database() throws IOException, JSONException {
+        String fPath = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "userBehavior", "xes3g5m.json").toString();
         File file = new File(fPath);
         String jsonString = Files.readString(Path.of(file.getAbsolutePath()));
+        org.json.JSONArray jsonArray = new org.json.JSONArray(jsonString);
+
+        for (int i = 0; i < jsonArray.length(); i++) {
+            org.json.JSONObject obj = jsonArray.getJSONObject(i);
+
+        }
     }
 }
