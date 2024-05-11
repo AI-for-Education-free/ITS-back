@@ -35,7 +35,7 @@ public class MongodbTest {
     }
 
     @Test
-    void singleChoiceExercise2database() throws IOException {
+    void javaSingleChoiceExercise2database() throws IOException {
         // 对应数据库里的singleChoiceExercise集合
         String fPath = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "exercises", "program", "java", "singleChoiceExercises.json").toString();
         File file = new File(fPath);
@@ -49,9 +49,9 @@ public class MongodbTest {
         }
 
         // 先删除所有数据，再导入全部数据
-        mongoTemplate.dropCollection("singleChoiceExercise");
-        mongoTemplate.createCollection("singleChoiceExercise");
-        mongoTemplate.insert(singleChoiceExercises, "singleChoiceExercise");
+        mongoTemplate.dropCollection("javaSingleChoiceExercise");
+        mongoTemplate.createCollection("javaSingleChoiceExercise");
+        mongoTemplate.insert(singleChoiceExercises, "javaSingleChoiceExercise");
     }
 
     @Test
@@ -70,5 +70,32 @@ public class MongodbTest {
         mongoTemplate.dropCollection("javaProgramExercise");
         mongoTemplate.createCollection("javaProgramExercise");
         mongoTemplate.insert(javaProgramExercises, "javaProgramExercise");
+    }
+
+    @Test
+    void xes3g5mSingleChoiceExercise2database() throws IOException {
+        // 对应数据库里的singleChoiceExercise集合
+        String fPath = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "exercises", "math", "xes3g5m", "singleChoiceExercises.json").toString();
+        File file = new File(fPath);
+        String jsonString = Files.readString(Path.of(file.getAbsolutePath()));
+        JSONObject jsonObject = JSONObject.fromObject(jsonString);
+        JSONArray exercises = jsonObject.getJSONArray("exercises");
+        List<SingleChoiceExercise> singleChoiceExercises = new ArrayList<>();
+        for (int i = 0; i < exercises.size(); i++) {
+            JSONObject exerciseObject = exercises.getJSONObject(i);
+            singleChoiceExercises.add(SingleChoiceExercise.generateExerciseFromJsonObject(exerciseObject, "JAVA"));
+        }
+
+        // 先删除所有数据，再导入全部数据
+        mongoTemplate.dropCollection("xes3g5mSingleChoiceExercise");
+        mongoTemplate.createCollection("xes3g5mSingleChoiceExercise");
+        mongoTemplate.insert(singleChoiceExercises, "xes3g5mSingleChoiceExercise");
+    }
+
+    @Test
+    void xes3g5mUserBehavior2database() throws IOException {
+        String fPath = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "exercises", "math", "xes3g5m", "mathExercises.json").toString();
+        File file = new File(fPath);
+        String jsonString = Files.readString(Path.of(file.getAbsolutePath()));
     }
 }

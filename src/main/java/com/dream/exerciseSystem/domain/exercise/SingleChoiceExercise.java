@@ -11,6 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import lombok.ToString;
@@ -83,7 +84,7 @@ public class SingleChoiceExercise {
     }
 
     public static void main(String[] args) throws IOException {
-        String fPath = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "exercises", "program", "java", "testSingleChoiceExercises.json").toString();
+        String fPath = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "exercises", "math", "xes3g5m", "singleChoiceExercises.json").toString();
         File file = new File(fPath);
         String jsonString = Files.readString(Path.of(file.getAbsolutePath()));
         JSONObject jsonObject = JSONObject.fromObject(jsonString);
