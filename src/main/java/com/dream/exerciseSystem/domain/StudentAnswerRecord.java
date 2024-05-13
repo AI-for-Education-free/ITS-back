@@ -2,8 +2,6 @@ package com.dream.exerciseSystem.domain;
 
 import lombok.Data;
 
-import java.security.Timestamp;
-
 /**
  *
  * @Description Student info corresponding to answer record
@@ -21,7 +19,7 @@ public class StudentAnswerRecord<T> {
     //answer (including select and code answer)
     private T answer;
 
-    private Timestamp answerTimestamp;
+    private Long answerTimestamp;
 
     private boolean answerState;
 
@@ -29,22 +27,9 @@ public class StudentAnswerRecord<T> {
 
     private int hintNum;
 
-    public StudentAnswerRecord(String studentId, String questionId, T answer, Timestamp answerTimestamp, boolean answerState, String backInfo) {
+    public StudentAnswerRecord(String studentId, String questionId, boolean answerState) {
         this.studentId = studentId;
         this.questionId = questionId;
-        this.answer = answer;
-        this.answerTimestamp = answerTimestamp;
         this.answerState = answerState;
-        this.backInfo = backInfo;
-    }
-
-    public StudentAnswerRecord(String studentId, String questionId, T answer, Timestamp answerTimestamp, boolean answerState, String backInfo, int hintNum) {
-        this.studentId = studentId;
-        this.questionId = questionId;
-        this.answer = answer;
-        this.answerTimestamp = answerTimestamp;
-        this.answerState = answerState;
-        this.backInfo = backInfo;
-        this.hintNum = hintNum;
     }
 }
