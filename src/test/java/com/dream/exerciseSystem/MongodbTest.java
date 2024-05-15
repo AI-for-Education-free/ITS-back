@@ -1,7 +1,7 @@
 package com.dream.exerciseSystem;
 
 import com.dream.exerciseSystem.domain.Student;
-import com.dream.exerciseSystem.domain.User4MongodbTest;
+//import com.dream.exerciseSystem.domain.User4MongodbTest;
 import com.dream.exerciseSystem.domain.exercise.JavaProgramExercise;
 import com.dream.exerciseSystem.domain.exercise.SingleChoiceExercise;
 import net.sf.json.JSONArray;
@@ -27,15 +27,15 @@ public class MongodbTest {
     @Resource
     private MongoTemplate mongoTemplate;
 
-    @Test
-    void testMongodb() {
-        System.out.println(mongoTemplate.findAll(User4MongodbTest.class));
-        User4MongodbTest user = new User4MongodbTest();
-        user.setId(6);
-        user.setName("a-xzj-dream");
-        mongoTemplate.save(user);
-        System.out.println(mongoTemplate.findAll(User4MongodbTest.class));
-    }
+//    @Test
+//    void testMongodb() {
+//        System.out.println(mongoTemplate.findAll(User4MongodbTest.class));
+//        User4MongodbTest user = new User4MongodbTest();
+//        user.setId(6);
+//        user.setName("a-xzj-dream");
+//        mongoTemplate.save(user);
+//        System.out.println(mongoTemplate.findAll(User4MongodbTest.class));
+//    }
 
     @Test
     void javaSingleChoiceExercise2database() throws IOException {

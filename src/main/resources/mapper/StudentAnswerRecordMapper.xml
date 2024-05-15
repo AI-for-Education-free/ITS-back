@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dream.exerciseSystem.mapper.StudentAnswerRecordMapper">
+
+    <resultMap id="BaseResultMap" type="com.dream.exerciseSystem.domain.StudentAnswerRecord">
+            <id property="id" column="id" jdbcType="VARCHAR"/>
+            <result property="userId" column="userId" jdbcType="VARCHAR"/>
+            <result property="questionId" column="questionId" jdbcType="VARCHAR"/>
+            <result property="answerCorrectness" column="answerCorrectness" jdbcType="TINYINT"/>
+            <result property="answerTimestamp" column="answerTimestamp" jdbcType="BIGINT"/>
+            <result property="answerTimeConsume" column="answerTimeConsume" jdbcType="INTEGER"/>
+            <result property="hintCount" column="hintCount" jdbcType="INTEGER"/>
+            <result property="codeErrorType" column="codeErrorType" jdbcType="VARCHAR"/>
+            <result property="codeErrorInfo" column="codeErrorInfo" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,userId,questionId,
+        answerCorrectness,answerTimestamp,answerTimeConsume,
+        hintCount,codeErrorType,codeErrorInfo
+    </sql>
+</mapper>
