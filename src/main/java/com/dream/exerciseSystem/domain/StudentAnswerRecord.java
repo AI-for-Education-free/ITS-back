@@ -1,35 +1,87 @@
 package com.dream.exerciseSystem.domain;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import java.io.Serializable;
 import lombok.Data;
 
 /**
  *
- * @Description Student info corresponding to answer record
- * @author xzy
- *
+ * @TableName StudentAnswerRecord
  */
+@TableName(value ="StudentAnswerRecord")
 @Data
-public class StudentAnswerRecord<T> {
-    // identity of student
-    private String studentId;
+public class StudentAnswerRecord implements Serializable {
+    /**
+     * student only id
+     */
+    @TableId
+    private String id;
 
-    //identity of question
+    /**
+     * student account id
+     */
+    private String userId;
+
+    /**
+     * question id
+     */
     private String questionId;
 
-    //answer (including select and code answer)
-    private T answer;
+    /**
+     * answer is correct or not
+     */
+    private Integer answerCorrectness;
 
+    /**
+     * time of student commit answer
+     */
     private Long answerTimestamp;
 
-    private boolean answerState;
+    /**
+     * time consume of answering
+     */
+    private Integer answerTimeConsume;
 
-    private String backInfo;
+    /**
+     * times of hint
+     */
+    private Integer hintCount;
 
-    private int hintNum;
+    /**
+     * code error type
+     */
+    private String codeErrorType;
 
-    public StudentAnswerRecord(String studentId, String questionId, boolean answerState) {
-        this.studentId = studentId;
+    /**
+     * code error info
+     */
+    private String codeErrorInfo;
+
+    @TableField(exist = false)
+    private static final long serialVersionUID = 1L;
+
+    public StudentAnswerRecord(String id, String userId, String questionId, Integer answerCorrectness, Long answerTimestamp) {
+        this.id = id;
+        this.userId = userId;
         this.questionId = questionId;
-        this.answerState = answerState;
+        this.answerCorrectness = answerCorrectness;
+        this.answerTimestamp = answerTimestamp;
+    }
+
+    public StudentAnswerRecord() {
+    }
+
+    public StudentAnswerRecord(String id, String userId, String questionId, Integer answerCorrectness, Long answerTimestamp, Integer answerTimeConsume, Integer hintCount, String codeErrorType, String codeErrorInfo) {
+        this.id = id;
+        this.userId = userId;
+        this.questionId = questionId;
+        this.answerCorrectness = answerCorrectness;
+        this.answerTimestamp = answerTimestamp;
+        this.answerTimeConsume = answerTimeConsume;
+        this.hintCount = hintCount;
+        this.codeErrorType = codeErrorType;
+        this.codeErrorInfo = codeErrorInfo;
     }
 }
