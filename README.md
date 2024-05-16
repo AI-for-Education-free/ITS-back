@@ -99,6 +99,10 @@
     mapper-locations:
       - classpath:mappers/*.xml
       - classpath*:com/**/mappers/*.xml
+  
+  mybatis-plus:
+    configuration:
+      map-underscore-to-camel-case: false
   ```
 
 ## 2、导入数据

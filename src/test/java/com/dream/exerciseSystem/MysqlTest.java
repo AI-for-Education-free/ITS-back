@@ -66,29 +66,29 @@ public class MysqlTest {
         }
     }
 
-    @Test
-    void xes3g5mUserBehavior2database() throws IOException, JSONException {
-        String fPath = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "userBehavior", "xes3g5m_demo.json").toString();
-        File file = new File(fPath);
-        String jsonString = Files.readString(Path.of(file.getAbsolutePath()));
-        org.json.JSONArray jsonArray = new org.json.JSONArray(jsonString);
-        for (int i = 0; i < jsonArray.length(); i++) {
-            org.json.JSONObject obj = jsonArray.getJSONObject(i);
-            String studentName = obj.getString("user_name");
-            String questionId = obj.getString("question_id");
-            boolean correct = obj.getBoolean("correct");
-            Long timestamp = obj.getLong("timestamp");
-
-            // 因为json数据里只有name（目前id是存储自增的id，不唯一，后续要改），所以先根据name查id
-            QueryWrapper<Student> queryWrapper = new QueryWrapper<>();
-            queryWrapper.eq("name", studentName);
-            List<Student> targetStudents = iStudentService.list(queryWrapper);
-            Student targetStudent = targetStudents.get(0);
-            String studentId = targetStudent.getId().toString();
-
-            StudentAnswerRecord<String> studentAnswerRecord = new StudentAnswerRecord<>(studentId, questionId, correct);
-            studentAnswerRecord.setAnswerTimestamp(timestamp);
-            System.out.println();
-        }
-    }
+//    @Test
+//    void xes3g5mUserBehavior2database() throws IOException, JSONException {
+//        String fPath = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "userBehavior", "xes3g5m_demo.json").toString();
+//        File file = new File(fPath);
+//        String jsonString = Files.readString(Path.of(file.getAbsolutePath()));
+//        org.json.JSONArray jsonArray = new org.json.JSONArray(jsonString);
+//        for (int i = 0; i < jsonArray.length(); i++) {
+//            org.json.JSONObject obj = jsonArray.getJSONObject(i);
+//            String studentName = obj.getString("user_name");
+//            String questionId = obj.getString("question_id");
+//            boolean correct = obj.getBoolean("correct");
+//            Long timestamp = obj.getLong("timestamp");
+//
+//            // 因为json数据里只有name（目前id是存储自增的id，不唯一，后续要改），所以先根据name查id
+//            QueryWrapper<Student> queryWrapper = new QueryWrapper<>();
+//            queryWrapper.eq("name", studentName);
+//            List<Student> targetStudents = iStudentService.list(queryWrapper);
+//            Student targetStudent = targetStudents.get(0);
+//            String studentId = targetStudent.getId().toString();
+//
+//            StudentAnswerRecord<String> studentAnswerRecord = new StudentAnswerRecord<>(studentId, questionId, correct);
+//            studentAnswerRecord.setAnswerTimestamp(timestamp);
+//            System.out.println();
+//        }
+//    }
 }

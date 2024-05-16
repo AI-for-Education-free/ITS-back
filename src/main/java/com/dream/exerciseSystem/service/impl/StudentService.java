@@ -1,16 +1,15 @@
 package com.dream.exerciseSystem.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.dream.exerciseSystem.dao.IStudentDao;
 import com.dream.exerciseSystem.domain.LoginStudentDetails;
 import com.dream.exerciseSystem.domain.Student;
+//import com.dream.exerciseSystem.domain.Student2Mongodb;
 import com.dream.exerciseSystem.service.IStudentService;
 import com.dream.exerciseSystem.utils.DataWrapper;
 import com.dream.exerciseSystem.utils.JwtUtil;
 import com.dream.exerciseSystem.utils.RedisCache;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.convert.ReadingConverter;
-import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -54,6 +53,7 @@ public class StudentService extends ServiceImpl<StudentMapper, Student> implemen
      */
     @Resource
     private StudentMapper studentMapper;
+
 
     @Override
     public DataWrapper login(String email, String password) {
@@ -113,13 +113,16 @@ public class StudentService extends ServiceImpl<StudentMapper, Student> implemen
         // Encode the password
         String encodedPassword = passwordEncoder.encode(student.getPassword());
         student.setPassword(encodedPassword);
-        boolean createResult = save(student);
+        boolean createResult = this.save(student);
         Map<String, String> data = new HashMap<>();
+
         if (createResult) {
             return new DataWrapper(true).msgBuilder("注册成功").dataBuilder(data);
         } else {
             data.put("reason", "插入数据失败");
             return new DataWrapper(false).msgBuilder("注册失败").dataBuilder(data);
         }
+
+
     }
 }

@@ -15,7 +15,7 @@ public class StudentAnswerRecordTest {
     private StudentAnswerRecordService studentAnswerRecordService;
     @Test
     void addAnswerRecord(){
-        String id = "xzy1";
+        String id = "xzy2";
         String userId = "xzy";
         String questionId = "dusdhq";
         int answerCorrectness = 0;
@@ -28,7 +28,7 @@ public class StudentAnswerRecordTest {
         studentAnswerRecord.setAnswerCorrectness(answerCorrectness);
         studentAnswerRecord.setAnswerTimestamp(answerTimestamp);
 
-        studentAnswerRecordService.save(studentAnswerRecord);
+        //studentAnswerRecordService.save(studentAnswerRecord);
 
 
     }

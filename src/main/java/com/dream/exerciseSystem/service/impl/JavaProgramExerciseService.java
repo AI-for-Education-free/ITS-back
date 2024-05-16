@@ -1,19 +1,27 @@
 package com.dream.exerciseSystem.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.dream.exerciseSystem.constant.StudentInfoConstant;
+import com.dream.exerciseSystem.domain.Student;
+import com.dream.exerciseSystem.domain.StudentAnswerRecord;
 import com.dream.exerciseSystem.domain.exercise.ExerciseBasicInfo;
 import com.dream.exerciseSystem.domain.exercise.JavaProgramExercise;
+import com.dream.exerciseSystem.mapper.StudentAnswerRecordMapper;
 import com.dream.exerciseSystem.service.IJavaProgramExerciseService;
 import com.dream.exerciseSystem.utils.DataWrapper;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.util.DigestUtils;
 
 import javax.annotation.Resource;
+import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Service
-public class JavaProgramExerciseService implements IJavaProgramExerciseService {
+public class JavaProgramExerciseService extends ServiceImpl<StudentAnswerRecordMapper, StudentAnswerRecord> implements IJavaProgramExerciseService {
     @Resource
     private MongoTemplate mongoTemplate;
 
@@ -54,6 +62,39 @@ public class JavaProgramExerciseService implements IJavaProgramExerciseService {
             return new DataWrapper(true).msgBuilder("检查Java编程习题成功").dataBuilder(data);
         }
     }
+
+    @Override
+    public DataWrapper checkExercise(String id, String submissionCode, String studentId) throws Exception {
+        Map<String, Map> data = new HashMap<>();
+        JavaProgramExercise result = mongoTemplate.findById(id, JavaProgramExercise.class);
+        if (result == null) {
+            return new DataWrapper(false).msgBuilder("检查Java编程习题失败").codeBuilder(100);
+        } else {
+            String targetMethodName = result.targetMethodName;
+            HashMap<String, Object> checkResult = JavaProgramExercise.check(submissionCode, targetMethodName, "XZJ");
+            data.put("result", checkResult);
+
+            StudentAnswerRecord studentAnswerRecord = new StudentAnswerRecord();
+            // id in StudentAnswerRecord is encrypted by MD5 algorithm
+            String studentEncryptedId = DigestUtils.md5DigestAsHex((StudentInfoConstant.salt+studentId).getBytes());
+            studentAnswerRecord.setId(studentEncryptedId);
+            studentAnswerRecord.setUserId(studentId);
+            studentAnswerRecord.setQuestionId(id);
+            if(!(boolean)checkResult.get("correct")){
+                studentAnswerRecord.setAnswerCorrectness(0);
+            }
+            else
+                studentAnswerRecord.setAnswerCorrectness(1);
+
+            long studentAnswerTimestamp = Instant.now().getEpochSecond();
+            studentAnswerRecord.setAnswerTimestamp(studentAnswerTimestamp);
+            boolean writeState = this.save(studentAnswerRecord);
+            return new DataWrapper(true).msgBuilder("检查Java编程习题成功").dataBuilder(data);
+        }
+
+
+    }
+
 
     @Override
     public DataWrapper getExerciseAllBasicInfo() {

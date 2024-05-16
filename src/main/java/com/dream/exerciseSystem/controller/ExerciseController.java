@@ -5,14 +5,15 @@ import com.dream.exerciseSystem.domain.exercise.SingleChoiceExercise;
 import com.dream.exerciseSystem.service.IJavaProgramExerciseService;
 import com.dream.exerciseSystem.service.ISingleChoiceExerciseService;
 import com.dream.exerciseSystem.utils.DataWrapper;
+import com.dream.exerciseSystem.utils.JwtUtil;
+import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
+import java.util.*;
 
 @Slf4j
 @RestController
@@ -64,6 +65,18 @@ public class ExerciseController {
     public DataWrapper checkJavaProgramExercise(@PathVariable String exerciseId, @RequestBody Map<String, String> requestBody) throws Exception {
         String submissionCode = "package org.dream.solution;\n" + requestBody.get("submissionCode");
         return javaProgramExerciseService.checkExercise(exerciseId, submissionCode);
+    }
+
+    @PostMapping("/java/program/check/xzy/{exerciseId}")
+    @ResponseBody
+    public DataWrapper checkJavaProgramExerciseXzy(@PathVariable String exerciseId, @RequestBody Map<String, String> requestBody, HttpServletRequest request) throws Exception {
+        String token = request.getHeader("token");
+        // 解析token
+        String studentId;
+        Claims claims = JwtUtil.parsedResult(token);
+        studentId = claims.getSubject();
+        String submissionCode = "package org.dream.solution;\n" + requestBody.get("submissionCode");
+        return javaProgramExerciseService.checkExercise(exerciseId, submissionCode, studentId);
     }
 
     @GetMapping("/java/basicInfo/all")

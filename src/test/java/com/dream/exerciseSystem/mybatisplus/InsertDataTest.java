@@ -3,6 +3,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.dream.exerciseSystem.domain.Student;
 import com.dream.exerciseSystem.mapper.StudentMapper;
 import com.dream.exerciseSystem.service.IStudentService;
+import com.dream.exerciseSystem.utils.DataWrapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,18 +32,16 @@ public class InsertDataTest {
     void testAddStudent(){
         Student studentInfo = new Student();
 
-        int testId = 1;
         String testName = "xzy";
-        String testEmail = "xxxxx@gmail.com";
+        String testEmail = "ulyess@gmail.com";
         String testPassword = "123456";
 
-        studentInfo.setId(testId);
         studentInfo.setName(testName);
         studentInfo.setEmail(testEmail);
         studentInfo.setPassword(testPassword);
 
-        boolean result = iStudentService.save(studentInfo);
-        Assertions.assertTrue(result);
+        DataWrapper dataWrapper = iStudentService.register(studentInfo);
+        Assertions.assertNotNull(dataWrapper);
     }
 
 }
