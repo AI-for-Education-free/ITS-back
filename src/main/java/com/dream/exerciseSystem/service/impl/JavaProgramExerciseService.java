@@ -75,9 +75,10 @@ public class JavaProgramExerciseService extends ServiceImpl<StudentAnswerRecordM
             data.put("result", checkResult);
 
             StudentAnswerRecord studentAnswerRecord = new StudentAnswerRecord();
+            long studentAnswerTimestamp = Instant.now().getEpochSecond();
             // id in StudentAnswerRecord is encrypted by MD5 algorithm
-            String studentEncryptedId = DigestUtils.md5DigestAsHex((StudentInfoConstant.salt+studentId).getBytes());
-            studentAnswerRecord.setId(studentEncryptedId);
+            String studentAnswerId = studentId+id+studentAnswerTimestamp;
+            studentAnswerRecord.setId(studentAnswerId);
             studentAnswerRecord.setUserId(studentId);
             studentAnswerRecord.setQuestionId(id);
             if(!(boolean)checkResult.get("correct")){
@@ -85,9 +86,8 @@ public class JavaProgramExerciseService extends ServiceImpl<StudentAnswerRecordM
             }
             else
                 studentAnswerRecord.setAnswerCorrectness(1);
-
-            long studentAnswerTimestamp = Instant.now().getEpochSecond();
             studentAnswerRecord.setAnswerTimestamp(studentAnswerTimestamp);
+            studentAnswerRecord.setAnswer(submissionCode);
             boolean writeState = this.save(studentAnswerRecord);
             return new DataWrapper(true).msgBuilder("检查Java编程习题成功").dataBuilder(data);
         }

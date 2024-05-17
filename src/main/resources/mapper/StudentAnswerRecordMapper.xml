@@ -14,11 +14,13 @@
             <result property="hintCount" column="hintCount" jdbcType="INTEGER"/>
             <result property="codeErrorType" column="codeErrorType" jdbcType="VARCHAR"/>
             <result property="codeErrorInfo" column="codeErrorInfo" jdbcType="VARCHAR"/>
+            <result property="answer" column="answer" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         id,userId,questionId,
         answerCorrectness,answerTimestamp,answerTimeConsume,
-        hintCount,codeErrorType,codeErrorInfo
+        hintCount,codeErrorType,codeErrorInfo,
+        answer
     </sql>
 </mapper>

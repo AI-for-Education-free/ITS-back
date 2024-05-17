@@ -1,6 +1,7 @@
 package com.dream.exerciseSystem.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.dream.exerciseSystem.constant.StudentInfoConstant;
 import com.dream.exerciseSystem.domain.LoginStudentDetails;
 import com.dream.exerciseSystem.domain.Student;
 //import com.dream.exerciseSystem.domain.Student2Mongodb;
@@ -17,6 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.dream.exerciseSystem.mapper.StudentMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.util.DigestUtils;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
@@ -66,7 +68,8 @@ public class StudentService extends ServiceImpl<StudentMapper, Student> implemen
         }
         // 如果认证通过了，使用id生成一个jwt
         LoginStudentDetails loginStudentDetails = (LoginStudentDetails) authenticate.getPrincipal();
-        String id = loginStudentDetails.getStudent().getId().toString();
+        //String id = loginStudentDetails.getStudent().getId().toString();
+        String id = loginStudentDetails.getStudent().getId();
         String jwt = JwtUtil.getInstance().clear().subjectBuilder(id).build();
         Map<String,String> data = new HashMap<>();
         data.put("student", loginStudentDetails.getStudent().getName());
@@ -113,6 +116,7 @@ public class StudentService extends ServiceImpl<StudentMapper, Student> implemen
         // Encode the password
         String encodedPassword = passwordEncoder.encode(student.getPassword());
         student.setPassword(encodedPassword);
+        student.setId(DigestUtils.md5DigestAsHex((StudentInfoConstant.salt+student.getEmail()).getBytes()));
         boolean createResult = this.save(student);
         Map<String, String> data = new HashMap<>();
 

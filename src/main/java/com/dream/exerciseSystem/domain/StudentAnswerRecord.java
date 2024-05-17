@@ -59,15 +59,18 @@ public class StudentAnswerRecord implements Serializable {
      */
     private String codeErrorInfo;
 
+    private String answer;
+
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 
-    public StudentAnswerRecord(String id, String userId, String questionId, Integer answerCorrectness, Long answerTimestamp) {
+    public StudentAnswerRecord(String id, String userId, String questionId, Integer answerCorrectness, Long answerTimestamp, String answer) {
         this.id = id;
         this.userId = userId;
         this.questionId = questionId;
         this.answerCorrectness = answerCorrectness;
         this.answerTimestamp = answerTimestamp;
+        this.answer = answer;
     }
 
     public StudentAnswerRecord() {
@@ -83,5 +86,6 @@ public class StudentAnswerRecord implements Serializable {
         this.hintCount = hintCount;
         this.codeErrorType = codeErrorType;
         this.codeErrorInfo = codeErrorInfo;
+        this.answer = answer;
     }
 }

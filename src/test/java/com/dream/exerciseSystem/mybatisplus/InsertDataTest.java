@@ -30,15 +30,15 @@ public class InsertDataTest {
      *
      */
     void testAddStudent(){
-        Student studentInfo = new Student();
+        Student studentInfo = new Student("xzy","ulyess3@gmail.com","123456");
 
-        String testName = "xzy";
-        String testEmail = "ulyess@gmail.com";
-        String testPassword = "123456";
-
-        studentInfo.setName(testName);
-        studentInfo.setEmail(testEmail);
-        studentInfo.setPassword(testPassword);
+//        String testName = "xzy";
+//        String testEmail = "ulyess3@gmail.com";
+//        String testPassword = "123456";
+//
+//        studentInfo.setName(testName);
+//        studentInfo.setEmail(testEmail);
+//        studentInfo.setPassword(testPassword);
 
         DataWrapper dataWrapper = iStudentService.register(studentInfo);
         Assertions.assertNotNull(dataWrapper);

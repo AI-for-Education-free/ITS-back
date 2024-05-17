@@ -6,9 +6,11 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import java.io.Serializable;
 
+import com.dream.exerciseSystem.constant.StudentInfoConstant;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.springframework.util.DigestUtils;
 
 /**
  * student model for mybatis
@@ -19,13 +21,14 @@ import lombok.RequiredArgsConstructor;
 @TableName(value ="student")
 @Data
 @AllArgsConstructor
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class Student implements Serializable {
     /**
      * student id
      */
-    @TableId(type = IdType.AUTO)
-    private Integer id;
+    //@TableId(type = IdType.AUTO)
+    @TableId
+    private String id;
 
     /**
      * student name
@@ -49,16 +52,19 @@ public class Student implements Serializable {
         this.name = name;
         this.email = email;
         this.password = password;
+        this.id = "";
     }
 
-    public Student(int id, String name, String email, String password) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.password = password;
+//    public Student(String id, String name, String email, String password) {
+//        this.id = id;
+//        this.name = name;
+//        this.email = email;
+//        this.password = password;
+//    }
+
+    public Student(){
+        this.id = "";
     }
-
-
 
     @Override
     public String toString() {
