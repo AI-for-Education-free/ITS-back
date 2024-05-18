@@ -32,11 +32,8 @@ build/
 ### VS Code ###
 .vscode/
 
-# data
-record.md
-
-# local db
+# local db configure
 src/main/resources/*Database.yml
 
 # too large data
-/src/main/resources/userBehavior
+.src/main/resources/userBehavior/xes3g5m.json

@@ -107,10 +107,13 @@
 
 ## 2、导入数据
 
-- 测试数据库连接：运行`src/test/java/com/dream/exerciseSystem/MongodbTest.java`里的`testMongodb`，不报错则连接成功
-- 导入习题数据到MongoDB：运行`src/test/java/com/dream/exerciseSystem/MongodbTest.java`里的`javaProgramExercise2database`，不报错则导入成功
+- 导入Java编程习题：`src/test/java/com/dream/exerciseSystem/MongodbTest.java`里的`javaProgramExercise2database`
+- 导入Java单选习题：`src/test/java/com/dream/exerciseSystem/MongodbTest.java`里的`javaSingleChoiceExercise2database`
+- 导入Xes3g5m单选习题：`src/test/java/com/dream/exerciseSystem/MongodbTest.java`里的`xes3g5mSingleChoiceExercise2database`
+- 导入Xes3g5m用户数据：`src/test/java/com/dream/exerciseSystem/MysqlTest.java`里的`xes3g5mUser2Database`
+- 导入Xes3g5m用户行为：`src/test/java/com/dream/exerciseSystem/MysqlTest.java`里的`xes3g5mUserBehavior2database`
 
-## 2、启动服务
+## 3、启动服务
 
 - 开启所有需要的数据库
 - 运行`src/main/java/com/dream/exerciseSystem/ExerciseSystemApplication.java`

@@ -1,6 +1,7 @@
 package com.dream.exerciseSystem;
 
 import com.alibaba.fastjson.JSON;
+import com.dream.exerciseSystem.constant.StudentInfoConstant;
 import com.dream.exerciseSystem.domain.LoginStudentDetails;
 import com.dream.exerciseSystem.domain.Student;
 import com.dream.exerciseSystem.utils.FastJsonRedisSerializer;
@@ -17,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.util.DigestUtils;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -113,10 +115,10 @@ public class UtilsTests {
 
     @Test
     public void redisCacheTest() {
-        Integer id = 1;
         String name = "xzj";
         String password = "dream";
         String email = "123@126.com";
+        String id = DigestUtils.md5DigestAsHex((StudentInfoConstant.salt+email).getBytes());
         Student student = new Student(id, name, password, email);
         List<String> permissions = new ArrayList<>();
         permissions.add("vip0");

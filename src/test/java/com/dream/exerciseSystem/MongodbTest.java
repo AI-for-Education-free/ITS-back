@@ -1,7 +1,6 @@
 package com.dream.exerciseSystem;
 
 import com.dream.exerciseSystem.domain.Student;
-//import com.dream.exerciseSystem.domain.User4MongodbTest;
 import com.dream.exerciseSystem.domain.exercise.JavaProgramExercise;
 import com.dream.exerciseSystem.domain.exercise.SingleChoiceExercise;
 import net.sf.json.JSONArray;
@@ -26,16 +25,6 @@ import java.util.List;
 public class MongodbTest {
     @Resource
     private MongoTemplate mongoTemplate;
-
-//    @Test
-//    void testMongodb() {
-//        System.out.println(mongoTemplate.findAll(User4MongodbTest.class));
-//        User4MongodbTest user = new User4MongodbTest();
-//        user.setId(6);
-//        user.setName("a-xzj-dream");
-//        mongoTemplate.save(user);
-//        System.out.println(mongoTemplate.findAll(User4MongodbTest.class));
-//    }
 
     @Test
     void javaSingleChoiceExercise2database() throws IOException {
@@ -70,6 +59,7 @@ public class MongodbTest {
             javaProgramExercises.add(JavaProgramExercise.generateExerciseFromJsonObject(exerciseObject, "JAVA"));
         }
 
+        // 先删除所有数据，再导入全部数据
         mongoTemplate.dropCollection("javaProgramExercise");
         mongoTemplate.createCollection("javaProgramExercise");
         mongoTemplate.insert(javaProgramExercises, "javaProgramExercise");
@@ -93,18 +83,5 @@ public class MongodbTest {
         mongoTemplate.dropCollection("xes3g5mSingleChoiceExercise");
         mongoTemplate.createCollection("xes3g5mSingleChoiceExercise");
         mongoTemplate.insert(singleChoiceExercises, "xes3g5mSingleChoiceExercise");
-    }
-
-    @Test
-    void xes3g5mUserBehavior2database() throws IOException, JSONException {
-        String fPath = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "userBehavior", "xes3g5m.json").toString();
-        File file = new File(fPath);
-        String jsonString = Files.readString(Path.of(file.getAbsolutePath()));
-        org.json.JSONArray jsonArray = new org.json.JSONArray(jsonString);
-
-        for (int i = 0; i < jsonArray.length(); i++) {
-            org.json.JSONObject obj = jsonArray.getJSONObject(i);
-
-        }
     }
 }

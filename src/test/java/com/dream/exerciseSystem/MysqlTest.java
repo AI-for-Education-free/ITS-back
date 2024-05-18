@@ -1,23 +1,31 @@
 package com.dream.exerciseSystem;
+import com.baomidou.mybatisplus.core.conditions.query.Query;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.dream.exerciseSystem.constant.StudentInfoConstant;
 import com.dream.exerciseSystem.domain.Student;
 import com.dream.exerciseSystem.domain.StudentAnswerRecord;
 import com.dream.exerciseSystem.service.IStudentService;
+import com.dream.exerciseSystem.service.StudentAnswerRecordService;
+import com.dream.exerciseSystem.service.impl.StudentService;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.util.DigestUtils;
 
 import javax.annotation.Resource;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @SpringBootTest
@@ -25,23 +33,8 @@ public class MysqlTest {
     @Resource
     private IStudentService iStudentService;
 
-    @Test
-    void testMysql(){
-        Student studentInfo = new Student();
-
-        int testId = 1;
-        String testName = "xzj";
-        String testEmail = "18800118477@163.com";
-        String testPassword = "xzj12345";
-
-        studentInfo.setId(testId);
-        studentInfo.setName(testName);
-        studentInfo.setEmail(testEmail);
-        studentInfo.setPassword(testPassword);
-
-        boolean result = iStudentService.save(studentInfo);
-        Assertions.assertTrue(result);
-    }
+    @Resource
+    private StudentAnswerRecordService studentAnswerRecordService;
 
     @Test
     void xes3g5mUser2Database() throws IOException, JSONException {
@@ -52,43 +45,77 @@ public class MysqlTest {
 
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject obj = jsonArray.getJSONObject(i);
-            Student studentInfo = new Student();
+            Student student = new Student();
 
             String name = obj.getString("name");
             String email = obj.getString("email");
             String password = obj.getString("password");
-            studentInfo.setName(name);
-            studentInfo.setEmail(email);
-            studentInfo.setPassword(password);
+            String id = DigestUtils.md5DigestAsHex((StudentInfoConstant.salt+email).getBytes());
+            student.setId(id);
+            student.setName(name);
+            student.setEmail(email);
+            student.setPassword(password);
 
-            boolean result = iStudentService.save(studentInfo);
+            boolean result = iStudentService.save(student);
             Assertions.assertTrue(result);
         }
     }
 
-//    @Test
-//    void xes3g5mUserBehavior2database() throws IOException, JSONException {
-//        String fPath = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "userBehavior", "xes3g5m_demo.json").toString();
-//        File file = new File(fPath);
-//        String jsonString = Files.readString(Path.of(file.getAbsolutePath()));
-//        org.json.JSONArray jsonArray = new org.json.JSONArray(jsonString);
-//        for (int i = 0; i < jsonArray.length(); i++) {
-//            org.json.JSONObject obj = jsonArray.getJSONObject(i);
-//            String studentName = obj.getString("user_name");
-//            String questionId = obj.getString("question_id");
-//            boolean correct = obj.getBoolean("correct");
-//            Long timestamp = obj.getLong("timestamp");
-//
-//            // 因为json数据里只有name（目前id是存储自增的id，不唯一，后续要改），所以先根据name查id
-//            QueryWrapper<Student> queryWrapper = new QueryWrapper<>();
-//            queryWrapper.eq("name", studentName);
-//            List<Student> targetStudents = iStudentService.list(queryWrapper);
-//            Student targetStudent = targetStudents.get(0);
-//            String studentId = targetStudent.getId().toString();
-//
-//            StudentAnswerRecord<String> studentAnswerRecord = new StudentAnswerRecord<>(studentId, questionId, correct);
-//            studentAnswerRecord.setAnswerTimestamp(timestamp);
-//            System.out.println();
-//        }
-//    }
+    @Test
+    void xes3g5mUserBehavior2database() throws IOException, JSONException {
+        String dataDir = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "userBehavior").toString();
+        String prefix = "xes3g5m_data_";
+        List<String> jsonFilePaths = new ArrayList<>();
+        File directory = new File(dataDir);
+
+        // 使用FileFilter过滤器获取符合条件的文件路径
+        File[] files = directory.listFiles(new FileFilter() {
+            @Override
+            public boolean accept(File file) {
+                return file.isFile() && file.getName().startsWith(prefix) && file.getName().toLowerCase().endsWith(".json");
+            }
+        });
+
+        if (files != null) {
+            for (File file : files) {
+                jsonFilePaths.add(file.getAbsolutePath());
+            }
+        }
+
+        List<File> fileList = jsonFilePaths.stream().map(
+                File::new
+        ).collect(Collectors.toList());
+
+        for (File file: fileList) {
+            String jsonString = Files.readString(Path.of(file.getAbsolutePath()));
+            org.json.JSONArray jsonArray = new org.json.JSONArray(jsonString);
+            for (int i = 0; i < jsonArray.length(); i++) {
+                org.json.JSONObject obj = jsonArray.getJSONObject(i);
+                String studentName = obj.getString("user_name");
+                String questionId = obj.getString("question_id");
+                boolean correct = obj.getBoolean("correct");
+                Long timestamp = obj.getLong("timestamp");
+
+                // 因为json数据里只有name，所以先根据name查id
+                QueryWrapper<Student> queryUserIdWrapper = new QueryWrapper<>();
+                queryUserIdWrapper.eq("name", studentName);
+                List<Student> targetStudents = iStudentService.list(queryUserIdWrapper);
+                Student targetStudent = targetStudents.get(0);
+                String studentId = targetStudent.getId();
+
+                StudentAnswerRecord studentAnswerRecord = new StudentAnswerRecord(
+                        studentId, questionId, timestamp, correct
+                );
+
+                // 查询是否存在数据，因为该数据集下可能存在一个人在相同时间戳下做了同一道题两次
+                QueryWrapper<StudentAnswerRecord> queryStudentAnswerRecordIdWrapper = new QueryWrapper<>();
+                queryStudentAnswerRecordIdWrapper.eq("id", studentId + questionId + timestamp);
+                List<StudentAnswerRecord> studentAnswerRecords = studentAnswerRecordService.list(queryStudentAnswerRecordIdWrapper);
+                if (studentAnswerRecords.size() == 0) {
+                    boolean result = studentAnswerRecordService.save(studentAnswerRecord);
+                    Assertions.assertTrue(result);
+                }
+            }
+        }
+    }
 }
