@@ -36,4 +36,4 @@ build/
 src/main/resources/*Database.yml
 
 # too large data
-.src/main/resources/userBehavior/xes3g5m.json
+src/main/resources/userBehavior/xes3g5m.json
