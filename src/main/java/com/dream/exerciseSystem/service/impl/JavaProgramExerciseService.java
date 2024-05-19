@@ -6,6 +6,7 @@ import com.dream.exerciseSystem.domain.Student;
 import com.dream.exerciseSystem.domain.StudentAnswerRecord;
 import com.dream.exerciseSystem.domain.exercise.ExerciseBasicInfo;
 import com.dream.exerciseSystem.domain.exercise.JavaProgramExercise;
+import com.dream.exerciseSystem.domain.exercise.JavaProgramExerciseCheckResult;
 import com.dream.exerciseSystem.mapper.StudentAnswerRecordMapper;
 import com.dream.exerciseSystem.service.IJavaProgramExerciseService;
 import com.dream.exerciseSystem.utils.DataWrapper;
@@ -57,8 +58,9 @@ public class JavaProgramExerciseService extends ServiceImpl<StudentAnswerRecordM
             return new DataWrapper(false).msgBuilder("检查Java编程习题失败").codeBuilder(100);
         } else {
             String targetMethodName = result.targetMethodName;
-            HashMap<String, Object> checkResult = JavaProgramExercise.check(submissionCode, targetMethodName, "XZJ");
-            data.put("result", checkResult);
+            JavaProgramExerciseCheckResult checkResult = JavaProgramExercise.check(submissionCode, targetMethodName, "XZJ");
+            // 这里是我注释调的因为类型不匹配
+            //            data.put("result", checkResult);
             return new DataWrapper(true).msgBuilder("检查Java编程习题成功").dataBuilder(data);
         }
     }
@@ -71,8 +73,9 @@ public class JavaProgramExerciseService extends ServiceImpl<StudentAnswerRecordM
             return new DataWrapper(false).msgBuilder("检查Java编程习题失败").codeBuilder(100);
         } else {
             String targetMethodName = result.targetMethodName;
-            HashMap<String, Object> checkResult = JavaProgramExercise.check(submissionCode, targetMethodName, "XZJ");
-            data.put("result", checkResult);
+            JavaProgramExerciseCheckResult checkResult = JavaProgramExercise.check(submissionCode, targetMethodName, "XZJ");
+            // 同上
+            //            data.put("result", checkResult);
 
             StudentAnswerRecord studentAnswerRecord = new StudentAnswerRecord();
             long studentAnswerTimestamp = Instant.now().getEpochSecond();
@@ -81,7 +84,7 @@ public class JavaProgramExerciseService extends ServiceImpl<StudentAnswerRecordM
             studentAnswerRecord.setId(studentAnswerId);
             studentAnswerRecord.setUserId(studentId);
             studentAnswerRecord.setQuestionId(id);
-            if(!(boolean)checkResult.get("correct")){
+            if(!checkResult.isAnswerState()){
                 studentAnswerRecord.setAnswerCorrectness(0);
             }
             else
