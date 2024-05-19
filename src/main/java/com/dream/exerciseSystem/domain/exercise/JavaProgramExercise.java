@@ -111,8 +111,9 @@ public class JavaProgramExercise {
         return result;
     }
 
-    public static HashMap<String, Object> check(String submissionCode, String targetMethodName, String developer)
+    public static JavaProgramExerciseCheckResult check(String submissionCode, String targetMethodName, String developer)
             throws Exception {
+        JavaProgramExerciseCheckResult javaProgramExerciseCheckResult = new JavaProgramExerciseCheckResult();
         HashMap<String, Object> checkResult = new HashMap<>();
         HashMap<String, Object> findSolutionClassResult = getSolutionClass(submissionCode);
         Class<?> solutionClass = (Class<?>) findSolutionClassResult.get("solutionClass");
@@ -121,7 +122,13 @@ public class JavaProgramExercise {
             checkResult.put("correct", false);
             checkResult.put("hint", "compileException");
             checkResult.put("compileException", findSolutionClassResult.get("error"));
-            return checkResult;
+
+            javaProgramExerciseCheckResult.setAnswerState(false);
+            javaProgramExerciseCheckResult.setCaseHints(null);
+            javaProgramExerciseCheckResult.setCodeErrorType("compileException");
+            javaProgramExerciseCheckResult.setCodeErrorInfo("not find solutionClass");
+
+            return javaProgramExerciseCheckResult;
         }
 
         Method checkMethod = getCheckMethod(targetMethodName, developer);
@@ -138,12 +145,27 @@ public class JavaProgramExercise {
         } catch (Exception e) {
             assert e instanceof InvocationTargetException;
             InvocationTargetException targetEx = (InvocationTargetException) e;
-            checkResult.put("correct", false);
-            checkResult.put("hint", "runtimeException");
-            checkResult.put("runtimeException", targetEx);
-            return checkResult;
+            javaProgramExerciseCheckResult.setAnswerState(false);
+            javaProgramExerciseCheckResult.setCaseHints(null);
+            javaProgramExerciseCheckResult.setCodeErrorType("runtimeException");
+            javaProgramExerciseCheckResult.setCodeErrorInfo(targetEx.toString());
+
+            return javaProgramExerciseCheckResult;
         }
 
-        return checkResult;
+        boolean answerState = (boolean) checkResult.get("correct");
+        javaProgramExerciseCheckResult.setAnswerState(answerState);
+        List<HashMap<String, String>> caseHints = (List<HashMap<String, String>>) checkResult.get("hints");
+        if (answerState) {
+            javaProgramExerciseCheckResult.setCaseHints(null);
+            javaProgramExerciseCheckResult.setCodeErrorType("");
+            javaProgramExerciseCheckResult.setCodeErrorInfo("");
+        } else {
+            javaProgramExerciseCheckResult.setCodeErrorType("case not pass");
+            javaProgramExerciseCheckResult.setCodeErrorInfo("");
+            javaProgramExerciseCheckResult.setCaseHints(caseHints);
+        }
+
+        return javaProgramExerciseCheckResult;
     }
 }

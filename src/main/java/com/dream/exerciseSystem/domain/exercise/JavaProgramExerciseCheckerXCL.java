@@ -67,7 +67,7 @@ public class JavaProgramExerciseCheckerXCL {
                 + submissionCodeSuffix;
         String targetMethodName = exercise.targetMethodName;
 
-        HashMap<String, Object> checkResult = JavaProgramExercise.check(submissionCode, targetMethodName, "XCL");
+        JavaProgramExerciseCheckResult checkResult = JavaProgramExercise.check(submissionCode, targetMethodName, "XCL");
         System.out.println(checkResult);
     }
 

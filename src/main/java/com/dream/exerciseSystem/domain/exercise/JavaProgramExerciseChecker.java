@@ -86,7 +86,7 @@ public class JavaProgramExerciseChecker {
                 "        int result = 0;\n" +
                 "\n" +
                 "        while(n > 0) {\n" +
-                "            result += n % 10;\n" +
+                "            result += n % 10 + 1;\n" +
                 "            n /= 10;\n" +
                 "        }\n" +
                 "\n" +
@@ -95,7 +95,7 @@ public class JavaProgramExerciseChecker {
                 + submissionCodeSuffix;
         String targetMethodName = exercise.targetMethodName;
 
-        HashMap<String, Object> checkResult = JavaProgramExercise.check(submissionCode, targetMethodName, "XZJ");
+        JavaProgramExerciseCheckResult checkResult = JavaProgramExercise.check(submissionCode, targetMethodName, "XZJ");
         System.out.println(checkResult);
     }
 
@@ -548,60 +548,60 @@ public class JavaProgramExerciseChecker {
         return result;
     }
 
-    public HashMap<String, Object> checkSumDigits(Class<?> solutionClass) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
-        return checkLongIntOut(solutionClass, "sumDigits", 3, -100, 100);
-    }
-
 //    public HashMap<String, Object> checkSumDigits(Class<?> solutionClass) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
-//        String targetMethodName = "sumDigits";
-//        HashMap<String, Object> result = new HashMap<>();
-//        ArrayList<HashMap<String, String>> hints = new ArrayList<>();
-//
-//        Method targetMethod = null;
-//        Class<?>[] trueParameterTypes = {long.class};
-//        Class<?> trueReturnType = int.class;
-//        HashMap<String, Object> checkInputAndOutputResult = checkInputAndOutput(solutionClass, targetMethodName, trueParameterTypes, trueReturnType);
-//        if (!(boolean)checkInputAndOutputResult.get("correct")) {
-//            return checkInputAndOutputResult;
-//        }
-//        targetMethod = solutionClass.getDeclaredMethod(targetMethodName, trueParameterTypes);
-//
-//        long testInput1 = random.nextLong() % 1000;
-//        long testInput2 = random.nextLong() % 1000;
-//        long testInput3 = random.nextLong() % 1000;
-//
-//        targetMethod.setAccessible(true);
-//        int userMethodOutput1 = (int) targetMethod.invoke(null, testInput1);
-//        int userMethodOutput2 = (int) targetMethod.invoke(null, testInput2);
-//        int userMethodOutput3 = (int) targetMethod.invoke(null, testInput3);
-//
-//        int trueOutput1 = sumDigits(testInput1);
-//        int trueOutput2 = sumDigits(testInput2);
-//        int trueOutput3 = sumDigits(testInput3);
-//
-//        boolean check1 = Objects.equals(userMethodOutput1, trueOutput1);
-//        boolean check2 = Objects.equals(userMethodOutput2, trueOutput2);
-//        boolean check3 = Objects.equals(userMethodOutput3, trueOutput3);
-//
-//        if (!check1) {
-//            HashMap<String, String> hint = new HashMap<>();
-//            hint.put("chinese", targetMethodName + "(" + testInput1 + ")的返回值应该是" + trueOutput1 + "，而不应该是" + userMethodOutput1);
-//            hints.add(hint);
-//        }
-//        if (!check2) {
-//            HashMap<String, String> hint = new HashMap<>();
-//            hint.put("chinese", targetMethodName + "(" + testInput2 + ")的返回值应该是" + trueOutput2 + "，而不应该是" + userMethodOutput2);
-//            hints.add(hint);
-//        }
-//        if (!check3) {
-//            HashMap<String, String> hint = new HashMap<>();
-//            hint.put("chinese", targetMethodName + "(" + testInput3 + ")的返回值应该是" + trueOutput3 + "，而不应该是" + userMethodOutput3);
-//            hints.add(hint);
-//        }
-//        result.put("correct", check1 && check2 && check3);
-//        result.put("hints", hints);
-//        return result;
+//        return checkLongIntOut(solutionClass, "sumDigits", 3, -100, 100);
 //    }
+
+    public HashMap<String, Object> checkSumDigits(Class<?> solutionClass) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
+        String targetMethodName = "sumDigits";
+        HashMap<String, Object> result = new HashMap<>();
+        ArrayList<HashMap<String, String>> hints = new ArrayList<>();
+
+        Method targetMethod = null;
+        Class<?>[] trueParameterTypes = {long.class};
+        Class<?> trueReturnType = int.class;
+        HashMap<String, Object> checkInputAndOutputResult = checkInputAndOutput(solutionClass, targetMethodName, trueParameterTypes, trueReturnType);
+        if (!(boolean)checkInputAndOutputResult.get("correct")) {
+            return checkInputAndOutputResult;
+        }
+        targetMethod = solutionClass.getDeclaredMethod(targetMethodName, trueParameterTypes);
+
+        long testInput1 = random.nextLong() % 1000;
+        long testInput2 = random.nextLong() % 1000;
+        long testInput3 = random.nextLong() % 1000;
+
+        targetMethod.setAccessible(true);
+        int userMethodOutput1 = (int) targetMethod.invoke(null, testInput1);
+        int userMethodOutput2 = (int) targetMethod.invoke(null, testInput2);
+        int userMethodOutput3 = (int) targetMethod.invoke(null, testInput3);
+
+        int trueOutput1 = sumDigits(testInput1);
+        int trueOutput2 = sumDigits(testInput2);
+        int trueOutput3 = sumDigits(testInput3);
+
+        boolean check1 = Objects.equals(userMethodOutput1, trueOutput1);
+        boolean check2 = Objects.equals(userMethodOutput2, trueOutput2);
+        boolean check3 = Objects.equals(userMethodOutput3, trueOutput3);
+
+        if (!check1) {
+            HashMap<String, String> hint = new HashMap<>();
+            hint.put("chinese", targetMethodName + "(" + testInput1 + ")的返回值应该是" + trueOutput1 + "，而不应该是" + userMethodOutput1);
+            hints.add(hint);
+        }
+        if (!check2) {
+            HashMap<String, String> hint = new HashMap<>();
+            hint.put("chinese", targetMethodName + "(" + testInput2 + ")的返回值应该是" + trueOutput2 + "，而不应该是" + userMethodOutput2);
+            hints.add(hint);
+        }
+        if (!check3) {
+            HashMap<String, String> hint = new HashMap<>();
+            hint.put("chinese", targetMethodName + "(" + testInput3 + ")的返回值应该是" + trueOutput3 + "，而不应该是" + userMethodOutput3);
+            hints.add(hint);
+        }
+        result.put("correct", check1 && check2 && check3);
+        result.put("hints", hints);
+        return result;
+    }
 
     public static int getPentagonalNumber(int i) {
         return (i * (3 * i - 1))/2;

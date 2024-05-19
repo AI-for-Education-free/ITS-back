@@ -61,7 +61,7 @@ public class JavaProgramExerciseCheckerXZJ2 {
                 + submissionCodeSuffix;
         String targetMethodName = exercise.targetMethodName;
 
-        HashMap<String, Object> checkResult = JavaProgramExercise.check(submissionCode, targetMethodName, "XZJ2");
+        JavaProgramExerciseCheckResult checkResult = JavaProgramExercise.check(submissionCode, targetMethodName, "XZJ2");
         System.out.println(checkResult);
     }
 
