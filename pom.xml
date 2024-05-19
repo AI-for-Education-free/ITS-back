@@ -208,6 +208,21 @@
 			<version>3.2.0</version>
 		</dependency>
 
+
+		<!-- 千帆api，https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp -->
+		<dependency>
+			<groupId>com.squareup.okhttp3</groupId>
+			<artifactId>okhttp</artifactId>
+			<version>4.12.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.baidubce</groupId>
+			<artifactId>qianfan</artifactId>
+			<version>0.0.5</version>
+		</dependency>
+
+
 	</dependencies>
 
 <!--	配置多环境-->
