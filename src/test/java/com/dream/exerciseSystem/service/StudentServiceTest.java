@@ -36,8 +36,8 @@ public class StudentServiceTest {
 //        Student existedStudent = new Student("xzj", "12345678", "18800118477@163.com");
         Student newStudent = new Student("xzy2", "test2@gmail.com", "123456");
 //        DataWrapper registerResult1 = studentService.register(existedStudent);
-        DataWrapper registerResult2 = studentService.register(newStudent);
+       // studentService.register(newStudent);
 //        System.out.println(registerResult1);
-        System.out.println(registerResult2);
+        //System.out.println(registerResult2);
     }
 }

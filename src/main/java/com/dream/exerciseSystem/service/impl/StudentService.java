@@ -1,6 +1,7 @@
 package com.dream.exerciseSystem.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.dream.exerciseSystem.config.RabbitMQConfig;
 import com.dream.exerciseSystem.constant.StudentInfoConstant;
 import com.dream.exerciseSystem.domain.LoginStudentDetails;
 import com.dream.exerciseSystem.domain.Student;
@@ -9,8 +10,11 @@ import com.dream.exerciseSystem.service.IStudentService;
 import com.dream.exerciseSystem.utils.DataWrapper;
 import com.dream.exerciseSystem.utils.JwtUtil;
 import com.dream.exerciseSystem.utils.RedisCache;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.messaging.converter.MessageConversionException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -56,6 +60,8 @@ public class StudentService extends ServiceImpl<StudentMapper, Student> implemen
     @Resource
     private StudentMapper studentMapper;
 
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
 
     @Override
     public DataWrapper login(String email, String password) {
@@ -127,6 +133,37 @@ public class StudentService extends ServiceImpl<StudentMapper, Student> implemen
             return new DataWrapper(false).msgBuilder("注册失败").dataBuilder(data);
         }
 
+    }
 
+    @Override
+    @RabbitListener(queues = RabbitMQConfig.REGISTER_QUEUE)
+    public void registerRabbitMQ(Student student){
+        // Query if the email is registered or not
+        QueryWrapper<Student> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("email", student.getEmail());
+        // Get the email number from the database
+        int emailCount = studentMapper.selectCount(queryWrapper);
+        if (emailCount > 0) {
+            rabbitTemplate.convertAndSend(RabbitMQConfig.REPLY_QUEUE, new DataWrapper(false).msgBuilder("the email has been registered").dataBuilder(null));
+            //throw new RuntimeException("该邮箱已被注册");
+            throw new MessageConversionException("该邮箱已被注册");
+            //return;
+        }
+
+        // Encode the password
+        String encodedPassword = passwordEncoder.encode(student.getPassword());
+        student.setPassword(encodedPassword);
+        student.setId(DigestUtils.md5DigestAsHex((StudentInfoConstant.salt+student.getEmail()).getBytes()));
+        boolean createResult = this.save(student);
+        Map<String, String> data = new HashMap<>();
+
+        if (createResult) {
+            rabbitTemplate.convertAndSend(RabbitMQConfig.REPLY_QUEUE, new DataWrapper(true).msgBuilder("注册成功").dataBuilder(data));
+            //return new DataWrapper(true).msgBuilder("注册成功").dataBuilder(data);
+        } else {
+            data.put("reason", "插入数据失败");
+            rabbitTemplate.convertAndSend(RabbitMQConfig.REPLY_QUEUE, new DataWrapper(false).msgBuilder("注册失败").dataBuilder(data));
+            //return new DataWrapper(false).msgBuilder("注册失败").dataBuilder(data);
+        }
     }
 }

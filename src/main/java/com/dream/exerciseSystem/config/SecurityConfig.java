@@ -41,6 +41,7 @@ public class SecurityConfig {
                 // 对于登入接口，允许匿名访问
                 .antMatchers("/students/login").anonymous()
                 .antMatchers("/students/register").anonymous()
+                .antMatchers("/students/xzy/register").anonymous()
                 // 除上面以外的所有请求都需要鉴权认证
                 .anyRequest().authenticated();
 

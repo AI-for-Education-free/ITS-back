@@ -4,9 +4,11 @@ package com.dream.exerciseSystem.utils;
 import lombok.Data;
 import lombok.Getter;
 
+import java.io.Serializable;
+
 @Data
 @Getter
-public class DataWrapper {
+public class DataWrapper implements Serializable {
     private boolean flag;
     private String msg;
     private Object data;

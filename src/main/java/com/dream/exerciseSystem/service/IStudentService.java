@@ -8,5 +8,8 @@ import com.dream.exerciseSystem.utils.DataWrapper;
 
 public interface IStudentService extends IService<Student> {
     DataWrapper login(String email, String password);
+    //DataWrapper register(Student student);
     DataWrapper register(Student student);
+
+    void registerRabbitMQ(Student student);
 }
