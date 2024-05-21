@@ -41,9 +41,9 @@ public class MongodbTest {
         }
 
         // 先删除所有数据，再导入全部数据
-        mongoTemplate.dropCollection("javaSingleChoiceExercise");
-        mongoTemplate.createCollection("javaSingleChoiceExercise");
-        mongoTemplate.insert(singleChoiceExercises, "javaSingleChoiceExercise");
+        mongoTemplate.dropCollection("singleChoiceExercise");
+        mongoTemplate.createCollection("singleChoiceExercise");
+        mongoTemplate.insert(singleChoiceExercises, "singleChoiceExercise");
     }
 
     @Test
@@ -60,15 +60,15 @@ public class MongodbTest {
         }
 
         // 先删除所有数据，再导入全部数据
-        mongoTemplate.dropCollection("javaProgramExercise");
-        mongoTemplate.createCollection("javaProgramExercise");
-        mongoTemplate.insert(javaProgramExercises, "javaProgramExercise");
+        mongoTemplate.dropCollection("programExercise");
+        mongoTemplate.createCollection("programExercise");
+        mongoTemplate.insert(javaProgramExercises, "programExercise");
     }
 
     @Test
     void xes3g5mSingleChoiceExercise2database() throws IOException {
         // 对应数据库里的singleChoiceExercise集合
-        String fPath = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "exercises", "math", "xes3g5m", "singleChoiceExercises.json").toString();
+        String fPath = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "exercises", "math", "xes3g5m", "single_choice_question.json").toString();
         File file = new File(fPath);
         String jsonString = Files.readString(Path.of(file.getAbsolutePath()));
         JSONObject jsonObject = JSONObject.fromObject(jsonString);
@@ -80,8 +80,8 @@ public class MongodbTest {
         }
 
         // 先删除所有数据，再导入全部数据
-        mongoTemplate.dropCollection("xes3g5mSingleChoiceExercise");
-        mongoTemplate.createCollection("xes3g5mSingleChoiceExercise");
-        mongoTemplate.insert(singleChoiceExercises, "xes3g5mSingleChoiceExercise");
+        mongoTemplate.dropCollection("singleChoiceExercise");
+        mongoTemplate.createCollection("singleChoiceExercise");
+        mongoTemplate.insert(singleChoiceExercises, "singleChoiceExercise");
     }
 }

@@ -38,7 +38,7 @@ public class MysqlTest {
 
     @Test
     void xes3g5mUser2Database() throws IOException, JSONException {
-        String fPath = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "user", "xes3g5m.json").toString();
+        String fPath = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "user", "xes3g5m_user_part.json").toString();
         File file = new File(fPath);
         String jsonString = Files.readString(Path.of(file.getAbsolutePath()));
         JSONArray jsonArray = new JSONArray(jsonString);
@@ -64,7 +64,7 @@ public class MysqlTest {
     @Test
     void xes3g5mUserBehavior2database() throws IOException, JSONException {
         String dataDir = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "userBehavior").toString();
-        String prefix = "xes3g5m_data_";
+        String prefix = "xes3g5m_";
         List<String> jsonFilePaths = new ArrayList<>();
         File directory = new File(dataDir);
 
