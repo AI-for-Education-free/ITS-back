@@ -34,16 +34,11 @@ public class MongodbTest {
         String jsonString = Files.readString(Path.of(file.getAbsolutePath()));
         JSONObject jsonObject = JSONObject.fromObject(jsonString);
         JSONArray exercises = jsonObject.getJSONArray("exercises");
-        List<SingleChoiceExercise> singleChoiceExercises = new ArrayList<>();
         for (int i = 0; i < exercises.size(); i++) {
             JSONObject exerciseObject = exercises.getJSONObject(i);
-            singleChoiceExercises.add(SingleChoiceExercise.generateExerciseFromJsonObject(exerciseObject, "JAVA"));
+            SingleChoiceExercise singleChoiceExercise = SingleChoiceExercise.generateExerciseFromJsonObject(exerciseObject, "JAVA");
+            mongoTemplate.save(singleChoiceExercise);
         }
-
-        // 先删除所有数据，再导入全部数据
-        mongoTemplate.dropCollection("singleChoiceExercise");
-        mongoTemplate.createCollection("singleChoiceExercise");
-        mongoTemplate.insert(singleChoiceExercises, "singleChoiceExercise");
     }
 
     @Test
@@ -53,16 +48,11 @@ public class MongodbTest {
         String jsonString = Files.readString(Path.of(file.getAbsolutePath()));
         JSONObject jsonObject = JSONObject.fromObject(jsonString);
         JSONArray exerciseArray = jsonObject.getJSONArray("exercises");
-        List<JavaProgramExercise> javaProgramExercises = new ArrayList<>();
         for (int i = 0; i < exerciseArray.size(); i++) {
             JSONObject exerciseObject = exerciseArray.getJSONObject(i);
-            javaProgramExercises.add(JavaProgramExercise.generateExerciseFromJsonObject(exerciseObject, "JAVA"));
+            JavaProgramExercise javaProgramExercise = JavaProgramExercise.generateExerciseFromJsonObject(exerciseObject, "JAVA");
+            mongoTemplate.save(javaProgramExercise);
         }
-
-        // 先删除所有数据，再导入全部数据
-        mongoTemplate.dropCollection("programExercise");
-        mongoTemplate.createCollection("programExercise");
-        mongoTemplate.insert(javaProgramExercises, "programExercise");
     }
 
     @Test
@@ -73,15 +63,10 @@ public class MongodbTest {
         String jsonString = Files.readString(Path.of(file.getAbsolutePath()));
         JSONObject jsonObject = JSONObject.fromObject(jsonString);
         JSONArray exercises = jsonObject.getJSONArray("exercises");
-        List<SingleChoiceExercise> singleChoiceExercises = new ArrayList<>();
         for (int i = 0; i < exercises.size(); i++) {
             JSONObject exerciseObject = exercises.getJSONObject(i);
-            singleChoiceExercises.add(SingleChoiceExercise.generateExerciseFromJsonObject(exerciseObject, "JAVA"));
+            SingleChoiceExercise singleChoiceExercise = SingleChoiceExercise.generateExerciseFromJsonObject(exerciseObject, "MATH");
+            mongoTemplate.save(singleChoiceExercise);
         }
-
-        // 先删除所有数据，再导入全部数据
-        mongoTemplate.dropCollection("singleChoiceExercise");
-        mongoTemplate.createCollection("singleChoiceExercise");
-        mongoTemplate.insert(singleChoiceExercises, "singleChoiceExercise");
     }
 }
