@@ -10,7 +10,8 @@ create table StudentAnswerRecord
     hintCount         int           null comment 'times of hint',
     codeErrorType     varchar(128)  null comment 'code error type',
     codeErrorInfo     varchar(256)  null comment 'code error info',
-    answer            varchar(1024) not null comment 'the commited answer of student (including choice, math, program question'
+    answer            varchar(1024) not null comment 'the commited answer of student (including choice, math, program question',
+    questionType      int           not null comment 'question type'
 );
 
 
