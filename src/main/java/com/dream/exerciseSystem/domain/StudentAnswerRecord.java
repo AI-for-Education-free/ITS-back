@@ -61,22 +61,25 @@ public class StudentAnswerRecord implements Serializable {
 
     private String answer;
 
+    private int questionType;
+
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 
-    public StudentAnswerRecord(String id, String userId, String questionId, Integer answerCorrectness, Long answerTimestamp, String answer) {
+    public StudentAnswerRecord(String id, String userId, String questionId, Integer answerCorrectness, Long answerTimestamp, String answer, int questionType) {
         this.id = id;
         this.userId = userId;
         this.questionId = questionId;
         this.answerCorrectness = answerCorrectness;
         this.answerTimestamp = answerTimestamp;
         this.answer = answer;
+        this.questionType = questionType;
     }
 
     public StudentAnswerRecord() {
     }
 
-    public StudentAnswerRecord(String id, String userId, String questionId, Integer answerCorrectness, Long answerTimestamp, Integer answerTimeConsume, Integer hintCount, String codeErrorType, String codeErrorInfo) {
+    public StudentAnswerRecord(String id, String userId, String questionId, Integer answerCorrectness, Long answerTimestamp, Integer answerTimeConsume, Integer hintCount, String codeErrorType, String codeErrorInfo, String answer, int questionType) {
         this.id = id;
         this.userId = userId;
         this.questionId = questionId;
@@ -87,9 +90,10 @@ public class StudentAnswerRecord implements Serializable {
         this.codeErrorType = codeErrorType;
         this.codeErrorInfo = codeErrorInfo;
         this.answer = answer;
+        this.questionType = questionType;
     }
 
-    public StudentAnswerRecord(String userId, String questionId, Long answerTimestamp, boolean correctness) {
+    public StudentAnswerRecord(String userId, String questionId, Long answerTimestamp, boolean correctness, int questionType) {
         this.id = userId + questionId + answerTimestamp;
         this.userId = userId;
         this.questionId = questionId;
@@ -100,5 +104,6 @@ public class StudentAnswerRecord implements Serializable {
         this.codeErrorType = "";
         this.codeErrorInfo = "";
         this.answer = "";
+        this.questionType = questionType;
     }
 }

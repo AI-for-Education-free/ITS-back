@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dream.exerciseSystem.mapper.UserBalanceRecordMapper">
+
+    <resultMap id="BaseResultMap" type="com.dream.exerciseSystem.domain.UserBalanceRecord">
+            <id property="userId" column="userId" jdbcType="VARCHAR"/>
+            <result property="FAQTokenBalance" column="FAQTokenBalance" jdbcType="INTEGER"/>
+            <result property="recommendTokenBalance" column="recommendTokenBalance" jdbcType="INTEGER"/>
+            <result property="recommendFreeUses" column="recommendFreeUses" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        userId,FAQTokenBalance,recommendTokenBalance,
+        recommendFreeUses
+    </sql>
+</mapper>
