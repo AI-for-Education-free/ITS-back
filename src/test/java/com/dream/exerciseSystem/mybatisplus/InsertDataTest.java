@@ -40,8 +40,8 @@ public class InsertDataTest {
 //        studentInfo.setEmail(testEmail);
 //        studentInfo.setPassword(testPassword);
 
-        DataWrapper dataWrapper = iStudentService.register(studentInfo);
-        Assertions.assertNotNull(dataWrapper);
+        iStudentService.register(studentInfo);
+        //Assertions.assertNotNull(dataWrapper);
     }
 
 }

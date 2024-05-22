@@ -84,6 +84,7 @@ public class JavaProgramExerciseService extends ServiceImpl<StudentAnswerRecordM
             studentAnswerRecord.setId(studentAnswerId);
             studentAnswerRecord.setUserId(studentId);
             studentAnswerRecord.setQuestionId(id);
+            studentAnswerRecord.setQuestionType(0);
             if(!checkResult.isAnswerState()){
                 studentAnswerRecord.setAnswerCorrectness(0);
             }
@@ -92,6 +93,7 @@ public class JavaProgramExerciseService extends ServiceImpl<StudentAnswerRecordM
             studentAnswerRecord.setAnswerTimestamp(studentAnswerTimestamp);
             studentAnswerRecord.setAnswer(submissionCode);
             boolean writeState = this.save(studentAnswerRecord);
+            //data.put("result", checkResult);
             return new DataWrapper(true).msgBuilder("检查Java编程习题成功").dataBuilder(data);
         }
 

@@ -5,6 +5,8 @@ import com.dream.exerciseSystem.constant.StudentInfoConstant;
 import com.dream.exerciseSystem.domain.LoginStudentDetails;
 import com.dream.exerciseSystem.domain.Student;
 //import com.dream.exerciseSystem.domain.Student2Mongodb;
+import com.dream.exerciseSystem.domain.UserBalanceRecord;
+import com.dream.exerciseSystem.mapper.UserBalanceRecordMapper;
 import com.dream.exerciseSystem.service.IStudentService;
 import com.dream.exerciseSystem.utils.DataWrapper;
 import com.dream.exerciseSystem.utils.JwtUtil;
@@ -55,6 +57,9 @@ public class StudentService extends ServiceImpl<StudentMapper, Student> implemen
      */
     @Resource
     private StudentMapper studentMapper;
+
+    @Resource
+    private UserBalanceRecordMapper userBalanceRecordMapper;
 
 
     @Override
@@ -119,6 +124,11 @@ public class StudentService extends ServiceImpl<StudentMapper, Student> implemen
         student.setId(DigestUtils.md5DigestAsHex((StudentInfoConstant.salt+student.getEmail()).getBytes()));
         boolean createResult = this.save(student);
         Map<String, String> data = new HashMap<>();
+
+        // Create the new balance table for the new registered student
+        UserBalanceRecord userBalanceRecord = new UserBalanceRecord();
+        userBalanceRecord.setUserId(DigestUtils.md5DigestAsHex((StudentInfoConstant.salt+student.getEmail()).getBytes()));
+        userBalanceRecordMapper.insert(userBalanceRecord);
 
         if (createResult) {
             return new DataWrapper(true).msgBuilder("注册成功").dataBuilder(data);

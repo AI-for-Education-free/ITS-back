@@ -60,12 +60,27 @@ public class ExerciseController {
         return singleChoiceExerciseService.getExerciseById(exerciseId);
     }
 
+    @PostMapping("/java/singleChoice/check/{exerciseId}")
+    @ResponseBody
+    public DataWrapper checkSingleChoiceExercise(@PathVariable String exerciseId, @RequestBody Map<String, String> requestBody, HttpServletRequest request) throws Exception{
+        String token = request.getHeader("token");
+        // 解析token
+        String studentId;
+        Claims claims = JwtUtil.parsedResult(token);
+        studentId = claims.getSubject();
+
+        String choiceAnswer = requestBody.get("SubmissionChoiceAnswer");
+        return singleChoiceExerciseService.checkSingleChoiceExercise(exerciseId, choiceAnswer, studentId);
+    }
+
     @PostMapping("/java/program/check/{exerciseId}")
     @ResponseBody
     public DataWrapper checkJavaProgramExercise(@PathVariable String exerciseId, @RequestBody Map<String, String> requestBody) throws Exception {
         String submissionCode = "package org.dream.solution;\n" + requestBody.get("submissionCode");
         return javaProgramExerciseService.checkExercise(exerciseId, submissionCode);
     }
+
+
 
     @PostMapping("/java/program/check/xzy/{exerciseId}")
     @ResponseBody
