@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -47,11 +47,11 @@
 			<scope>runtime</scope>
 		</dependency>
 
-<!--		<dependency>-->
-<!--			<groupId>com.github.pagehelper</groupId>-->
-<!--			<artifactId>pagehelper-spring-boot-starter</artifactId>-->
-<!--			<version>1.4.3</version>-->
-<!--		</dependency>-->
+		<!--		<dependency>-->
+		<!--			<groupId>com.github.pagehelper</groupId>-->
+		<!--			<artifactId>pagehelper-spring-boot-starter</artifactId>-->
+		<!--			<version>1.4.3</version>-->
+		<!--		</dependency>-->
 
 
 		<dependency>
@@ -66,7 +66,7 @@
 		</dependency>
 
 
-<!--		jdk1.8以下版本使用slf4j和slf4j-log4j12的1.8.0以下版本-->
+		<!--		jdk1.8以下版本使用slf4j和slf4j-log4j12的1.8.0以下版本-->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
@@ -83,19 +83,19 @@
 		</dependency>
 
 
-<!--		热部署-->
+		<!--		热部署-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 		</dependency>
 
-<!--		数据校验 JSR303-->
+		<!--		数据校验 JSR303-->
 		<dependency>
 			<groupId>jakarta.validation</groupId>
 			<artifactId>jakarta.validation-api</artifactId>
 		</dependency>
 
-<!--		validation实现-->
+		<!--		validation实现-->
 		<dependency>
 			<groupId>org.hibernate.validator</groupId>
 			<artifactId>hibernate-validator</artifactId>
@@ -144,11 +144,11 @@
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-pool2 -->
-<!--		<dependency>-->
-<!--			<groupId>org.apache.commons</groupId>-->
-<!--			<artifactId>commons-pool2</artifactId>-->
-<!--			<version>2.11.1</version>-->
-<!--		</dependency>-->
+		<!--		<dependency>-->
+		<!--			<groupId>org.apache.commons</groupId>-->
+		<!--			<artifactId>commons-pool2</artifactId>-->
+		<!--			<version>2.11.1</version>-->
+		<!--		</dependency>-->
 
 		<!-- spring-boot-starter-data-redis2.7.2对应jedis最高只能到3.9.0 -->
 		<dependency>
@@ -176,7 +176,7 @@
 			<version>1.3.0</version>
 		</dependency>
 
-<!--		用于将json数据导入数据库-->
+		<!--		用于将json数据导入数据库-->
 		<dependency>
 			<groupId>org.mongodb</groupId>
 			<artifactId>mongo-java-driver</artifactId>
@@ -196,7 +196,7 @@
 			<optional>true</optional>
 		</dependency>
 
-<!--		静态资源-->
+		<!--		静态资源-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
@@ -223,30 +223,42 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-amqp</artifactId>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-elasticsearch</artifactId>
+			<version>4.4.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webflux</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>jakarta.json</groupId>
+			<artifactId>jakarta.json-api</artifactId>
+			<version>2.1.1</version>
 		</dependency>
 
 	</dependencies>
 
-<!--	配置多环境-->
-<!--	<profiles>-->
-<!--		<profile>-->
-<!--			<id>env_dev</id>-->
-<!--			<properties>-->
-<!--				<prfile.active>dev</prfile.active>-->
-<!--			</properties>-->
-<!--			<activation>-->
-<!--				<activeByDefault>true</activeByDefault>-->
-<!--			</activation>-->
-<!--		</profile>-->
-<!--		<profile>-->
-<!--			<id>env_pro</id>-->
-<!--			<properties>-->
-<!--				<prfile.active>pro</prfile.active>-->
-<!--			</properties>-->
-<!--		</profile>-->
-<!--	</profiles>-->
+	<!--	配置多环境-->
+	<!--	<profiles>-->
+	<!--		<profile>-->
+	<!--			<id>env_dev</id>-->
+	<!--			<properties>-->
+	<!--				<prfile.active>dev</prfile.active>-->
+	<!--			</properties>-->
+	<!--			<activation>-->
+	<!--				<activeByDefault>true</activeByDefault>-->
+	<!--			</activation>-->
+	<!--		</profile>-->
+	<!--		<profile>-->
+	<!--			<id>env_pro</id>-->
+	<!--			<properties>-->
+	<!--				<prfile.active>pro</prfile.active>-->
+	<!--			</properties>-->
+	<!--		</profile>-->
+	<!--	</profiles>-->
 
 
 	<build>
@@ -257,13 +269,13 @@
 				<version>2.2.6.RELEASE</version>
 
 			</plugin>
-<!--			<plugin>-->
-<!--				<groupId>org.apache.maven.plugins</groupId>-->
-<!--				<artifactId>maven-surefire-plugin</artifactId>-->
-<!--				<configuration>-->
-<!--					<skipTests>true</skipTests>-->
-<!--				</configuration>-->
-<!--			</plugin>-->
+			<!--			<plugin>-->
+			<!--				<groupId>org.apache.maven.plugins</groupId>-->
+			<!--				<artifactId>maven-surefire-plugin</artifactId>-->
+			<!--				<configuration>-->
+			<!--					<skipTests>true</skipTests>-->
+			<!--				</configuration>-->
+			<!--			</plugin>-->
 		</plugins>
 	</build>
 
