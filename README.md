@@ -110,6 +110,7 @@
 - 导入Java编程习题：`src/test/java/com/dream/exerciseSystem/MongodbTest.java`里的`javaProgramExercise2database`
 - 导入Java单选习题：`src/test/java/com/dream/exerciseSystem/MongodbTest.java`里的`javaSingleChoiceExercise2database`
 - 导入Xes3g5m单选习题：`src/test/java/com/dream/exerciseSystem/MongodbTest.java`里的`xes3g5mSingleChoiceExercise2database`
+- 导入Xes3g5m填空题：`src/test/java/com/dream/exerciseSystem/MongodbTest.java`里的`xes3g5mFillInExercise2database`
 - 导入Xes3g5m用户数据：`src/test/java/com/dream/exerciseSystem/MysqlTest.java`里的`xes3g5mUser2Database`
 - 导入Xes3g5m用户行为：`src/test/java/com/dream/exerciseSystem/MysqlTest.java`里的`xes3g5mUserBehavior2database`
 
