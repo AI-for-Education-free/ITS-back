@@ -1,10 +1,10 @@
 package com.dream.exerciseSystem.domain.exercise;
 
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+import org.springframework.data.mongodb.core.aggregation.ArrayOperators;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class Util {
     private final Random random = new Random();
@@ -16,6 +16,17 @@ public class Util {
             values.add(value);
         }
         return values;
+    }
+
+    public static HashMap<String, String> generateHashMapFromJsonObject(JSONObject jsonObject){
+        HashMap<String, String> hashMap = new HashMap<>();
+        Iterator keys = jsonObject.keys();
+        while(keys.hasNext()){
+            String key =  (String) keys.next();
+            String value = jsonObject.getString(key);
+            hashMap.put(key, value);
+        }
+        return hashMap;
     }
 
     public int[] generateIntArray(int start, int end, int num) {
