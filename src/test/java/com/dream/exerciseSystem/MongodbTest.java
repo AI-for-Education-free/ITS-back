@@ -1,6 +1,7 @@
 package com.dream.exerciseSystem;
 
 import com.dream.exerciseSystem.domain.Student;
+import com.dream.exerciseSystem.domain.exercise.FillInExercise;
 import com.dream.exerciseSystem.domain.exercise.JavaProgramExercise;
 import com.dream.exerciseSystem.domain.exercise.SingleChoiceExercise;
 import net.sf.json.JSONArray;
@@ -67,6 +68,21 @@ public class MongodbTest {
             JSONObject exerciseObject = exercises.getJSONObject(i);
             SingleChoiceExercise singleChoiceExercise = SingleChoiceExercise.generateExerciseFromJsonObject(exerciseObject, "MATH");
             mongoTemplate.save(singleChoiceExercise);
+        }
+    }
+
+    @Test
+    void xes3g5mFillInExercise2database() throws IOException {
+        // 对应数据库里的singleChoiceExercise集合
+        String fPath = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "exercises", "math", "xes3g5m", "fill_in_question.json").toString();
+        File file = new File(fPath);
+        String jsonString = Files.readString(Path.of(file.getAbsolutePath()));
+        JSONObject jsonObject = JSONObject.fromObject(jsonString);
+        JSONArray exercises = jsonObject.getJSONArray("exercises");
+        for (int i = 0; i < exercises.size(); i++) {
+            JSONObject exerciseObject = exercises.getJSONObject(i);
+            FillInExercise fillInExercise = FillInExercise.generateExerciseFromJsonObject(exerciseObject, "MATH");
+            mongoTemplate.save(fillInExercise);
         }
     }
 }

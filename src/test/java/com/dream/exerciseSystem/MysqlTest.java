@@ -25,6 +25,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 
@@ -95,6 +96,8 @@ public class MysqlTest {
                 String questionId = obj.getString("question_id");
                 boolean correct = obj.getBoolean("correct");
                 Long timestamp = obj.getLong("timestamp");
+                String questionTypeStr = obj.getString("question_type");
+                int questionType = Objects.equals(questionTypeStr, "单选") ? 0 : 1;
 
                 // 因为json数据里只有name，所以先根据name查id
                 QueryWrapper<Student> queryUserIdWrapper = new QueryWrapper<>();
@@ -103,8 +106,9 @@ public class MysqlTest {
                 Student targetStudent = targetStudents.get(0);
                 String studentId = targetStudent.getId();
 
+                // 0单选，1表示填空，2表示JavaProgram
                 StudentAnswerRecord studentAnswerRecord = new StudentAnswerRecord(
-                        studentId, questionId, timestamp, correct
+                        studentId, questionId, timestamp, correct, questionType
                 );
 
                 // 查询是否存在数据，因为该数据集下可能存在一个人在相同时间戳下做了同一道题两次
