@@ -2,11 +2,13 @@ package com.dream.exerciseSystem.controller;
 
 import com.dream.exerciseSystem.domain.exercise.ExerciseBasicInfo;
 import com.dream.exerciseSystem.domain.exercise.SingleChoiceExercise;
+import com.dream.exerciseSystem.service.IFillInExerciseService;
 import com.dream.exerciseSystem.service.IJavaProgramExerciseService;
 import com.dream.exerciseSystem.service.ISingleChoiceExerciseService;
 import com.dream.exerciseSystem.utils.DataWrapper;
 import com.dream.exerciseSystem.utils.JwtUtil;
 import io.jsonwebtoken.Claims;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
@@ -24,6 +26,9 @@ public class ExerciseController {
 
     @Autowired
     private ISingleChoiceExerciseService singleChoiceExerciseService;
+
+    @Autowired
+    private IFillInExerciseService fillInExerciseService;
 
     @GetMapping("/type")
     @ResponseBody
@@ -69,7 +74,7 @@ public class ExerciseController {
         Claims claims = JwtUtil.parsedResult(token);
         studentId = claims.getSubject();
 
-        String choiceAnswer = requestBody.get("SubmissionChoiceAnswer");
+        String choiceAnswer = requestBody.get("submissionChoiceAnswer");
         return singleChoiceExerciseService.checkSingleChoiceExercise(exerciseId, choiceAnswer, studentId);
     }
 
@@ -80,6 +85,18 @@ public class ExerciseController {
         return javaProgramExerciseService.checkExercise(exerciseId, submissionCode);
     }
 
+    @PostMapping("/fillIn/check/{exerciseId}")
+    @ResponseBody
+    public DataWrapper checkFillInExercise(@PathVariable String exerciseId, @RequestBody Map<String, HashMap<String, String>> requestBody, HttpServletRequest request) throws Exception{
+        String token = request.getHeader("token");
+        // 解析token
+        String studentId;
+        Claims claims = JwtUtil.parsedResult(token);
+        studentId = claims.getSubject();
+
+        HashMap<String, String> fillInAnswer = requestBody.get("submissionFillInAnswer");
+        return fillInExerciseService.checkFillInExercise(exerciseId, fillInAnswer, studentId);
+    }
 
 
     @PostMapping("/java/program/check/xzy/{exerciseId}")

@@ -1,7 +1,9 @@
 package com.dream.exerciseSystem.elasticSearch;
 
 import co.elastic.clients.json.JsonData;
+import com.dream.exerciseSystem.domain.ExerciseVector;
 import com.dream.exerciseSystem.domain.UserVector;
+import com.dream.exerciseSystem.mapper.ExerciseVectorRepository;
 import com.dream.exerciseSystem.mapper.UserVectorRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -26,32 +28,42 @@ public class EStest {
 
     @Resource
     private ElasticsearchTemplate elasticsearchTemplate;
+
+    @Resource
+    private ExerciseVectorRepository exerciseVectorRepository;
+
+
     @Test
     void insertDataTestFunctionFromESTemplate(){
         float[] array = new float[800];
-        float[] array1 = new float[800];
-        // 创建一个Random对象
+                // 创建一个Random对象
         Random random = new Random();
 
         // 填充数组
         for (int i = 0; i < 800; i++) {
             array[i] = random.nextFloat();
-            array1[i] = random.nextFloat();
         }
-        UserVector vectorObject = new UserVector();
-        vectorObject.setId("123456");
+        ExerciseVector vectorObject = new ExerciseVector();
+        vectorObject.setId("12345671");
         vectorObject.setVector(array);
-       vectorObject.setVector(array1);
+        vectorObject.setExerciseType("MATH");
         elasticsearchTemplate.save(vectorObject);
     }
 
     @Test
     void insertDataFunctionFromESRepository(){
-        float []arr = {1,10};
+        float[] array = new float[2];
+        // 创建一个Random对象
+        Random random = new Random();
+
+        // 填充数组
+        for (int i = 0; i < 2; i++) {
+            array[i] = random.nextFloat();
+        }
         UserVector userVector = new UserVector();
-        userVector.setId("123459");
+        userVector.setId("123458");
 //        userVector.setName("xzy3");
-//        vectorObject.setVector(arr);
+        userVector.setVector(array);
         userVectorRepository.save(userVector);
     }
 
@@ -66,8 +78,21 @@ public class EStest {
 
     @Test
     void searchDataBySimilarity(){
-        float[] arr = new float[]{1,6};
-        List<UserVector> list = userVectorRepository.findBySimilar(JsonData.of(arr).toJson(new JacksonJsonpMapper()).toString());
-        //
+        float[] array = new float[800];
+        // 创建一个Random对象
+        Random random = new Random();
+
+        // 填充数组
+        for (int i = 0; i < 800; i++) {
+            array[i] = random.nextFloat();
+        }
+//        List<UserVector> list = userVectorRepository.findBySimilar(JsonData.of(array).toJson(new JacksonJsonpMapper()).toString());
+//        for(UserVector i:list){
+//            System.out.println(i.getId());
+//        }
+        List<ExerciseVector> list = exerciseVectorRepository.findDissimilarJAVAExercise(JsonData.of(array).toJson(new JacksonJsonpMapper()).toString());
+        for(ExerciseVector i:list){
+            System.out.println(i.getId());
+        }
     }
 }

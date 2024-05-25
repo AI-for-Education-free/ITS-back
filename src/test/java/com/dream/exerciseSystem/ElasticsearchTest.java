@@ -52,7 +52,7 @@ public class ElasticsearchTest {
                 latentList.add(item.floatValue());
             }
 
-            questionVector.put(id, latentList);
+            //questionVector.put(id, latentList);
         }
 
         System.out.println(questionVector);

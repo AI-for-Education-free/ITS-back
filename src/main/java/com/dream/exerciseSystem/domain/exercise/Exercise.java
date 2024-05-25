@@ -29,4 +29,10 @@ public class Exercise {
         this.answerContents = answerContents;
         this.explanationContents = explanationContents;
     }
+
+    public Exercise(List<Content> exerciseContents, List<Content> explanationContents) {
+        this.exerciseContents = exerciseContents;
+        this.explanationContents = explanationContents;
+        this.answerContents = null;
+    }
 }

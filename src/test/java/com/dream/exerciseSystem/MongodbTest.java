@@ -1,11 +1,17 @@
 package com.dream.exerciseSystem;
 
 import com.dream.exerciseSystem.domain.Student;
+import com.dream.exerciseSystem.domain.exercise.Exercise;
 import com.dream.exerciseSystem.domain.exercise.FillInExercise;
 import com.dream.exerciseSystem.domain.exercise.JavaProgramExercise;
 import com.dream.exerciseSystem.domain.exercise.SingleChoiceExercise;
+import com.dream.exerciseSystem.service.RecommendService;
+import com.dream.exerciseSystem.service.impl.RecommendServiceImpl;
+import com.dream.exerciseSystem.utils.MongoUtils;
+import net.sf.json.JSON;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import org.bson.Document;
 import org.json.JSONException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -26,6 +32,9 @@ import java.util.List;
 public class MongodbTest {
     @Resource
     private MongoTemplate mongoTemplate;
+
+    @Resource
+    private MongoUtils mongoUtils;
 
     @Test
     void javaSingleChoiceExercise2database() throws IOException {
@@ -83,6 +92,14 @@ public class MongodbTest {
             JSONObject exerciseObject = exercises.getJSONObject(i);
             FillInExercise fillInExercise = FillInExercise.generateExerciseFromJsonObject(exerciseObject, "MATH");
             mongoTemplate.save(fillInExercise);
+        }
+    }
+
+    @Test
+    void randomGetData(){
+        List<Exercise> list = mongoUtils.getRandomExerciseContent();
+        for(Exercise document:list){
+            System.out.println(document.toString());
         }
     }
 }

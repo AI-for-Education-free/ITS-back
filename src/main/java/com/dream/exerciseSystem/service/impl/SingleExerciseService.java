@@ -72,7 +72,7 @@ public class SingleExerciseService extends ServiceImpl<StudentAnswerRecordMapper
         // If answer check passwd. Query the question by the exerciseId
         SingleChoiceExercise singleChoiceExercise = mongoTemplate.findById(exerciseId, SingleChoiceExercise.class);
         if (singleChoiceExercise == null)
-            return new DataWrapper(false).msgBuilder("检查Java习题失败").codeBuilder(100);
+            return new DataWrapper(false).msgBuilder("检查single choice习题失败").codeBuilder(100);
         int correctAnswer = singleChoiceExercise.getCorrectAnswer();
 
         // Generate the studentAnswerRecord model
