@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.dream.exerciseSystem.domain.StudentAnswerRecord;
 import com.dream.exerciseSystem.utils.DataWrapper;
 
-public interface ISingleChoiceExerciseService extends IService<StudentAnswerRecord> {
+public interface SingleChoiceExerciseService extends IService<StudentAnswerRecord> {
     DataWrapper getExerciseById(String id);
     DataWrapper getExerciseAll();
     DataWrapper getExerciseAllBasicInfo();

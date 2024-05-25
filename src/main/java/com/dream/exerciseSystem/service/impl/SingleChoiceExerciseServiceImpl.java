@@ -5,7 +5,7 @@ import com.dream.exerciseSystem.domain.StudentAnswerRecord;
 import com.dream.exerciseSystem.domain.exercise.ExerciseBasicInfo;
 import com.dream.exerciseSystem.domain.exercise.SingleChoiceExercise;
 import com.dream.exerciseSystem.mapper.StudentAnswerRecordMapper;
-import com.dream.exerciseSystem.service.ISingleChoiceExerciseService;
+import com.dream.exerciseSystem.service.SingleChoiceExerciseService;
 import com.dream.exerciseSystem.utils.DataWrapper;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class SingleExerciseService extends ServiceImpl<StudentAnswerRecordMapper, StudentAnswerRecord> implements ISingleChoiceExerciseService {
+public class SingleChoiceExerciseServiceImpl extends ServiceImpl<StudentAnswerRecordMapper, StudentAnswerRecord> implements SingleChoiceExerciseService {
     @Resource
     private MongoTemplate mongoTemplate;
 
