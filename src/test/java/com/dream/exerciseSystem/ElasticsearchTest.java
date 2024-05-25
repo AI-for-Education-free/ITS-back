@@ -40,22 +40,26 @@ public class ElasticsearchTest {
         String jsonString = Files.readString(Path.of(file.getAbsolutePath()));
         JSONArray jsonArray = new JSONArray(jsonString);
 
-        HashMap<String, List<Float>> questionVector = new HashMap<>();
+        HashMap<String, float[]> questionVector = new HashMap<>();
+        HashMap<String, String> questionType = new HashMap<>();
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject obj = jsonArray.getJSONObject(i);
 
             String id = obj.getString("question_id");
+            questionType.put(id, obj.getString("question_type"));
+
             JSONArray latentArray = obj.getJSONArray("question_emb");
-            List<Float> latentList = new ArrayList<>();
+            float[] vector = new float[64];
             for (int j = 0; j < latentArray.length(); j++) {
                 Double item = (Double)latentArray.get(j);
-                latentList.add(item.floatValue());
+                vector[j] = item.floatValue();
             }
 
-            //questionVector.put(id, latentList);
+            questionVector.put(id, vector);
         }
 
         System.out.println(questionVector);
+        System.out.println(questionType);
     }
 
     @Test
@@ -65,7 +69,7 @@ public class ElasticsearchTest {
         String jsonString = Files.readString(Path.of(file.getAbsolutePath()));
         JSONArray jsonArray = new JSONArray(jsonString);
 
-        HashMap<String, List<Float>> userVector = new HashMap<>();
+        HashMap<String, float[]> userVector = new HashMap<>();
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject obj = jsonArray.getJSONObject(i);
 
@@ -73,13 +77,13 @@ public class ElasticsearchTest {
             String id = DigestUtils.md5DigestAsHex((StudentInfoConstant.salt+email).getBytes());
 
             JSONArray latentArray = obj.getJSONArray("latent");
-            List<Float> latentList = new ArrayList<>();
+            float[] vector = new float[64];
             for (int j = 0; j < latentArray.length(); j++) {
                 Double item = (Double)latentArray.get(j);
-                latentList.add(item.floatValue());
+                vector[j] = item.floatValue();
             }
 
-            userVector.put(id, latentList);
+            userVector.put(id, vector);
         }
 
         System.out.println(userVector);
