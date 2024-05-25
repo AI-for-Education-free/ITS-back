@@ -4,7 +4,7 @@ import com.dream.exerciseSystem.domain.exercise.ExerciseBasicInfo;
 import com.dream.exerciseSystem.domain.exercise.SingleChoiceExercise;
 import com.dream.exerciseSystem.service.IFillInExerciseService;
 import com.dream.exerciseSystem.service.IJavaProgramExerciseService;
-import com.dream.exerciseSystem.service.ISingleChoiceExerciseService;
+import com.dream.exerciseSystem.service.SingleChoiceExerciseService;
 import com.dream.exerciseSystem.utils.DataWrapper;
 import com.dream.exerciseSystem.utils.JwtUtil;
 import io.jsonwebtoken.Claims;
@@ -25,7 +25,7 @@ public class ExerciseController {
     private IJavaProgramExerciseService javaProgramExerciseService;
 
     @Autowired
-    private ISingleChoiceExerciseService singleChoiceExerciseService;
+    private SingleChoiceExerciseService singleChoiceExerciseService;
 
     @Autowired
     private IFillInExerciseService fillInExerciseService;

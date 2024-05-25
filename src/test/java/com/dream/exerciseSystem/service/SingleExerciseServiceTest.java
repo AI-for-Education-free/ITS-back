@@ -1,6 +1,6 @@
 package com.dream.exerciseSystem.service;
 
-import com.dream.exerciseSystem.service.impl.SingleExerciseService;
+import com.dream.exerciseSystem.service.SingleChoiceExerciseService;
 import com.dream.exerciseSystem.utils.DataWrapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,7 @@ import org.springframework.test.context.ActiveProfiles;
 //@ActiveProfiles("dev")
 public class SingleExerciseServiceTest {
     @Autowired
-    SingleExerciseService singleExerciseService;
+    SingleChoiceExerciseService singleExerciseService;
 
     @Test
     void TestGetExerciseById() {

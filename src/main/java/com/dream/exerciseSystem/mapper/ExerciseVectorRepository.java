@@ -12,7 +12,7 @@ public interface ExerciseVectorRepository extends ElasticsearchRepository<Exerci
             "    \"script_score\": {" +
             "       \"query\": {\"match\": {\"exerciseType\":\"JAVA\"}}," +
             "       \"script\": {"+
-            "           \"source\": \"cosineSimilarity(params.queryVector, 'vector') +0.1\","+
+            "           \"source\": \"(dotProduct(params.queryVector, 'vector') +1.0)*0.6\","+
             "           \"params\": {\"queryVector\": ?0}"+
             "       }"+
             "   }"+
@@ -23,7 +23,7 @@ public interface ExerciseVectorRepository extends ElasticsearchRepository<Exerci
             "    \"script_score\": {" +
             "       \"query\": {\"match\": {\"exerciseType\":\"MATH\"}}," +
             "       \"script\": {"+
-            "           \"source\": \"cosineSimilarity(params.queryVector, 'vector') +0.1\","+
+            "           \"source\": \"(dotProduct(params.queryVector, 'vector') +1.0)*0.6\","+
             "           \"params\": {\"queryVector\": ?0}"+
             "       }"+
             "   }"+
@@ -34,7 +34,7 @@ public interface ExerciseVectorRepository extends ElasticsearchRepository<Exerci
             "    \"script_score\": {" +
             "       \"query\": {\"match\": {\"exerciseType\":\"JAVA\"}}," +
             "       \"script\": {"+
-            "           \"source\": \"double result = cosineSimilarity(params.queryVector, 'vector') +0.1; return 1/result\","+
+            "           \"source\": \"double result = (dotProduct(params.queryVector, 'vector') +1.0)*0.6; return 1/result\","+
             "           \"params\": {\"queryVector\": ?0}"+
             "       }"+
             "   }"+
@@ -45,11 +45,76 @@ public interface ExerciseVectorRepository extends ElasticsearchRepository<Exerci
             "    \"script_score\": {" +
             "       \"query\": {\"match\": {\"exerciseType\":\"MATH\"}}," +
             "       \"script\": {"+
-            "           \"source\": \"double result = cosineSimilarity(params.queryVector, 'vector') +0.1, return 1/result\","+
+            "           \"source\": \"double result = (dotProduct(params.queryVector, 'vector') +1.0)*0.6; return 1/result\","+
             "           \"params\": {\"queryVector\": ?0}"+
             "       }"+
             "   }"+
             "}")
     List<ExerciseVector> findDissimilarMathExercise(String content);
 
+    @Query("{" +
+            "    \"script_score\": {" +
+            "       \"query\": {\"match\": {\"exerciseType\":\"单选\"}}," +
+            "       \"script\": {"+
+            "           \"source\": \"(dotProduct(params.queryVector, 'vector') +1.0)*0.6\","+
+            "           \"params\": {\"queryVector\": ?0}"+
+            "       }"+
+            "   }"+
+            "}")
+    List<ExerciseVector> findSimilarSingleChoiceExercise(String content);
+
+    @Query("{" +
+            "    \"script_score\": {" +
+            "       \"query\": {\"match\": {\"exerciseType\":\"单选\"}}," +
+            "       \"script\": {"+
+            "           \"source\": \"double result = (dotProduct(params.queryVector, 'vector') +1.0)*0.6; return 1/result\","+
+            "           \"params\": {\"queryVector\": ?0}"+
+            "       }"+
+            "   }"+
+            "}")
+    List<ExerciseVector> findDisimilarSingleChoiceExercise(String content);
+
+    @Query("{" +
+            "    \"script_score\": {" +
+            "       \"query\": {\"match\": {\"exerciseType\":\"填空\"}}," +
+            "       \"script\": {"+
+            "           \"source\": \"(dotProduct(params.queryVector, 'vector') +1.0)*0.6\","+
+            "           \"params\": {\"queryVector\": ?0}"+
+            "       }"+
+            "   }"+
+            "}")
+    List<ExerciseVector> findSimilarFillInExercise(String content);
+
+    @Query("{" +
+            "    \"script_score\": {" +
+            "       \"query\": {\"match\": {\"exerciseType\":\"填空\"}}," +
+            "       \"script\": {"+
+            "           \"source\": \"double result = (dotProduct(params.queryVector, 'vector') +1.0)*0.6; return 1/result\","+
+            "           \"params\": {\"queryVector\": ?0}"+
+            "       }"+
+            "   }"+
+            "}")
+    List<ExerciseVector> findDisimilarFillInExercise(String content);
+
+    @Query("{" +
+            "    \"script_score\": {" +
+            "       \"query\": {\"match\": {\"exerciseType\":\"编程\"}}," +
+            "       \"script\": {"+
+            "           \"source\": \"(dotProduct(params.queryVector, 'vector') +1.0)*0.6\","+
+            "           \"params\": {\"queryVector\": ?0}"+
+            "       }"+
+            "   }"+
+            "}")
+    List<ExerciseVector> findSimilarJavaProgramExercise(String content);
+
+    @Query("{" +
+            "    \"script_score\": {" +
+            "       \"query\": {\"match\": {\"exerciseType\":\"编程\"}}," +
+            "       \"script\": {"+
+            "           \"source\": \"double result = (dotProduct(params.queryVector, 'vector') +1.0)*0.6; return 1/result\","+
+            "           \"params\": {\"queryVector\": ?0}"+
+            "       }"+
+            "   }"+
+            "}")
+    List<ExerciseVector> findDisimilarJavaProgramExercise(String content);
 }

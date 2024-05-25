@@ -83,12 +83,25 @@ public class RecommendServiceImpl extends ServiceImpl<StudentAnswerRecordMapper,
                     float[] vector = exerciseVector.getVector();
                     List<ExerciseVector> exerciseVectorList = new ArrayList<>();
                     // find the dissimilar exercise by exercise id given
-                    if (questionType == 0) {
-                        exerciseVectorList = exerciseVectorRepository.findDissimilarJAVAExercise(JsonData.of(vector).toJson(new JacksonJsonpMapper()).toString());
+                    if(questionType == 0){
+                        // dissimilar single choice exercise
+                        exerciseVectorList = exerciseVectorRepository.findDisimilarSingleChoiceExercise(JsonData.of(vector).toJson(new JacksonJsonpMapper()).toString());
                     }
-                    if (questionType == 1 || questionType == 2) {
-                        exerciseVectorList = exerciseVectorRepository.findDissimilarMathExercise(JsonData.of(vector).toJson(new JacksonJsonpMapper()).toString());
+                    if(questionType == 1){
+                        // dissimilar fill in exercise
+                        exerciseVectorList = exerciseVectorRepository.findDisimilarFillInExercise(JsonData.of(vector).toJson(new JacksonJsonpMapper()).toString());
                     }
+                    if(questionType == 2){
+                        // dissimilar program exercise
+                        exerciseVectorList = exerciseVectorRepository.findDisimilarJavaProgramExercise(JsonData.of(vector).toJson(new JacksonJsonpMapper()).toString());
+                    }
+//                    }
+//                    if (questionType == 2) {
+//                        exerciseVectorList = exerciseVectorRepository.findDissimilarJAVAExercise(JsonData.of(vector).toJson(new JacksonJsonpMapper()).toString());
+//                    }
+//                    if (questionType == 1 || questionType == 0) {
+//                        exerciseVectorList = exerciseVectorRepository.findDissimilarMathExercise(JsonData.of(vector).toJson(new JacksonJsonpMapper()).toString());
+//                    }
                     //for the reason that the number of correct record is not sufficient, we pick the last answer record and recommend more exercise based on this record
                     if (i == exerciseCorrectRecordList.size() - 1) {
                         for (int j = 0; j <= 5 - exerciseCorrectRecordList.size(); j++) {
@@ -113,12 +126,24 @@ public class RecommendServiceImpl extends ServiceImpl<StudentAnswerRecordMapper,
                     ExerciseVector exerciseVector = elasticsearchTemplate.searchOne(query, ExerciseVector.class).getContent();
                     float[] vector = exerciseVector.getVector();
                     List<ExerciseVector> exerciseVectorList = new ArrayList<>();
-                    if (questionType == 0) {
-                        exerciseVectorList = exerciseVectorRepository.findDissimilarJAVAExercise(JsonData.of(vector).toJson(new JacksonJsonpMapper()).toString());
+                    if(questionType == 0){
+                        // dissimilar single choice exercise
+                        exerciseVectorList = exerciseVectorRepository.findDisimilarSingleChoiceExercise(JsonData.of(vector).toJson(new JacksonJsonpMapper()).toString());
                     }
-                    if (questionType == 1 || questionType == 2) {
-                        exerciseVectorList = exerciseVectorRepository.findDissimilarMathExercise(JsonData.of(vector).toJson(new JacksonJsonpMapper()).toString());
+                    if(questionType == 1){
+                        // dissimilar fill in exercise
+                        exerciseVectorList = exerciseVectorRepository.findDisimilarFillInExercise(JsonData.of(vector).toJson(new JacksonJsonpMapper()).toString());
                     }
+                    if(questionType == 2){
+                        // dissimilar program exercise
+                        exerciseVectorList = exerciseVectorRepository.findDisimilarJavaProgramExercise(JsonData.of(vector).toJson(new JacksonJsonpMapper()).toString());
+                    }
+//                    if (questionType == 2) {
+//                        exerciseVectorList = exerciseVectorRepository.findDissimilarJAVAExercise(JsonData.of(vector).toJson(new JacksonJsonpMapper()).toString());
+//                    }
+//                    if (questionType == 1 || questionType == 0) {
+//                        exerciseVectorList = exerciseVectorRepository.findDissimilarMathExercise(JsonData.of(vector).toJson(new JacksonJsonpMapper()).toString());
+//                    }
                     //for the reason that we already have 5 wrong records, and we generate the corresponding recommend exercise for each record by find the lowest similarity
                     recommendExerciseIdList.add(exerciseVectorList.get(0).getId());
                 }
@@ -136,12 +161,24 @@ public class RecommendServiceImpl extends ServiceImpl<StudentAnswerRecordMapper,
                     float[] vector = exerciseVector.getVector();
                     List<ExerciseVector> exerciseVectorList = new ArrayList<>();
                     // get the highest similarity by the code below
-                    if (questionType == 0) {
-                        exerciseVectorList = exerciseVectorRepository.findSimilarJAVAExercise(JsonData.of(vector).toJson(new JacksonJsonpMapper()).toString());
+                    if(questionType == 0){
+                        // similar single choice exercise
+                        exerciseVectorList = exerciseVectorRepository.findSimilarSingleChoiceExercise(JsonData.of(vector).toJson(new JacksonJsonpMapper()).toString());
                     }
-                    if (questionType == 1 || questionType == 2) {
-                        exerciseVectorList = exerciseVectorRepository.findSimilarMathExercise(JsonData.of(vector).toJson(new JacksonJsonpMapper()).toString());
+                    if(questionType == 1){
+                        // similar fill in exercise
+                        exerciseVectorList = exerciseVectorRepository.findSimilarFillInExercise(JsonData.of(vector).toJson(new JacksonJsonpMapper()).toString());
                     }
+                    if(questionType == 2){
+                        // similar program exercise
+                        exerciseVectorList = exerciseVectorRepository.findSimilarJavaProgramExercise(JsonData.of(vector).toJson(new JacksonJsonpMapper()).toString());
+                    }
+//                    if (questionType == 2) {
+//                        exerciseVectorList = exerciseVectorRepository.findSimilarJAVAExercise(JsonData.of(vector).toJson(new JacksonJsonpMapper()).toString());
+//                    }
+//                    if (questionType == 1 || questionType == 0) {
+//                        exerciseVectorList = exerciseVectorRepository.findSimilarMathExercise(JsonData.of(vector).toJson(new JacksonJsonpMapper()).toString());
+//                    }
                     //recommendExerciseIdList.add(exerciseVectorList.get(0).getId());
                     if (i == exerciseFalseRecordList.size() - 1) {
                         for (int j = 0; j <= 5 - exerciseFalseRecordList.size(); j++) {
@@ -157,17 +194,30 @@ public class RecommendServiceImpl extends ServiceImpl<StudentAnswerRecordMapper,
                 for (int i = 0; i <= exerciseCorrectRecordList.size() - 1; i++) {
                     int questionType = exerciseCorrectRecordList.get(i).getQuestionType();
                     Criteria criteria = new Criteria("id").is(exerciseCorrectRecordList.get(i).getQuestionId());
+                    String temp = exerciseCorrectRecordList.get(i).getQuestionId();
                     Query query = new CriteriaQuery(criteria);
                     ExerciseVector exerciseVector = elasticsearchTemplate.searchOne(query, ExerciseVector.class).getContent();
                     float[] vector = exerciseVector.getVector();
                     List<ExerciseVector> exerciseVectorList = new ArrayList<>();
                     // find the dissimilar exercise by exercise id given
-                    if (questionType == 0) {
-                        exerciseVectorList = exerciseVectorRepository.findDissimilarJAVAExercise(JsonData.of(vector).toJson(new JacksonJsonpMapper()).toString());
+                    if(questionType == 0){
+                        // dissimilar single choice exercise
+                        exerciseVectorList = exerciseVectorRepository.findDisimilarSingleChoiceExercise(JsonData.of(vector).toJson(new JacksonJsonpMapper()).toString());
                     }
-                    if (questionType == 1 || questionType == 2) {
-                        exerciseVectorList = exerciseVectorRepository.findDissimilarMathExercise(JsonData.of(vector).toJson(new JacksonJsonpMapper()).toString());
+                    if(questionType == 1){
+                        // dissimilar fill in exercise
+                        exerciseVectorList = exerciseVectorRepository.findDisimilarFillInExercise(JsonData.of(vector).toJson(new JacksonJsonpMapper()).toString());
                     }
+                    if(questionType == 2){
+                        // dissimilar program exercise
+                        exerciseVectorList = exerciseVectorRepository.findDisimilarJavaProgramExercise(JsonData.of(vector).toJson(new JacksonJsonpMapper()).toString());
+                    }
+//                    if (questionType == 2) {
+//                        exerciseVectorList = exerciseVectorRepository.findDissimilarJAVAExercise(JsonData.of(vector).toJson(new JacksonJsonpMapper()).toString());
+//                    }
+//                    if (questionType == 1 || questionType == 0) {
+//                        exerciseVectorList = exerciseVectorRepository.findDissimilarMathExercise(JsonData.of(vector).toJson(new JacksonJsonpMapper()).toString());
+//                    }
                     //each correct record only recommend one
                     recommendExerciseIdList.add(exerciseVectorList.get(0).getId());
                 }
@@ -179,12 +229,24 @@ public class RecommendServiceImpl extends ServiceImpl<StudentAnswerRecordMapper,
                     float[] vector = exerciseVector.getVector();
                     List<ExerciseVector> exerciseVectorList = new ArrayList<>();
                     // get the highest similarity by the code below
-                    if (questionType == 0) {
-                        exerciseVectorList = exerciseVectorRepository.findSimilarJAVAExercise(JsonData.of(vector).toJson(new JacksonJsonpMapper()).toString());
+                    if(questionType == 0){
+                        // dissimilar single choice exercise
+                        exerciseVectorList = exerciseVectorRepository.findSimilarSingleChoiceExercise(JsonData.of(vector).toJson(new JacksonJsonpMapper()).toString());
                     }
-                    if (questionType == 1 || questionType == 2) {
-                        exerciseVectorList = exerciseVectorRepository.findSimilarMathExercise(JsonData.of(vector).toJson(new JacksonJsonpMapper()).toString());
+                    if(questionType == 1){
+                        // dissimilar fill in exercise
+                        exerciseVectorList = exerciseVectorRepository.findSimilarFillInExercise(JsonData.of(vector).toJson(new JacksonJsonpMapper()).toString());
                     }
+                    if(questionType == 2){
+                        // dissimilar program exercise
+                        exerciseVectorList = exerciseVectorRepository.findSimilarJavaProgramExercise(JsonData.of(vector).toJson(new JacksonJsonpMapper()).toString());
+                    }
+//                    if (questionType == 2) {
+//                        exerciseVectorList = exerciseVectorRepository.findSimilarJAVAExercise(JsonData.of(vector).toJson(new JacksonJsonpMapper()).toString());
+//                    }
+//                    if (questionType == 0 || questionType == 1) {
+//                        exerciseVectorList = exerciseVectorRepository.findSimilarMathExercise(JsonData.of(vector).toJson(new JacksonJsonpMapper()).toString());
+//                    }
                     // each wrong record only recommend one
                     // because the recommend list is still less than 5, we  continue to recoomend
                     if (i == exerciseFalseRecordList.size() - 1) {
@@ -206,12 +268,24 @@ public class RecommendServiceImpl extends ServiceImpl<StudentAnswerRecordMapper,
                     float[] vector = exerciseVector.getVector();
                     List<ExerciseVector> exerciseVectorList = new ArrayList<>();
                     // get the highest similarity by the code below
-                    if (questionType == 0) {
-                        exerciseVectorList = exerciseVectorRepository.findSimilarJAVAExercise(JsonData.of(vector).toJson(new JacksonJsonpMapper()).toString());
+                    if(questionType == 0){
+                        // dissimilar single choice exercise
+                        exerciseVectorList = exerciseVectorRepository.findSimilarSingleChoiceExercise(JsonData.of(vector).toJson(new JacksonJsonpMapper()).toString());
                     }
-                    if (questionType == 1 || questionType == 2) {
-                        exerciseVectorList = exerciseVectorRepository.findSimilarMathExercise(JsonData.of(vector).toJson(new JacksonJsonpMapper()).toString());
+                    if(questionType == 1){
+                        // dissimilar fill in exercise
+                        exerciseVectorList = exerciseVectorRepository.findSimilarFillInExercise(JsonData.of(vector).toJson(new JacksonJsonpMapper()).toString());
                     }
+                    if(questionType == 2){
+                        // dissimilar program exercise
+                        exerciseVectorList = exerciseVectorRepository.findSimilarJavaProgramExercise(JsonData.of(vector).toJson(new JacksonJsonpMapper()).toString());
+                    }
+//                    if (questionType == 2) {
+//                        exerciseVectorList = exerciseVectorRepository.findSimilarJAVAExercise(JsonData.of(vector).toJson(new JacksonJsonpMapper()).toString());
+//                    }
+//                    if (questionType == 1 || questionType == 0) {
+//                        exerciseVectorList = exerciseVectorRepository.findSimilarMathExercise(JsonData.of(vector).toJson(new JacksonJsonpMapper()).toString());
+//                    }
                     recommendExerciseIdList.add(exerciseVectorList.get(0).getId());
                 }
                 // shuffle the correct record list, and pick up the coresponding number
@@ -225,12 +299,24 @@ public class RecommendServiceImpl extends ServiceImpl<StudentAnswerRecordMapper,
                     ExerciseVector exerciseVector = elasticsearchTemplate.searchOne(query, ExerciseVector.class).getContent();
                     float[] vector = exerciseVector.getVector();
                     List<ExerciseVector> exerciseVectorList = new ArrayList<>();
-                    if (questionType == 0) {
-                        exerciseVectorList = exerciseVectorRepository.findDissimilarJAVAExercise(JsonData.of(vector).toJson(new JacksonJsonpMapper()).toString());
+                    if(questionType == 0){
+                        // dissimilar single choice exercise
+                        exerciseVectorList = exerciseVectorRepository.findDisimilarSingleChoiceExercise(JsonData.of(vector).toJson(new JacksonJsonpMapper()).toString());
                     }
-                    if (questionType == 1 || questionType == 2) {
-                        exerciseVectorList = exerciseVectorRepository.findDissimilarMathExercise(JsonData.of(vector).toJson(new JacksonJsonpMapper()).toString());
+                    if(questionType == 1){
+                        // dissimilar fill in exercise
+                        exerciseVectorList = exerciseVectorRepository.findDisimilarFillInExercise(JsonData.of(vector).toJson(new JacksonJsonpMapper()).toString());
                     }
+                    if(questionType == 2){
+                        // dissimilar program exercise
+                        exerciseVectorList = exerciseVectorRepository.findDisimilarJavaProgramExercise(JsonData.of(vector).toJson(new JacksonJsonpMapper()).toString());
+                    }
+//                    if (questionType == 2) {
+//                        exerciseVectorList = exerciseVectorRepository.findDissimilarJAVAExercise(JsonData.of(vector).toJson(new JacksonJsonpMapper()).toString());
+//                    }
+//                    if (questionType == 1 || questionType == 0) {
+//                        exerciseVectorList = exerciseVectorRepository.findDissimilarMathExercise(JsonData.of(vector).toJson(new JacksonJsonpMapper()).toString());
+//                    }
                     //for the reason that we already have 5 wrong records, and we generate the corresponding recommend exercise for each record by find the lowest similarity
                     recommendExerciseIdList.add(exerciseVectorList.get(0).getId());
                 }
@@ -248,12 +334,24 @@ public class RecommendServiceImpl extends ServiceImpl<StudentAnswerRecordMapper,
                 ExerciseVector exerciseVector = elasticsearchTemplate.searchOne(query, ExerciseVector.class).getContent();
                 float[] vector = exerciseVector.getVector();
                 List<ExerciseVector> exerciseVectorList = new ArrayList<>();
-                if (questionType == 0) {
-                    exerciseVectorList = exerciseVectorRepository.findSimilarJAVAExercise(JsonData.of(vector).toJson(new JacksonJsonpMapper()).toString());
+                if(questionType == 0){
+                    // dissimilar single choice exercise
+                    exerciseVectorList = exerciseVectorRepository.findSimilarSingleChoiceExercise(JsonData.of(vector).toJson(new JacksonJsonpMapper()).toString());
                 }
-                if (questionType == 1 || questionType == 2) {
-                    exerciseVectorList = exerciseVectorRepository.findSimilarMathExercise(JsonData.of(vector).toJson(new JacksonJsonpMapper()).toString());
+                if(questionType == 1){
+                    // dissimilar fill in exercise
+                    exerciseVectorList = exerciseVectorRepository.findSimilarFillInExercise(JsonData.of(vector).toJson(new JacksonJsonpMapper()).toString());
                 }
+                if(questionType == 2){
+                    // dissimilar program exercise
+                    exerciseVectorList = exerciseVectorRepository.findSimilarJavaProgramExercise(JsonData.of(vector).toJson(new JacksonJsonpMapper()).toString());
+                }
+//                if (questionType == 2) {
+//                    exerciseVectorList = exerciseVectorRepository.findSimilarJAVAExercise(JsonData.of(vector).toJson(new JacksonJsonpMapper()).toString());
+//                }
+//                if (questionType == 0 || questionType == 1) {
+//                    exerciseVectorList = exerciseVectorRepository.findSimilarMathExercise(JsonData.of(vector).toJson(new JacksonJsonpMapper()).toString());
+//                }
                 //for the reason that we already have 5 wrong records, and we generate the corresponding recommend exercise for each record by find the lowest similarity
                 recommendExerciseIdList.add(exerciseVectorList.get(0).getId());
             }
