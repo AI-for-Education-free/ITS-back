@@ -2,6 +2,7 @@ package com.dream.exerciseSystem;
 
 
 import com.dream.exerciseSystem.constant.StudentInfoConstant;
+import com.dream.exerciseSystem.domain.ExerciseVector;
 import com.dream.exerciseSystem.domain.Student;
 import com.dream.exerciseSystem.domain.exercise.Util;
 import com.dream.exerciseSystem.service.ErnieService;
@@ -13,8 +14,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.elasticsearch.client.elc.ElasticsearchTemplate;
 import org.springframework.util.DigestUtils;
 
+import javax.annotation.Resource;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -32,6 +35,9 @@ public class ElasticsearchTest {
 
     @Autowired
     ErnieService ernieService;
+
+    @Resource
+    private ElasticsearchTemplate elasticsearchTemplate;
 
     @Test
     void loadMathExerciseKtVector() throws IOException, JSONException {
@@ -55,7 +61,12 @@ public class ElasticsearchTest {
                 vector[j] = item.floatValue();
             }
 
-            questionVector.put(id, vector);
+//            questionVector.put(id, vector);
+            ExerciseVector exerciseVector = new ExerciseVector();
+            exerciseVector.setId(id);
+            exerciseVector.setExerciseType(questionType.get(id));
+            exerciseVector.setVector(vector);
+            elasticsearchTemplate.save(exerciseVector);
         }
 
         System.out.println(questionVector);
