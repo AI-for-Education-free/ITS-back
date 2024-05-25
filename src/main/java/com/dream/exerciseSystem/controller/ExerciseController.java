@@ -1,17 +1,14 @@
 package com.dream.exerciseSystem.controller;
 
 import com.dream.exerciseSystem.domain.exercise.ExerciseBasicInfo;
-import com.dream.exerciseSystem.domain.exercise.SingleChoiceExercise;
 import com.dream.exerciseSystem.service.IFillInExerciseService;
 import com.dream.exerciseSystem.service.IJavaProgramExerciseService;
-import com.dream.exerciseSystem.service.ISingleChoiceExerciseService;
+import com.dream.exerciseSystem.service.SingleChoiceExerciseService;
 import com.dream.exerciseSystem.utils.DataWrapper;
 import com.dream.exerciseSystem.utils.JwtUtil;
 import io.jsonwebtoken.Claims;
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +22,7 @@ public class ExerciseController {
     private IJavaProgramExerciseService javaProgramExerciseService;
 
     @Autowired
-    private ISingleChoiceExerciseService singleChoiceExerciseService;
+    private SingleChoiceExerciseService singleChoiceExerciseService;
 
     @Autowired
     private IFillInExerciseService fillInExerciseService;
@@ -37,8 +34,20 @@ public class ExerciseController {
         List<String> types = new ArrayList<>();
         types.add("JAVA_PROGRAM_EXERCISE");
         types.add("SINGLE_CHOICE_EXERCISE");
+        types.add("FILL_IN_EXERCISE");
         data.put("typeList", types);
         return new DataWrapper(true).msgBuilder("请求习题类型成功").dataBuilder(data);
+    }
+
+    @GetMapping("/subject")
+    @ResponseBody
+    public DataWrapper getSubjectAll() {
+        HashMap<String, List<String>> data = new HashMap<>();
+        List<String> subjectList = new ArrayList<>();
+        subjectList.add("JAVA");
+        subjectList.add("MATH");
+        data.put("subjectList", subjectList);
+        return new DataWrapper(true).msgBuilder("请求已有学科成功").dataBuilder(data);
     }
 
     @GetMapping("/java/program/all")
@@ -53,7 +62,7 @@ public class ExerciseController {
         return javaProgramExerciseService.getExerciseById(exerciseId);
     }
 
-    @GetMapping("/java/singleChoice/all")
+    @GetMapping("/singleChoice/all")
     @ResponseBody
     public DataWrapper getJavaSingleChoiceExerciseAll() {
         return singleChoiceExerciseService.getExerciseAll();

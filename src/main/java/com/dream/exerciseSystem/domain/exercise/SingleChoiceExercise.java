@@ -22,7 +22,7 @@ import org.springframework.data.mongodb.core.mapping.MongoId;
 
 @Data @Getter @Setter
 @ToString
-@Document(collection = "javaSingleChoiceExercise")
+@Document(collection = "singleChoiceExercise")
 public class SingleChoiceExercise {
     public String exerciseType = "SINGLE_CHOICE_EXERCISE";
     @MongoId
