@@ -12,7 +12,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.util.DigestUtils;
 
 import javax.annotation.Resource;
@@ -37,6 +39,9 @@ public class MysqlTest {
     @Resource
     private StudentAnswerRecordService studentAnswerRecordService;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Test
     void xes3g5mUser2Database() throws IOException, JSONException {
         String fPath = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "user", "xes3g5m_user_part.json").toString();
@@ -51,11 +56,12 @@ public class MysqlTest {
             String name = obj.getString("name");
             String email = obj.getString("email");
             String password = obj.getString("password");
+            String encodedPassword = passwordEncoder.encode(password);
             String id = DigestUtils.md5DigestAsHex((StudentInfoConstant.salt+email).getBytes());
             student.setId(id);
             student.setName(name);
             student.setEmail(email);
-            student.setPassword(password);
+            student.setPassword(encodedPassword);
 
             boolean result = iStudentService.save(student);
             Assertions.assertTrue(result);
