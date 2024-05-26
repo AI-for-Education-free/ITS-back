@@ -4,6 +4,9 @@ package com.dream.exerciseSystem;
 import com.dream.exerciseSystem.constant.StudentInfoConstant;
 import com.dream.exerciseSystem.domain.ExerciseVector;
 import com.dream.exerciseSystem.domain.Student;
+import com.dream.exerciseSystem.domain.exercise.Content;
+import com.dream.exerciseSystem.domain.exercise.Exercise;
+import com.dream.exerciseSystem.domain.exercise.SingleChoiceExercise;
 import com.dream.exerciseSystem.domain.exercise.Util;
 import com.dream.exerciseSystem.service.ErnieService;
 import com.dream.exerciseSystem.service.impl.ErnieServiceImpl;
@@ -101,9 +104,33 @@ public class ElasticsearchTest {
     }
 
     @Test
-    void getMathExerciseLlmVector() {
+    void getMathExerciseLlmVector() throws IOException {
         String token = "24.7774bf49bfab28c02f5d3ac41dbcbed7.2592000.1718783984.282335-72413740";
-        ErnieServiceImpl ernieServiceImpl = new ErnieServiceImpl();
-        ernieServiceImpl.getTextEmbFromBgeLargeZH(token, "推荐一些美食");
+//        ErnieServiceImpl ernieServiceImpl = new ErnieServiceImpl();
+//        ernieServiceImpl.getTextEmbFromBgeLargeZH(token, "推荐一些美食");
+
+        String fPath = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "exercises", "math", "xes3g5m", "demo_single_choice_question.json").toString();
+        File file = new File(fPath);
+        String jsonString = Files.readString(Path.of(file.getAbsolutePath()));
+        net.sf.json.JSONObject jsonObject = net.sf.json.JSONObject.fromObject(jsonString);
+        net.sf.json.JSONArray exercises = jsonObject.getJSONArray("exercises");
+        for (int i = 0; i < exercises.size(); i++) {
+            net.sf.json.JSONObject exerciseObject = exercises.getJSONObject(i);
+            SingleChoiceExercise singleChoiceExercise = SingleChoiceExercise.generateExerciseFromJsonObject(exerciseObject, "MATH");
+
+            String tagsStr = String.join("、", singleChoiceExercise.getTags());
+
+            Exercise exercise = singleChoiceExercise.getExercise();
+            List<Content> exerciseContents = exercise.getExerciseContents();
+            StringBuilder exerciseContentStr = new StringBuilder();
+            for (Content exerciseContent: exerciseContents) {
+                String contentType = exerciseContent.getContentType();
+                if (contentType.equals("TEXT")) {
+                    exerciseContentStr.append(exerciseContent.getChinese()).append("\n");
+                }
+            }
+            String questionDescription = "这是一道数学习题，考察的知识点是" + tagsStr + "。题目内容如下\n";
+            System.out.println("");
+        }
     }
 }

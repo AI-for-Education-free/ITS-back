@@ -1,0 +1,66 @@
+{
+  "source": "xes3g5m",
+  "link": "",
+  "subjectType": "MATH",
+  "exercises": [
+    {
+      "orderInTag": 0,
+      "id": "64c6206c3741d385a487eb16bf637ba2",
+      "concepts": [
+        "拓展思维----几何模块----直线型----几何思想与方法----几何方法整体减空白"
+      ],
+      "tags": [
+        "几何方法整体减空白"
+      ],
+      "exerciseContents": [
+        {
+          "contentType": "TEXT",
+          "chinese": "有一个边长为$$5$$米的正方形花坛，在外围四周铺$$1$$米宽的小路，小路的面积是（ ）平方米．",
+          "english": ""
+        },
+        {
+          "contentType": "IMAGE",
+          "imageName": "question_20-image_0"
+        }
+      ],
+      "options": [
+        [
+          {
+            "contentType": "TEXT",
+            "english": "",
+            "chinese": "$$25$$"
+          }
+        ],
+        [
+          {
+            "contentType": "TEXT",
+            "english": "",
+            "chinese": "$$24$$"
+          }
+        ],
+        [
+          {
+            "contentType": "TEXT",
+            "english": "",
+            "chinese": "$$23$$"
+          }
+        ],
+        [
+          {
+            "contentType": "TEXT",
+            "english": "",
+            "chinese": "$$16$$"
+          }
+        ]
+      ],
+      "explanationContents": [
+        {
+          "contentType": "TEXT",
+          "chinese": "把阴影面积分成四块大小形状一样的长方形，小路的面积为$$(5+1)\\times 1\\times 4=24$$（平方米）；",
+          "english": ""
+        }
+      ],
+      "correctAnswer": 1
+    }
+  ]
+}

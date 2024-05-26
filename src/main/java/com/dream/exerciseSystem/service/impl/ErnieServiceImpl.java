@@ -21,7 +21,6 @@ public class ErnieServiceImpl implements ErnieService {
     private final float temperature = (float) 0.95;
     private final float penaltyScore = (float) 1;
 
-    @Override
     public String getAccessToken(String apiKey, String secretKey) {
         RestTemplate restTemplate = new RestTemplate();
 
@@ -79,6 +78,8 @@ public class ErnieServiceImpl implements ErnieService {
         // 解析返回结果
         HashMap<String, String> chatResult = parseChatResponseEntity(responseEntity);
         data.put("chatResult", chatResult.get("chatResult"));
+        data.put("promptTokens", chatResult.get("promptTokens"));
+        data.put("completionTokens", chatResult.get("completionTokens"));
 
         return new DataWrapper(true).msgBuilder("测试成功").dataBuilder(data);
     }
@@ -105,13 +106,14 @@ public class ErnieServiceImpl implements ErnieService {
         // 解析返回结果
         HashMap<String, String> chatResult = parseChatResponseEntity(responseEntity);
         data.put("chatResult", chatResult.get("chatResult"));
+        data.put("promptTokens", chatResult.get("promptTokens"));
+        data.put("completionTokens", chatResult.get("completionTokens"));
 
         return new DataWrapper(true).msgBuilder("测试成功").dataBuilder(data);
     }
 
     @Override
     public DataWrapper chatWithTemplate(String accessToken, String chatUrl, String templatePath) {
-
         return new DataWrapper(true).msgBuilder("测试成功");
     }
 
@@ -172,7 +174,7 @@ public class ErnieServiceImpl implements ErnieService {
         return embList;
     }
 
-    public int getNumToken(String accessToken, String text, String modelName) {
+    public HashMap<String, Integer> getNumToken(String accessToken, String text, String modelName) {
         String url = "https://aip.baidubce.com/rpc/2.0/ai_custom/v1/wenxinworkshop/tokenizer/erniebot";
         RestTemplate restTemplate = new RestTemplate();
 
@@ -187,7 +189,7 @@ public class ErnieServiceImpl implements ErnieService {
         "ernie-tiny-8k", "ernie-char-8k"};
         boolean isValidModelName = Arrays.asList(options).contains(modelName);
         Map<String, Object> requestBody = new HashMap<>();
-        requestBody.put("input", text);
+        requestBody.put("prompt", text);
         if (isValidModelName) {
             requestBody.put("model", modelName);
         }
@@ -196,8 +198,15 @@ public class ErnieServiceImpl implements ErnieService {
         HashMap<String, Object> body = (HashMap<String, Object>) responseEntity.getBody();
         HashMap<String, Integer> usage = (HashMap<String, Integer>) body.get("usage");
         Integer promptTokens = (Integer) usage.get("prompt_tokens");
+        Integer completionTokens = (Integer) usage.get("completion_tokens");
+        Integer totalTokens = (Integer) usage.get("total_tokens");
 
-        return promptTokens;
+        HashMap<String, Integer> result = new HashMap<>();
+        result.put("promptTokens", promptTokens);
+        result.put("completionTokens", completionTokens);
+        result.put("totalTokens", totalTokens);
+
+        return result;
     }
 
     public URI buildUriWithAccessToken(String url, String accessToken) {

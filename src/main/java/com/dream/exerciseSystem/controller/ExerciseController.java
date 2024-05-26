@@ -71,13 +71,13 @@ public class ExerciseController {
 
     @GetMapping("/singleChoice/all")
     @ResponseBody
-    public DataWrapper getJavaSingleChoiceExerciseAll() {
+    public DataWrapper getSingleChoiceExerciseAll() {
         return singleChoiceExerciseService.getExerciseAll();
     }
 
     @GetMapping("/singleChoice/one/{exerciseId}")
     @ResponseBody
-    public DataWrapper getJavaSingleChoiceExerciseOneById(@PathVariable String exerciseId) {
+    public DataWrapper getJavaChoiceExerciseOneById(@PathVariable String exerciseId) {
         return singleChoiceExerciseService.getExerciseById(exerciseId);
     }
 
