@@ -41,7 +41,7 @@ public class ElasticsearchTest {
 
     @Test
     void loadMathExerciseKtVector() throws IOException, JSONException {
-        String fPath = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "exercises", "math", "xes3g5m", "its_question_kt_portrait.json").toString();
+        String fPath = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "exercises", "math", "xes3g5m", "question_kt_portrait.json").toString();
         File file = new File(fPath);
         String jsonString = Files.readString(Path.of(file.getAbsolutePath()));
         JSONArray jsonArray = new JSONArray(jsonString);
