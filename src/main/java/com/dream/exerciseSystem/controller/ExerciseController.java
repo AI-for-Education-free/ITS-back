@@ -62,19 +62,26 @@ public class ExerciseController {
         return javaProgramExerciseService.getExerciseById(exerciseId);
     }
 
+    @PostMapping("/java/program/check/{exerciseId}")
+    @ResponseBody
+    public DataWrapper checkJavaProgramExercise(@PathVariable String exerciseId, @RequestBody Map<String, String> requestBody) throws Exception {
+        String submissionCode = "package org.dream.solution;\n" + requestBody.get("submissionCode");
+        return javaProgramExerciseService.checkExercise(exerciseId, submissionCode);
+    }
+
     @GetMapping("/singleChoice/all")
     @ResponseBody
     public DataWrapper getJavaSingleChoiceExerciseAll() {
         return singleChoiceExerciseService.getExerciseAll();
     }
 
-    @GetMapping("/java/singleChoice/one/{exerciseId}")
+    @GetMapping("/singleChoice/one/{exerciseId}")
     @ResponseBody
     public DataWrapper getJavaSingleChoiceExerciseOneById(@PathVariable String exerciseId) {
         return singleChoiceExerciseService.getExerciseById(exerciseId);
     }
 
-    @PostMapping("/java/singleChoice/check/{exerciseId}")
+    @PostMapping("/singleChoice/check/{exerciseId}")
     @ResponseBody
     public DataWrapper checkSingleChoiceExercise(@PathVariable String exerciseId, @RequestBody Map<String, String> requestBody, HttpServletRequest request) throws Exception{
         String token = request.getHeader("token");
@@ -85,13 +92,6 @@ public class ExerciseController {
 
         String choiceAnswer = requestBody.get("submissionChoiceAnswer");
         return singleChoiceExerciseService.checkSingleChoiceExercise(exerciseId, choiceAnswer, studentId);
-    }
-
-    @PostMapping("/java/program/check/{exerciseId}")
-    @ResponseBody
-    public DataWrapper checkJavaProgramExercise(@PathVariable String exerciseId, @RequestBody Map<String, String> requestBody) throws Exception {
-        String submissionCode = "package org.dream.solution;\n" + requestBody.get("submissionCode");
-        return javaProgramExerciseService.checkExercise(exerciseId, submissionCode);
     }
 
     @PostMapping("/fillIn/check/{exerciseId}")

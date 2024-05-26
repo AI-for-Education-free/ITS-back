@@ -18,7 +18,7 @@ public class RecommendController {
     @Resource
     private RecommendService recommendService;
 
-    @PostMapping("default")
+    @GetMapping("/default")
     public DataWrapper defaultRecommend(HttpServletRequest request){
         String token = request.getHeader("token");
         // 解析token
