@@ -72,7 +72,7 @@ public class ErnieServiceTest {
     }
 
     @Test
-    void testLoadTemplate() throws IOException {
+    void testChatWithoutKnowledgeState() throws IOException {
         // 先运行上面的testGetAccessToken获取一下token
         String token = "24.7774bf49bfab28c02f5d3ac41dbcbed7.2592000.1718783984.282335-72413740";
         // 这个自己到官网上选择，目前统一使用这个
