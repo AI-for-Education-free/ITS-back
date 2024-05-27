@@ -63,16 +63,16 @@ public class SingleChoiceExerciseServiceImpl extends ServiceImpl<StudentAnswerRe
     public DataWrapper checkSingleChoiceExercise(String exerciseId, String answer, String studentId) {
         // check if the answer is in the correct form
         if(answer.length() >= 2){
-            return new DataWrapper(false).msgBuilder("the length of answer exceeds").dataBuilder(null);
+            return new DataWrapper(false).msgBuilder("输入答案长度超出限制").dataBuilder(null);
         }
         else if(answer.isEmpty()){
-            return new DataWrapper(false).msgBuilder("the content of answer is empty").dataBuilder(null);
+            return new DataWrapper(false).msgBuilder("输入答案为空").dataBuilder(null);
         }
 
         // If answer check passwd. Query the question by the exerciseId
         SingleChoiceExercise singleChoiceExercise = mongoTemplate.findById(exerciseId, SingleChoiceExercise.class);
         if (singleChoiceExercise == null)
-            return new DataWrapper(false).msgBuilder("检查single choice习题失败").codeBuilder(100);
+            return new DataWrapper(false).msgBuilder("数据库没有该id的单选习题信息").codeBuilder(100);
         int correctAnswer = singleChoiceExercise.getCorrectAnswer();
 
         // Generate the studentAnswerRecord model
@@ -94,6 +94,6 @@ public class SingleChoiceExerciseServiceImpl extends ServiceImpl<StudentAnswerRe
         studentAnswerRecord.setAnswerTimestamp(studentAnswerTimestamp);
         studentAnswerRecord.setAnswer(answer);
         boolean writeState = this.save(studentAnswerRecord);
-        return new DataWrapper(true).msgBuilder("检查Java编程习题成功").dataBuilder(null);
+        return new DataWrapper(true).msgBuilder("检查单选习题成功").dataBuilder(null);
     }
 }

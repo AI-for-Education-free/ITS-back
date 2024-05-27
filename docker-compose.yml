@@ -1,0 +1,60 @@
+version: '3'
+
+services:
+  mysql:
+    image: mysql:8.0.29
+    container_name: ITSMysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 'ITSBackend123!@#'
+      MYSQL_DATABASE: 'exercise_system'
+      MYSQL_USER: 'xzy'
+      MYSQL_PASSWORD: 'xzy'
+    ports:
+      - "3306:3306"
+    volumes:
+      - /home/docker/ITSMysql/log:/var/log/mysql
+      - /home/docker/ITSMysql/data:/var/lib/mysql
+      - /home/docker/ITSMysql/conf.d:/etc/mysql/conf.d
+      - /etc/localtime:/etc/localtime:ro
+
+  mongodb:
+    image: mongo:5.0.7
+    ports:
+      - "27017:27017"
+    volumes:
+      - /home/docker/ITSMongo/data:/data/db
+
+  redis:
+    image: redis:7.0.0
+    ports:
+      - "6379:6379"
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.21
+    ports:
+      - "9200:9200"
+    environment:
+      - discovery.type=single-node
+      - ES_JAVA_OPTS=-Xms256m -Xmx256m
+    volumes:
+      - /home/docker/ITSEs/data:/usr/share/elasticsearch/data
+    networks:
+      - elastic
+
+  rabbitmq:
+    image: rabbitmq:management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+
+networks:
+  elastic:
+    driver: bridge
+
+volumes:
+  mysql_data:
+  mongodb_data:
+  elasticsearch_data:

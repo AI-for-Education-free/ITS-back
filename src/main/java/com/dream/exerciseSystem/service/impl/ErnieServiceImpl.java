@@ -1,7 +1,14 @@
 package com.dream.exerciseSystem.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.dream.exerciseSystem.constant.BaiduAccessConstant;
+import com.dream.exerciseSystem.domain.UserBalanceRecord;
+import com.dream.exerciseSystem.domain.exercise.*;
+import com.dream.exerciseSystem.mapper.StudentAnswerRecordMapper;
+import com.dream.exerciseSystem.mapper.UserBalanceRecordMapper;
 import com.dream.exerciseSystem.service.ErnieService;
 import com.dream.exerciseSystem.utils.DataWrapper;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -10,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 import java.net.URI;
 import java.nio.file.Files;
@@ -18,6 +26,13 @@ import java.util.*;
 
 @Service
 public class ErnieServiceImpl implements ErnieService {
+
+    @Resource
+    private UserBalanceRecordMapper userBalanceRecordMapper;
+
+    @Resource
+    private MongoTemplate mongoTemplate;
+
     private final float temperature = (float) 0.95;
     private final float penaltyScore = (float) 1;
 
@@ -115,6 +130,89 @@ public class ErnieServiceImpl implements ErnieService {
     @Override
     public DataWrapper chatWithTemplate(String accessToken, String chatUrl, String templatePath) {
         return new DataWrapper(true).msgBuilder("测试成功");
+    }
+
+    @Override
+    public DataWrapper chatWithStudentQuery(String studentId, String exerciseId, String studentQuery) throws IOException {
+        // Init some data structure
+        HashMap<String, Integer> numTokensBeforeChat;
+        int promptTokens;
+        int completionTokens;
+        int userFAQTokenBalance;
+        Exercise exercise = new Exercise();
+
+
+        // loading template content
+        String templateContent = this.loadTemplate(BaiduAccessConstant.templatePath);
+
+        // query the exercise belongs to which subject, and acquire new templateContent
+        org.springframework.data.mongodb.core.query.Query query = new org.springframework.data.mongodb.core.query.Query();
+        query.addCriteria(org.springframework.data.mongodb.core.query.Criteria.where("_id").is(exerciseId));
+        if (mongoTemplate.exists(query, "javaProgramExercise")) {
+            JavaProgramExercise result = mongoTemplate.findById(exerciseId, JavaProgramExercise.class);
+            templateContent = templateContent.replace("${#SUBJECT#}$", result.getExerciseType());
+            String tagsStr = "`" + String.join("、", result.getTags()) + "`";
+            templateContent = templateContent.replace("${#CONCEPT_RELATED#}$", tagsStr);
+            exercise = result.getExercise();
+        }
+        if (mongoTemplate.exists(query, "javaSingleChoiceExercise")) {
+            SingleChoiceExercise result = mongoTemplate.findById(exerciseId, SingleChoiceExercise.class);
+            templateContent = templateContent.replace("${#SUBJECT#}$", result.getExerciseType());
+            String tagsStr = "`" + String.join("、", result.getTags()) + "`";
+            templateContent = templateContent.replace("${#CONCEPT_RELATED#}$", tagsStr);
+            exercise = result.getExercise();
+        }
+        if (mongoTemplate.exists(query, "fillInExercise")) {
+            FillInExercise result = mongoTemplate.findById(exerciseId, FillInExercise.class);
+            templateContent = templateContent.replace("${#SUBJECT#}$", result.getExerciseType());
+            String tagsStr = "`" + String.join("、", result.getTags()) + "`";
+            templateContent = templateContent.replace("${#CONCEPT_RELATED#}$", tagsStr);
+            exercise = result.getExercise();
+        }
+
+        List<Content> exerciseContents = exercise.getExerciseContents();
+        StringBuilder exerciseContentStr = new StringBuilder();
+        for (Content exerciseContent: exerciseContents) {
+            String contentType = exerciseContent.getContentType();
+            if (contentType.equals("TEXT")) {
+                exerciseContentStr.append(exerciseContent.getChinese()).append("\n");
+            }
+        }
+        templateContent = templateContent.replace("${#QUESTION_CONTENT#}$", exerciseContentStr);
+        String prompt = templateContent.replace("${#STUDENT_QUERY#}$", studentQuery);
+
+        // Firstly, we calculate the prompt token according to the studentQuery
+        numTokensBeforeChat = this.getNumToken(BaiduAccessConstant.accessToken, prompt, BaiduAccessConstant.modelName);
+        promptTokens = numTokensBeforeChat.get("promptTokens");
+
+        // Query the user balance record if the user has the sufficient tokens for continue chat
+        QueryWrapper<UserBalanceRecord> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("userId", studentId);
+        UserBalanceRecord userBalanceRecord = userBalanceRecordMapper.selectOne(queryWrapper);
+        userFAQTokenBalance = userBalanceRecord.getFAQTokenBalance();
+        if(userFAQTokenBalance < promptTokens){
+            return new DataWrapper(true).msgBuilder("not enough token for asking, please recharge").dataBuilder("asking token: "+promptTokens);
+        }
+        // if user has enough token for submitting prompts, continue
+        // Generate the new messages
+        List<Map<String, String>> messages = new ArrayList<>();
+        HashMap<String, String> msg = new HashMap<>();
+        msg.put("role", "user");
+        msg.put("content", prompt);
+        messages.add(msg);
+
+        DataWrapper response = this.simpleChat(BaiduAccessConstant.accessToken, BaiduAccessConstant.chatUrl, messages);
+
+        HashMap<String, String> responseData = (HashMap<String, String>) response.getData();
+        completionTokens = Integer.parseInt(responseData.get("completionTokens"));
+        // if token is enough, return false
+        if(userFAQTokenBalance < completionTokens+promptTokens){
+            return new DataWrapper(true).msgBuilder("not enough token for get the answer back, please recharge").dataBuilder("all need tokens: "+(completionTokens+promptTokens));
+        }
+        // if token is enough, deduct the token in the datasource and return the answer back to frontend
+        userBalanceRecord.setFAQTokenBalance(userFAQTokenBalance-completionTokens-promptTokens);
+        userBalanceRecordMapper.updateById(userBalanceRecord);
+        return response;
     }
 
     public String loadTemplate(String templatePath) throws IOException {
