@@ -50,19 +50,19 @@ public class ExerciseController {
         return new DataWrapper(true).msgBuilder("请求已有学科成功").dataBuilder(data);
     }
 
-    @GetMapping("/java/program/all")
+    @GetMapping("/javaProgram/all")
     @ResponseBody
     public DataWrapper getJavaProgramExerciseAll() {
         return javaProgramExerciseService.getExerciseAll();
     }
 
-    @GetMapping("/java/program/one/{exerciseId}")
+    @GetMapping("/javaProgram/one/{exerciseId}")
     @ResponseBody
     public DataWrapper getJavaProgramExerciseOneById(@PathVariable String exerciseId) {
         return javaProgramExerciseService.getExerciseById(exerciseId);
     }
 
-    @PostMapping("/java/program/check/{exerciseId}")
+    @PostMapping("/javaProgram/check/{exerciseId}")
     @ResponseBody
     public DataWrapper checkJavaProgramExercise(@PathVariable String exerciseId, @RequestBody Map<String, String> requestBody) throws Exception {
         String submissionCode = "package org.dream.solution;\n" + requestBody.get("submissionCode");
@@ -77,8 +77,14 @@ public class ExerciseController {
 
     @GetMapping("/singleChoice/one/{exerciseId}")
     @ResponseBody
-    public DataWrapper getJavaChoiceExerciseOneById(@PathVariable String exerciseId) {
+    public DataWrapper getSingleChoiceExerciseOneById(@PathVariable String exerciseId) {
         return singleChoiceExerciseService.getExerciseById(exerciseId);
+    }
+
+    @GetMapping("/fillIn/one/{exerciseId}")
+    @ResponseBody
+    public DataWrapper getFillInExerciseOneById(@PathVariable String exerciseId) {
+        return fillInExerciseService.getExerciseById(exerciseId);
     }
 
     @PostMapping("/singleChoice/check/{exerciseId}")
@@ -120,23 +126,28 @@ public class ExerciseController {
         return javaProgramExerciseService.checkExercise(exerciseId, submissionCode, studentId);
     }
 
-    @GetMapping("/java/basicInfo/all")
+    @GetMapping("/basicInfo/all/{exerciseType}")
     @ResponseBody
-    public DataWrapper getJavaExerciseBasicInfoAll() {
-        DataWrapper singleChoiceExerciseBasicInfo = singleChoiceExerciseService.getExerciseAllBasicInfo();
-        DataWrapper programExerciseBasicInfo = javaProgramExerciseService.getExerciseAllBasicInfo();
-        if (!singleChoiceExerciseBasicInfo.isFlag() && !programExerciseBasicInfo.isFlag()) {
+    public DataWrapper getJavaExerciseBasicInfoAll(@PathVariable String exerciseType) {
+        DataWrapper exerciseBasicInfo;
+        if (exerciseType.equals("javaProgram")) {
+            exerciseBasicInfo = javaProgramExerciseService.getExerciseAllBasicInfo();
+        } else if (exerciseType.equals("fillIn")) {
+            exerciseBasicInfo = fillInExerciseService.getExerciseAllBasicInfo();
+        } else if (exerciseType.equals("singleChoice")) {
+            exerciseBasicInfo = singleChoiceExerciseService.getExerciseAllBasicInfo();
+        } else {
+            return new DataWrapper(false).msgBuilder("请求失败");
+        }
+        if (!exerciseBasicInfo.isFlag()) {
             return new DataWrapper(false).msgBuilder("请求失败");
         } else {
             Map<String, List<ExerciseBasicInfo>> data = new HashMap<>();
             List<ExerciseBasicInfo> exerciseBasicInfoList = new ArrayList<>();
-            HashMap<String, Object> singleChoiceExerciseBasicInfoData = (HashMap<String, Object>) singleChoiceExerciseBasicInfo.getData();
-            HashMap<String, Object> programExerciseBasicInfoData = (HashMap<String, Object>) programExerciseBasicInfo.getData();
-            exerciseBasicInfoList.addAll((List<ExerciseBasicInfo>) singleChoiceExerciseBasicInfoData.get("exerciseBasicInfoList"));
-            exerciseBasicInfoList.addAll((List<ExerciseBasicInfo>) programExerciseBasicInfoData.get("exerciseBasicInfoList"));
+            HashMap<String, Object> exerciseBasicInfoData = (HashMap<String, Object>) exerciseBasicInfo.getData();
+            exerciseBasicInfoList.addAll((List<ExerciseBasicInfo>) exerciseBasicInfoData.get("exerciseBasicInfoList"));
             data.put("exerciseBasicInfoList", exerciseBasicInfoList);
             return new DataWrapper(true).msgBuilder("请求成功").dataBuilder(data);
         }
     }
-
 }

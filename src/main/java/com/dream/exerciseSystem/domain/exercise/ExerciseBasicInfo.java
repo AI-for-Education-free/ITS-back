@@ -18,18 +18,20 @@ import java.util.List;
 @ToString
 @Document(collection = "javaProgramExercise")
 public class ExerciseBasicInfo {
+    public String subjectType;
     public String exerciseType;
     @MongoId
     public String exerciseId;
-    public HashMap<String, String> exerciseString;
+    public String exerciseContent;
     public List<String> concepts;
     public List<String> tags;
 
-    public ExerciseBasicInfo(String exerciseType, String exerciseId, HashMap<String, String> exerciseString,
+    public ExerciseBasicInfo(String subjectType, String exerciseType, String exerciseId, String exerciseContent,
                              List<String> concepts, List<String> tags) {
+        this.subjectType = subjectType;
         this.exerciseType = exerciseType;
         this.exerciseId = exerciseId;
-        this.exerciseString = exerciseString;
+        this.exerciseContent = exerciseContent;
         this.concepts = concepts;
         this.tags = tags;
     }
@@ -38,11 +40,12 @@ public class ExerciseBasicInfo {
         List<ExerciseBasicInfo> basicInfoList = new ArrayList<>();
         for (JavaProgramExercise javaProgramExercise: javaProgramExerciseList) {
             Content firstContent = javaProgramExercise.exercise.exerciseContents.get(0);
-            HashMap<String, String> exerciseString = new HashMap<>();
-            exerciseString.put("chinese", firstContent.getChinese());
-            exerciseString.put("english", firstContent.getEnglish());
-            ExerciseBasicInfo exerciseBasicInfo = new ExerciseBasicInfo(javaProgramExercise.getExerciseType(),
-                    javaProgramExercise.getId(), exerciseString, javaProgramExercise.concepts, javaProgramExercise.tags);
+            String exerciseContent = firstContent.getChinese();
+            if (exerciseContent.length() == 0) {
+                exerciseContent = firstContent.getEnglish();
+            }
+            ExerciseBasicInfo exerciseBasicInfo = new ExerciseBasicInfo("JAVA", javaProgramExercise.getExerciseType(),
+                    javaProgramExercise.getId(), exerciseContent, javaProgramExercise.concepts, javaProgramExercise.tags);
             basicInfoList.add(exerciseBasicInfo);
         }
         return basicInfoList;
@@ -52,11 +55,29 @@ public class ExerciseBasicInfo {
         List<ExerciseBasicInfo> basicInfoList = new ArrayList<>();
         for (SingleChoiceExercise singleChoiceExercise: singleChoiceExerciseList) {
             Content firstContent = singleChoiceExercise.exercise.exerciseContents.get(0);
-            HashMap<String, String> exerciseString = new HashMap<>();
-            exerciseString.put("chinese", firstContent.getChinese());
-            exerciseString.put("english", firstContent.getEnglish());
-            ExerciseBasicInfo exerciseBasicInfo = new ExerciseBasicInfo(singleChoiceExercise.getExerciseType(),
-                    singleChoiceExercise.getId(), exerciseString, singleChoiceExercise.concepts, singleChoiceExercise.tags);
+            String exerciseContent = firstContent.getChinese();
+            if (exerciseContent.length() == 0) {
+                exerciseContent = firstContent.getEnglish();
+            }
+            ExerciseBasicInfo exerciseBasicInfo = new ExerciseBasicInfo(
+                    singleChoiceExercise.getSubjectType(), singleChoiceExercise.getExerciseType(),
+                    singleChoiceExercise.getId(), exerciseContent, singleChoiceExercise.concepts, singleChoiceExercise.tags);
+            basicInfoList.add(exerciseBasicInfo);
+        }
+        return basicInfoList;
+    }
+
+    public static List<ExerciseBasicInfo> fillInExercise2exerciseBasicInfo(List<FillInExercise> fillInExercisesList) {
+        List<ExerciseBasicInfo> basicInfoList = new ArrayList<>();
+        for (FillInExercise fillInExercise: fillInExercisesList) {
+            Content firstContent = fillInExercise.exercise.exerciseContents.get(0);
+            String exerciseContent = firstContent.getChinese();
+            if (exerciseContent.length() == 0) {
+                exerciseContent = firstContent.getEnglish();
+            }
+            ExerciseBasicInfo exerciseBasicInfo = new ExerciseBasicInfo(
+                    fillInExercise.getSubjectType(), fillInExercise.getExerciseType(),
+                    fillInExercise.getId(), exerciseContent, fillInExercise.concepts, fillInExercise.tags);
             basicInfoList.add(exerciseBasicInfo);
         }
         return basicInfoList;
