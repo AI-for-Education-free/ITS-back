@@ -25,6 +25,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -63,14 +64,16 @@ public class RecommendServiceImpl extends ServiceImpl<StudentAnswerRecordMapper,
         // the recommendedExerciseIdList and content list is inited here
         List<Exercise> recommendExerciseContentList = new ArrayList<>();
         List<String> recommendExerciseIdList = new ArrayList<>();
+        HashMap<String, Exercise> recommendExerciseHashMap = new HashMap<>();
 
         // the code below is to generate recommend exercise list
         if (exerciseFalseRecordList.isEmpty()) {
             if (exerciseCorrectRecordList.isEmpty()) {
                 // if user has no exercise record, the system reccmmend random exercise for user
 //                mongoTemplate.aggregate()
-                recommendExerciseContentList = mongoUtils.getRandomExerciseContent();
-                return new DataWrapper(true).msgBuilder("random 5 exercise contents").dataBuilder(recommendExerciseContentList);
+                recommendExerciseHashMap = mongoUtils.getRandomExerciseContent();
+
+                return new DataWrapper(true).msgBuilder("用户没有做题记录，随机推荐五道习题").dataBuilder(recommendExerciseHashMap);
             }
             if (exerciseCorrectRecordList.size() < 5) {
                 // if user only has the correct exercise record and the number of exercise record is less than 5,
@@ -363,16 +366,23 @@ public class RecommendServiceImpl extends ServiceImpl<StudentAnswerRecordMapper,
             query.addCriteria(org.springframework.data.mongodb.core.query.Criteria.where("_id").is(recommendExerciseId));
             if (mongoTemplate.exists(query, "javaProgramExercise")) {
                 JavaProgramExercise result = mongoTemplate.findById(recommendExerciseId, JavaProgramExercise.class);
-                recommendExerciseContentList.add(result.getExercise());
+                Exercise recommendExerciseContent = result.getExercise();
+                recommendExerciseContentList.add(recommendExerciseContent);
+                recommendExerciseHashMap.put(recommendExerciseId, recommendExerciseContent);
             } else if (mongoTemplate.exists(query, "javaSingleChoiceExercise")) {
                 SingleChoiceExercise result = mongoTemplate.findById(recommendExerciseId, SingleChoiceExercise.class);
-                recommendExerciseContentList.add(result.getExercise());
+                Exercise recommendExerciseContent = result.getExercise();
+                recommendExerciseContentList.add(recommendExerciseContent);
+                recommendExerciseHashMap.put(recommendExerciseId, recommendExerciseContent);
             } else if (mongoTemplate.exists(query, "fillInExercise")) {
                 FillInExercise result = mongoTemplate.findById(recommendExerciseId, FillInExercise.class);
-                recommendExerciseContentList.add(result.getExercise());
+                Exercise recommendExerciseContent = result.getExercise();
+                recommendExerciseContentList.add(recommendExerciseContent);
+                recommendExerciseHashMap.put(recommendExerciseId, recommendExerciseContent);
             }
         }
 
-        return new DataWrapper(true).msgBuilder("return five default recommendation").dataBuilder(recommendExerciseContentList);
+
+        return new DataWrapper(true).msgBuilder("根据用户做题记录，推荐五道习题").dataBuilder(recommendExerciseHashMap);
     }
 }

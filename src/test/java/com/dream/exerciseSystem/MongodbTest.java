@@ -25,7 +25,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @SpringBootTest
@@ -97,9 +99,10 @@ public class MongodbTest {
 
     @Test
     void randomGetData(){
-        List<Exercise> list = mongoUtils.getRandomExerciseContent();
-        for(Exercise document:list){
-            System.out.println(document.toString());
+        HashMap<String, Exercise> hashMap = mongoUtils.getRandomExerciseContent();
+        for(Map.Entry<String, Exercise> entry: hashMap.entrySet()){
+            System.out.println(entry.getKey());
+            System.out.println(entry.getValue().toString());
         }
     }
 }

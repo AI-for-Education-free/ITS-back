@@ -1,7 +1,6 @@
 package com.dream.exerciseSystem.utils;
 
-import com.dream.exerciseSystem.domain.exercise.Content;
-import com.dream.exerciseSystem.domain.exercise.Exercise;
+import com.dream.exerciseSystem.domain.exercise.*;
 import net.sf.json.JSONObject;
 import org.bson.Document;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -14,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -23,7 +23,26 @@ public class MongoUtils {
     @Resource
     private MongoTemplate mongoTemplate;
 
-    public List<Exercise> getRandomExerciseContent() {
+//    public List<String> getIdFromExerciseContent(List<Exercise> exerciseList){
+//        List<String> exerciseIdList = new ArrayList<>();
+//        for(Exercise exercise: exerciseList){
+//            org.springframework.data.mongodb.core.query.Query query = new org.springframework.data.mongodb.core.query.Query();
+//            query.addCriteria(org.springframework.data.mongodb.core.query.Criteria.where("exercise").is(exercise));
+//            if (mongoTemplate.exists(query, "javaProgramExercise")) {
+//                JavaProgramExercise result = mongoTemplate.findOne(query, JavaProgramExercise.class);
+//                exerciseIdList.add(result.getId());
+//            } else if (mongoTemplate.exists(query, "javaSingleChoiceExercise")) {
+//                SingleChoiceExercise result = mongoTemplate.findOne(query, SingleChoiceExercise.class);
+//                exerciseIdList.add(result.getId());
+//            } else if (mongoTemplate.exists(query, "fillInExercise")) {
+//                FillInExercise result = mongoTemplate.findOne(query, FillInExercise.class);
+//                exerciseIdList.add(result.getId());
+//            }
+//        }
+//        return  exerciseIdList;
+//    }
+
+    public HashMap<String, Exercise> getRandomExerciseContent() {
         AggregationOperation sampleOperationSingleChoice = new AggregationOperation() {
             @Override
             public Document toDocument(AggregationOperationContext context) {
@@ -56,27 +75,30 @@ public class MongoUtils {
         AggregationResults<Document> resultsJavaProgram = mongoTemplate.aggregate(aggregationJavaProgram, "javaProgramExercise", Document.class);
 
         // 返回结果列表
-        List<Exercise> exerciseList = new ArrayList<>();
+        HashMap<String, Exercise> exerciseHashMap = new HashMap<>();
         for(Document document: resultsSingleChoice){
+            String exerciseId = (String) document.get("_id");
             Document exerciseDocument = (Document) document.get("exercise");
             MongoConverter mongoConverter = mongoTemplate.getConverter();
             Exercise exercise = mongoConverter.read(Exercise.class, exerciseDocument);
-            exerciseList.add(exercise);
+            exerciseHashMap.put(exerciseId, exercise);
         }
         for(Document document: resultsFillIn){
+            String exerciseId = (String) document.get("_id");
             Document exerciseDocument = (Document) document.get("exercise");
             MongoConverter mongoConverter = mongoTemplate.getConverter();
             Exercise exercise = mongoConverter.read(Exercise.class, exerciseDocument);
-            exerciseList.add(exercise);
+            exerciseHashMap.put(exerciseId, exercise);
         }
         for(Document document: resultsJavaProgram){
+            String exerciseId = (String) document.get("_id");
             Document exerciseDocument = (Document) document.get("exercise");
             MongoConverter mongoConverter = mongoTemplate.getConverter();
             Exercise exercise = mongoConverter.read(Exercise.class, exerciseDocument);
-            exerciseList.add(exercise);
+            exerciseHashMap.put(exerciseId, exercise);
         }
 
-        return exerciseList;
+        return exerciseHashMap;
     }
 
 }

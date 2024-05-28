@@ -25,7 +25,7 @@ public class FillInExerciseService extends ServiceImpl<StudentAnswerRecordMapper
     public DataWrapper checkFillInExercise(String exerciseId, HashMap<String, String> answer, String studentId) {
         FillInExercise fillInExercise = mongoTemplate.findById(exerciseId, FillInExercise.class);
         if(fillInExercise == null)
-            return new DataWrapper(false).msgBuilder("检查fill in习题失败").codeBuilder(100);
+            return new DataWrapper(false).msgBuilder("检查填空习题失败").codeBuilder(100);
         HashMap<String, String> hashMap = fillInExercise.getCorrectAnswer();
 
         StudentAnswerRecord studentAnswerRecord = new StudentAnswerRecord();
@@ -45,6 +45,6 @@ public class FillInExerciseService extends ServiceImpl<StudentAnswerRecordMapper
         studentAnswerRecord.setAnswerTimestamp(studentAnswerTimestamp);
         studentAnswerRecord.setAnswer(answer.toString());   //hashmap convert to string
         boolean writeState = this.save(studentAnswerRecord);
-        return new DataWrapper(true).msgBuilder("检查fill in习题成功").dataBuilder(null);
+        return new DataWrapper(true).msgBuilder("检查填空习题成功").dataBuilder(null);
     }
 }

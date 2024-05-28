@@ -191,7 +191,7 @@ public class ErnieServiceImpl implements ErnieService {
         UserBalanceRecord userBalanceRecord = userBalanceRecordMapper.selectOne(queryWrapper);
         userFAQTokenBalance = userBalanceRecord.getFAQTokenBalance();
         if(userFAQTokenBalance < promptTokens){
-            return new DataWrapper(true).msgBuilder("not enough token for asking, please recharge").dataBuilder("asking token: "+promptTokens);
+            return new DataWrapper(true).msgBuilder("余额不足，无法生成prompt").dataBuilder("asking token: "+promptTokens);
         }
         // if user has enough token for submitting prompts, continue
         // Generate the new messages
@@ -207,7 +207,7 @@ public class ErnieServiceImpl implements ErnieService {
         completionTokens = Integer.parseInt(responseData.get("completionTokens"));
         // if token is enough, return false
         if(userFAQTokenBalance < completionTokens+promptTokens){
-            return new DataWrapper(true).msgBuilder("not enough token for get the answer back, please recharge").dataBuilder("all need tokens: "+(completionTokens+promptTokens));
+            return new DataWrapper(true).msgBuilder("余额不足，无法获取回答").dataBuilder("all need tokens: "+(completionTokens+promptTokens));
         }
         // if token is enough, deduct the token in the datasource and return the answer back to frontend
         userBalanceRecord.setFAQTokenBalance(userFAQTokenBalance-completionTokens-promptTokens);
