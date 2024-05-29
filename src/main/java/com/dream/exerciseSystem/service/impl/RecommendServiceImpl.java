@@ -66,6 +66,8 @@ public class RecommendServiceImpl extends ServiceImpl<StudentAnswerRecordMapper,
         List<String> recommendExerciseIdList = new ArrayList<>();
         HashMap<String, Exercise> recommendExerciseHashMap = new HashMap<>();
 
+        HashMap<String, Object> data = new HashMap<>();
+
         // the code below is to generate recommend exercise list
         if (exerciseFalseRecordList.isEmpty()) {
             if (exerciseCorrectRecordList.isEmpty()) {
@@ -360,29 +362,36 @@ public class RecommendServiceImpl extends ServiceImpl<StudentAnswerRecordMapper,
             }
         }
 
-
+        List<HashMap<String, Object>> recommendExercises = new ArrayList<>();
         for (String recommendExerciseId : recommendExerciseIdList) {
+            HashMap<String, Object> recommendExercise = new HashMap<>();
+            recommendExercise.put("exerciseId", recommendExerciseId);
+
             org.springframework.data.mongodb.core.query.Query query = new org.springframework.data.mongodb.core.query.Query();
             query.addCriteria(org.springframework.data.mongodb.core.query.Criteria.where("_id").is(recommendExerciseId));
+            Exercise recommendExerciseContent;
             if (mongoTemplate.exists(query, "javaProgramExercise")) {
                 JavaProgramExercise result = mongoTemplate.findById(recommendExerciseId, JavaProgramExercise.class);
-                Exercise recommendExerciseContent = result.getExercise();
+                recommendExerciseContent = result.getExercise();
                 recommendExerciseContentList.add(recommendExerciseContent);
-                recommendExerciseHashMap.put(recommendExerciseId, recommendExerciseContent);
-            } else if (mongoTemplate.exists(query, "javaSingleChoiceExercise")) {
+                recommendExercise.put("exerciseType", "JAVA_PROGRAM_EXERCISE");
+            } else if (mongoTemplate.exists(query, "singleChoiceExercise")) {
                 SingleChoiceExercise result = mongoTemplate.findById(recommendExerciseId, SingleChoiceExercise.class);
-                Exercise recommendExerciseContent = result.getExercise();
+                recommendExerciseContent = result.getExercise();
                 recommendExerciseContentList.add(recommendExerciseContent);
-                recommendExerciseHashMap.put(recommendExerciseId, recommendExerciseContent);
-            } else if (mongoTemplate.exists(query, "fillInExercise")) {
+                recommendExercise.put("exerciseType", "SINGLE_CHOICE_EXERCISE");
+            } else {
                 FillInExercise result = mongoTemplate.findById(recommendExerciseId, FillInExercise.class);
-                Exercise recommendExerciseContent = result.getExercise();
+                recommendExerciseContent = result.getExercise();
                 recommendExerciseContentList.add(recommendExerciseContent);
-                recommendExerciseHashMap.put(recommendExerciseId, recommendExerciseContent);
+                recommendExercise.put("exerciseType", "FILL_IN_EXERCISE");
             }
+            recommendExercise.put("exerciseContents", recommendExerciseContent.getExerciseContents());
+            recommendExercises.add(recommendExercise);
         }
+        data.put("recommendExercises", recommendExercises);
 
 
-        return new DataWrapper(true).msgBuilder("根据用户做题记录，推荐五道习题").dataBuilder(recommendExerciseHashMap);
+        return new DataWrapper(true).msgBuilder("根据用户做题记录，推荐五道习题").dataBuilder(data);
     }
 }

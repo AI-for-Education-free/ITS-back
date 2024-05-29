@@ -86,14 +86,19 @@ public class SingleChoiceExerciseServiceImpl extends ServiceImpl<StudentAnswerRe
         studentAnswerRecord.setQuestionType(1); //single choice type:1
         // Convert the answer into the lower case
         char convertedAnswer = answer.toLowerCase().charAt(0);
-        if(convertedAnswer-'a' != correctAnswer){
+        boolean correctness = (convertedAnswer-'a') == correctAnswer;
+        if (correctness){
+            studentAnswerRecord.setAnswerCorrectness(1);
+        }
+        else{
             studentAnswerRecord.setAnswerCorrectness(0);
         }
-        else
-            studentAnswerRecord.setAnswerCorrectness(1);
         studentAnswerRecord.setAnswerTimestamp(studentAnswerTimestamp);
         studentAnswerRecord.setAnswer(answer);
         boolean writeState = this.save(studentAnswerRecord);
-        return new DataWrapper(true).msgBuilder("检查单选习题成功").dataBuilder(null);
+
+        HashMap<String, Boolean> data = new HashMap<>();
+        data.put("checkResult", correctness);
+        return new DataWrapper(true).msgBuilder("检查单选习题成功").dataBuilder(data);
     }
 }

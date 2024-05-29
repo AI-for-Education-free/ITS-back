@@ -78,14 +78,19 @@ public class FillInExerciseService extends ServiceImpl<StudentAnswerRecordMapper
         studentAnswerRecord.setQuestionId(exerciseId);
         studentAnswerRecord.setQuestionType(2); //single choice type:1
         // Convert the answer into the lower case
-        if(answer.equals(hashMap))
+        boolean correctness = answer.equals(hashMap);
+        if (correctness) {
             studentAnswerRecord.setAnswerCorrectness(1);
-        else
+        }
+        else {
             studentAnswerRecord.setAnswerCorrectness(0);
-
+        }
         studentAnswerRecord.setAnswerTimestamp(studentAnswerTimestamp);
         studentAnswerRecord.setAnswer(answer.toString());   //hashmap convert to string
         boolean writeState = this.save(studentAnswerRecord);
-        return new DataWrapper(true).msgBuilder("检查填空习题成功").dataBuilder(null);
+
+        HashMap<String, Boolean> data = new HashMap<>();
+        data.put("checkResult", correctness);
+        return new DataWrapper(true).msgBuilder("检查填空习题成功").dataBuilder(data);
     }
 }
