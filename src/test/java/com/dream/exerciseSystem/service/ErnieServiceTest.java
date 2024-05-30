@@ -93,14 +93,23 @@ public class ErnieServiceTest {
 
         Exercise exercise = singleChoiceExercise.getExercise();
         List<Content> exerciseContents = exercise.getExerciseContents();
+        List<Content> explanationContents = exercise.getExplanationContents();
         StringBuilder exerciseContentStr = new StringBuilder();
+        StringBuilder explanationContentStr = new StringBuilder();
         for (Content exerciseContent: exerciseContents) {
             String contentType = exerciseContent.getContentType();
             if (contentType.equals("TEXT")) {
                 exerciseContentStr.append(exerciseContent.getChinese()).append("\n");
             }
         }
+        for (Content explanationContent: explanationContents) {
+            String contentType = explanationContent.getContentType();
+            if (contentType.equals("TEXT")) {
+                explanationContentStr.append(explanationContent.getChinese()).append("\n");
+            }
+        }
         templateContent = templateContent.replace("${#QUESTION_CONTENT#}$", exerciseContentStr);
+        templateContent = templateContent.replace("${#EXPLANTION_CONTENT#}$", explanationContentStr);
 
         // 假设这是学生的问题
         String studentQuery = "我不知道该怎么解这道题，请帮助我。";
