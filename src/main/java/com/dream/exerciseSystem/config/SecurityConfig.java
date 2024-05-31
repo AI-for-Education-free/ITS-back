@@ -39,6 +39,7 @@ public class SecurityConfig {
                 .and()
                 .authorizeRequests()
                 // 对于登入接口，允许匿名访问
+                .antMatchers("/", "/index.html", "/static/**").anonymous()
                 .antMatchers("/students/login").anonymous()
                 .antMatchers("/students/register").anonymous()
                 .antMatchers("/students/xzy/register").anonymous()

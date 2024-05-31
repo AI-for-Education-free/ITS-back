@@ -7,6 +7,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 public class WebConfig extends WebMvcConfigurationSupport {
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/**")
+                .addResourceLocations("classpath:/static/");
+    }
 //    @Override
 //    protected void addInterceptors(InterceptorRegistry registry) {
 //        super.addInterceptors(registry);
