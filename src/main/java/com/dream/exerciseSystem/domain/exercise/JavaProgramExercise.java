@@ -14,6 +14,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -111,7 +112,7 @@ public class JavaProgramExercise {
         return result;
     }
 
-    public static JavaProgramExerciseCheckResult check(String submissionCode, String targetMethodName, String developer)
+    public static Map<String, Object> check(String submissionCode, String targetMethodName, String developer)
             throws Exception {
         JavaProgramExerciseCheckResult javaProgramExerciseCheckResult = new JavaProgramExerciseCheckResult();
         HashMap<String, Object> checkResult = new HashMap<>();
@@ -123,12 +124,13 @@ public class JavaProgramExercise {
             checkResult.put("hint", "compileException");
             checkResult.put("compileException", findSolutionClassResult.get("error"));
 
+            // 按照以前的写法用不到，后续改成统一格式
             javaProgramExerciseCheckResult.setAnswerState(false);
             javaProgramExerciseCheckResult.setCaseHints(null);
             javaProgramExerciseCheckResult.setCodeErrorType("compileException");
             javaProgramExerciseCheckResult.setCodeErrorInfo("not find solutionClass");
 
-            return javaProgramExerciseCheckResult;
+            return checkResult;
         }
 
         Method checkMethod = getCheckMethod(targetMethodName, developer);
@@ -145,15 +147,19 @@ public class JavaProgramExercise {
         } catch (Exception e) {
             assert e instanceof InvocationTargetException;
             InvocationTargetException targetEx = (InvocationTargetException) e;
+
+            // 按照以前的写法用不到，后续改成统一格式
             javaProgramExerciseCheckResult.setAnswerState(false);
             javaProgramExerciseCheckResult.setCaseHints(null);
             javaProgramExerciseCheckResult.setCodeErrorType("runtimeException");
             javaProgramExerciseCheckResult.setCodeErrorInfo(targetEx.toString());
 
-            return javaProgramExerciseCheckResult;
+            return checkResult;
         }
 
         boolean answerState = (boolean) checkResult.get("correct");
+
+        // 按照以前的写法用不到，后续改成统一格式
         javaProgramExerciseCheckResult.setAnswerState(answerState);
         List<HashMap<String, String>> caseHints = (List<HashMap<String, String>>) checkResult.get("hints");
         if (answerState) {
@@ -166,6 +172,6 @@ public class JavaProgramExercise {
             javaProgramExerciseCheckResult.setCaseHints(caseHints);
         }
 
-        return javaProgramExerciseCheckResult;
+        return checkResult;
     }
 }

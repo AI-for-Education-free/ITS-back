@@ -58,9 +58,9 @@ public class JavaProgramExerciseService extends ServiceImpl<StudentAnswerRecordM
             return new DataWrapper(false).msgBuilder("检查Java编程习题失败").codeBuilder(100);
         } else {
             String targetMethodName = result.targetMethodName;
-            JavaProgramExerciseCheckResult checkResult = JavaProgramExercise.check(submissionCode, targetMethodName, "XZJ");
+            Map<String, Object> checkResult = JavaProgramExercise.check(submissionCode, targetMethodName, "XZJ");
             // 这里是我注释调的因为类型不匹配
-            //            data.put("result", checkResult);
+            data.put("result", checkResult);
             return new DataWrapper(true).msgBuilder("检查Java编程习题成功").dataBuilder(data);
         }
     }
@@ -73,7 +73,7 @@ public class JavaProgramExerciseService extends ServiceImpl<StudentAnswerRecordM
             return new DataWrapper(false).msgBuilder("检查Java编程习题失败").codeBuilder(100);
         } else {
             String targetMethodName = result.targetMethodName;
-            JavaProgramExerciseCheckResult checkResult = JavaProgramExercise.check(submissionCode, targetMethodName, "XZJ");
+            Map<String, Object> checkResult = JavaProgramExercise.check(submissionCode, targetMethodName, "XZJ");
             // 同上
             //            data.put("result", checkResult);
 
@@ -85,7 +85,7 @@ public class JavaProgramExerciseService extends ServiceImpl<StudentAnswerRecordM
             studentAnswerRecord.setUserId(studentId);
             studentAnswerRecord.setQuestionId(id);
             studentAnswerRecord.setQuestionType(0);
-            if(!checkResult.isAnswerState()){
+            if(!(boolean)checkResult.get("correct")){
                 studentAnswerRecord.setAnswerCorrectness(0);
             }
             else
