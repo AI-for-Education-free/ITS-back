@@ -124,4 +124,10 @@ public class ErnieServiceTest {
         DataWrapper response = ernieService.simpleChat(token, chatUrl, messages);
         System.out.println(response);
     }
+
+    @Test
+    void testChatAgent() {
+        // ID OziCVa0dL1QwDZYYMZLsw6hNpF0QU4Qm
+        // secret yOJS2hFIcgXDQRWFYUICiIxa8CtT2jhO
+    }
 }
